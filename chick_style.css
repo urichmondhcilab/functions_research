@@ -1,0 +1,36 @@
+.chick
+{
+  content: url("chick.png");
+  width: 3em;
+  height: 3em;
+}
+
+.trial
+{
+  width: 2em;
+  height: 2em;
+  background-color: blue;
+}
+
+#game_canvas
+{
+  background-image: url('grass.jpg');
+}
+
+.points, .reset
+{
+  font-size: 2em;
+  color: white;
+  background-color: black;
+  display: inline;
+  text-align: center;
+  font-family: "Gill Sans", sans-serif;
+  z-index: -1;
+  padding: 0.2em;
+  border-radius: 0.2em;
+}
+
+.reset
+{
+  
+}
