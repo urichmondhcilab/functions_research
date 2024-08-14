@@ -14,14 +14,13 @@
 
 #game_canvas
 {
-  background-image: url('scene.png'), linear-gradient(skyblue, green );
-  background-size: contain;
+  background-image: url('scene.png');
+  background-size: cover;
   background-repeat: no-repeat;
   background-color: skyblue;
   background-position: center;
-  height: 1000px;
+  height: 100vh;
   width: 100%
-  
 }
 
 .points, .reset
