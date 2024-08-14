@@ -8,8 +8,8 @@ class Bird{
     this.movedLeft = MIN_MOVEMENT + Math.floor(Math.random() * MAX_MOVEMENT);
     this.birdie = document.createElement('img');
 
-    let left = `${MIN_HEIGHT + Math.floor(Math.random() * 500)}px`;
-    let top = `${MIN_WIDTH + Math.floor(Math.random() * 500)}px`;
+    let left = `${MIN_WIDTH + Math.floor(Math.random() * WIDTH_OFFSET)}px`;
+    let top = `${MIN_HEIGHT + Math.floor(Math.random() * HEIGHT_OFFSET)}px`;
 
     this.birdie.className = 'chick';
     this.birdie.style.position="absolute";

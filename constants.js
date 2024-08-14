@@ -5,7 +5,14 @@ const MAX_NUMBER_OF_BIRDS = 20;
 // const WINDOW_HEIGHT = window.innerHeight;
 const WINDOW_WIDTH = window.innerWidth / 2;
 const WINDOW_HEIGHT = window.innerHeight / 2;
-const MIN_HEIGHT = 500;
-const MIN_WIDTH = 500;
+console.log("window width: " + WINDOW_WIDTH);
+console.log("window height: " + WINDOW_HEIGHT);
+
+const MIN_HEIGHT = WINDOW_HEIGHT;
+const MIN_WIDTH = WINDOW_WIDTH;
+
+const HEIGHT_OFFSET = window.innerHeight / 4;
+const WIDTH_OFFSET = window.innerWidth / 4;
+
 const MAX_MOVEMENT = 5;
 const MIN_MOVEMENT = -5;
