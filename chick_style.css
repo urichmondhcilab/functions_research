@@ -14,12 +14,12 @@
 
 #game_canvas
 {
-  background-image: url('scene.png');
-  background-size: 180vw 180vh;
+  background-image: url('scene_3.png');
+  background-size: 140vw 140vh;
   background-repeat: no-repeat;
   /* background-color: skyblue; */
-  /* background-color: rgba(121,191,0,255); */
-  background-color: rgba(183,149,43,255);
+  background-color: rgba(121,191,0,255);
+  /* background-color: rgba(183,149,43,255); */
   background-position: center;
   background-attachment: fixed;
   height: 150vw 100vh;
