@@ -1,8 +1,8 @@
 .chick
 {
-  content: url("Chick_2.png");
-  width: 5em;
-  height: 5em;
+  content: url("chick_resting_pose.svg");
+  width: 15em;
+  height: 15em;
 }
 
 .trial
@@ -22,8 +22,8 @@
   /* background-color: rgba(183,149,43,255); */
   background-position: center;
   background-attachment: fixed;
-  height: 150vw 100vh;
-  width: 100%
+  /* height: 150vw 100vh;
+  width: 100% */
 }
 
 .points, .reset
@@ -37,9 +37,4 @@
   z-index: -1;
   padding: 0.2em;
   border-radius: 0.2em;
-}
-
-.reset
-{
-
 }

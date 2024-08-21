@@ -3,7 +3,7 @@ const MAX_LIFE_SPAN = 50; // actually 100 + 500
 const MAX_NUMBER_OF_BIRDS = 8;
 // const WINDOW_WIDTH = window.innerWidth;
 // const WINDOW_HEIGHT = window.innerHeight;
-const WINDOW_WIDTH = window.innerWidth / 2;
+const WINDOW_WIDTH = window.innerHeight / 2;
 const WINDOW_HEIGHT = window.innerHeight / 2;
 console.log("window width: " + WINDOW_WIDTH);
 console.log("window height: " + WINDOW_HEIGHT);
