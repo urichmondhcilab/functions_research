@@ -1,5 +1,8 @@
 let currentNumberOfBirds = 0;
 let allBirds = [];
+let currentAngle = 0;
+let radius = 200;
+
 
 function bob(){
   setInterval(birdAction, 1000);

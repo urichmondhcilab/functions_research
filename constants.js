@@ -16,3 +16,8 @@ const WIDTH_OFFSET = Math.min(window.innerWidth, window.innerHeight) / 4;
 
 const MAX_MOVEMENT = 5;
 const MIN_MOVEMENT = -5;
+
+
+const centerLeft = Math.min(window.innerWidth, window.innerHeight) / 2;
+const centerTop = window.innerHeight / 2;
+
