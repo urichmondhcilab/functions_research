@@ -1,7 +1,11 @@
 /**
- A bird class that creates and styles an image object as a bird
-
-*/
+ *  A bird class that creates and styles an image object as a bird
+ * birds have a lifeSpan, a check on what direction they have moved (moveleft) 
+ * and an image element (dynamically generated)
+ * We give the image element a class with pre-determined styles from chick_style.css
+ * We set the image elements position on the screen with absolute, left and top
+ * We add the child to the body of the html
+ */
 class Bird{
   constructor(){
     console.log(currentAngle);
