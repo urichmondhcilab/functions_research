@@ -1,3 +1,6 @@
+/* The chick class is a dynamic class
+    we use it to include the chick image and set its width and height
+ */
 .chick
 {
   content: url("chick_resting_pose.svg");
@@ -5,6 +8,9 @@
   height: 15em;
 }
 
+/* A class not currently used
+    I used it for debugging
+ */
 .trial
 {
   width: 2em;
@@ -12,18 +18,26 @@
   background-color: blue;
 }
 
+/* 
+  game_canvas is the class name associated with the body of the document
+  background-image sets the source of the image
+  background-size sets the size of the image. vw is the viewport-height - ie.
+    the visible view height. The first 140vw sets the height of the image and
+    the second 140vw sets the width of the image. This is set consistently with the aspect-ratio
+    of the original image
+    background-color sets the color of the portion of the screen not covered by the image
+    background position set the image to the center
+    background-attachment - determines if the image is scrollable
+ */
 #game_canvas
 {
-  background-image: url('Scene_3.png');
-  background-size: 140vw 140vw;
+  background-image: url('Scene_3.png'); /*set the source for the image*/
+  background-size: 140vw 140vw; /*set the size of the image */
   background-repeat: no-repeat;
   /* background-color: skyblue; */
   background-color: rgba(121,191,0,255);
-  /* background-color: rgba(183,149,43,255); */
   background-position: center;
   background-attachment: fixed;
-  /* height: 150vw 100vh;
-  width: 100% */
 }
 
 .points, .reset
