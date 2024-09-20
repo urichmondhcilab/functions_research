@@ -1,4 +1,5 @@
 let currentNumberOfBirds = 0;
+let currentNumberOfMoms = 0;
 let allBirds = [];
 let currentAngle = 0;
 let radius = 200;
@@ -15,6 +16,16 @@ function createBird()
       allBirds[currentNumberOfBirds] = birdie;
       currentNumberOfBirds++;
       point_number.textContent = currentNumberOfBirds; //this updates the counter of chicks on the top left. 
+  }
+}
+
+function createMother(){
+  let mom = new mother_bird();
+  if (currentNumberOfMoms < 1){
+    allBirds[currentNumberOfBirds] = mom;
+    currentNumberOfBirds++;
+    currentNumberOfMoms++;
+    point_number.textContent = currentNumberOfBirds;
   }
 }
 
@@ -45,6 +56,7 @@ function removeBirds(bird){
 
 function birdAction(){
   createBird();
+  createMother();
   moveBirds();
   allBirds = allBirds.filter(removeBirds);
 }

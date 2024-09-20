@@ -5,6 +5,12 @@
   height: 15em;
 }
 
+.mother{
+  content: url("Squarton\ Resting\ Pose\ 2.svg");
+  width: 20em;
+  height: 20em;
+}
+
 .trial
 {
   width: 2em;
