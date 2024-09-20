@@ -15,8 +15,8 @@ class mother_bird{
     //let left = `${centerLeft + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
     //let top = `${centerTop + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
     
-    let left = '400px'
-    let right = '$20px'
+    let left = '850px'
+    let btop = '500px';
     //currentAngle = 180
 
     
@@ -24,7 +24,7 @@ class mother_bird{
     this.mother.className = 'mother';
     this.mother.style.position="absolute";
     this.mother.style.left= left;
-    this.mother.style.top = top;
+    this.mother.style.top = btop;
 
     game_canvas.appendChild(this.mother);
   }

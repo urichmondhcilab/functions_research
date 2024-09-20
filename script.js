@@ -33,12 +33,15 @@ function moveBirds(){
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
 
     let currentBird = allBirds[i];
+    //if (currentBird && (typeof currentBird) != mother_bird){
     if (currentBird){
+      if((typeof currentBird) != mother_bird){
       let currentLeft = parseInt(currentBird.birdie.style.left); //ask about this. 
       let currentTop = parseInt(currentBird.birdie.style.top);
 
       currentBird.movedLeft = currentBird.movedLeft * -1; //ask about this.
       currentBird.birdie.style.left = `${currentLeft + currentBird.movedLeft}px`; //ask about this. 
+      }
     }
   }
 }
