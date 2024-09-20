@@ -14,7 +14,7 @@
 
 #game_canvas
 {
-  background-image: url('scene.png');
+  background-image: url('scene.svg');
   background-size: 140vw 140vw;
   background-repeat: no-repeat;
   /* background-color: skyblue; */
