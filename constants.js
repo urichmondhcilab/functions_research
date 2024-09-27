@@ -14,6 +14,10 @@ const MIN_LIFE_SPAN = 10;
 const MAX_LIFE_SPAN = 50; // actually 100 + 500
 const MAX_NUMBER_OF_BIRDS = 8;
 
+const MAX_MOM = 1;
+
+const MAX_WATER = 1;
+
 const HEIGHT_OFFSET = window.innerHeight / 4;
 const WIDTH_OFFSET = Math.min(window.innerWidth, window.innerHeight) / 4;
 

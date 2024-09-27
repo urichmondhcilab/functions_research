@@ -8,6 +8,24 @@
   height: 15em;
 }
 
+.water{
+  content: url("gameenvironmentandrestingpose/WaterPan.svg");
+  width:50em;
+  height: 30em;
+  left: 34%;
+  top:55%;
+}
+
+/* as about resizing of the window. how do we want to handle this? */
+.mother
+{
+  content: url("images/Mother_Hen_2 Resting Pose 1.svg");
+  width: 25em;
+  height: 25em;
+  left: 60%;
+  top: 50%;
+}
+
 /* A class not currently used
     I used it for debugging
  */
@@ -31,7 +49,7 @@
  */
 #game_canvas
 {
-  background-image: url('Scene_3.png'); /*set the source for the image*/
+  background-image: url('gameenvironmentandrestingpose/scene.svg'); /*set the source for the image*/
   background-size: 140vw 140vw; /*set the size of the image */
   background-repeat: no-repeat;
   /* background-color: skyblue; */
