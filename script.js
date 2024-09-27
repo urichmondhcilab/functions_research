@@ -6,7 +6,10 @@
  * radius is the distance of my bird from by choosen center 
  */
 let currentNumberOfBirds = 0;
+let currNumOfMoms = 0;
+let currWater = 0;
 let allBirds = [];
+let allMothers = [];
 let currentAngle = 0;
 let radius = 200;
 
@@ -35,6 +38,19 @@ function createBird()
       allBirds[currentNumberOfBirds] = birdie;
       currentNumberOfBirds++;
       point_number.textContent = currentNumberOfBirds;
+  }
+}
+
+function createMother(){
+  let mother = new Mother();
+  allMothers[currNumOfMoms] = mother;
+  currNumOfMoms++;
+}
+
+function createWater(){
+  if(currWater < MAX_WATER){
+    let water = new Water();
+    currWater++;
   }
 }
 
@@ -83,9 +99,11 @@ function removeBirds(bird){
  * It keeps the birds for which removeBird returns true.
  */
 function birdAction(){
+  createMother();
   createBird();
+  createWater();
   moveBirds();
-  allBirds = allBirds.filter(removeBirds);
+  //allBirds = allBirds.filter(removeBirds);
 }
 
 /**
