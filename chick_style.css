@@ -19,7 +19,7 @@
 /* as about resizing of the window. how do we want to handle this? */
 .mother
 {
-  content: url("images/Mother_Hen_2 Resting Pose 1.svg");
+  /* content: url("images/Mother_Hen_2 Resting Pose 1.svg"); */
   width: 25em;
   height: 25em;
   left: 60%;
