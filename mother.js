@@ -18,6 +18,8 @@ class Mother{
       let left = `{0}px`;
       let top = `{0}px`;
 
+      this.mother.currImageFlag = 0;
+
   
       this.mother.className = 'mother';
       this.mother.style.position="absolute";

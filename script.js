@@ -59,7 +59,7 @@ function createWater(){
  * we move them left or right by setting the birds left property 
  * Note that the bird is an html image element
  */
-function moveBirds(){
+function updateBirds(){
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
 
     let currentBird = allBirds[i];
@@ -69,7 +69,33 @@ function moveBirds(){
       currentBird.movedLeft = currentBird.movedLeft * -1;
       currentBird.birdie.style.left = `${currentLeft + currentBird.movedLeft}px`;
     }
+
+    if(currentBird.birdie.currImageFlag == 0){
+      currentBird.birdie.src = 'gameenvironmentandrestingpose/chick_resting_1.svg';
+      currentBird.birdie.currImageFlag = 1;
+    }
+    else{
+      currentBird.birdie.src = 'gameenvironmentandrestingpose/chick_resting_2.svg';
+      currentBird.birdie.currImageFlag = 0;
+    }
   }
+}
+
+function updateImage(){
+  currMom = allMothers[0]; 
+  console.log(currMom.mother.src);
+  currMomImage = currMom.mother.src;
+
+  if (currMom.mother.currImageFlag == 0){
+    currMom.mother.src = 'images/Mother_Hen_2.svg';
+    currMom.mother.currImageFlag = 1;
+  }
+
+  else{
+    currMom.mother.src = 'images/Mother_Hen_1.svg';
+    currMom.mother.currImageFlag = 0;
+  }
+
 }
 
 /**
@@ -102,7 +128,8 @@ function birdAction(){
   createMother();
   createBird();
   createWater();
-  moveBirds();
+  updateImage();
+  updateBirds();
   //allBirds = allBirds.filter(removeBirds);
 }
 
