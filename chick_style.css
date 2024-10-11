@@ -4,8 +4,8 @@
 .chick
 {
   content: url("chick_resting_pose.svg");
-  width: 15em;
-  height: 15em;
+  width: 10%;
+  height: 10%;
 }
 
 .water{

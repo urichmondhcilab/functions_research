@@ -8,7 +8,7 @@
  */
 class Bird{
   constructor(){
-    console.log(currentAngle);
+    // console.log(currentAngle);
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
     this.movedLeft = MIN_MOVEMENT + Math.floor(Math.random() * MAX_MOVEMENT);
     this.birdie = document.createElement('img');

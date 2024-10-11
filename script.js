@@ -65,9 +65,9 @@ function updateBirds(){
     let currentBird = allBirds[i];
     if (currentBird){
       
-      let currentLeft = parseInt(currentBird.birdie.style.left);
-      currentBird.movedLeft = currentBird.movedLeft * -1;
-      currentBird.birdie.style.left = `${currentLeft + currentBird.movedLeft}px`;
+      //let currentLeft = parseInt(currentBird.birdie.style.left);
+      //currentBird.movedLeft = currentBird.movedLeft * -1;
+      //currentBird.birdie.style.left = `${currentLeft + currentBird.movedLeft}px`;
     }
 
     if(currentBird.birdie.currImageFlag == 0){
@@ -83,7 +83,6 @@ function updateBirds(){
 
 function updateImage(){
   currMom = allMothers[0]; 
-  console.log(currMom.mother.src);
   currMomImage = currMom.mother.src;
 
   if (currMom.mother.currImageFlag == 0){
@@ -147,6 +146,12 @@ function reset(){
   allBirds = [];
 }
 
+
+function repositionGameObjects()
+{
+  console.log(window.innerWidth);
+}
+
 /**
  * The program starts here
  * An event listener runs in the background waiting for an event to occur on an element
@@ -155,4 +160,5 @@ function reset(){
  * Once the reset button is clicked the function reset is invoked
  */
 window.addEventListener('load', bob);
+window.addEventListener('resize', repositionGameObjects);
 reset_btn.addEventListener('click', reset);
