@@ -25,10 +25,13 @@ const MAX_MOVEMENT = 5;
 const MIN_MOVEMENT = -5;
 
 
-// let centerLeft = Math.min(window.innerWidth, window.innerHeight) / 2;
-// let centerTop = window.innerHeight / 2;
-
-let centerLeft = window.innerWidth * 0.3; // at 30% of the width of the screen
-let centerTop = window.innerHeight * 0.68; // at 65% of the height of the screen
-let radius = Math.min(window.innerWidth / 8, window.innerHeight / 8); // the radius is relative to the width and height of the screen
+let screenWidth = window.innerWidth;
+let screenHeight = window.innerHeight;
+let centerX = window.innerWidth / 2;
+let centerY = window.innerHeight / 2;
+let offsetX = screenWidth * 0.07;
+let offsetY = screenWidth * 0.09; // use screenWidth because height is based off the width
+let positionX = centerX - offsetX; // at 30%  of the width of the screen
+let positionY = centerY + offsetY;
+let radius = screenWidth / 12; // the radius is relative to the width and height of the screen
 

@@ -155,9 +155,17 @@ function reset(){
 function repositionGameObjects()
 {
 
-  centerLeft = window.innerWidth * 0.3;
-  centerTop = window.innerHeight * 0.68;
-  radius = Math.min(window.innerWidth / 8, window.innerHeight / 8);
+  //reset the positions of the birds based on new screen size
+  screenWidth = window.innerWidth;
+  screenHeight = window.innerHeight;
+  centerX = window.innerWidth / 2;
+  centerY = window.innerHeight / 2;
+  offsetX = screenWidth * 0.07;
+  offsetY = screenWidth * 0.09; // use screenWidth because height is based off the width
+  positionX = centerX - offsetX; 
+  positionY = centerY + offsetY;
+  radius = screenWidth / 12; // the radius is relative to the width and height of the screen
+  
 
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
     let currentBird = allBirds[i];

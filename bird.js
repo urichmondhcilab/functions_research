@@ -13,8 +13,8 @@ class Bird{
     this.movedLeft = MIN_MOVEMENT + Math.floor(Math.random() * MAX_MOVEMENT);
     this.birdie = document.createElement('img');
 
-    let left = `${(centerLeft) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
-    let top = `${(centerTop) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
+    let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
+    let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
 
     currentAngle = (currentAngle + 45) % 360;
 
@@ -27,9 +27,8 @@ class Bird{
 
     // a function to update the position of a bird 
     this.updateBirdPosition = function(){
-      console.log("here");
-      let left = `${(centerLeft) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
-      let top = `${(centerTop) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
+      let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
+      let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
       currentAngle = (currentAngle + 45) % 360;
       this.birdie.style.left= left;
       this.birdie.style.top = top;      
