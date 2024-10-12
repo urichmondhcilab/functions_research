@@ -160,12 +160,12 @@ function repositionGameObjects()
   screenHeight = window.innerHeight;
   centerX = window.innerWidth / 2;
   centerY = window.innerHeight / 2;
-  offsetX = screenWidth * 0.07;
-  offsetY = screenWidth * 0.09; // use screenWidth because height is based off the width
-  positionX = centerX - offsetX; 
-  positionY = centerY + offsetY;
+  offsetX = screenWidth * 0.07; // offset is 7% of the screen width
+  offsetY = screenWidth * 0.09; // offset is 9% of the screen width
+  positionX = centerX - offsetX; // we subtract the X offset to shift the chick left
+  positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
   radius = screenWidth / 12; // the radius is relative to the width and height of the screen
-  
+
 
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
     let currentBird = allBirds[i];
