@@ -149,13 +149,14 @@ function reset(){
 
 /**
  * recomputes the position of the bird each time the screen is resized
+ * by recomputing the centerLeft, centerTop, and radius 
+ * and invoking updateBirdPosition for all the birds
  */
 function repositionGameObjects()
 {
-  console.log(window.innerWidth);
 
   centerLeft = window.innerWidth * 0.3;
-  centerTop = window.innerHeight * 0.6;
+  centerTop = window.innerHeight * 0.68;
   radius = Math.min(window.innerWidth / 8, window.innerHeight / 8);
 
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){

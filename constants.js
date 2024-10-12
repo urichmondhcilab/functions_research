@@ -29,6 +29,6 @@ const MIN_MOVEMENT = -5;
 // let centerTop = window.innerHeight / 2;
 
 let centerLeft = window.innerWidth * 0.3; // at 30% of the width of the screen
-let centerTop = window.innerHeight * 0.65; // at 65% of the height of the screen
+let centerTop = window.innerHeight * 0.68; // at 65% of the height of the screen
 let radius = Math.min(window.innerWidth / 8, window.innerHeight / 8); // the radius is relative to the width and height of the screen
 

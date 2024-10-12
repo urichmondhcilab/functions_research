@@ -56,6 +56,7 @@
   background-color: skyblue;
   background-position: center;
   background-attachment: fixed;
+  overflow: hidden;
 }
 
 .points, .reset
