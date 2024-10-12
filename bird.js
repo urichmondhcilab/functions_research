@@ -13,13 +13,9 @@ class Bird{
     this.movedLeft = MIN_MOVEMENT + Math.floor(Math.random() * MAX_MOVEMENT);
     this.birdie = document.createElement('img');
 
-    // let left = `${MIN_WIDTH + Math.floor(Math.random() * WIDTH_OFFSET)}px`;
-    // let top = `${MIN_HEIGHT + Math.floor(Math.random() * HEIGHT_OFFSET)}px`;
+    let left = `${(centerLeft) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
+    let top = `${(centerTop) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
 
-    radius = 150
-
-    let left = `${(centerLeft-40) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
-    let top = `${(centerTop+100) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
     currentAngle = (currentAngle + 45) % 360;
 
     this.birdie.currImageFlag= 0;
@@ -28,6 +24,16 @@ class Bird{
     this.birdie.style.position="absolute";
     this.birdie.style.left= left;
     this.birdie.style.top = top;
+
+    // a function to update the position of a bird 
+    this.updateBirdPosition = function(){
+      console.log("here");
+      let left = `${(centerLeft) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
+      let top = `${(centerTop) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
+      currentAngle = (currentAngle + 45) % 360;
+      this.birdie.style.left= left;
+      this.birdie.style.top = top;      
+    }
 
     game_canvas.appendChild(this.birdie);
   }

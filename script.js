@@ -11,7 +11,7 @@ let currWater = 0;
 let allBirds = [];
 let allMothers = [];
 let currentAngle = 0;
-let radius = 200;
+//let radius = 200;
 
 /**
  * bob [from side to side]
@@ -147,9 +147,22 @@ function reset(){
 }
 
 
+/**
+ * recomputes the position of the bird each time the screen is resized
+ */
 function repositionGameObjects()
 {
   console.log(window.innerWidth);
+
+  centerLeft = window.innerWidth * 0.3;
+  centerTop = window.innerHeight * 0.6;
+  radius = Math.min(window.innerWidth / 8, window.innerHeight / 8);
+
+  for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
+    let currentBird = allBirds[i];
+    if (currentBird)
+      currentBird.updateBirdPosition();
+  }  
 }
 
 /**
