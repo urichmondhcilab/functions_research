@@ -4,8 +4,8 @@
 .chick
 {
   content: url("chick_resting_pose.svg");
-  width: 15em;
-  height: 15em;
+  width: 10%;
+  height: 10%;
 }
 
 .water{
@@ -53,9 +53,10 @@
   background-size: 140vw 140vw; /*set the size of the image */
   background-repeat: no-repeat;
   /* background-color: skyblue; */
-  background-color: rgba(121,191,0,255);
+  background-color: skyblue;
   background-position: center;
   background-attachment: fixed;
+  overflow: hidden;
 }
 
 .points, .reset

@@ -6,12 +6,13 @@
  * radius is the distance of my bird from by choosen center 
  */
 let currentNumberOfBirds = 0;
+let birdCounter = 0;
 let currNumOfMoms = 0;
 let currWater = 0;
 let allBirds = [];
 let allMothers = [];
 let currentAngle = 0;
-let radius = 200;
+//let radius = 200;
 
 /**
  * bob [from side to side]
@@ -37,7 +38,7 @@ function createBird()
     let birdie = new Bird();
       allBirds[currentNumberOfBirds] = birdie;
       currentNumberOfBirds++;
-      point_number.textContent = currentNumberOfBirds;
+      birdCounter++;
   }
 }
 
@@ -58,32 +59,37 @@ function createWater(){
  * In every time interval, for all the current birds,
  * we move them left or right by setting the birds left property 
  * Note that the bird is an html image element
+ * Instead, of moving, we update the images. We use the same idea as we used updating the mother image, instead we go through all the birds
+ * present within the array. 
  */
 function updateBirds(){
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
 
     let currentBird = allBirds[i];
-    if (currentBird){
-      
-      let currentLeft = parseInt(currentBird.birdie.style.left);
-      currentBird.movedLeft = currentBird.movedLeft * -1;
-      currentBird.birdie.style.left = `${currentLeft + currentBird.movedLeft}px`;
-    }
 
-    if(currentBird.birdie.currImageFlag == 0){
+    if(currentBird && currentBird.lifeSpan > 1){
+      if(currentBird.birdie.currImageFlag == 0){
       currentBird.birdie.src = 'gameenvironmentandrestingpose/chick_resting_1.svg';
       currentBird.birdie.currImageFlag = 1;
-    }
-    else{
+      }
+      else{
       currentBird.birdie.src = 'gameenvironmentandrestingpose/chick_resting_2.svg';
       currentBird.birdie.currImageFlag = 0;
+      }
+    }
+
+    if(currentBird && currentBird.birdie.deathImgFlag == 1){
+      currentBird.birdie.src = 'gameenvironmentandrestingpose/Squarton_Dead_1.svg';
     }
   }
 }
-
+/**
+ * To update the mother image, we first grab the current mother from the allMothers array. We then get the current mom image.
+ * We use a simple 1-0 switching if-else block to make sure the switch happens every tick (If 0, we are on img2. If 1, we are on img1.)
+ * The mother object has the field currImageFlag built into it so that this switching can happen.
+ */
 function updateImage(){
   currMom = allMothers[0]; 
-  console.log(currMom.mother.src);
   currMomImage = currMom.mother.src;
 
   if (currMom.mother.currImageFlag == 0){
@@ -103,17 +109,29 @@ function updateImage(){
  * if the life is less than or equal 0, the bird is removed from the body of the html.
  * removeChild is a JavaScript function that removes a child element from a parent element.
  * In this case game_canvas is the parent. bird.birdie is the child to remove
+ * Each bird has a .deathImgFlag. If this flag is 1, it tells the UpdateBird() function to replace the img of the squarton with a death img,
+ * instead of the normal animation. Here, we check to see if the life span is close to death. If we are, we set this flag to 1. To adjust the
+ * length the death img shows up, we can increase the number on if(bird.lifeSpan == 2). The larger the number, the longer this image stays. 
  * @param {Bird} bird 
  * @returns a boolean that indicates whether to keep or remove the bird
  */
 function removeBirds(bird){
+  point_number.textContent = birdCounter;
   if (!bird) return false;
   let keepBird = true;
   bird.lifeSpan = bird.lifeSpan - 1;
+  if(bird.lifeSpan == 2){
+    bird.birdie.deathImgFlag = 1;
+    // console.log("deadimg");
+    // console.log(bird.birdie.deathImgFlag);
+  }
   if (bird.lifeSpan <= 0){
     game_canvas.removeChild(bird.birdie);
     keepBird = false;
+    birdCounter--;
   }
+  // console.log(allBirds)
+
   return keepBird;
 }
 
@@ -130,7 +148,7 @@ function birdAction(){
   createWater();
   updateImage();
   updateBirds();
-  //allBirds = allBirds.filter(removeBirds);
+  allBirds = allBirds.filter(removeBirds);
 }
 
 /**
@@ -147,6 +165,34 @@ function reset(){
   allBirds = [];
 }
 
+
+/**
+ * recomputes the position of the bird each time the screen is resized
+ * by recomputing the centerLeft, centerTop, and radius 
+ * and invoking updateBirdPosition for all the birds
+ */
+function repositionGameObjects()
+{
+
+  //reset the positions of the birds based on new screen size
+  screenWidth = window.innerWidth;
+  screenHeight = window.innerHeight;
+  centerX = window.innerWidth / 2;
+  centerY = window.innerHeight / 2;
+  offsetX = screenWidth * 0.07; // offset is 7% of the screen width
+  offsetY = screenWidth * 0.09; // offset is 9% of the screen width
+  positionX = centerX - offsetX; // we subtract the X offset to shift the chick left
+  positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
+  radius = screenWidth / 12; // the radius is relative to the width and height of the screen
+
+
+  for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
+    let currentBird = allBirds[i];
+    if (currentBird)
+      currentBird.updateBirdPosition();
+  }  
+}
+
 /**
  * The program starts here
  * An event listener runs in the background waiting for an event to occur on an element
@@ -155,4 +201,5 @@ function reset(){
  * Once the reset button is clicked the function reset is invoked
  */
 window.addEventListener('load', bob);
+window.addEventListener('resize', repositionGameObjects);
 reset_btn.addEventListener('click', reset);
