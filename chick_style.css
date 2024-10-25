@@ -10,8 +10,8 @@
 
 .water{
   content: url("gameenvironmentandrestingpose/WaterPan.svg");
-  width:50em;
-  height: 30em;
+  width: 50%;
+  height: 70%;
   left: 34%;
   top:55%;
 }
@@ -20,9 +20,9 @@
 .mother
 {
   /* content: url("images/Mother_Hen_2 Resting Pose 1.svg"); */
-  width: 25em;
-  height: 25em;
-  left: 60%;
+  width: 50%;
+  height: 40%;
+  left: 50%;
   top: 50%;
 }
 

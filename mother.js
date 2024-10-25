@@ -15,8 +15,8 @@ class Mother{
       // let left = `${MIN_WIDTH + Math.floor(Math.random() * WIDTH_OFFSET)}px`;
       // let top = `${MIN_HEIGHT + Math.floor(Math.random() * HEIGHT_OFFSET)}px`;
   
-      let left = `{0}px`;
-      let top = `{0}px`;
+      let left = centerX;
+      let top = centerY;
 
       this.mother.currImageFlag = 0;
 
@@ -25,6 +25,13 @@ class Mother{
       this.mother.style.position="absolute";
       this.mother.style.left= left;
       this.mother.style.top = top;
+
+      this.updateMomPosition = function(){
+        let left = centerX;
+        let top = centerY;
+        this.birdie.style.left= left;
+        this.birdie.style.top = top;      
+      }
   
       game_canvas.appendChild(this.mother);
     }

@@ -11,6 +11,7 @@ let currNumOfMoms = 0;
 let currWater = 0;
 let allBirds = [];
 let allMothers = [];
+let waterObj = [];
 let currentAngle = 0;
 //let radius = 200;
 
@@ -51,6 +52,7 @@ function createMother(){
 function createWater(){
   if(currWater < MAX_WATER){
     let water = new Water();
+    waterObj[0] = water;
     currWater++;
   }
 }
@@ -190,7 +192,20 @@ function repositionGameObjects()
     let currentBird = allBirds[i];
     if (currentBird)
       currentBird.updateBirdPosition();
+  } 
+  for(let m = 0; m < currNumOfMoms; m++){
+    let currentMom = allMothers[m];
+    if(currentMom){
+      currentMom.updateMomPosition();
+    }
+  }
+  for(let w = 0; w < currWater; w++){
+    let currentWater = waterObj[w];
+    if(currentWater){
+      currentWater.updateWaterPosition();
+    }
   }  
+  
 }
 
 /**
