@@ -1,14 +1,21 @@
 class Water{
     constructor(){
         this.water = document.createElement('img');
-        let left = `{0}px`;
-        let top = `{0}px`;
+        let left = centerX;
+        let top = centerY;
   
     
         this.water.className = 'water';
         this.water.style.position="absolute";
         this.water.style.left= left;
-        this.water.style.top = top;
+        this.water.style.top = top;       
+        
+        this.updateWaterPosition = function(){
+            let left = centerX;
+            let top = centerY;
+            this.birdie.style.left= left;
+            this.birdie.style.top = top;      
+          }
     
         game_canvas.appendChild(this.water);
     }
