@@ -8,3 +8,4 @@ let water = document.getElementById('water');
 let game_canvas =document.getElementById('game_canvas');
 let point_number = document.getElementById('point_number');
 let reset_btn = document.getElementById('reset');
+let list = document.getElementById("list");

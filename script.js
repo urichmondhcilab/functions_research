@@ -37,6 +37,7 @@ function createBird()
 {
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
     let birdie = new Bird();
+    let list = new List();
       allBirds[currentNumberOfBirds] = birdie;
       currentNumberOfBirds++;
       birdCounter++;
@@ -140,7 +141,7 @@ function removeBirds(bird){
 /**
  * Every second a bird is created, 
  * birds are moved 
- * and birds that have completed their livespan are removed
+ * and birds that have completed livespan are removed
  * The filter function runs removeBird on each bird in allBirds.
  * It keeps the birds for which removeBird returns true.
  */
