@@ -72,17 +72,17 @@ function updateBirds(){
 
     if(currentBird && currentBird.lifeSpan > 1){
       if(currentBird.birdie.currImageFlag == 0){
-      currentBird.birdie.src = 'gameenvironmentandrestingpose/chick_resting_1.svg';
+      currentBird.birdie.firstChild.src = 'gameenvironmentandrestingpose/chick_resting_1.svg';
       currentBird.birdie.currImageFlag = 1;
       }
       else{
-      currentBird.birdie.src = 'gameenvironmentandrestingpose/chick_resting_2.svg';
+      currentBird.birdie.firstChild.src = 'gameenvironmentandrestingpose/chick_resting_2.svg';
       currentBird.birdie.currImageFlag = 0;
       }
     }
 
     if(currentBird && currentBird.birdie.deathImgFlag == 1){
-      currentBird.birdie.src = 'gameenvironmentandrestingpose/Squarton_Dead_1.svg';
+      currentBird.birdie.firstChild.src = 'gameenvironmentandrestingpose/Squarton_Dead_1.svg';
     }
   }
 }

@@ -1,11 +1,18 @@
 /* The chick class is a dynamic class
     we use it to include the chick image and set its width and height
  */
-.chick
-{
-  content: url("chick_resting_pose.svg");
+/* .chickCont */
+
+  /*
+  { content: url(""); 
   width: 10%;
   height: 10%;
+}
+  */
+
+.chick{
+  width: 20%;
+  height: 20%;
 }
 
 .water{
