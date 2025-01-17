@@ -1,12 +1,12 @@
 class List{
-    constructor(){
-        let size = 5;
+    constructor(lstSize){
+        this.size = 0 || lstSize;
         let list = document.createElement("ul");
-        for(let i = 0; i < size; i++){
+        for(let i = 0; i < lstSize; i++){
             let child = document.createElement("li");
             child.textContent = i;
             list.appendChild(child);
-            console.log(i);
+            //console.log(i);
             }
     }
 }
