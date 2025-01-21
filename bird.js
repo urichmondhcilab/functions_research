@@ -48,7 +48,7 @@ class Bird{
       this.birdie.style.top = top;      
     }
 
-    console.log(this.birdie)
+    //console.log(this.birdie)
 
     game_canvas.appendChild(this.birdie);
   }
