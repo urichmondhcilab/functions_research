@@ -11,9 +11,14 @@ class Bird{
     // console.log(currentAngle);
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
     this.movedLeft = MIN_MOVEMENT + Math.floor(Math.random() * MAX_MOVEMENT);
-    this.birdie = document.createElement('img');
-    // let listInst = new List();
-    // this.birdie.list = listInst;
+    let birdDiv = document.createElement('div');
+    let birdImg = document.createElement('img');
+    birdImg.className = "chick"
+    birdImg.src = "SRP1.svg";
+    birdDiv.appendChild(birdImg)
+    this.birdie = birdDiv;
+    let listInst = new List(3);
+    this.birdie.list = listInst;
 
 
 
@@ -25,10 +30,14 @@ class Bird{
     this.birdie.currImageFlag= 0;
     this.birdie.deathImgFlag = 0;
 
-    this.birdie.className = 'chick';
+    
+
+    this.birdie.className = 'chickCont';
     this.birdie.style.position="absolute";
     this.birdie.style.left= left;
     this.birdie.style.top = top;
+
+
 
     // a function to update the position of a bird 
     this.updateBirdPosition = function(){
@@ -38,6 +47,8 @@ class Bird{
       this.birdie.style.left= left;
       this.birdie.style.top = top;      
     }
+
+    //console.log(this.birdie)
 
     game_canvas.appendChild(this.birdie);
   }

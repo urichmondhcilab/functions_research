@@ -26,6 +26,11 @@ function bob(){
   setInterval(birdAction, 1000);
 }
 
+// function eventListen(){
+//   console.log(document.getElementById("water"));
+//   // .addEventListener('load',test())
+// }
+
 /**
  * In a time interval, if we have not exceeded the maximum number of birds,
  * We create a new bird 
@@ -37,17 +42,22 @@ function createBird()
 {
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
     let birdie = new Bird();
-    let list = new List();
+    //let list = new List();
       allBirds[currentNumberOfBirds] = birdie;
       currentNumberOfBirds++;
       birdCounter++;
+      birdie.birdie.addEventListener('mouseover', test);
   }
 }
 
 function createMother(){
-  let mother = new Mother();
-  allMothers[currNumOfMoms] = mother;
-  currNumOfMoms++;
+  if(allMothers.length < 1){
+    let mother = new Mother();
+    allMothers[currNumOfMoms] = mother;
+    mother.id = "mom";
+    currNumOfMoms++;
+    mother.mother.addEventListener('mouseover',test)
+  }
 }
 
 function createWater(){
@@ -55,6 +65,8 @@ function createWater(){
     let water = new Water();
     waterObj[0] = water;
     currWater++;
+    // console.log(water.water)
+    water.water.addEventListener('mouseover', test);
   }
 }
 
@@ -72,17 +84,17 @@ function updateBirds(){
 
     if(currentBird && currentBird.lifeSpan > 1){
       if(currentBird.birdie.currImageFlag == 0){
-      currentBird.birdie.src = 'gameenvironmentandrestingpose/chick_resting_1.svg';
+      currentBird.birdie.firstChild.src = 'gameenvironmentandrestingpose/chick_resting_1.svg';
       currentBird.birdie.currImageFlag = 1;
       }
       else{
-      currentBird.birdie.src = 'gameenvironmentandrestingpose/chick_resting_2.svg';
+      currentBird.birdie.firstChild.src = 'gameenvironmentandrestingpose/chick_resting_2.svg';
       currentBird.birdie.currImageFlag = 0;
       }
     }
 
     if(currentBird && currentBird.birdie.deathImgFlag == 1){
-      currentBird.birdie.src = 'gameenvironmentandrestingpose/Squarton_Dead_1.svg';
+      currentBird.birdie.firstChild.src = 'gameenvironmentandrestingpose/Squarton_Dead_1.svg';
     }
   }
 }
@@ -138,6 +150,17 @@ function removeBirds(bird){
   return keepBird;
 }
 
+function checkMoms(){
+  let cb = allBirds[0].birdie;
+  allBirds[0].birdie.id = "test";
+}
+
+function test(){
+  console.log("here");
+
+  // obj.lists.style.display = 'visible'
+}
+
 /**
  * Every second a bird is created, 
  * birds are moved 
@@ -151,6 +174,7 @@ function birdAction(){
   createWater();
   updateImage();
   updateBirds();
+  // checkMoms();
   allBirds = allBirds.filter(removeBirds);
 }
 
@@ -219,3 +243,4 @@ function repositionGameObjects()
 window.addEventListener('load', bob);
 window.addEventListener('resize', repositionGameObjects);
 reset_btn.addEventListener('click', reset);
+// eventListen();

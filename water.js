@@ -1,6 +1,7 @@
 class Water{
     constructor(){
-        this.water = document.createElement('img');
+        this.water = document.createElement('div');
+        this.water.id = "water";
         let left = centerX;
         let top = centerY;
   
