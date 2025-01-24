@@ -1,19 +1,16 @@
 /**
- *  A bird class that creates and styles an image object as a bird
- * birds have a lifeSpan, a check on what direction they have moved (moveleft) 
- * and an image element (dynamically generated)
+ *  A Mother class that creates and styles an image object as a bird
+ * we have an image element (dynamically generated)
  * We give the image element a class with pre-determined styles from chick_style.css
  * We set the image elements position on the screen with absolute, left and top
  * We add the child to the body of the html
+ * Mom has a currImage flag. The currImage flag changes the sprite of the Mom. 
+ * Currently, we have two images, corresponding to values 1 and 0 on this integer. 
  */
 class Mother{
     constructor(){
     //   this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
-    //   this.movedLeft = MIN_MOVEMENT + Math.floor(Math.random() * MAX_MOVEMENT);
       this.mother = document.createElement('img');
-  
-      // let left = `${MIN_WIDTH + Math.floor(Math.random() * WIDTH_OFFSET)}px`;
-      // let top = `${MIN_HEIGHT + Math.floor(Math.random() * HEIGHT_OFFSET)}px`;
   
       let left = centerX;
       let top = centerY;

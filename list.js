@@ -1,3 +1,9 @@
+/**
+ * A list class that constructs an HTML to be appended to each bird. 
+ * Each list has a size that is governed in the constants.js file. 
+ * TO DO NEXT: dispay this list on the game canvas. 
+ */
+
 class List{
     constructor(lstSize){
         this.size = 0 || lstSize;
@@ -6,7 +12,6 @@ class List{
             let child = document.createElement("li");
             child.textContent = i;
             list.appendChild(child);
-            //console.log(i);
             }
     }
 }

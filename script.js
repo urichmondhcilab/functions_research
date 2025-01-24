@@ -4,6 +4,10 @@
  * currentAngle I'm placing birds at a radius from a point and incrementing this angle
  *  every time interval
  * radius is the distance of my bird from by choosen center 
+ * currNumOfMoms is the amount of Mom objects present. 
+ * allMothers stores the references to Mother objects. 
+ * currWater is the amount of Water objects present. 
+ * waterObj stores the references to Mother objects. 
  */
 let currentNumberOfBirds = 0;
 let birdCounter = 0;
@@ -26,10 +30,6 @@ function bob(){
   setInterval(birdAction, 1000);
 }
 
-// function eventListen(){
-//   console.log(document.getElementById("water"));
-//   // .addEventListener('load',test())
-// }
 
 /**
  * In a time interval, if we have not exceeded the maximum number of birds,
@@ -42,13 +42,19 @@ function createBird()
 {
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
     let birdie = new Bird();
-    //let list = new List();
       allBirds[currentNumberOfBirds] = birdie;
       currentNumberOfBirds++;
       birdCounter++;
       birdie.birdie.addEventListener('mouseover', test);
   }
 }
+
+/**
+ * In a time interval, if we have not exceeded the maximum number of Moms,
+ * We create a new Mom
+ * and add the Mom to the array of existing Moms
+ * we also increment the mom counter by 1.
+ */
 
 function createMother(){
   if(allMothers.length < 1){
@@ -60,19 +66,27 @@ function createMother(){
   }
 }
 
+/**
+ * In a time interval, if we have not exceeded the maximum number of water objs,
+ * We create a new water obj
+ * and add the Mom to the array of existing water objs
+ * we also increment the water counter by 1.
+ */
+
 function createWater(){
   if(currWater < MAX_WATER){
     let water = new Water();
     waterObj[0] = water;
     currWater++;
-    // console.log(water.water)
     water.water.addEventListener('mouseover', test);
   }
 }
 
 /**
  * In every time interval, for all the current birds,
- * we move them left or right by setting the birds left property 
+ * we move them left or right by setting the birds left property
+ * We also switch between the two chick resting poses by checking for either a 1 or 0 value
+ *  
  * Note that the bird is an html image element
  * Instead, of moving, we update the images. We use the same idea as we used updating the mother image, instead we go through all the birds
  * present within the array. 
@@ -137,28 +151,18 @@ function removeBirds(bird){
   bird.lifeSpan = bird.lifeSpan - 1;
   if(bird.lifeSpan == 2){
     bird.birdie.deathImgFlag = 1;
-    // console.log("deadimg");
-    // console.log(bird.birdie.deathImgFlag);
   }
   if (bird.lifeSpan <= 0){
     game_canvas.removeChild(bird.birdie);
     keepBird = false;
     birdCounter--;
   }
-  // console.log(allBirds)
 
   return keepBird;
 }
 
-function checkMoms(){
-  let cb = allBirds[0].birdie;
-  allBirds[0].birdie.id = "test";
-}
-
 function test(){
   console.log("here");
-
-  // obj.lists.style.display = 'visible'
 }
 
 /**
@@ -174,7 +178,6 @@ function birdAction(){
   createWater();
   updateImage();
   updateBirds();
-  // checkMoms();
   allBirds = allBirds.filter(removeBirds);
 }
 
@@ -243,4 +246,3 @@ function repositionGameObjects()
 window.addEventListener('load', bob);
 window.addEventListener('resize', repositionGameObjects);
 reset_btn.addEventListener('click', reset);
-// eventListen();

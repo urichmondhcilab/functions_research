@@ -5,6 +5,9 @@
  * We give the image element a class with pre-determined styles from chick_style.css
  * We set the image elements position on the screen with absolute, left and top
  * We add the child to the body of the html
+ * We have a currImage and deathImage flag. The currImage flag changes the sprite of the chicks. 
+ * Currently, we have two images, corresponding to values 1 and 0 on this integer. 
+ * We have a deathImage. When this flag is set to 1, the death image is displayed. Otherwise, the image is set to the normal chick image.
  */
 class Bird{
   constructor(){
