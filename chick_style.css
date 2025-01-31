@@ -10,9 +10,16 @@
 }
   */
 
+.chickCont{
+  width: 10%;
+  height: 8%;
+}
+
 .chick{
-  width: 20%;
-  height: 20%;
+  width: 140%;
+  height: 140%;
+  /* left: 50%;
+  top: 50%; */
 }
 
 .water{
@@ -23,15 +30,30 @@
   top:55%;
 }
 
-/* as about resizing of the window. how do we want to handle this? */
-.mother
-{
-  /* content: url("images/Mother_Hen_2 Resting Pose 1.svg"); */
-  width: 50%;
-  height: 40%;
-  left: 50%;
-  top: 50%;
+.motherCont{
+  width: 15%;
+  height: 25%;
+  top: 40%;
+  left: 60%;
 }
+
+.mDiv{
+  width: 100%;
+  height: 100%;
+}
+
+.mother{
+  width: 250%;
+  height: 250%;
+}
+
+
+/* as about resizing of the window. how do we want to handle this? */
+/* .mother
+{  width: 100%;
+  height: 100%;
+  margin: 0%;
+} */
 
 /* A class not currently used
     I used it for debugging

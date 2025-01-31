@@ -10,7 +10,17 @@
 class Mother{
     constructor(){
     //   this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
-      this.mother = document.createElement('img');
+      let motherDiv = document.createElement('div');
+      let imgMDiv = document.createElement('div');
+      let motherImg = document.createElement('img');
+      motherImg.className = "mother";
+      imgMDiv.className = "mDiv";
+      motherImg.src = "/functions_research/images/Mother_Hen_1.svg";
+      imgMDiv.appendChild(motherImg);
+      motherDiv.appendChild(imgMDiv);
+      motherImg.style.position = "relative"
+      this.mother = motherDiv;
+
   
       let left = centerX;
       let top = centerY;
@@ -18,7 +28,7 @@ class Mother{
       this.mother.currImageFlag = 0;
 
   
-      this.mother.className = 'mother';
+      this.mother.className = 'motherCont';
       this.mother.style.position="absolute";
       this.mother.style.left= left;
       this.mother.style.top = top;
@@ -26,8 +36,8 @@ class Mother{
       this.updateMomPosition = function(){
         let left = centerX;
         let top = centerY;
-        this.birdie.style.left= left;
-        this.birdie.style.top = top;      
+        this.mother.style.left= left;
+        this.mother.style.top = top;      
       }
   
       game_canvas.appendChild(this.mother);
