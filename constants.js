@@ -2,6 +2,7 @@
     MIN_LIFE_SPAN: minimum life span of the bird
     MAX_LIFE_SPAN: maximum life span of the bird
     MAX_NUMBER_OF_BIRDS: The maximum number of birds that can be created
+    MAX_MOM and MAX_WATER = max amount of moms and waters that can be spawned
 
     MAX_MOVEMENT how far right a bird can move
     MIN_MOVEMENT how far left a bird can move
