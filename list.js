@@ -5,6 +5,9 @@
  */
 
 class List{
+    /**
+     * @param {Integer} lstSize the number of items in a list
+     */
     constructor(lstSize){
         this.size = 0 || lstSize;
         let listDiv = document.createElement("div")
@@ -16,8 +19,5 @@ class List{
             child.textContent = i;
             list.appendChild(child);
             }
-
-        
-        // game_canvas.appendChild(this.list);
     }
 }

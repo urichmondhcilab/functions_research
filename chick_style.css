@@ -1,15 +1,6 @@
 /* The chick class is a dynamic class
     we use it to include the chick image and set its width and height
  */
-/* .chickCont */
-
-  /*
-  { content: url(""); 
-  width: 10%;
-  height: 10%;
-}
-  */
-
 .chickCont{
   width: 10%;
   height: 8%;
@@ -46,14 +37,6 @@
   width: 250%;
   height: 250%;
 }
-
-
-/* as about resizing of the window. how do we want to handle this? */
-/* .mother
-{  width: 100%;
-  height: 100%;
-  margin: 0%;
-} */
 
 /* A class not currently used
     I used it for debugging

@@ -55,7 +55,6 @@ function createBird()
  * and add the Mom to the array of existing Moms
  * we also increment the mom counter by 1.
  */
-
 function createMother(){
   if(allMothers.length < 1){
     let mother = new Mother();
@@ -72,7 +71,6 @@ function createMother(){
  * and add the Mom to the array of existing water objs
  * we also increment the water counter by 1.
  */
-
 function createWater(){
   if(currWater < MAX_WATER){
     let water = new Water();
@@ -112,6 +110,7 @@ function updateBirds(){
     }
   }
 }
+
 /**
  * To update the mother image, we first grab the current mother from the allMothers array. We then get the current mom image.
  * We use a simple 1-0 switching if-else block to make sure the switch happens every tick (If 0, we are on img2. If 1, we are on img1.)
@@ -130,7 +129,6 @@ function updateImage(){
     currMom.mother.src = 'images/Mother_Hen_1.svg';
     currMom.mother.currImageFlag = 0;
   }
-
 }
 
 /**
@@ -149,9 +147,11 @@ function removeBirds(bird){
   if (!bird) return false;
   let keepBird = true;
   bird.lifeSpan = bird.lifeSpan - 1;
+
   if(bird.lifeSpan == 2){
     bird.birdie.deathImgFlag = 1;
   }
+
   if (bird.lifeSpan <= 0){
     game_canvas.removeChild(bird.birdie);
     keepBird = false;
@@ -195,15 +195,12 @@ function reset(){
   allBirds = [];
 }
 
-
 /**
  * recomputes the position of the bird each time the screen is resized
  * by recomputing the centerLeft, centerTop, and radius 
  * and invoking updateBirdPosition for all the birds
  */
-function repositionGameObjects()
-{
-
+function repositionGameObjects(){
   //reset the positions of the birds based on new screen size
   screenWidth = window.innerWidth;
   screenHeight = window.innerHeight;
@@ -221,12 +218,14 @@ function repositionGameObjects()
     if (currentBird)
       currentBird.updateBirdPosition();
   } 
+
   for(let m = 0; m < currNumOfMoms; m++){
     let currentMom = allMothers[m];
     if(currentMom){
       currentMom.updateMomPosition();
     }
   }
+
   for(let w = 0; w < currWater; w++){
     let currentWater = waterObj[w];
     if(currentWater){
@@ -235,6 +234,7 @@ function repositionGameObjects()
   }  
   
 }
+
 
 /**
  * The program starts here
