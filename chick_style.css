@@ -1,10 +1,9 @@
 /* The chick class is a dynamic class
     we use it to include the chick image and set its width and height
  */
-/* .chickCont */
-
-  /*
-  { content: url(""); 
+.chick
+{
+  /* content: url("gameenvironmentandrestingpose/chick_resting_1.svg"); */
   width: 10%;
   height: 10%;
 }
