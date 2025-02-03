@@ -1,29 +1,23 @@
 let state = [
     {   name : "BLOCK",
-        color : "grey",
         image_path : "none"
     },
     {   name : "WATER",
-        color : "skyblue",
         image_path: "images/water.svg"
 
     },
     {   name : "FOOD",
-        color : "brown",
         image_path: "images/food.svg"
 
     },
     {   name : "PLANK",
-        color : "brown",
-        image_path : "plank.svg"
+        image_path : "images/plank.svg"
     },   
     {   name : "PLANK",
-        color : "brown",
-        image_path : "plank.svg"
+        image_path : "images/plank.svg"
     },     
     {   name : "PLANK",
-        color : "brown",
-        image_path : "plank.svg"
+        image_path : "images/plank.svg"
     },            
 ]
 

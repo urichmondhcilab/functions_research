@@ -3,11 +3,10 @@
  */
 class Tile{
     /**
-     * 
-     * @param {int} x the start pixel of the tile on the horizontal
-     * @param {int} y the start pixel of the tile on the vertical
-     * @param {int} width the width of the tile 
-     * @param {int} height the height of the tile
+     * @param {Number} x the start pixel of the tile on the horizontal
+     * @param {Number} y the start pixel of the tile on the vertical
+     * @param {Number} width the width of the tile 
+     * @param {Number} height the height of the tile
      * @param {Object} state information about the tile PLANK, BLOCK, WATER, etc.
      */
     constructor(x, y, width, height, state){
@@ -18,7 +17,7 @@ class Tile{
         this.height = height;
         this.state = state;
 
-        // html element properties
+        // update html element properties
         this.div = document.createElement("div");
         this.div.style.backgroundImage = `url("${this.state.image_path}")`;
         this.div.style.backgroundPosition = "center";

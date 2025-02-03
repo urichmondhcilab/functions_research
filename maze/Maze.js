@@ -3,11 +3,10 @@
  */
 class Maze{
     /**
-     * 
-     * @param {Integer} startX The start pixel of the Maze along the horizontal
-     * @param {Integer} startY The start pixel of the Maze along the vertical
-     * @param {Integer} endX The end pixel of the Maze along the horizontal
-     * @param {Integer} endY The end pixel of the Maze along the vertical
+     * @param {Number} startX The start pixel of the Maze along the horizontal
+     * @param {Number} startY The start pixel of the Maze along the vertical
+     * @param {Number} endX The end pixel of the Maze along the horizontal
+     * @param {Number} endY The end pixel of the Maze along the vertical
      */
     constructor(startX, startY, endX, endY){
         this.endX = Math.floor(endX);
@@ -22,7 +21,7 @@ class Maze{
         let currentX = Math.floor(startX);
         let currentY = Math.floor(startY);
 
-        //create each tile add add each tile to maze and the DOM
+        //create each tile and the tile to maze and then the DOM
         while (currentX < this.endX){
             currentY = startY;
 
