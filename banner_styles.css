@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.banner {
+    height: 3rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 1rem;
+    padding-right: 2rem;
+    font-family: sans-serif;
+}
+
+.banner h3 {
+    padding-right: 1rem;
+}
+
+.banner button {
+    height: 2rem;
+    width: 7rem;
+    font-weight: bold;
+    font-size: larger;
+    border: 0;
+    background-color: white;
+    border-radius: .25rem;
+    border: 2px solid black;
+}
+
+.banner button:hover {
+    background-color: rgb(144, 222, 26);
+}
+
+.banner button:active {
+    background-color: rgb(110, 168, 23);
+}
+
+.login-popup {
+    font-family: sans-serif;
+    width: 30%;
+    height: 10rem;
+    background-color: white;
+    float: right;
+    padding: 1rem;
+    display: none;
+}
+
+#incrementBtn, #decrementBtn {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 999px;
+    border: 4px solid black;
+    background-color: white;
+    font-weight: bolder;
+    font-size: larger;
+    text-align: center;
+    margin: 2rem;
+}
