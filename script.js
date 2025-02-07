@@ -13,6 +13,7 @@ let allBirds = [];
 let allMothers = [];
 let waterObj = [];
 let currentAngle = 0;
+
 //let radius = 200;
 
 /**
@@ -164,6 +165,9 @@ function reset(){
   allBirds.forEach((bird, i) => {
     game_canvas.removeChild(bird.birdie);
   });
+
+  let maze = new Maze(mazeSpawnX, mazeSpawnY, window.innerWidth / 2, window.innerHeight / 2);
+  let chicken = new Chicken(maze);
 
   allBirds = [];
 }

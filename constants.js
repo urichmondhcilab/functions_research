@@ -24,6 +24,9 @@ const WIDTH_OFFSET = Math.min(window.innerWidth, window.innerHeight) / 4;
 const MAX_MOVEMENT = 5;
 const MIN_MOVEMENT = -5;
 
+const mazeSpawnX = 100;
+const mazeSpawnY = 100;
+
 
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
@@ -35,3 +38,30 @@ let positionX = centerX - offsetX; // we subtract the X offset to shift the chic
 let positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
 let radius = screenWidth / 12; // the radius is relative to the width and height of the screen
 
+let NUMBER_OF_TILES_X = 20;
+let NUMBER_OF_TILES_Y = 10;
+let GROUND_COLOR = "#BB8459";
+
+
+let state = [
+    {   name : "BLOCK",
+        image_path : "none"
+    },
+    {   name : "WATER",
+        image_path: "images/water.svg"
+
+    },
+    {   name : "FOOD",
+        image_path: "images/food.svg"
+
+    },
+    {   name : "PLANK",
+        image_path : "images/plank.svg"
+    },   
+    {   name : "PLANK",
+        image_path : "images/plank.svg"
+    },     
+    {   name : "PLANK",
+        image_path : "images/plank.svg"
+    },            
+]

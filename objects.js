@@ -9,3 +9,6 @@ let game_canvas =document.getElementById('game_canvas');
 let point_number = document.getElementById('point_number');
 let reset_btn = document.getElementById('reset');
 let list = document.getElementById("list");
+let tile = document.getElementById("tile")
+let maze = document.getElementById("maze")
+let moveBird = document.getElementById("moveBird")
