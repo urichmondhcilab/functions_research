@@ -22,7 +22,7 @@ let state = [
 ]
 
 let game_canvas = document.getElementById("game-body");
-let NUMBER_OF_TILES_X = 20;
+let NUMBER_OF_TILES_X = 10;
 let NUMBER_OF_TILES_Y = 10;
 let GROUND_COLOR = "#BB8459";
 

@@ -25,7 +25,7 @@ class Maze{
         while (currentX < this.endX){
             currentY = startY;
 
-            while(currentY < this.endY){
+            while(currentY < this.endY - 4){ // TODO: fix this, the -4 is a temporary fix, not sure why I need it, either
                 let currentState = state[Math.floor(Math.random() * state.length)];
                 let tile = new Tile(currentX + 'px', currentY + 'px', tileWidth + 'px', tileHeight + 'px', currentState);
 
@@ -36,6 +36,5 @@ class Maze{
             
             currentX = currentX + tileWidth;
         }
-
     }
 }
