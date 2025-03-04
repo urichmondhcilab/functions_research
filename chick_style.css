@@ -8,18 +8,21 @@
 }
 
 .chick{
-  width: 140%;
-  height: 140%;
+  /* width: 140%;
+  height: 140%; */
   /* left: 50%;
   top: 50%; */
+
+  width: 100px;
+  height: 100px;
 }
 
 .water{
   content: url("gameenvironmentandrestingpose/WaterPan.svg");
-  width: 50%;
-  height: 70%;
-  left: 34%;
-  top:55%;
+  width: 200px;
+  height: 200px;
+  left: 50%;
+  top:70%;
 }
 
 .motherCont{

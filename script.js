@@ -41,7 +41,7 @@ function bob(){
 function createBird()
 {
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
-    let birdie = new Bird();
+    let birdie = new Bird(currentNumberOfBirds);
       allBirds[currentNumberOfBirds] = birdie;
       currentNumberOfBirds++;
       birdCounter++;
@@ -172,7 +172,7 @@ function birdAction(){
   createWater();
   updateImage();
   updateBirds();
-  allBirds = allBirds.filter(removeBirds);
+  //allBirds = allBirds.filter(removeBirds);
 }
 
 /**
