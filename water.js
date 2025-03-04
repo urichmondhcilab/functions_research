@@ -1,6 +1,12 @@
+/**
+ * This is a class for the water object. 
+ * Here, we give it positions, a name, and append it to the canvas.
+ * the updateWaterPosition function is run every "tick" to reposition the left and top of the water circle relative to the size (height and width) of the screen.
+ */
 class Water{
     constructor(){
-        this.water = document.createElement('img');
+        this.water = document.createElement('div');
+        this.water.id = "water";
         let left = centerX;
         let top = centerY;
   
