@@ -3,10 +3,32 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="chick_style.css">
-
+    <link rel="stylesheet" href="banner_styles.css">
     <title></title>
   </head>
   <body id="game_canvas">
+    <div class="banner" id="banner">
+      <h3 id="authStatus">Not Signed In</h3>
+      <button id="loginButton">Login</button>
+      <button id="registerButton">Register</button>
+      <button id="logoutButton">Logout</button>
+    </div>
+    <div class="login-popup" id="login-popup">
+      <!-- Sign In Form -->
+      <div id="signInForm">
+        <h3>Email/Password Sign In</h3>
+        <input type="email" id="email" placeholder="Email" />
+        <input type="password" id="password" placeholder="Password" />
+        <button id="emailSignInBtn">Sign In</button>
+      </div>
+
+      <!-- Google Sign In -->
+      <div>
+        <h3>Sign In with Google</h3>
+        <button id="googleSignInBtn">Sign In with Google</button>
+      </div>
+    </div>
+
     <!-- point_number and reset ids are used to style the points and reset divs-->
     <div class="points">chicks</div>
     <div id="point_number" class="points">0</div>
@@ -21,6 +43,7 @@
     <script id = "list" type="text/javascript" src ="list.js"></script>
     <script id = "mom" type="text/javascript" src="mother.js"></script>
     <script type="text/javascript" src="water.js"></script>
+    <script type="module" src="auth.js"></script>
   </body>
 
 </html>
