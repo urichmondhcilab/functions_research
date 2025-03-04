@@ -14,6 +14,7 @@ class Mother{
       let imgMDiv = document.createElement('div');
       let motherImg = document.createElement('img');
       motherImg.className = "mother";
+      motherImg.src = 'images/Mother_Hen_1.svg';
       imgMDiv.className = "mDiv";
       imgMDiv.appendChild(motherImg);
       motherDiv.appendChild(imgMDiv);
@@ -24,7 +25,7 @@ class Mother{
       let left = centerX;
       let top = centerY;
 
-      this.mother.currImageFlag = 0;
+      this.mother.currImageFlag = 1;
 
   
       this.mother.className = 'motherCont';

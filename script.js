@@ -117,21 +117,12 @@ function updateBirds(){
  * The mother object has the field currImageFlag built into it so that this switching can happen.
  */
 function updateImage(){
-  currMom = allMothers[0]; 
-  currMomImage = currMom.mother.src;
+  let currMom = allMothers[0].mother; 
+  let currMomImage = currMom.firstChild.firstChild;
+  let flag = currMom.currImageFlag;
 
-  if (currMom.mother.currImageFlag == 0){
-    console.log(currMom.mother.firstChild.firstChild);
-    //currMom.mother.src = 'images/Mother_Hen_2.svg';
-    currMom.mother.firstChild.firstChild.src = 'images/Mother_Hen_1.svg'
-    currMom.mother.currImageFlag = 1;
-  }
-  else{
-   // currMom.mother.src = 'images/Mother_Hen_1.svg';
-    currMom.mother.firstChild.firstChild.src = 'images/Mother_Hen_2.svg'  
-    currMom.mother.currImageFlag = 0;
-
-  }
+  currMomImage.src = (flag == 1) ? 'images/Mother_Hen_2.svg' : 'images/Mother_Hen_1.svg';
+  currMom.currImageFlag = flag * -1;
 }
 
 /**
