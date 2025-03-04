@@ -1,14 +1,6 @@
 /* The chick class is a dynamic class
     we use it to include the chick image and set its width and height
  */
-/* .chickCont */
-
-  /*
-  { content: url(""); 
-  width: 10%;
-  height: 10%;
-}
-  */
 
 .chickCont{
   width: 10%;
