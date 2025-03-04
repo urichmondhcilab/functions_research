@@ -15,7 +15,6 @@ class Mother{
       let motherImg = document.createElement('img');
       motherImg.className = "mother";
       imgMDiv.className = "mDiv";
-      motherImg.src = "images/Mother_Hen_1.svg";
       imgMDiv.appendChild(motherImg);
       motherDiv.appendChild(imgMDiv);
       motherImg.style.position = "relative"

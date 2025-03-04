@@ -121,13 +121,16 @@ function updateImage(){
   currMomImage = currMom.mother.src;
 
   if (currMom.mother.currImageFlag == 0){
-    currMom.mother.src = 'images/Mother_Hen_2.svg';
+    console.log(currMom.mother.firstChild.firstChild);
+    //currMom.mother.src = 'images/Mother_Hen_2.svg';
+    currMom.mother.firstChild.firstChild.src = 'images/Mother_Hen_1.svg'
     currMom.mother.currImageFlag = 1;
   }
-
   else{
-    currMom.mother.src = 'images/Mother_Hen_1.svg';
+   // currMom.mother.src = 'images/Mother_Hen_1.svg';
+    currMom.mother.firstChild.firstChild.src = 'images/Mother_Hen_2.svg'  
     currMom.mother.currImageFlag = 0;
+
   }
 }
 
