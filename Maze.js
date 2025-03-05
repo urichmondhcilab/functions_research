@@ -32,10 +32,10 @@ class Maze{
 
                 maze.push(tile);
                 game_canvas.appendChild(tile.div);
-                currentY = currentY + tileHeight;    
+                currentY = currentY + (tileHeight);    
             }
             
-            currentX = currentX + tileWidth;
+            currentX = currentX + (tileWidth * 3 / 4);
         }
 
     }
