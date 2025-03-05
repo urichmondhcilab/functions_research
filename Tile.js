@@ -23,7 +23,6 @@ class Tile{
         this.div.style.backgroundImage = `url("${this.state.image_path}")`;
         this.div.style.backgroundPosition = "center";
         this.div.style.backgroundSize = "cover";
-        //this.div.style.backgroundColor = GROUND_COLOR;       
         this.div.style.position = "absolute";
         this.div.style.height = this.height;
         this.div.style.width = this.width;

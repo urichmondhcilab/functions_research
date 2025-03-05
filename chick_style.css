@@ -8,11 +8,6 @@
 }
 
 .chick{
-  /* width: 140%;
-  height: 140%; */
-  /* left: 50%;
-  top: 50%; */
-
   width: 100px;
   height: 100px;
 }
@@ -26,8 +21,8 @@
 }
 
 .motherCont{
-  width: 15%;
-  height: 25%;
+  width: 10%;
+  height: 10%;
   top: 40%;
   left: 60%;
 }
