@@ -78,8 +78,4 @@ class Bird{
     this.birdie.style.left= left;
     this.birdie.style.top = top;      
   }
-
-  
-
-
 }

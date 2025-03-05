@@ -36,3 +36,36 @@ let positionX = centerX - offsetX; // we subtract the X offset to shift the chic
 let positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
 let radius = screenWidth / 12; // the radius is relative to the width and height of the screen
 
+
+let state = [
+    {   name : "BLOCK",
+        color : "grey",
+        image_path : "none"
+    },
+    {   name : "WATER",
+        color : "skyblue",
+        image_path: "images/water.svg"
+
+    },
+    {   name : "FOOD",
+        color : "brown",
+        image_path: "images/food.svg"
+
+    },
+    {   name : "PLANK",
+        color : "brown",
+        image_path : "images/planks/plank.svg"
+    },   
+    {   name : "PLANK",
+        color : "brown",
+        image_path : "images/planks/plank.svg"
+    },     
+    {   name : "PLANK",
+        color : "brown",
+        image_path : "images/planks/plank.svg"
+    },            
+]
+
+let NUMBER_OF_TILES_X = 10;
+let NUMBER_OF_TILES_Y = 5;
+let GROUND_COLOR = "#BB8459";
