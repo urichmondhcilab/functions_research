@@ -10,19 +10,29 @@
  * We have a deathImage. When this flag is set to 1, the death image is displayed. Otherwise, the image is set to the normal chick image.
  */
 class Bird{
-  constructor(){
-    // console.log(currentAngle);
+
+  // keep track of the number of created birds
+  static count = 0;
+
+  constructor(birdId){
+    // update bird count every time a bird is created
+    Bird.count++;
+
+    // give the bird an id
+    this.id = birdId;
+
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
     this.movedLeft = MIN_MOVEMENT + Math.floor(Math.random() * MAX_MOVEMENT);
     let birdDiv = document.createElement('div');
     let birdImg = document.createElement('img');
     birdImg.className = "chick"
     birdImg.src = "SRP1.svg";
+    birdImg.style.objectFit = "cover";
+    birdImg.style.border= "none";
     birdDiv.appendChild(birdImg)
     this.birdie = birdDiv;
     let listInst = new List(3);
     this.birdie.list = listInst;
-
 
 
     let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
@@ -41,18 +51,35 @@ class Bird{
     this.birdie.style.top = top;
 
 
+    // handle this that refers to the event object and this that refers to the object
+    // bind the the the object to the member function
+    this.displayCodeEditor = this.displayCodeEditor.bind(this);
 
-    // a function to update the position of a bird 
-    this.updateBirdPosition = function(){
-      let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
-      let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
-      currentAngle = (currentAngle + 45) % 360;
-      this.birdie.style.left= left;
-      this.birdie.style.top = top;      
-    }
-
-    //console.log(this.birdie)
+    birdImg.addEventListener("click", this.displayCodeEditor);
 
     game_canvas.appendChild(this.birdie);
   }
+
+  /**
+   * display the bird's id everytime a bird is clicked
+   * @param {Object} e is the event object
+   */
+  displayCodeEditor(e){
+    let codeEditor = document.getElementById("codeEditor");
+    codeEditor.innerText = this.id;
+    console.log(this.id);
+    console.log(e.target);
+  }
+
+  updateBirdPosition(){
+    let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
+    let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
+    currentAngle = (currentAngle + 45) % 360;
+    this.birdie.style.left= left;
+    this.birdie.style.top = top;      
+  }
+
+  
+
+
 }
