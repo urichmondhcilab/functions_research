@@ -66,21 +66,6 @@ function createMother(){
 }
 
 /**
- * In a time interval, if we have not exceeded the maximum number of water objs,
- * We create a new water obj
- * and add the Mom to the array of existing water objs
- * we also increment the water counter by 1.
- */
-function createWater(){
-  if(currWater < MAX_WATER){
-    let water = new Water();
-    waterObj[0] = water;
-    currWater++;
-    water.water.addEventListener('mouseover', test);
-  }
-}
-
-/**
  * In every time interval, for all the current birds,
  * we move them left or right by setting the birds left property
  * We also switch between the two chick resting poses by checking for either a 1 or 0 value
@@ -169,7 +154,6 @@ function test(){
 function birdAction(){
   createMother();
   createBird();
-  createWater();
   updateImage();
   updateBirds();
   //allBirds = allBirds.filter(removeBirds);
