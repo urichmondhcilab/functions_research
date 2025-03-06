@@ -156,7 +156,7 @@ function birdAction(){
   createBird();
   updateImage();
   updateBirds();
-  //allBirds = allBirds.filter(removeBirds);
+  allBirds = allBirds.filter(removeBirds);
 }
 
 /**
@@ -214,7 +214,7 @@ function repositionGameObjects(){
 }
 
 (function(){
-  let maze = new Maze(0, (window.innerHeight  * (3/ 4)) , window.innerWidth, window.innerHeight);
+  let maze = new Maze(0, (window.innerHeight  * (3/ 4)) , window.innerWidth, window.innerHeight); // begin at 3/4 the height of the screen
 })();
 
 

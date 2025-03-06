@@ -11,13 +11,7 @@
  */
 class Bird{
 
-  // keep track of the number of created birds
-  static count = 0;
-
   constructor(birdId){
-    // update bird count every time a bird is created
-    Bird.count++;
-
     // give the bird an id
     this.id = birdId;
 
@@ -34,7 +28,6 @@ class Bird{
     let listInst = new List(3);
     this.birdie.list = listInst;
 
-
     let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
     let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
 
@@ -42,8 +35,6 @@ class Bird{
 
     this.birdie.currImageFlag= 0;
     this.birdie.deathImgFlag = 0;
-
-    
 
     this.birdie.className = 'chickCont';
     this.birdie.style.position="absolute";
@@ -66,9 +57,8 @@ class Bird{
    */
   displayCodeEditor(e){
     let codeEditor = document.getElementById("codeEditor");
-    codeEditor.innerText = this.id;
+    codeEditor.firstChild.nodeValue = "chick " + this.id;
     console.log(this.id);
-    console.log(e.target);
   }
 
   updateBirdPosition(){

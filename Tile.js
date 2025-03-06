@@ -22,7 +22,8 @@ class Tile{
         this.div = document.createElement("div");
         this.div.style.backgroundImage = `url("${this.state.image_path}")`;
         this.div.style.backgroundPosition = "center";
-        this.div.style.backgroundSize = "cover";
+        this.div.style.backgroundSize = "auto 100%";
+        this.div.style.backgroundRepeat = "no-repeat"
         this.div.style.position = "absolute";
         this.div.style.height = this.height;
         this.div.style.width = this.width;
