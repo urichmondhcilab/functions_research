@@ -67,5 +67,5 @@ let state = [
 ]
 
 let NUMBER_OF_TILES_X = 10;
-let NUMBER_OF_TILES_Y = 3;
+let NUMBER_OF_TILES_Y = 1;
 let GROUND_COLOR = "#BB8459";

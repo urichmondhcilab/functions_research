@@ -63,7 +63,6 @@
   background-image: url('gameenvironmentandrestingpose/scene.svg'); /*set the source for the image*/
   background-size: 140vw 140vw; /*set the size of the image */
   background-repeat: no-repeat;
-  /* background-color: skyblue; */
   background-color: skyblue;
   background-position: center;
   background-attachment: fixed;

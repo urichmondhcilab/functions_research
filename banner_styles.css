@@ -30,11 +30,15 @@
 }
 
 .banner button:hover {
-    background-color: rgb(144, 222, 26);
+    background-color: #6C7C17;
+    border: none;
+    color: white;
+    /* background-color: rgb(144, 222, 26); */
 }
 
 .banner button:active {
-    background-color: rgb(110, 168, 23);
+    background-color: #6C7C17;
+    /* background-color: rgb(110, 168, 23); */
 }
 
 .login-popup {

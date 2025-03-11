@@ -1,6 +1,6 @@
 /**
- *  A bird class that creates and styles an image object as a bird
- * birds have a lifeSpan, a check on what direction they have moved (moveleft) 
+ * A bird class that creates and styles an image object as a bird
+ * birds have a lifeSpan
  * and an image element (dynamically generated)
  * We give the image element a class with pre-determined styles from chick_style.css
  * We set the image elements position on the screen with absolute, left and top
@@ -10,7 +10,10 @@
  * We have a deathImage. When this flag is set to 1, the death image is displayed. Otherwise, the image is set to the normal chick image.
  */
 class Bird{
-
+/**
+ * 
+ * @param {Number} birdId the number assigned to the bird when it was created 
+ */
   constructor(birdId){
     // give the bird an id
     this.id = birdId;

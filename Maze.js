@@ -4,10 +4,10 @@
 class Maze{
     /**
      * 
-     * @param {Integer} startX The start pixel of the Maze along the horizontal
-     * @param {Integer} startY The start pixel of the Maze along the vertical
-     * @param {Integer} endX The end pixel of the Maze along the horizontal
-     * @param {Integer} endY The end pixel of the Maze along the vertical
+     * @param {Number} startX The start pixel of the Maze along the horizontal
+     * @param {Number} startY The start pixel of the Maze along the vertical
+     * @param {Number} endX The end pixel of the Maze along the horizontal
+     * @param {Number} endY The end pixel of the Maze along the vertical
      */
     constructor(startX, startY, endX, endY){
         this.endX = Math.floor(endX);
@@ -35,7 +35,7 @@ class Maze{
                 currentY = currentY + (tileHeight);    
             }
             
-            currentX = currentX + (tileWidth /** 1 / 2*/);
+            currentX = currentX + (tileWidth * 1 / 4);
         }
 
     }
