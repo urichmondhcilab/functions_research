@@ -214,7 +214,7 @@ function repositionGameObjects(){
 }
 
 (function(){
-  let maze = new Maze(0, (window.innerHeight  * (2 / 3)) , window.innerWidth, (window.innerHeight  * (3/ 4))); // begin at 3/4 the height of the screen
+  let maze = new Maze(MAZE_START, (window.innerHeight  * (2 / 3)) , MAZE_END, (window.innerHeight  * (3/ 4))); // begin at 3/4 the height of the screen
 })();
 
 

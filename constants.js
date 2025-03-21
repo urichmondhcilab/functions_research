@@ -15,6 +15,9 @@ const MIN_LIFE_SPAN = 10;
 const MAX_LIFE_SPAN = 50; // actually 100 + 500
 const MAX_NUMBER_OF_BIRDS = 8;
 
+const MAZE_START = window.innerWidth * 0.10;
+const MAZE_END = window.innerWidth * 0.85;
+
 const MAX_MOM = 1;
 
 const MAX_WATER = 1;
