@@ -23,11 +23,13 @@ class Maze{
         let currentY = Math.floor(startY);
 
         //create each tile add add each tile to maze and the DOM
+
+        console.log(endY)
         while (currentY < this.endY){
-            currentX = startX;
+            currentX = Math.floor(startX);
 
             let mazeY = []
-            while(currentX < this.endX){
+            while(currentX < endX){
                 let currentState = state[Math.floor(Math.random() * state.length)];
                 let tile = new Tile(currentX + 'px', currentY + 'px', tileWidth + 'px', tileHeight + 'px', currentState);
 
@@ -38,8 +40,10 @@ class Maze{
             }
             maze.push(mazeY)
             currentY = currentY + (tileHeight);   
-            startX = Math.floor(startX * 0.10);
-            endX = Math.floor(endX * 0.87);
+            console.log("oldsx " + startX + "oldex " + endX)
+            startX = Math.floor(startX * 0.50); //edit start x and end x to turn in with the background.
+            endX = Math.floor(endX * 1.1);
+            console.log("nsx " + startX + "nex " + endX)
             
         }
 
