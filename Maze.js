@@ -35,7 +35,7 @@ class Maze{
                 currentY = currentY + (tileHeight);    
             }
             
-            currentX = currentX + (tileWidth * 1 / 4);
+            currentX = currentX + (tileWidth * 1 / 3);
         }
 
     }
