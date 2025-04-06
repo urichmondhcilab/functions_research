@@ -23,20 +23,31 @@ class Maze{
         let currentY = Math.floor(startY);
 
         //create each tile add add each tile to maze and the DOM
-        while (currentX < this.endX){
-            currentY = startY;
 
-            while(currentY < this.endY){
+        console.log(endY)
+        while (currentY < this.endY){
+            currentX = Math.floor(startX);
+
+            let mazeY = []
+            while(currentX < endX){
                 let currentState = state[Math.floor(Math.random() * state.length)];
                 let tile = new Tile(currentX + 'px', currentY + 'px', tileWidth + 'px', tileHeight + 'px', currentState);
 
-                maze.push(tile);
+                
                 game_canvas.appendChild(tile.div);
-                currentY = currentY + (tileHeight);    
+                currentX = currentX + (tileWidth * 1 / 4);
+                mazeY.push(tile)
             }
+            maze.push(mazeY)
+            currentY = currentY + (tileHeight);   
+            console.log("oldsx " + startX + "oldex " + endX)
+            startX = Math.floor(startX * 0.50); //edit start x and end x to turn in with the background.
+            endX = Math.floor(endX * 1.1);
+            console.log("nsx " + startX + "nex " + endX)
             
-            currentX = currentX + (tileWidth * 1 / 3);
         }
+
+        console.log(maze)
 
     }
 }
