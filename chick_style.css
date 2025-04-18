@@ -68,16 +68,3 @@
   background-attachment: fixed;
   overflow: hidden;
 }
-
-.points, .reset
-{
-  font-size: 2em;
-  color: white;
-  background-color: black;
-  display: inline;
-  text-align: center;
-  font-family: "Gill Sans", sans-serif;
-  z-index: -1;
-  padding: 0.2em;
-  border-radius: 0.2em;
-}

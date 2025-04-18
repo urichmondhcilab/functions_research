@@ -3,6 +3,19 @@
     padding: 0;
 }
 
+.points, .reset
+{
+  padding: 0.2em;
+  border-radius: 0.2em;
+  color: white;
+  background-color: black;
+  text-align: center;
+  font-family: "Gill Sans", sans-serif;
+  display: inline;
+  font-size: 1.8em;
+}
+
+
 .banner {
     height: 3rem;
     background-color: white;
