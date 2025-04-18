@@ -14,17 +14,18 @@ class Maze{
         this.endY = Math.floor(endY);
 
         // compute the width and height of each tile
-        let tileWidth = Math.floor((endX - startX) / NUMBER_OF_TILES_X);
-        let tileHeight = Math.floor((endY - startY) / NUMBER_OF_TILES_Y);
+        let tileWidth = Math.floor((endX - startX) / (NUMBER_OF_TILES_X - 1)); //-1 is here to make the amount of tiles in  the x 1-indexed 
+        let tileHeight = Math.floor((endY - startY) / NUMBER_OF_TILES_Y); 
 
         // initialize maze to empty array. Each entry is a tile object
         let maze = [];
         let currentX = Math.floor(startX);
-        let currentY = Math.floor(startY);
+        let currentY = Math.floor(startY) + 1; //+ 1 is here to make the amount of tiles in the y 1-indexed
+
+        console.log(currentX)
+        
 
         //create each tile add add each tile to maze and the DOM
-
-        console.log(endY)
         while (currentY < this.endY){
             currentX = Math.floor(startX);
 
@@ -35,13 +36,13 @@ class Maze{
 
                 
                 game_canvas.appendChild(tile.div);
-                currentX = currentX + (tileWidth * 1 / 2);
+                currentX = currentX + (tileWidth);
                 mazeY.push(tile)
             }
             maze.push(mazeY)
             currentY = currentY + (tileHeight);   
             console.log("oldsx " + startX + "oldex " + endX)
-            startX = Math.floor(startX * 0.50); //edit start x and end x to turn in with the background.
+            startX = Math.floor(startX * 0.7); //edit start x and end x to turn in with the background.
             endX = Math.floor(endX * 1.1);
             console.log("nsx " + startX + "nex " + endX)
             
