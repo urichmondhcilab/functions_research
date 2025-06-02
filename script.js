@@ -20,13 +20,13 @@ let currentAngle = 0;
 //let radius = 200;
 
 /**
- * bob [from side to side]
+ * animateGameObjects [changes the sprites that are displayed]
  * runs setInterval 
  * setInterval(fun, ms) is a JavaScript function that receives a function fun
  * and runs fun every ms milliseconds
  * In this case it receives the function birdAction and runs it every 1000 milliseconds
  */
-function bob(){
+function animateGameObjects(){
   setInterval(birdAction, 1000);
 }
 
@@ -222,9 +222,9 @@ function repositionGameObjects(){
  * The program starts here
  * An event listener runs in the background waiting for an event to occur on an element
  * In these two cases load and click
- * Once load occurs the function bob is invoked
+ * Once load occurs the function animateGameObjects is invoked
  * Once the reset button is clicked the function reset is invoked
  */
-window.addEventListener('load', bob);
+window.addEventListener('load', animateGameObjects);
 window.addEventListener('resize', repositionGameObjects);
 reset_btn.addEventListener('click', reset);
