@@ -20,11 +20,13 @@
     height: 3rem;
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: space-between;
     gap: 1rem;
     padding-right: 2rem;
     font-family: sans-serif;
     position: fixed;
+    left: 0px;
+    right: 0px;
 }
 
 .banner h3 {
@@ -62,6 +64,7 @@
     float: right;
     padding: 1rem;
     display: none;
+    margin-top: 3%;
 }
 
 #incrementBtn, #decrementBtn {
@@ -75,3 +78,10 @@
     text-align: center;
     margin: 2rem;
 }
+
+
+.login_status{
+    display: flex;
+    gap: 1rem;
+}
+

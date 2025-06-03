@@ -6,17 +6,26 @@
     <link rel="stylesheet" href="banner_styles.css">
     <title></title>
   </head>
+
   <body id="game_canvas">
     <div class="banner" id="banner">
-      <div class="points">chicks</div>
-      <div id="point_number" class="points">0</div>
-      <div id="reset" class="reset">reset</div>
-      <h3 id="authStatus">Not Signed In</h3>
-      <button id="loginButton">Login</button>
-      <button id="registerButton">Register</button>
-      <button id="logoutButton">Logout</button>
-      <!--display code editor on-click-->
-    <div id="codeEditor" class="points">Here!</div>
+      <div class="game_status">
+        <div class="points">chicks</div>
+        <div id="point_number" class="points">0</div>
+        <div id="reset" class="reset">reset</div>
+        <!--display code editor on-click-->
+        <div id="codeEditor" class="points">Here!</div> 
+      </div>
+
+      <div class="login_status">
+        <h3 id="authStatus">Not Signed In</h3>
+        <button id="loginButton">Login</button>
+        <button id="registerButton">Register</button>
+        <button id="logoutButton">Logout</button>
+      </div>
+
+
+
     </div>
     <div class="login-popup" id="login-popup">
       <!-- Sign In Form -->
