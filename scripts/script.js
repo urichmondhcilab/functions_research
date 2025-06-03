@@ -20,11 +20,7 @@ let currentAngle = 0;
 //let radius = 200;
 
 /**
-<<<<<<< HEAD:script.js
- * animateGameObjects [changes the sprites that are displayed]
-=======
  * animateGameObjects by changing sprites
->>>>>>> dbae8eda97640a6bea918585267a7af16f88d0a2:scripts/script.js
  * runs setInterval 
  * setInterval(fun, ms) is a JavaScript function that receives a function fun
  * and runs fun every ms milliseconds
