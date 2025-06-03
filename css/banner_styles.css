@@ -80,22 +80,8 @@
 }
 
 
-<<<<<<< HEAD:banner_styles.css
-.points, .reset
-{
-  font-size: 2em;
-  color: white;
-  background-color: black;
-  display: inline;
-  text-align: center;
-  font-family: "Gill Sans", sans-serif;
-  padding: 0.2em;
-  border-radius: 0.2em;
-}
-=======
 .login_status{
     display: flex;
     gap: 1rem;
 }
 
->>>>>>> dbae8eda97640a6bea918585267a7af16f88d0a2:css/banner_styles.css
