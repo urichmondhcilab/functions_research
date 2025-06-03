@@ -3,15 +3,30 @@
     padding: 0;
 }
 
+.points, .reset
+{
+  padding: 0.2em;
+  border-radius: 0.2em;
+  color: white;
+  background-color: black;
+  text-align: center;
+  font-family: "Gill Sans", sans-serif;
+  display: inline;
+  font-size: 1.8em;
+}
+
+
 .banner {
     height: 3rem;
-    background-color: white;
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: space-between;
     gap: 1rem;
     padding-right: 2rem;
     font-family: sans-serif;
+    position: fixed;
+    left: 0px;
+    right: 0px;
 }
 
 .banner h3 {
@@ -49,6 +64,7 @@
     float: right;
     padding: 1rem;
     display: none;
+    margin-top: 3%;
 }
 
 #incrementBtn, #decrementBtn {
@@ -64,6 +80,7 @@
 }
 
 
+<<<<<<< HEAD:banner_styles.css
 .points, .reset
 {
   font-size: 2em;
@@ -75,3 +92,10 @@
   padding: 0.2em;
   border-radius: 0.2em;
 }
+=======
+.login_status{
+    display: flex;
+    gap: 1rem;
+}
+
+>>>>>>> dbae8eda97640a6bea918585267a7af16f88d0a2:css/banner_styles.css

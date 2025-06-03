@@ -2,12 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="chick_style.css">
-    <link rel="stylesheet" href="banner_styles.css">
+    <link rel="stylesheet" href="css/chick_style.css">
+    <link rel="stylesheet" href="css/banner_styles.css">
     <title></title>
   </head>
+
   <body id="game_canvas">
     <div class="banner" id="banner">
+<<<<<<< HEAD
       <h3 id="authStatus">Not Signed In</h3>
       <button id="loginButton">Login</button>
       <button id="registerButton">Register</button>
@@ -15,6 +17,25 @@
       <div class="points">chicks</div>
       <div id="point_number" class="points">0</div>
       <div id="reset" class="reset">reset</div>
+=======
+      <div class="game_status">
+        <div class="points">chicks</div>
+        <div id="point_number" class="points">0</div>
+        <div id="reset" class="reset">reset</div>
+        <!--display code editor on-click-->
+        <div id="codeEditor" class="points">Here!</div> 
+      </div>
+
+      <div class="login_status">
+        <h3 id="authStatus">Not Signed In</h3>
+        <button id="loginButton">Login</button>
+        <button id="registerButton">Register</button>
+        <button id="logoutButton">Logout</button>
+      </div>
+
+
+
+>>>>>>> dbae8eda97640a6bea918585267a7af16f88d0a2
     </div>
     <div class="login-popup" id="login-popup">
       <!-- Sign In Form -->
@@ -33,27 +54,24 @@
     </div>
 
     <!-- point_number and reset ids are used to style the points and reset divs-->
+<<<<<<< HEAD
     <!-- <div class="points">chicks</div>
     <div id="point_number" class="points">0</div>
     <div id="reset" class="reset">reset</div> -->
+=======
+>>>>>>> dbae8eda97640a6bea918585267a7af16f88d0a2
 
-
-    <!--display code editor on-click-->
-    <div id="codeEditor" class="points">Here!</div>
 
     <!-- include the different scripts that control the appearance, position, 
      and eventual removel of the birds -->
-    <script type="text/javascript" src="constants.js"></script>
-    <script type="text/javascript" src="objects.js"></script>
-    <script type="text/javascript" src="bird.js"></script>
-    <script src="Tile.js"></script>
-    <script src="Maze.js"></script>        
-    <script type="text/javascript" src="script.js"></script>
-    <script id = "list" type="text/javascript" src ="list.js"></script>
-    <script id = "mom" type="text/javascript" src="mother.js"></script>
-    <script type="text/javascript" src="water.js"></script>
-
-    <script type="module" src="auth.js"></script>
+    <script type="text/javascript" src="scripts/constants.js"></script>
+    <script type="text/javascript" src="scripts/objects.js"></script>
+    <script type="text/javascript" src="scripts/bird.js"></script>
+    <script src="scripts/Tile.js"></script>
+    <script src="scripts/Maze.js"></script>        
+    <script type="text/javascript" src="scripts/script.js"></script>
+    <script id = "mom" type="text/javascript" src="scripts/mother.js"></script>
+    <script type="module" src="scripts/auth.js"></script>
   </body>
 
 </html>

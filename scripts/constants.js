@@ -47,12 +47,12 @@ let state = [
     },
     {   name : "WATER",
         color : "skyblue",
-        image_path: "images/water.svg"
+        image_path: "images/water/water.svg"
 
     },
     {   name : "FOOD",
         color : "brown",
-        image_path: "images/food.svg"
+        image_path: "images/food/food.svg"
 
     },
     {   name : "PLANK",

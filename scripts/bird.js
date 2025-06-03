@@ -23,13 +23,10 @@ class Bird{
     let birdDiv = document.createElement('div');
     let birdImg = document.createElement('img');
     birdImg.className = "chick"
-    birdImg.src = "SRP1.svg";
     birdImg.style.objectFit = "cover";
     birdImg.style.border= "none";
     birdDiv.appendChild(birdImg)
     this.birdie = birdDiv;
-    let listInst = new List(3);
-    this.birdie.list = listInst;
 
     let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
     let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
@@ -45,7 +42,7 @@ class Bird{
     this.birdie.style.top = top;
 
 
-    // handle this that refers to the event object and this that refers to the object
+    // handle "this" that refers to the event object and "this" that refers to the object
     // bind the the the object to the member function
     this.displayCodeEditor = this.displayCodeEditor.bind(this);
 
