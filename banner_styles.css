@@ -18,13 +18,13 @@
 
 .banner {
     height: 3rem;
-    background-color: white;
     display: flex;
     align-items: center;
     justify-content: right;
     gap: 1rem;
     padding-right: 2rem;
     font-family: sans-serif;
+    position: fixed;
 }
 
 .banner h3 {
