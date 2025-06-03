@@ -28,8 +28,8 @@ class Bird{
     birdImg.style.border= "none";
     birdDiv.appendChild(birdImg)
     this.birdie = birdDiv;
-    let listInst = new List(3);
-    this.birdie.list = listInst;
+    // let listInst = new List(3);
+    // this.birdie.list = listInst;
 
     let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
     let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;

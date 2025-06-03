@@ -13,7 +13,7 @@
 }
 
 .water{
-  content: url("gameenvironmentandrestingpose/WaterPan.svg");
+  content: url("../gameenvironmentandrestingpose/WaterPan.svg");
   width: 200px;
   height: 200px;
   left: 50%;
@@ -60,7 +60,7 @@
  */
 #game_canvas
 {
-  background-image: url('gameenvironmentandrestingpose/scene.svg'); /*set the source for the image*/
+  background-image: url('../gameenvironmentandrestingpose/scene.svg'); /*set the source for the image*/
   background-size: 140vw 140vw; /*set the size of the image */
   background-repeat: no-repeat;
   background-color: skyblue;
