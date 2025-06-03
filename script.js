@@ -81,17 +81,17 @@ function updateBirds(){
 
     if(currentBird && currentBird.lifeSpan > 1){
       if(currentBird.birdie.currImageFlag == 0){
-      currentBird.birdie.firstChild.src = 'gameenvironmentandrestingpose/chick_resting_1.svg';
+      currentBird.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg'; //'gameenvironmentandrestingpose/chick_resting_1.svg';
       currentBird.birdie.currImageFlag = 1;
       }
       else{
-      currentBird.birdie.firstChild.src = 'gameenvironmentandrestingpose/chick_resting_2.svg';
+      currentBird.birdie.firstChild.src = 'images/chicks/squarton_resting_position_2.svg';
       currentBird.birdie.currImageFlag = 0;
       }
     }
 
     if(currentBird && currentBird.birdie.deathImgFlag == 1){
-      currentBird.birdie.firstChild.src = 'gameenvironmentandrestingpose/Squarton_Dead_1.svg';
+      currentBird.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
     }
   }
 }
@@ -106,7 +106,7 @@ function updateImage(){
   let currMomImage = currMom.firstChild.firstChild;
   let flag = currMom.currImageFlag;
 
-  currMomImage.src = (flag == 1) ? 'images/Mother_Hen_2.svg' : 'images/Mother_Hen_1.svg';
+  currMomImage.src = (flag == 1) ? 'images/mother_hen/Mother_Hen_2.svg' : 'images/mother_hen/Mother_Hen_1.svg';
   currMom.currImageFlag = flag * -1;
 }
 

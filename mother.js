@@ -14,7 +14,7 @@ class Mother{
       let imgMDiv = document.createElement('div');
       let motherImg = document.createElement('img');
       motherImg.className = "mother";
-      motherImg.src = 'images/Mother_Hen_1.svg';
+      motherImg.src = 'images/mother_hen/Mother_Hen_1.svg';
       imgMDiv.className = "mDiv";
       imgMDiv.appendChild(motherImg);
       motherDiv.appendChild(imgMDiv);

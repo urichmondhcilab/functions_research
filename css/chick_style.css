@@ -3,17 +3,17 @@
  */
 
 .chickCont{
-  width: 10%;
-  height: 8%;
+  width: 110px;
+  height: 120px;
 }
 
 .chick{
-  width: 100px;
-  height: 100px;
+  width: 60%;
+  height: 60%;
 }
 
 .water{
-  content: url("../gameenvironmentandrestingpose/WaterPan.svg");
+  content: url("../images/water/water.svg");
   width: 200px;
   height: 200px;
   left: 50%;
@@ -60,7 +60,7 @@
  */
 #game_canvas
 {
-  background-image: url('../gameenvironmentandrestingpose/scene.svg'); /*set the source for the image*/
+  background-image: url('../images/game_environment/scene.svg'); /*set the source for the image*/
   background-size: 140vw 140vw; /*set the size of the image */
   background-repeat: no-repeat;
   background-color: skyblue;
