@@ -4,17 +4,17 @@
  * currentAngle I'm placing birds at a radius from a point and incrementing this angle
  *  every time interval
  * radius is the distance of my bird from by choosen center 
- * currNumOfMoms is the amount of Mom objects present. 
- * allMothers stores the references to Mother objects. 
+ * motherCreated is a boolean value, true if mother created.
+ * motherHen is the mother hen object, once created.
  * currWater is the amount of Water objects present. 
  * waterObj stores the references to Mother objects. 
  */
 let currentNumberOfBirds = 0;
 let birdCounter = 0;
-let currNumOfMoms = 0;
 let currWater = 0;
 let allBirds = [];
-let allMothers = [];
+// let motherCreated = false;
+let motherHen = null;
 let waterObj = [];
 let currentAngle = 0;
 //let radius = 200;
@@ -50,18 +50,15 @@ function createBird()
 }
 
 /**
- * In a time interval, if we have not exceeded the maximum number of Moms,
+ * Checks that the motherHen has not already been created
  * We create a new Mom
- * and add the Mom to the array of existing Moms
- * we also increment the mom counter by 1.
+ * set motherCreated to true
+ * add event listener, to HTML DOM mother element
+ * remove bool
  */
 function createMother(){
-  if(allMothers.length < 1){
-    let mother = new Mother();
-    allMothers[currNumOfMoms] = mother;
-    mother.id = "mom";
-    currNumOfMoms++;
-    mother.mother.addEventListener('mouseover',test)
+  if(motherHen == null){
+    motherHen = new Mother();
   }
 }
 
@@ -97,13 +94,13 @@ function updateBirds(){
 }
 
 /**
- * To update the mother image, we first grab the current mother from the allMothers array. We then get the current mom image.
+ * To update the mother image, We first set currMom to the mother DOM object. 
  * We use a simple 1-0 switching if-else block to make sure the switch happens every tick (If 0, we are on img2. If 1, we are on img1.)
  * The mother object has the field currImageFlag built into it so that this switching can happen.
  */
-function updateImage(){
-  let currMom = allMothers[0].mother; 
-  let currMomImage = currMom.firstChild.firstChild;
+function updateMotherHen(){
+  let currMom = motherHen.mother;
+  let currMomImage = currMom.firstChild;
   let flag = currMom.currImageFlag;
 
   currMomImage.src = (flag == 1) ? 'images/mother_hen/Mother_Hen_2.svg' : 'images/mother_hen/Mother_Hen_1.svg';
@@ -154,7 +151,7 @@ function test(){
 function birdAction(){
   createMother();
   createBird();
-  updateImage();
+  updateMotherHen();
   updateBirds();
   allBirds = allBirds.filter(removeBirds);
 }
@@ -197,12 +194,9 @@ function repositionGameObjects(){
       currentBird.updateBirdPosition();
   } 
 
-  for(let m = 0; m < currNumOfMoms; m++){
-    let currentMom = allMothers[m];
-    if(currentMom){
-      currentMom.updateMomPosition();
+    if(motherHen != null){
+      motherHen.updateMomPosition();
     }
-  }
 
   for(let w = 0; w < currWater; w++){
     let currentWater = waterObj[w];

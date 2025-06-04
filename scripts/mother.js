@@ -11,13 +11,10 @@ class Mother{
     constructor(){
     //   this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
       let motherDiv = document.createElement('div');
-      let imgMDiv = document.createElement('div');
       let motherImg = document.createElement('img');
       motherImg.className = "mother";
       motherImg.src = 'images/mother_hen/Mother_Hen_1.svg';
-      imgMDiv.className = "mDiv";
-      imgMDiv.appendChild(motherImg);
-      motherDiv.appendChild(imgMDiv);
+      motherDiv.appendChild(motherImg);
       motherImg.style.position = "relative"
       this.mother = motherDiv;
 
