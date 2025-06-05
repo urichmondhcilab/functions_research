@@ -7,41 +7,49 @@
     <title></title>
   </head>
 
-  <body id="game_canvas">
-    <div class="banner" id="banner">
-      <div class="game_status">
-        <div class="points">chicks</div>
-        <div id="point_number" class="points">0</div>
-        <div id="reset" class="reset">reset</div>
-        <!--display code editor on-click-->
-        <div id="codeEditor" class="points">Here!</div> 
+  <!-- <body id="game_canvas"> -->
+<body>
+    <div class="container">
+      <div id="game_canvas">
+        <div class="banner" id="banner">
+          <div class="game_status">
+            <div class="points">chicks</div>
+            <div id="point_number" class="points">0</div>
+            <div id="reset" class="reset">reset</div>
+            <!--display code editor on-click-->
+            <div id="codeEditor" class="points">Here!</div> 
+          </div>
+
+          <div class="login_status">
+            <h3 id="authStatus">Not Signed In</h3>
+            <button id="loginButton">Login</button>
+            <button id="registerButton">Register</button>
+            <button id="logoutButton">Logout</button>
+          </div>
+        </div>
+
+        <div class="login-popup" id="login-popup">
+          <!-- Sign In Form -->
+          <div id="signInForm">
+            <h3>Email/Password Sign In</h3>
+            <input type="email" id="email" placeholder="Email" />
+            <input type="password" id="password" placeholder="Password" />
+            <button id="emailSignInBtn">Sign In</button>
+          </div>
+
+          <!-- Google Sign In -->
+          <div>
+            <h3>Sign In with Google</h3>
+            <button id="googleSignInBtn">Sign In with Google</button>
+          </div>
+        </div>
       </div>
 
-      <div class="login_status">
-        <h3 id="authStatus">Not Signed In</h3>
-        <button id="loginButton">Login</button>
-        <button id="registerButton">Register</button>
-        <button id="logoutButton">Logout</button>
+      <div id="game_operations">
+        trial
       </div>
-
-
-
     </div>
-    <div class="login-popup" id="login-popup">
-      <!-- Sign In Form -->
-      <div id="signInForm">
-        <h3>Email/Password Sign In</h3>
-        <input type="email" id="email" placeholder="Email" />
-        <input type="password" id="password" placeholder="Password" />
-        <button id="emailSignInBtn">Sign In</button>
-      </div>
 
-      <!-- Google Sign In -->
-      <div>
-        <h3>Sign In with Google</h3>
-        <button id="googleSignInBtn">Sign In with Google</button>
-      </div>
-    </div>
 
     <!-- point_number and reset ids are used to style the points and reset divs-->
 
@@ -52,9 +60,10 @@
     <script type="text/javascript" src="scripts/objects.js"></script>
     <script type="text/javascript" src="scripts/bird.js"></script>
     <script src="scripts/Tile.js"></script>
-    <script src="scripts/Maze.js"></script>        
+    <script src="scripts/Maze.js"></script>  
+    <script id = "mom" type="text/javascript" src="scripts/mother.js"></script>          
     <script type="text/javascript" src="scripts/script.js"></script>
-    <script id = "mom" type="text/javascript" src="scripts/mother.js"></script>
+
     <script type="module" src="scripts/auth.js"></script>
   </body>
 

@@ -37,15 +37,15 @@
   height: 250%;
 }
 
-/* A class not currently used
+/* /* A class not currently used
     I used it for debugging
  */
-.trial
+/* .trial
 {
   width: 2em;
   height: 2em;
   background-color: blue;
-}
+} */ 
 
 /* 
   game_canvas is the class name associated with the body of the document
@@ -60,11 +60,16 @@
  */
 #game_canvas
 {
+  width: 70%;
+  height: 100vh;
   background-image: url('../images/game_environment/scene.svg'); /*set the source for the image*/
-  background-size: 140vw 140vw; /*set the size of the image */
   background-repeat: no-repeat;
-  background-color: skyblue;
   background-position: center;
-  background-attachment: fixed;
-  overflow: hidden;
+  background-size: cover;
+  background-color: skyblue;
+
+}
+
+.container{
+  display: flex;
 }

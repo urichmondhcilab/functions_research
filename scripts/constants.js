@@ -31,7 +31,7 @@ const MIN_MOVEMENT = -5;
 
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
-let centerX = window.innerWidth / 2;
+let centerX = (window.innerWidth * 0.7)/ 2;
 let centerY = window.innerHeight / 2;
 let offsetX = screenWidth * 0.07; // offset is 7% of the screen width
 let offsetY = screenWidth * 0.09; // offset is 9% of the screen width

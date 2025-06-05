@@ -16,25 +16,21 @@ class Mother{
       motherImg.src = 'images/mother_hen/Mother_Hen_1.svg';
       motherDiv.appendChild(motherImg);
       motherImg.style.position = "relative"
+
+
       this.mother = motherDiv;
-
-  
-      let left = centerX;
-      let top = centerY;
-
       this.mother.currImageFlag = 1;
-
-  
       this.mother.className = 'motherCont';
       this.mother.style.position="absolute";
-      this.mother.style.left= left;
-      this.mother.style.top = top;
+      this.mother.style.left= "-50px";
+      this.mother.style.top = centerY;
+
+      console.log("centerX is" + centerX);
+      console.log("Xwidth is" + window.innerWidth);
 
       this.updateMomPosition = function(){
-        let left = centerX;
-        let top = centerY;
-        this.mother.style.left= left;
-        this.mother.style.top = top;      
+        this.mother.style.left= "-50px";
+        this.mother.style.top = centerY;      
       }
   
       game_canvas.appendChild(this.mother);
