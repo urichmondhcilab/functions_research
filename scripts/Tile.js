@@ -24,11 +24,14 @@ class Tile{
         this.div.style.backgroundPosition = "center";
         this.div.style.backgroundSize = "100% 70%";
         this.div.style.backgroundRepeat = "no-repeat"
+
+        // position styles
         this.div.style.position = "absolute";
         this.div.style.height = this.height;
         this.div.style.width = this.width;
         this.div.style.left = this.x;
-        this.div.style.top = this.y;
+        this.div.style.top = this.y;           
+
     }
 
     updateTile(x, y, width, height){

@@ -186,6 +186,7 @@ function repositionGameObjects(){
   positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
   radius = screenWidth / 12; // the radius is relative to the width and height of the screen
 
+  // update maze location variables 
   mazeStartX = 0;
   mazeStartY = (window.innerHeight * 0.7);
   mazeWidth = (window.innerWidth * 0.6);
@@ -203,12 +204,12 @@ function repositionGameObjects(){
     }
 
     console.log("maze in reposition: " + maze);
-    if (maze != null) maze.upadateMazePosition();
+    if (maze) maze.upadateMazePosition(mazeStartX, mazeStartY, mazeWidth, mazeHeight);
   
 }
 
 (function(){
-  maze = new Maze(0, (window.innerHeight * 0.7) , (window.innerWidth * 0.6), (window.innerHeight  * 0.8)); // begin at 3/4 the height of the screen
+  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
 })();
 
 

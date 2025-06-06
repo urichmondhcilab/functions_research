@@ -10,80 +10,66 @@ class Maze{
      * @param {Number} endY The end pixel of the Maze along the vertical
      */
     constructor(startX, startY, endX, endY){
-        this.endX = Math.floor(endX);
-        this.endY = Math.floor(endY);
 
-        // compute the width and height of each tile
-        let tileWidth = Math.floor((endX - startX) / (NUMBER_OF_TILES_X - 1)); //-1 is here to make the amount of tiles in  the x 1-indexed 
-        let tileHeight = Math.floor((endY - startY) / NUMBER_OF_TILES_Y); 
-
+        this.#init(startX, startY, endX, endY);
         // initialize maze to empty array. Each entry is a tile object
         this.maze = [];
         let currentX = Math.floor(startX);
         let currentY = Math.floor(startY) + 1; //+ 1 is here to make the amount of tiles in the y 1-indexed
 
-        console.log(currentX)
         
 
         //create each tile add add each tile to maze and the DOM
-        while (currentY < this.endY){
+        while (currentY < endY){
             currentX = Math.floor(startX);
 
             let mazeY = []
             while(currentX < endX){
                 let currentState = state[Math.floor(Math.random() * state.length)];
-                let tile = new Tile(currentX + 'px', currentY + 'px', tileWidth + 'px', tileHeight + 'px', currentState);
-
-                
+                let tile = new Tile(currentX + 'px', currentY + 'px', this.tileWidth + 'px', this.tileHeight + 'px', currentState);
+            
                 game_canvas.appendChild(tile.div);
-                currentX = currentX + (tileWidth);
+                currentX = currentX + (this.tileWidth);
                 mazeY.push(tile)
             }
             this.maze.push(mazeY)
-            currentY = currentY + (tileHeight);   
-            console.log("oldsx " + startX + "oldex " + endX)
+            currentY = currentY + (this.tileHeight);   
             startX = Math.floor(startX * 0.7); //edit start x and end x to turn in with the background.
             endX = Math.floor(endX * 1.1);
-            console.log("nsx " + startX + "nex " + endX)
-            
         }
 
         console.log(this.maze[0])
     }
 
-    upadateMazePosition(){
+    upadateMazePosition(startX, startY, endX, endY){
 
-        this.endX = Math.floor(mazeWidth);
-        this.endY = Math.floor(mazeHeight);
-
-        this.startX = Math.floor(mazeStartX);
-        this.startY = Math.floor(mazeStartY);
-
-        console.log(this.startX, this.startY, this.endX, this.endY);
-
-        // compute the width and height of each tile
-        let tileWidth = Math.floor((this.endX - this.startX) / (NUMBER_OF_TILES_X - 1)); //-1 is here to make the amount of tiles in  the x 1-indexed 
-        let tileHeight = Math.floor((this.endY - this.startY) / NUMBER_OF_TILES_Y);   
+        this.#init(startX, startY, endX, endY);
         
-        let currentX = Math.floor(this.startX);
-        let currentY = Math.floor(this.startY) + 1; //+ 1 is here to make the amount of tiles in the y 1-indexed
+        let currentX = Math.floor(startX);
+        let currentY = Math.floor(startY) + 1; //+ 1 is here to make the amount of tiles in the y 1-indexed
 
         let i = 0;
         let j = 0
 
         while (i < this.maze.length){
-            currentX = Math.floor(this.startX);
+            currentX = Math.floor(startX);
             while(j < this.maze[i].length){
                 let currTile = this.maze[i][j];
-                currTile.updateTile(currentX + 'px', currentY + 'px', tileWidth + 'px', tileHeight + 'px');
+                currTile.updateTile(currentX + 'px', currentY + 'px', this.tileWidth + 'px', this.tileHeight + 'px');
 
-                currentX = currentX + (tileWidth);
+                currentX = currentX + (this.tileWidth);
                 j++;
             }
-            currentY = currentY + (tileHeight);   
+            currentY = currentY + (this.tileHeight);   
             i++;            
         }        
-        
-        
+    }
+
+
+    #init(startX, startY, width, height){
+
+        // compute the width and height of each tile
+        this.tileWidth = Math.floor((width - startX) / (NUMBER_OF_TILES_X - 1)); //-1 is here to make the amount of tiles in  the x 1-indexed 
+        this.tileHeight = Math.floor((height - startY) / NUMBER_OF_TILES_Y);   
     }
 }
