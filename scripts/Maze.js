@@ -18,7 +18,7 @@ class Maze{
         let tileHeight = Math.floor((endY - startY) / NUMBER_OF_TILES_Y); 
 
         // initialize maze to empty array. Each entry is a tile object
-        let maze = [];
+        this.maze = [];
         let currentX = Math.floor(startX);
         let currentY = Math.floor(startY) + 1; //+ 1 is here to make the amount of tiles in the y 1-indexed
 
@@ -39,7 +39,7 @@ class Maze{
                 currentX = currentX + (tileWidth);
                 mazeY.push(tile)
             }
-            maze.push(mazeY)
+            this.maze.push(mazeY)
             currentY = currentY + (tileHeight);   
             console.log("oldsx " + startX + "oldex " + endX)
             startX = Math.floor(startX * 0.7); //edit start x and end x to turn in with the background.
@@ -48,7 +48,42 @@ class Maze{
             
         }
 
-        console.log(maze)
+        console.log(this.maze[0])
+    }
 
+    upadateMazePosition(){
+
+        this.endX = Math.floor(mazeWidth);
+        this.endY = Math.floor(mazeHeight);
+
+        this.startX = Math.floor(mazeStartX);
+        this.startY = Math.floor(mazeStartY);
+
+        console.log(this.startX, this.startY, this.endX, this.endY);
+
+        // compute the width and height of each tile
+        let tileWidth = Math.floor((this.endX - this.startX) / (NUMBER_OF_TILES_X - 1)); //-1 is here to make the amount of tiles in  the x 1-indexed 
+        let tileHeight = Math.floor((this.endY - this.startY) / NUMBER_OF_TILES_Y);   
+        
+        let currentX = Math.floor(this.startX);
+        let currentY = Math.floor(this.startY) + 1; //+ 1 is here to make the amount of tiles in the y 1-indexed
+
+        let i = 0;
+        let j = 0
+
+        while (i < this.maze.length){
+            currentX = Math.floor(this.startX);
+            while(j < this.maze[i].length){
+                let currTile = this.maze[i][j];
+                currTile.updateTile(currentX + 'px', currentY + 'px', tileWidth + 'px', tileHeight + 'px');
+
+                currentX = currentX + (tileWidth);
+                j++;
+            }
+            currentY = currentY + (tileHeight);   
+            i++;            
+        }        
+        
+        
     }
 }

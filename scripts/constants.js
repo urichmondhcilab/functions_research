@@ -22,6 +22,11 @@ let positionX = centerX - offsetX; // we subtract the X offset to shift the chic
 let positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
 let radius = screenWidth / 12; // the radius is relative to the width and height of the screen
 
+let mazeStartX = 0;
+let mazeStartY = (window.innerHeight * 0.7);
+let mazeWidth = (window.innerWidth * 0.6);
+let mazeHeight = (window.innerHeight  * 0.8);
+
 
 let state = [
     {   name : "BLOCK",

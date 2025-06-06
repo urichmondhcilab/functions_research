@@ -16,6 +16,7 @@ let allBirds = [];
 let motherHen = null;
 let waterObj = [];
 let currentAngle = 0;
+let maze = null;
 //let radius = 200;
 
 /**
@@ -185,6 +186,11 @@ function repositionGameObjects(){
   positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
   radius = screenWidth / 12; // the radius is relative to the width and height of the screen
 
+  mazeStartX = 0;
+  mazeStartY = (window.innerHeight * 0.7);
+  mazeWidth = (window.innerWidth * 0.6);
+  mazeHeight = (window.innerHeight  * 0.8);
+
 
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
     let currentBird = allBirds[i];
@@ -195,11 +201,14 @@ function repositionGameObjects(){
     if(motherHen != null){
       motherHen.updateMomPosition();
     }
+
+    console.log("maze in reposition: " + maze);
+    if (maze != null) maze.upadateMazePosition();
   
 }
 
 (function(){
-  let maze = new Maze(0, (window.innerHeight * 0.7) , (window.innerWidth * 0.6), (window.innerHeight  * 0.8)); // begin at 3/4 the height of the screen
+  maze = new Maze(0, (window.innerHeight * 0.7) , (window.innerWidth * 0.6), (window.innerHeight  * 0.8)); // begin at 3/4 the height of the screen
 })();
 
 

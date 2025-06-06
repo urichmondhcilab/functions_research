@@ -25,8 +25,8 @@ class Mother{
       this.mother.style.top = `${Math.floor(centerY) - motherOffsetY}px`;
 
       this.updateMomPosition = function(){
-        this.mother.style.left= `${Math.floor(centerX)}px`;
-        this.mother.style.top = centerY;      
+        this.mother.style.left= `${Math.floor(centerX) - motherOffsetX}px`;
+        this.mother.style.top = `${Math.floor(centerY) - motherOffsetY}px`;      
       }
   
       game_canvas.appendChild(this.mother);

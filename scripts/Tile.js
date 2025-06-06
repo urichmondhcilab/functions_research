@@ -30,4 +30,16 @@ class Tile{
         this.div.style.left = this.x;
         this.div.style.top = this.y;
     }
+
+    updateTile(x, y, width, height){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+
+        this.div.style.height = this.height;
+        this.div.style.width = this.width;
+        this.div.style.left = this.x;
+        this.div.style.top = this.y;        
+    }
 }
