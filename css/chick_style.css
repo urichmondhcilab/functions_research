@@ -44,7 +44,8 @@
 #game_operations {
     display: flex;
     flex-direction: column;
-    width: 50vw;
+    width: 30%;
+    /* width: 50vw; */
 }
 
 .top-right {
