@@ -13,7 +13,6 @@ let currentNumberOfBirds = 0;
 let birdCounter = 0;
 let currWater = 0;
 let allBirds = [];
-// let motherCreated = false;
 let motherHen = null;
 let waterObj = [];
 let currentAngle = 0;
@@ -38,8 +37,7 @@ function animateGameObjects(){
  * increment the current number of birds
  * write the new number of birds on the screen
  */
-function createBird()
-{
+function createBird(){
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
     let birdie = new Bird(currentNumberOfBirds);
       allBirds[currentNumberOfBirds] = birdie;
@@ -179,7 +177,7 @@ function repositionGameObjects(){
   //reset the positions of the birds based on new screen size
   screenWidth = window.innerWidth;
   screenHeight = window.innerHeight;
-  centerX = window.innerWidth / 2;
+  centerX = (window.innerWidth * 0.6)/ 2;
   centerY = window.innerHeight / 2;
   offsetX = screenWidth * 0.07; // offset is 7% of the screen width
   offsetY = screenWidth * 0.09; // offset is 9% of the screen width
@@ -197,19 +195,8 @@ function repositionGameObjects(){
     if(motherHen != null){
       motherHen.updateMomPosition();
     }
-
-  for(let w = 0; w < currWater; w++){
-    let currentWater = waterObj[w];
-    if(currentWater){
-      currentWater.updateWaterPosition();
-    }
-  }  
   
 }
-
-// (function(){
-//   let maze = new Maze(MAZE_START, (window.innerHeight  * (2 / 3)) , MAZE_END, (window.innerHeight  * (3/ 4))); // begin at 3/4 the height of the screen
-// })();
 
 (function(){
   let maze = new Maze(0, (window.innerHeight * 0.7) , (window.innerWidth * 0.6), (window.innerHeight  * 0.8)); // begin at 3/4 the height of the screen

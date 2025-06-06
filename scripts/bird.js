@@ -11,7 +11,7 @@
  */
 class Bird{
 /**
- * 
+ * The constructor initializes the birdId
  * @param {Number} birdId the number assigned to the bird when it was created 
  */
   constructor(birdId){
@@ -19,11 +19,10 @@ class Bird{
     this.id = birdId;
 
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
-    this.movedLeft = MIN_MOVEMENT + Math.floor(Math.random() * MAX_MOVEMENT);
     let birdDiv = document.createElement('div');
     let birdImg = document.createElement('img');
-    birdImg.className = "chick"
-    birdImg.style.objectFit = "cover";
+    birdImg.className = "chick";
+    // birdImg.style.objectFit = "cover";
     birdImg.style.border= "none";
     birdDiv.appendChild(birdImg)
     this.birdie = birdDiv;
