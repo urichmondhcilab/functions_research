@@ -21,8 +21,8 @@ class Bird{
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
     let birdDiv = document.createElement('div');
     let birdImg = document.createElement('img');
-    birdImg.className = "chick"
-    birdImg.style.objectFit = "cover";
+    birdImg.className = "chick";
+    // birdImg.style.objectFit = "cover";
     birdImg.style.border= "none";
     birdDiv.appendChild(birdImg)
     this.birdie = birdDiv;
