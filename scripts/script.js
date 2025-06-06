@@ -177,7 +177,7 @@ function repositionGameObjects(){
   //reset the positions of the birds based on new screen size
   screenWidth = window.innerWidth;
   screenHeight = window.innerHeight;
-  centerX = window.innerWidth / 2;
+  centerX = (window.innerWidth * 0.6)/ 2;
   centerY = window.innerHeight / 2;
   offsetX = screenWidth * 0.07; // offset is 7% of the screen width
   offsetY = screenWidth * 0.09; // offset is 9% of the screen width
@@ -195,13 +195,6 @@ function repositionGameObjects(){
     if(motherHen != null){
       motherHen.updateMomPosition();
     }
-
-  for(let w = 0; w < currWater; w++){
-    let currentWater = waterObj[w];
-    if(currentWater){
-      currentWater.updateWaterPosition();
-    }
-  }  
   
 }
 

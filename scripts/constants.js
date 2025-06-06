@@ -12,6 +12,8 @@ const WIDTH_OFFSET = Math.min(window.innerWidth, window.innerHeight) / 4;
 
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
+let motherOffsetX = (window.innerWidth * 0.6)/ 4;
+let motherOffsetY = window.innerHeight / 8;
 let centerX = (window.innerWidth * 0.6)/ 2;
 let centerY = window.innerHeight / 2;
 let offsetX = 0; //screenWidth * 0.07; // offset is 7% of the screen width

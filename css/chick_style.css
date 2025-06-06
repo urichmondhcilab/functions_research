@@ -1,6 +1,6 @@
 .chickCont{
-  width: 110px;
-  height: 120px;
+  width: 6%;
+  height: 12%;
 }
 
 .chick{
@@ -9,15 +9,13 @@
 }
 
 .motherCont{
-  width: 10%;
-  height: 10%;
-  top: 40%;
-  left: 60%;
+  width: 30%;
+  height: 30%;
 }
 
 .mother{
-  width: 250%;
-  height: 250%;
+  width: 50%;
+  height: 90%;
 }
 
 /* 
