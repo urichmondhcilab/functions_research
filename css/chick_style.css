@@ -1,7 +1,3 @@
-/* The chick class is a dynamic class
-    we use it to include the chick image and set its width and height
- */
-
 .chickCont{
   width: 110px;
   height: 120px;
@@ -12,14 +8,6 @@
   height: 60%;
 }
 
-.water{
-  content: url("../images/water/water.svg");
-  width: 200px;
-  height: 200px;
-  left: 50%;
-  top:70%;
-}
-
 .motherCont{
   width: 10%;
   height: 10%;
@@ -27,39 +15,20 @@
   left: 60%;
 }
 
-.mDiv{
-  width: 100%;
-  height: 100%;
-}
-
 .mother{
   width: 250%;
   height: 250%;
 }
 
-/* /* A class not currently used
-    I used it for debugging
- */
-/* .trial
-{
-  width: 2em;
-  height: 2em;
-  background-color: blue;
-} */ 
-
 /* 
-  game_canvas is the class name associated with the body of the document
+  game_canvas is the class name associated with the left area of the document
   background-image sets the source of the image
-  background-size sets the size of the image. vw is the viewport-height - ie.
-    the visible view height. The first 140vw sets the height of the image and
-    the second 140vw sets the width of the image. This is set consistently with the aspect-ratio
-    of the original image
+  background-size sets the size of the image. 
     background-color sets the color of the portion of the screen not covered by the image
     background position set the image to the center
     background-attachment - determines if the image is scrollable
  */
-#game_canvas
-{
+#game_canvas{
   width: 70%;
   height: 100vh;
   background-image: url('../images/game_environment/scene.svg'); /*set the source for the image*/
