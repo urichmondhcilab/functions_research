@@ -73,3 +73,48 @@
 .container{
   display: flex;
 }
+
+#game_operations {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+}
+
+.top-right {
+    background-color: lightblue;
+    height: 50vh;
+    padding: 3rem;
+}
+
+.bottom-right {
+    height: 50vh;
+    padding: 3rem;
+}
+
+.draggable, .block {
+  background-color: #88c;
+  color: white;
+  padding: .5rem;
+  width: 100%;
+  margin-block: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.drink {
+  background-color: salmon;
+}
+
+.run-reset-buttons {
+  padding-top: 2.5rem;
+  display: flex;
+  gap: 10px;
+  float: right;
+}
+
+.run-reset-buttons button {
+  background-color: lightgreen;
+  border: 0;
+  padding: .25rem;
+  margin-top: -35px;
+}

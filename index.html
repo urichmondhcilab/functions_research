@@ -45,8 +45,35 @@
         </div>
       </div>
 
+      <!-- Right side, where block coding interface appears -->
       <div id="game_operations">
-        trial
+
+        <div class="top-right" id="canvas">
+          <div class="run-reset-buttons">
+              <button id="reset">Reset</button>
+              <button id="run">Run</button>
+          </div>
+        </div>
+
+          <div class="bottom-right">
+            <!-- Movement block to move the chicks -->
+            <div class="draggable move" data-move="up" draggable="true">
+                move
+                <select>
+                    <option value="up">up</option>
+                    <option value="down">down</option>
+                    <option value="left">left</option>
+                    <option value="right">right</option>
+                </select>
+                <input type="number" />
+            </div>
+
+            <!-- Drink block to give the chicken an action -->
+            <div class="draggable drink" draggable="true">
+                drink
+            </div>
+        </div>
+      </div>
       </div>
     </div>
 
