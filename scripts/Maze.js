@@ -49,10 +49,12 @@ class Maze{
         let currentY = Math.floor(startY) + 1; //+ 1 is here to make the amount of tiles in the y 1-indexed
 
         let i = 0;
-        let j = 0
+        let j = 0;
 
+        console.log(this.maze);
         while (i < this.maze.length){
             currentX = Math.floor(startX);
+            j = 0;
             while(j < this.maze[i].length){
                 let currTile = this.maze[i][j];
                 currTile.updateTile(currentX + 'px', currentY + 'px', this.tileWidth + 'px', this.tileHeight + 'px');
