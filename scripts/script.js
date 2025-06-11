@@ -52,7 +52,6 @@ function createBird(){
  * We create a new Mom
  * set motherCreated to true
  * add event listener, to HTML DOM mother element
- * remove bool
  */
 function createMother(){
   if(motherHen == null){
