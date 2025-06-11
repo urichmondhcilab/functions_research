@@ -67,4 +67,42 @@ class Bird{
     this.birdie.style.left= left;
     this.birdie.style.top = top;      
   }
+
+  move(direction, steps) {
+    //mulitiplies steps into pixel amount
+    const stepPx = steps * 10;
+
+    //gets current position or base position
+    let left = parseInt(this.birdie.style.left || "0");
+    let top = parseInt(this.birdie.style.top || "0");
+  
+    //adjusts left/top value accordingly
+    switch (direction) {
+        case "up":
+            top = top -= stepPx;
+            break;
+        case "down":
+          top = top += stepPx;
+          break;
+        case "left":
+          left = left -= stepPx;
+          break;
+        case "right":
+          right = right -= stepPx;
+            break;
+    }
+  
+    //sets new left and top position
+    this.birdie.style.left = `${left}px`;
+    this.birdie.style.top = `${top}px`;
+  }
+
+  // Fix Image changing
+  drink() {
+    this.birdie.style.backgroundImage = "url('images/chicks/squarton_resting_position_1.svg')";
+    setTimeout(() => {
+        this.birdie.style.backgroundImage = "url('images/chicks/squarton_dead.svg')";
+    }, 2000);
+}
+
 }

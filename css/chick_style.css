@@ -87,3 +87,16 @@
   padding: .25rem;
   margin-top: -35px;
 }
+
+#block-drop{
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+#num-input{
+  box-sizing: border-box;
+  width: 50%;
+}

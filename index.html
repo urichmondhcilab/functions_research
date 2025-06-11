@@ -50,14 +50,15 @@
 
         <div class="top-right" id="canvas">
           <div class="run-reset-buttons">
-              <button id="reset">Reset</button>
-              <button id="run">Run</button>
+              <button  id="block-reset">Reset</button>
+              <button  id="run">Run</button>
           </div>
+          <div id="block-drop"></div>
         </div>
 
           <div class="bottom-right">
             <!-- Movement block to move the chicks -->
-            <div class="draggable move" data-move="up" draggable="true">
+            <div class="draggable move block" data-move="up" draggable="true">
                 move
                 <select>
                     <option value="up">up</option>
@@ -65,7 +66,7 @@
                     <option value="left">left</option>
                     <option value="right">right</option>
                 </select>
-                <input type="number" />
+                <input type="number" id="num-input"/>
             </div>
 
             <!-- Drink block to give the chicken an action -->
@@ -90,8 +91,8 @@
     <script src="scripts/Maze.js"></script>  
     <script id = "mom" type="text/javascript" src="scripts/mother.js"></script>          
     <script type="text/javascript" src="scripts/script.js"></script>
-
-    <script type="module" src="scripts/auth.js"></script>
+    <script type="module" src="scripts/blockScript.js"></script>
+     <script></script>
   </body>
 
 </html>
