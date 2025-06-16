@@ -88,7 +88,7 @@ class Bird{
           left = left -= stepPx;
           break;
         case "right":
-          right = right -= stepPx;
+          left = left += stepPx;
             break;
     }
   

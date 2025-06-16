@@ -17,6 +17,7 @@ let motherHen = null;
 let waterObj = [];
 let currentAngle = 0;
 let maze = null;
+let selectedBirds = [];
 //let radius = 200;
 
 /**
@@ -37,6 +38,8 @@ function animateGameObjects(){
  * and add the bird to the array of existing birds
  * increment the current number of birds
  * write the new number of birds on the screen
+`* adds event listener, when clicked, sets that bird object to selectedBird.
+  * to allow coding.
  */
 function createBird(){
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
@@ -44,7 +47,10 @@ function createBird(){
       allBirds[currentNumberOfBirds] = birdie;
       currentNumberOfBirds++;
       birdCounter++;
-      birdie.birdie.addEventListener('mouseover', test);
+      birdie.birdie.addEventListener("click", function () {
+        selectedBirds.length = 0;
+        selectedBirds.push(birdie);
+     });
   }
 }
 
@@ -57,6 +63,10 @@ function createBird(){
 function createMother(){
   if(motherHen == null){
     motherHen = new Mother();
+    motherHen.mother.addEventListener("click", function () {
+      selectedBirds.length = 0;
+      selectedBirds = allBirds;
+   });
   }
 }
 

@@ -12,11 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('run').addEventListener('click', () => {
         //Retrieve the blocks from the canvas
         const placedBlocks = document.querySelectorAll('#canvas .block');
-        
-        let chicken = allBirds[1];
+        let delay = 0;
 
         // For each block, do the appropriate action
         placedBlocks.forEach((block) => {
+            selectedBirds.forEach((chick) => {
             // 1st action: move
             if (block.classList.contains("move")) {
                 // get the direction and the number of steps to move
@@ -25,21 +25,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 const moveValue = numberInput ? parseInt(numberInput.value) : 0;
 
                 // Check the move direction and apply the number input as the step value, then move the chicken
-                if (move === 'up') {
-                    chicken.move("up", moveValue);
-                } else if (move === 'down') {
-                    chicken.move("down", moveValue);
-                } else if (move === 'left') {
-                   chicken.move("left", moveValue);
-                } else if (move === 'right') {
-                    chicken.move("right", moveValue);
-                }
+                setTimeout(() => {
+                    if (move === 'up') {
+                        chick.move("up", moveValue);
+                    } else if (move === 'down') {
+                        chick.move("down", moveValue);
+                    } else if (move === 'left') {
+                        chick.move("left", moveValue);
+                    } else if (move === 'right') {
+                        chick.move("right", moveValue);
+                    }
+                }, delay);
+                delay += 1000;
             
             // 2nd action: drink
-             } else if (block.classList.contains("drink")) {
-                // do the drink action
-                chicken.drink();
+            } else if (block.classList.contains("drink")) {
+                setTimeout(() => {
+                    // do the drink action
+                    chick.drink();
+                }, delay);
+                delay += 1000;
             }
+
+        });
             
         });
     });

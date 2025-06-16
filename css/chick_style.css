@@ -59,12 +59,16 @@
     padding: 3rem;
 }
 
+.bottom-right, .draggable{
+  margin-bottom: .5rem;
+}
+
 .draggable, .block {
   background-color: #88c;
   color: white;
   padding: .5rem;
   width: 100%;
-  margin-block: 5px;
+  /* margin-block: 5px; */
   cursor: pointer;
   text-align: center;
 }
@@ -85,13 +89,14 @@
   border: 0;
   padding: .25rem;
   margin-top: -35px;
+  margin-bottom: 1rem;
 }
 
 #block-drop{
   display: flex;
-  gap: 10px;
+  /* gap: 10px; */
   flex-direction: column;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   width: 100%;
 }
 
