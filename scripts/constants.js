@@ -3,8 +3,8 @@
     MAX_LIFE_SPAN: maximum life span of the bird
     MAX_NUMBER_OF_BIRDS: The maximum number of birds that can be created
 */
-const MIN_LIFE_SPAN = 10;
-const MAX_LIFE_SPAN = 50; // actually 100 + 500
+const MIN_LIFE_SPAN = 100;
+const MAX_LIFE_SPAN = 500; // actually 100 + 500
 const MAX_NUMBER_OF_BIRDS = 8;
 
 const HEIGHT_OFFSET = window.innerHeight / 4;

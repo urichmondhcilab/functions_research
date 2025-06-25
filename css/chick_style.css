@@ -52,6 +52,9 @@
     background-color: lightblue;
     height: 50vh;
     padding: 3rem;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .bottom-right {
@@ -59,12 +62,16 @@
     padding: 3rem;
 }
 
+.bottom-right, .draggable{
+  margin-bottom: .5rem;
+}
+
 .draggable, .block {
   background-color: #88c;
   color: white;
   padding: .5rem;
   width: 100%;
-  margin-block: 5px;
+  /* margin-block: 5px; */
   cursor: pointer;
   text-align: center;
   border-radius: 0.3rem;
@@ -86,17 +93,34 @@
   border: 0;
   padding: .25rem;
   margin-top: -35px;
+  margin-bottom: 1rem;
 }
 
 #block-drop{
   display: flex;
-  gap: 10px;
+  /* gap: 10px; */
   flex-direction: column;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   width: 100%;
+  flex-grow: 1;
 }
 
 #num-input{
   box-sizing: border-box;
   width: 50%;
+}
+
+.selectedBackground{
+  border: .1rem solid cyan; 
+}
+
+#trash{
+  background-color: rgb(210, 26, 26);
+  color: white;
+  padding: .5rem;
+  text-align: center;
+  width: 35%;
+  border-radius: .5rem;
+  align-self: flex-end;
+  border: 0;
 }

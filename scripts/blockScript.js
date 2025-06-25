@@ -1,47 +1,60 @@
 import { allowDrop, drop } from './Canvas.js';
 import { makeDraggable } from './BlockLib.js';
 
+/**
+ * delay; 
+ * @param {number} ms - the number of miliseconds to delay.
+ * @returns {Promise} a promise that resolves after the delay
+ */
+function delay(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     // Declare the maze and the chicken
     const canvas = document.getElementById('canvas');
     const blockDrop = document.getElementById('block-drop');
-    // let maze = new Maze(0, 0, window.innerWidth / 2, window.innerHeight);
-    // TEMPORARY, to test general moving concept
 
     // When the run button is clicked, execute the blocks that are in the canvas
-    document.getElementById('run').addEventListener('click', () => {
+    document.getElementById('run').addEventListener('click', async () => {
         //Retrieve the blocks from the canvas
         const placedBlocks = document.querySelectorAll('#canvas .block');
-        
-        let chicken = allBirds[1];
 
         // For each block, do the appropriate action
-        placedBlocks.forEach((block) => {
+        console.log("Running for", selectedBirds.length, "chick(s)");
+
+        for(const chick of selectedBirds){       
+        for(const block of placedBlocks){
             // 1st action: move
             if (block.classList.contains("move")) {
                 // get the direction and the number of steps to move
                 const move = block.dataset.move;
                 const numberInput = block.querySelector('input[type="number"]');
                 const moveValue = numberInput ? parseInt(numberInput.value) : 0;
+                let curMaze = maze.maze;
 
                 // Check the move direction and apply the number input as the step value, then move the chicken
-                if (move === 'up') {
-                    chicken.move("up", moveValue);
-                } else if (move === 'down') {
-                    chicken.move("down", moveValue);
-                } else if (move === 'left') {
-                   chicken.move("left", moveValue);
-                } else if (move === 'right') {
-                    chicken.move("right", moveValue);
-                }
+                // setTimeout(() => {
+                    // if (move === 'up') {
+                    //     chick.move("up", moveValue, curMaze);
+                    // } else if (move === 'down') {
+                    //     chick.move("down", moveValue, curMaze);
+                    // } else if (move === 'left') {
+                    //     chick.move("left", moveValue, curMaze);
+                    // } else if (move === 'right') {
+                    //     chick.move("right", moveValue, curMaze);
+                    // }
+                   chick.move(move, moveValue, curMaze);
+                   await delay(moveValue * 1000);
             
             // 2nd action: drink
-             } else if (block.classList.contains("drink")) {
-                // do the drink action
-                chicken.drink();
+            } else if (block.classList.contains("drink")) {
+                    // do the drink action
+                    chick.drink();
+                    await delay(1000);
             }
-            
-        });
+        };
+        };
     });
 
     // reset button clears all the blocks from the canvas, but does not reset the chicken
@@ -50,9 +63,11 @@ document.addEventListener("DOMContentLoaded", function () {
         blocks.forEach(block => block.remove());
      });
     
+
     // Add event listeners for drag and drop functionality on the canvas
     canvas.addEventListener('drop', drop);
     canvas.addEventListener('dragover', allowDrop);
+
     
     // Initialize draggable blocks
     makeDraggable();

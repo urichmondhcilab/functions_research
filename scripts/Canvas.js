@@ -5,6 +5,10 @@ export function allowDrop(event) {
 
 // set a "draggedElementState" to keep track of the selection on the dropdown
 let draggedElementState = null;
+let trashObj = document.getElementById("trash")
+trashObj.addEventListener("dragover", dragOverTrash);
+trashObj.addEventListener("drop", trashDrop);
+let instCount = 0;
 
 // When the dragging starts, save the move selected to the "draggedElementState"
 document.addEventListener('dragstart', (event) => {
@@ -42,11 +46,33 @@ export function drop(event) {
                 newBlock.dataset.move = e.target.value;
             });
         }
-
+        instCount++;
+        newBlock.id = "instruction" + instCount;
         // Add the new element to the canvas
         newBlock.classList.remove('draggable');
         newBlock.classList.add('block');
+        newBlock.setAttribute("draggable", true); // make sure it's draggable
+        newBlock.addEventListener("dragstart", dragStartHandler); // allow dragging to trash
         document.getElementById('block-drop').appendChild(newBlock);
         draggedElementState = null;
     }
+}
+
+
+function dragOverTrash(e){
+    e.preventDefault();
+}
+
+function trashDrop(e){
+    e.preventDefault();
+    //gets the id of the object to be deleted (unique)
+    let data = e.dataTransfer.getData("text");
+    //gets the object to be deleted by unique ID
+    let delObject = document.getElementById(data);
+    //removes that object
+    delObject.remove();
+}
+
+function dragStartHandler(e){
+    e.dataTransfer.setData("text", e.target.id);
 }
