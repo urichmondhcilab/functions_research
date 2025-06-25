@@ -29,7 +29,7 @@ class Bird{
 
     let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
     let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
-
+    let hasMoved = false;
     currentAngle = (currentAngle + 45) % 360;
 
     this.birdie.currImageFlag= 0;
@@ -37,9 +37,12 @@ class Bird{
 
     this.birdie.className = 'chickCont';
     this.birdie.style.position="absolute";
+
     this.birdie.style.left= left;
     this.birdie.style.top = top;
-
+    this.xIndex = 0;
+    this.yIndex = 0;
+    this.curTile = null
 
     // handle "this" that refers to the event object and "this" that refers to the object
     // bind the the the object to the member function
@@ -57,6 +60,9 @@ class Bird{
   displayCodeEditor(e){
     let codeEditor = document.getElementById("codeEditor");
     codeEditor.firstChild.nodeValue = "chick " + this.id;
+    let curClass = this.birdie.className;
+    this.birdie.className = curClass + " selectedBackground";
+    console.log(this.birdie.className)
     console.log(this.id);
   }
 
@@ -68,33 +74,47 @@ class Bird{
     this.birdie.style.top = top;      
   }
 
-  move(direction, steps) {
-    //mulitiplies steps into pixel amount
-    const stepPx = steps * 10;
+/**
+ * Moves the chick to the desired end tile, one step at a time
+ * @param {string} direction is the direction to move in
+ * @param {Int} steps, amount of steps/tiles to move
+ * @param {Array} curMaze, current array of the maze, houses tiles
+ */
 
-    //gets current position or base position
-    let left = parseInt(this.birdie.style.left || "0");
-    let top = parseInt(this.birdie.style.top || "0");
-  
-    //adjusts left/top value accordingly
-    switch (direction) {
-        case "up":
-            top = top -= stepPx;
-            break;
-        case "down":
-          top = top += stepPx;
-          break;
-        case "left":
-          left = left -= stepPx;
-          break;
-        case "right":
-          left = left += stepPx;
-            break;
+  //Data structure all the tiles until the end
+  move(direction, steps, curMaze) {
+
+    //If this is the chicks first move, set the current tile to the first in maze
+    if (this.curTile === null){
+      this.curTile = curMaze[0][0];
     }
-  
-    //sets new left and top position
-    this.birdie.style.left = `${left}px`;
-    this.birdie.style.top = `${top}px`;
+
+    //Loops through the number of steps
+    //adjusts the index of the tile to move to +-1
+    for(let i=0; i<steps; i++){
+      setTimeout(() => {
+        switch (direction) {
+          case "up":
+              this.yIndex = Math.max(this.yIndex - 1, 0);
+              break;
+          case "down":
+              this.yIndex = Math.min(this.yIndex + 1, NUMBER_OF_TILES_Y - 1);
+              break;
+          case "left":
+            this.xIndex = Math.max(this.xIndex - 1, 0);
+              break;
+          case "right":
+            this.xIndex = Math.min(this.xIndex + 1, NUMBER_OF_TILES_X - 1);
+              break;
+        }
+
+      //Gets the tile from updated indexes
+      this.curTile = curMaze[this.yIndex][this.xIndex];
+      //Display new position
+      this.birdie.style.left = this.curTile.x;
+      this.birdie.style.top = this.curTile.y;
+    }, 1000 * i);
+    }
   }
 
   // Fix Image changing

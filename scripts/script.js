@@ -40,6 +40,7 @@ function animateGameObjects(){
  * write the new number of birds on the screen
 `* adds event listener, when clicked, sets that bird object to selectedBird.
   * to allow coding.
+  * Remove event listener, remove redundance
  */
 function createBird(){
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
@@ -60,6 +61,7 @@ function createBird(){
  * set motherCreated to true
  * add event listener, to HTML DOM mother element
  */
+
 function createMother(){
   if(motherHen == null){
     motherHen = new Mother();
