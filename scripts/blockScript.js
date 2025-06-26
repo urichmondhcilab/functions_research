@@ -6,7 +6,7 @@ import { makeDraggable } from './BlockLib.js';
  * @param {number} ms - the number of miliseconds to delay.
  * @returns {Promise} a promise that resolves after the delay
  */
-function delay(ms){
+export function delay(ms){
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -50,9 +50,13 @@ document.addEventListener("DOMContentLoaded", function () {
             // 2nd action: drink
             } else if (block.classList.contains("drink")) {
                     // do the drink action
-                    chick.drink();
-                    await delay(1000);
-            }
+                    await chick.drink();
+
+            // 3rd action: eat
+            } else if (block.classList.contains("eat")) {
+            // do the drink action
+            await chick.eat();
+    }
         };
         };
     });

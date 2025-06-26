@@ -86,6 +86,10 @@ function updateBirds(){
 
     let currentBird = allBirds[i];
 
+    if (currentBird?.isDrinking || currentBird?.isEating) {
+      continue;
+    }
+
     if(currentBird && currentBird.lifeSpan > 1){
       if(currentBird.birdie.currImageFlag == 0){
       currentBird.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg'; //'gameenvironmentandrestingpose/chick_resting_1.svg';

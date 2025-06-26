@@ -71,12 +71,15 @@
   color: white;
   padding: .5rem;
   width: 100%;
-  /* margin-block: 5px; */
   cursor: pointer;
   text-align: center;
 }
 
 .drink {
+  background-color: cornflowerblue;
+}
+
+.eat {
   background-color: salmon;
 }
 
@@ -97,9 +100,7 @@
 
 #block-drop{
   display: flex;
-  /* gap: 10px; */
   flex-direction: column;
-  /* margin-top: 2rem; */
   width: 100%;
   flex-grow: 1;
 }
@@ -119,7 +120,15 @@
   padding: .5rem;
   text-align: center;
   width: 35%;
-  border-radius: .5rem;
+  border-radius: .75rem;
   align-self: flex-end;
   border: 0;
+  margin-right: -1.75rem;
+  margin-bottom: -1.75rem;
+}
+
+#block-remove {
+  height: 38%;
+  width: 160%;
+  margin-left: -35%;
 }

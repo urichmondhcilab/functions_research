@@ -30,6 +30,8 @@ class Bird{
     let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
     let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
     let hasMoved = false;
+    let isDrinking = false;
+    let isEating = false;
     currentAngle = (currentAngle + 45) % 360;
 
     this.birdie.currImageFlag= 0;
@@ -117,12 +119,39 @@ class Bird{
     }
   }
 
-  // Fix Image changing
-  drink() {
-    this.birdie.style.backgroundImage = "url('images/chicks/squarton_resting_position_1.svg')";
-    setTimeout(() => {
-        this.birdie.style.backgroundImage = "url('images/chicks/squarton_dead.svg')";
-    }, 2000);
+
+async drink() {
+  if(this.curTile.div.style.backgroundImage == `url("${"images/water/water.svg"}")`){
+
+    this.isDrinking = true;
+    this.birdie.firstChild.src = 'images/chicks/Squarton_splashing.svg';
+    await new Promise(resolve => setTimeout(resolve, 1500)); // delay 1 second
+    this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
+    this.isDrinking = false;
+
+  }else{
+    this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
+    this.birdie.deathImgFlag = 1;
+    this.lifeSpan = 0;
+  }
 }
+
+async eat() {
+  if(this.curTile.div.style.backgroundImage == `url("${"images/food/food.svg"}")`){
+  this.isEating = true;
+  this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
+
+  await new Promise(resolve => setTimeout(resolve, 2000)); // delay 1 second
+
+  this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
+  this.isEating = false;
+  }
+  else{
+    this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
+    this.birdie.deathImgFlag = 1;
+    this.lifeSpan = 0;
+  }
+}
+
 
 }
