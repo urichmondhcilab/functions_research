@@ -76,7 +76,9 @@ function createMother(){
  * In every time interval, for all the current birds,
  * we move them left or right by setting the birds left property
  * We also switch between the two chick resting poses by checking for either a 1 or 0 value
- *  
+ * 
+ * Checks if currently eating/drinking, if so, skips resting image change until finished
+ * 
  * Note that the bird is an html image element
  * Instead, of moving, we update the images. We use the same idea as we used updating the mother image, instead we go through all the birds
  * present within the array. 

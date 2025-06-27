@@ -115,20 +115,32 @@ class Bird{
       //Display new position
       this.birdie.style.left = this.curTile.x;
       this.birdie.style.top = this.curTile.y;
-    }, 1000 * i);
+      }, 1000 * i);
+
+      // if(this.curTile.div.style.backgroundImage == `url("${"images/planks/plank.svg"}")`){
+      //   console.log("Plank");
+      //   continue;
+      // }else{
+      // console.log(this.curTile.div.style.backgroundImage);
+      // this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
+      // this.birdie.deathImgFlag = 1;
+      // this.lifeSpan = 0;
+      // }
     }
   }
 
 
 async drink() {
+  //Checks tile image, if water, changes to splash image, then reverts
   if(this.curTile.div.style.backgroundImage == `url("${"images/water/water.svg"}")`){
 
     this.isDrinking = true;
     this.birdie.firstChild.src = 'images/chicks/Squarton_splashing.svg';
-    await new Promise(resolve => setTimeout(resolve, 1500)); // delay 1 second
+    await new Promise(resolve => setTimeout(resolve, 1000)); // delay 1 second
     this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
     this.isDrinking = false;
 
+  //Else, changes to death image and sets variables to despawn
   }else{
     this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
     this.birdie.deathImgFlag = 1;
@@ -137,16 +149,16 @@ async drink() {
 }
 
 async eat() {
+  //Checks tile image, if food, changes to eat image, then reverts
   if(this.curTile.div.style.backgroundImage == `url("${"images/food/food.svg"}")`){
-  this.isEating = true;
-  this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
+    this.isEating = true;
+    this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
+    await new Promise(resolve => setTimeout(resolve, 1000)); // delay 1 second
+    this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
+    this.isEating = false;
 
-  await new Promise(resolve => setTimeout(resolve, 2000)); // delay 1 second
-
-  this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
-  this.isEating = false;
-  }
-  else{
+  //Else, changes to death image and sets variables to despawn
+  }else{
     this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
     this.birdie.deathImgFlag = 1;
     this.lifeSpan = 0;

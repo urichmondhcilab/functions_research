@@ -20,9 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         //Retrieve the blocks from the canvas
         const placedBlocks = document.querySelectorAll('#canvas .block');
 
-        // For each block, do the appropriate action
-        console.log("Running for", selectedBirds.length, "chick(s)");
-
+        //Iterates through each chick, by all selected block actions
         for(const chick of selectedBirds){       
         for(const block of placedBlocks){
             // 1st action: move
@@ -32,31 +30,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 const numberInput = block.querySelector('input[type="number"]');
                 const moveValue = numberInput ? parseInt(numberInput.value) : 0;
                 let curMaze = maze.maze;
-
-                // Check the move direction and apply the number input as the step value, then move the chicken
-                // setTimeout(() => {
-                    // if (move === 'up') {
-                    //     chick.move("up", moveValue, curMaze);
-                    // } else if (move === 'down') {
-                    //     chick.move("down", moveValue, curMaze);
-                    // } else if (move === 'left') {
-                    //     chick.move("left", moveValue, curMaze);
-                    // } else if (move === 'right') {
-                    //     chick.move("right", moveValue, curMaze);
-                    // }
-                   chick.move(move, moveValue, curMaze);
-                   await delay(moveValue * 1000);
+                
+                //Moves current chick in desired direction and amount, based on current maze position
+                chick.move(move, moveValue, curMaze);
+                await delay(moveValue * 1000);
             
             // 2nd action: drink
             } else if (block.classList.contains("drink")) {
-                    // do the drink action
-                    await chick.drink();
-
+                // do the drink action
+                await chick.drink();
+            
             // 3rd action: eat
             } else if (block.classList.contains("eat")) {
-            // do the drink action
+            // do the eat action
             await chick.eat();
-    }
+            }
         };
         };
     });
