@@ -207,7 +207,7 @@ function repositionGameObjects(){
   mazeStartX = 0;
   mazeStartY = (window.innerHeight * 0.7);
   mazeWidth = (window.innerWidth * 0.6);
-  mazeHeight = (window.innerHeight  * 0.8);
+  mazeHeight = (window.innerHeight  * 0.9);
 
 
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
