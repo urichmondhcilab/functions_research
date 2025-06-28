@@ -22,30 +22,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
         //Iterates through each chick, by all selected block actions
         for(const chick of selectedBirds){       
-        for(const block of placedBlocks){
-            // 1st action: move
-            if (block.classList.contains("move")) {
-                // get the direction and the number of steps to move
-                const move = block.dataset.move;
-                const numberInput = block.querySelector('input[type="number"]');
-                const moveValue = numberInput ? parseInt(numberInput.value) : 0;
-                let curMaze = maze.maze;
+            for(const block of placedBlocks){
+                // 1st action: move
+                if (block.classList.contains("move")) {
+                    // get the direction and the number of steps to move
+                    const move = block.dataset.move;
+                    const numberInput = block.querySelector('input[type="number"]');
+                    const moveValue = numberInput ? parseInt(numberInput.value) : 0;
+                    let curMaze = maze.maze;
+                    //Moves current chick in desired direction and amount, based on current maze position
+                    chick.move(move, moveValue, curMaze);
+                    await delay(moveValue * 1000);
                 
-                //Moves current chick in desired direction and amount, based on current maze position
-                chick.move(move, moveValue, curMaze);
-                await delay(moveValue * 1000);
-            
-            // 2nd action: drink
-            } else if (block.classList.contains("drink")) {
-                // do the drink action
-                await chick.drink();
-            
-            // 3rd action: eat
-            } else if (block.classList.contains("eat")) {
-            // do the eat action
-            await chick.eat();
-            }
-        };
+                // 2nd action: drink
+                } else if (block.classList.contains("drink")) {
+                    // do the drink action
+                    await chick.drink();
+                
+                // 3rd action: eat
+                } else if (block.classList.contains("eat")) {
+                // do the eat action
+                await chick.eat();
+                }
+            };
         };
     });
 
