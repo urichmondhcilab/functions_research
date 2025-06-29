@@ -64,8 +64,10 @@ class Bird{
     codeEditor.firstChild.nodeValue = "chick " + this.id;
     let curClass = this.birdie.className;
     this.birdie.className = curClass + " selectedBackground";
-    console.log(this.birdie.className)
-    console.log(this.id);
+    if (selectedBirds != null)
+      selectedBirds.style.border = "none";
+    selectedBirds = this.birdie;
+
   }
 
   updateBirdPosition(){
@@ -76,13 +78,20 @@ class Bird{
     this.birdie.style.top = top;      
   }
 
+  updateBird(){
+      console.log(Math.round (Math.random() * (chickImagePaths.length - 1)));
+      this.birdie.firstChild.src = chickImagePaths[Math.round (Math.random() * (chickImagePaths.length - 1))];    
+      // if (selectedBirds != this.birdie){
+      //   this.birdie.border = "None";
+      // }
+  }
+
 /**
  * Moves the chick to the desired end tile, one step at a time
  * @param {string} direction is the direction to move in
  * @param {Int} steps, amount of steps/tiles to move
  * @param {Array} curMaze, current array of the maze, houses tiles
  */
-
   //Data structure all the tiles until the end
   move(direction, steps, curMaze) {
 
@@ -117,15 +126,6 @@ class Bird{
       this.birdie.style.top = this.curTile.y;
       }, 1000 * i);
 
-      // if(this.curTile.div.style.backgroundImage == `url("${"images/planks/plank.svg"}")`){
-      //   console.log("Plank");
-      //   continue;
-      // }else{
-      // console.log(this.curTile.div.style.backgroundImage);
-      // this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
-      // this.birdie.deathImgFlag = 1;
-      // this.lifeSpan = 0;
-      // }
     }
   }
 
@@ -148,22 +148,20 @@ async drink() {
   }
 }
 
-async eat() {
-  //Checks tile image, if food, changes to eat image, then reverts
-  if(this.curTile.div.style.backgroundImage == `url("${"images/food/food.svg"}")`){
-    this.isEating = true;
-    this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
-    await new Promise(resolve => setTimeout(resolve, 1000)); // delay 1 second
-    this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
-    this.isEating = false;
+  async eat() {
+    //Checks tile image, if food, changes to eat image, then reverts
+    if(this.curTile.div.style.backgroundImage == `url("${"images/food/food.svg"}")`){
+      this.isEating = true;
+      this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
+      await new Promise(resolve => setTimeout(resolve, 1000)); // delay 1 second
+      this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
+      this.isEating = false;
 
-  //Else, changes to death image and sets variables to despawn
-  }else{
-    this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
-    this.birdie.deathImgFlag = 1;
-    this.lifeSpan = 0;
+    //Else, changes to death image and sets variables to despawn
+    }else{
+      this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
+      this.birdie.deathImgFlag = 1;
+      this.lifeSpan = 0;
+    }
   }
-}
-
-
 }

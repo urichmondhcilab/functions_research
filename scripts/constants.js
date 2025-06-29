@@ -29,7 +29,7 @@ let mazeStartY = (window.innerHeight * 0.7);
 let mazeWidth = (window.innerWidth * 0.6);
 let mazeHeight = (window.innerHeight  * 0.9);
 
-
+let chickImagePaths = ['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'];
 let state = [
     {   name : "BLOCK",
         color : "grey",
@@ -62,3 +62,5 @@ let state = [
 let NUMBER_OF_TILES_X = 10;
 let NUMBER_OF_TILES_Y = 2;
 // let GROUND_COLOR = "#BB8459";
+
+let selectedBirds = null;

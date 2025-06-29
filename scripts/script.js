@@ -2,7 +2,7 @@
  * currentNumberOfBirds is a counter for the number of birds created at each timeInterval
  * allBirds an array that will hold bird objects as they are created
  * currentAngle I'm placing birds at a radius from a point and incrementing this angle
- *  every time interval
+ * every time interval
  * radius is the distance of my bird from by choosen center 
  * motherCreated is a boolean value, true if mother created.
  * motherHen is the mother hen object, once created.
@@ -17,7 +17,7 @@ let motherHen = null;
 let waterObj = [];
 let currentAngle = 0;
 let maze = null;
-let selectedBirds = [];
+// let selectedBirds = [];
 //let radius = 200;
 
 /**
@@ -48,10 +48,10 @@ function createBird(){
       allBirds[currentNumberOfBirds] = birdie;
       currentNumberOfBirds++;
       birdCounter++;
-      birdie.birdie.addEventListener("click", function () {
-        selectedBirds.length = 0;
-        selectedBirds.push(birdie);
-     });
+    //   birdie.birdie.addEventListener("click", function () {
+    //     selectedBirds.length = 0;
+    //     selectedBirds.push(birdie);
+    //  });
   }
 }
 
@@ -83,6 +83,8 @@ function createMother(){
  * Instead, of moving, we update the images. We use the same idea as we used updating the mother image, instead we go through all the birds
  * present within the array. 
  */
+
+
 function updateBirds(){
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
 
@@ -93,14 +95,7 @@ function updateBirds(){
     }
 
     if(currentBird && currentBird.lifeSpan > 1){
-      if(currentBird.birdie.currImageFlag == 0){
-      currentBird.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg'; //'gameenvironmentandrestingpose/chick_resting_1.svg';
-      currentBird.birdie.currImageFlag = 1;
-      }
-      else{
-      currentBird.birdie.firstChild.src = 'images/chicks/squarton_resting_position_2.svg';
-      currentBird.birdie.currImageFlag = 0;
-      }
+      currentBird.updateBird();
     }
 
     if(currentBird && currentBird.birdie.deathImgFlag == 1){
@@ -108,6 +103,7 @@ function updateBirds(){
     }
   }
 }
+
 
 /**
  * To update the mother image, We first set currMom to the mother DOM object. 
@@ -193,11 +189,14 @@ function reset(){
  */
 function repositionGameObjects(){
   //reset the positions of the birds based on new screen size
+
   screenWidth = window.innerWidth;
   screenHeight = window.innerHeight;
+  motherOffsetX = (window.innerWidth * 0.6)/ 4;
+  motherOffsetY = window.innerHeight / 8; 
   centerX = (window.innerWidth * 0.6)/ 2;
   centerY = window.innerHeight / 2;
-  offsetX = screenWidth * 0.07; // offset is 7% of the screen width
+  offsetX = 0; //screenWidth * 0.07; // offset is 7% of the screen width
   offsetY = screenWidth * 0.09; // offset is 9% of the screen width
   positionX = centerX - offsetX; // we subtract the X offset to shift the chick left
   positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
