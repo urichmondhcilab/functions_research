@@ -63,10 +63,13 @@ class Bird{
     let codeEditor = document.getElementById("codeEditor");
     codeEditor.firstChild.nodeValue = "chick " + this.id;
     let curClass = this.birdie.className;
-    this.birdie.className = curClass + " selectedBackground";
-    if (selectedBirds != null)
-      selectedBirds.style.border = "none";
-    selectedBirds = this.birdie;
+    // this.birdie.className = curClass + " selectedBackground";
+    this.birdie.style.border = ".1rem solid cyan";    
+    console.log(selectedBirds);
+    if (selectedBirds != null && selectedBirds !== undefined ){
+      selectedBirds.birdie.style.border = "none";
+    }
+    selectedBirds = this;
 
   }
 
@@ -79,7 +82,7 @@ class Bird{
   }
 
   updateBird(){
-      console.log(Math.round (Math.random() * (chickImagePaths.length - 1)));
+      // console.log(Math.round (Math.random() * (chickImagePaths.length - 1)));
       this.birdie.firstChild.src = chickImagePaths[Math.round (Math.random() * (chickImagePaths.length - 1))];    
       // if (selectedBirds != this.birdie){
       //   this.birdie.border = "None";

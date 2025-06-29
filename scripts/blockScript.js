@@ -21,7 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const placedBlocks = document.querySelectorAll('#canvas .block');
 
         //Iterates through each chick, by all selected block actions
-        for(const chick of selectedBirds){       
+        // for(const chick of selectedBirds){      
+
+        let chick = selectedBirds;
+        console.log("the selected chick " + chick );   
+        console.log(chick );        
             for(const block of placedBlocks){
                 // 1st action: move
                 if (block.classList.contains("move")) {
@@ -45,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 await chick.eat();
                 }
             };
-        };
+        // };
     });
 
     // reset button clears all the blocks from the canvas, but does not reset the chicken

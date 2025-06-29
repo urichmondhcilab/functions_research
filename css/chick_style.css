@@ -117,9 +117,9 @@ html, body {
   width: 50%;
 }
 
-.selectedBackground{
+/* .selectedBackground{
   border: .1rem solid cyan; 
-}
+} */
 
 #trash{
   background-color: rgb(210, 26, 26);
