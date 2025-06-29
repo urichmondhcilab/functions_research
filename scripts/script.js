@@ -1,3 +1,6 @@
+// import { makeDraggable } from './BlockLib.js';
+// import { allowDrop, drop } from './Canvas.js';
+
 /**
  * currentNumberOfBirds is a counter for the number of birds created at each timeInterval
  * allBirds an array that will hold bird objects as they are created
@@ -17,8 +20,7 @@ let motherHen = null;
 let waterObj = [];
 let currentAngle = 0;
 let maze = null;
-// let selectedBirds = [];
-//let radius = 200;
+
 
 /**
  * animateGameObjects by changing sprites
@@ -34,13 +36,12 @@ function animateGameObjects(){
 
 /**
  * In a time interval, if we have not exceeded the maximum number of birds,
- * We create a new bird 
- * and add the bird to the array of existing birds
+ * We create a new bird and add the bird to the array of existing birds
  * increment the current number of birds
  * write the new number of birds on the screen
-`* adds event listener, when clicked, sets that bird object to selectedBird.
-  * to allow coding.
-  * Remove event listener, remove redundance
+ * adds event listener, when clicked, sets that bird object to selectedBird.
+ * to allow coding.
+ * Remove event listener, remove redundance
  */
 function createBird(){
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
@@ -48,12 +49,9 @@ function createBird(){
       allBirds[currentNumberOfBirds] = birdie;
       currentNumberOfBirds++;
       birdCounter++;
-    //   birdie.birdie.addEventListener("click", function () {
-    //     selectedBirds.length = 0;
-    //     selectedBirds.push(birdie);
-    //  });
   }
 }
+
 
 /**
  * Checks that the motherHen has not already been created
@@ -61,7 +59,6 @@ function createBird(){
  * set motherCreated to true
  * add event listener, to HTML DOM mother element
  */
-
 function createMother(){
   if(motherHen == null){
     motherHen = new Mother();
@@ -71,6 +68,7 @@ function createMother(){
    });
   }
 }
+
 
 /**
  * In every time interval, for all the current birds,
@@ -83,7 +81,6 @@ function createMother(){
  * Instead, of moving, we update the images. We use the same idea as we used updating the mother image, instead we go through all the birds
  * present within the array. 
  */
-
 
 function updateBirds(){
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
@@ -149,9 +146,6 @@ function removeBirds(bird){
   return keepBird;
 }
 
-function test(){
-  console.log("here");
-}
 
 /**
  * Every second a bird is created, 
@@ -160,12 +154,14 @@ function test(){
  * The filter function runs removeBird on each bird in allBirds.
  * It keeps the birds for which removeBird returns true.
  */
-function birdAction(){
+async function birdAction(){
   createMother();
   createBird();
   updateMotherHen();
   updateBirds();
   allBirds = allBirds.filter(removeBirds);
+  console.log(running + "in birdAction");
+  await runCode(selectedBirds);
 }
 
 /**
@@ -206,7 +202,7 @@ function repositionGameObjects(){
   mazeStartX = 0;
   mazeStartY = (window.innerHeight * 0.7);
   mazeWidth = (window.innerWidth * 0.6);
-  mazeHeight = (window.innerHeight  * 0.9);
+  mazeHeight = (window.innerHeight  * 0.8);
 
 
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
@@ -229,6 +225,49 @@ function repositionGameObjects(){
 })();
 
 
+async function initializeBlockIdentifiers(){
+  console.log("clicked");
+  blockCount = 0;
+  placedBlocks = document.querySelectorAll('#canvas .block');
+  console.log(placedBlocks);
+  running = true;
+}
+
+async function runCode(){
+  if (!running) return;
+  console.log("runing in runCode");
+  if (blockCount >= 0 && blockCount < placedBlocks.length){
+    let block = placedBlocks[blockCount];
+    let chick = selectedBirds;    
+    if (block.classList.contains("move")) {
+      console.log("move");
+        // get the direction and the number of steps to move
+        const move = block.dataset.move;
+        const numberInput = block.querySelector('input[type="number"]');
+        const moveValue = numberInput ? parseInt(numberInput.value) : 0;
+        let curMaze = maze.maze;
+        chick.move(move, moveValue, curMaze);        
+
+        //Moves current chick in desired direction and amount, based on current maze position
+    // 2nd action: drink
+    } else if (block.classList.contains("drink")) {
+        // do the drink action
+        chick.drink();              
+    
+    // 3rd action: eat
+    } else if (block.classList.contains("eat")) {
+      // do the eat action
+      chick.eat();          
+    }    
+    blockCount++;
+  }
+  if (blockCount === placedBlocks.length) running = false;
+}
+
+
+    // Initialize draggable blocks
+makeDraggable();  
+
 /**
  * The program starts here
  * An event listener runs in the background waiting for an event to occur on an element
@@ -239,3 +278,8 @@ function repositionGameObjects(){
 window.addEventListener('load', animateGameObjects);
 window.addEventListener('resize', repositionGameObjects);
 reset_btn.addEventListener('click', reset);
+runObject.addEventListener('click', initializeBlockIdentifiers);
+
+// Add event listeners for drag and drop functionality on the canvas
+canvas.addEventListener('drop', drop);
+canvas.addEventListener('dragover', allowDrop);

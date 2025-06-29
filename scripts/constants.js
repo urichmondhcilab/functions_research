@@ -1,12 +1,5 @@
-/* constants used in other files
-    MIN_LIFE_SPAN: minimum life span of the bird
-    MAX_LIFE_SPAN: maximum life span of the bird
-    MAX_NUMBER_OF_BIRDS: The maximum number of birds that can be created
-*/
-// const MIN_LIFE_SPAN = 100;
-// const MAX_LIFE_SPAN = 500; // actually 100 + 500
-const MIN_LIFE_SPAN = 10;
-const MAX_LIFE_SPAN = 50; // actually 100 + 500
+const MIN_LIFE_SPAN = 100;
+const MAX_LIFE_SPAN = 500; // actually 100 + 500
 const MAX_NUMBER_OF_BIRDS = 8;
 
 const HEIGHT_OFFSET = window.innerHeight / 4;
@@ -27,7 +20,7 @@ let radius = screenWidth / 12; // the radius is relative to the width and height
 let mazeStartX = 0;
 let mazeStartY = (window.innerHeight * 0.7);
 let mazeWidth = (window.innerWidth * 0.6);
-let mazeHeight = (window.innerHeight  * 0.9);
+let mazeHeight = (window.innerHeight  * 0.8);
 
 let chickImagePaths = ['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'];
 let state = [
@@ -60,7 +53,9 @@ let state = [
 ]
 
 let NUMBER_OF_TILES_X = 10;
-let NUMBER_OF_TILES_Y = 2;
-// let GROUND_COLOR = "#BB8459";
+let NUMBER_OF_TILES_Y = 1;
 
 let selectedBirds = null;
+let blockCount = 0;
+let running = false;
+let placedBlocks = null;

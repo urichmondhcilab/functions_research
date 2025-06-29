@@ -22,7 +22,6 @@ class Bird{
     let birdDiv = document.createElement('div');
     let birdImg = document.createElement('img');
     birdImg.className = "chick";
-    // birdImg.style.objectFit = "cover";
     birdImg.style.border= "none";
     birdDiv.appendChild(birdImg)
     this.birdie = birdDiv;
@@ -59,18 +58,15 @@ class Bird{
    * display the bird's id everytime a bird is clicked
    * @param {Object} e is the event object
    */
-  displayCodeEditor(e){
+  async displayCodeEditor(e){
     let codeEditor = document.getElementById("codeEditor");
     codeEditor.firstChild.nodeValue = "chick " + this.id;
-    let curClass = this.birdie.className;
-    // this.birdie.className = curClass + " selectedBackground";
     this.birdie.style.border = ".1rem solid cyan";    
     console.log(selectedBirds);
-    if (selectedBirds != null && selectedBirds !== undefined ){
+    if (selectedBirds != null && selectedBirds !== undefined){
       selectedBirds.birdie.style.border = "none";
     }
     selectedBirds = this;
-
   }
 
   updateBirdPosition(){
@@ -82,11 +78,7 @@ class Bird{
   }
 
   updateBird(){
-      // console.log(Math.round (Math.random() * (chickImagePaths.length - 1)));
       this.birdie.firstChild.src = chickImagePaths[Math.round (Math.random() * (chickImagePaths.length - 1))];    
-      // if (selectedBirds != this.birdie){
-      //   this.birdie.border = "None";
-      // }
   }
 
 /**
@@ -139,8 +131,8 @@ async drink() {
 
     this.isDrinking = true;
     this.birdie.firstChild.src = 'images/chicks/Squarton_splashing.svg';
-    await new Promise(resolve => setTimeout(resolve, 1000)); // delay 1 second
-    this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
+    // await new Promise(resolve => setTimeout(resolve, 1000)); // delay 1 second
+    // this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
     this.isDrinking = false;
 
   //Else, changes to death image and sets variables to despawn
@@ -156,8 +148,8 @@ async drink() {
     if(this.curTile.div.style.backgroundImage == `url("${"images/food/food.svg"}")`){
       this.isEating = true;
       this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
-      await new Promise(resolve => setTimeout(resolve, 1000)); // delay 1 second
-      this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
+      // await new Promise(resolve => setTimeout(resolve, 1000)); // delay 1 second
+      // this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
       this.isEating = false;
 
     //Else, changes to death image and sets variables to despawn

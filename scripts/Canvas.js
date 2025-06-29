@@ -1,5 +1,5 @@
 // need the allowDrop method for draggables in the script.js
-export function allowDrop(event) {
+function allowDrop(event) {
     event.preventDefault();
 }
 
@@ -35,7 +35,7 @@ document.addEventListener('dragstart', (event) => {
 });
 
 // Drop function handles creating a new block in the canvas after a block is dragged there
-export function drop(event) {
+function drop(event) {
     event.preventDefault();
     if (draggedElementState) {
         const draggedElement = draggedElementState.element;

@@ -1,3 +1,6 @@
+// import { allowDrop, drop } from './Canvas.js';
+// import { makeDraggable } from './BlockLib.js';
+
 /* Retrieve HTML elements to be used in javascript
     The elements are retrieved by their ids.
     document is a global variable made available with JavaScript
@@ -9,3 +12,18 @@ let game_canvas =document.getElementById('game_canvas');
 let point_number = document.getElementById('point_number');
 let reset_btn = document.getElementById('reset');
 let list = document.getElementById("list");
+let runObject = document.getElementById('run');
+const canvas = document.getElementById('canvas');
+const blockDrop = document.getElementById('block-drop');
+
+
+    // reset button clears all the blocks from the canvas, but does not reset the chicken
+    document.getElementById('block-reset').addEventListener('click', function () {
+        const blocks = blockDrop.querySelectorAll('.block');
+        blocks.forEach(block => block.remove());
+     });
+    
+
+
+
+    
