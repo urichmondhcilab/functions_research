@@ -1,11 +1,11 @@
 class Drink extends Block{
     /**
-     * A constructor for a move operation
-     * @param {String} direction up, down, right, or left           
+     * A constructor for a move operation     
      * @param {Bird} gameObject the object to move
      * @param {Maze} maze where the bird is moved
      */
-    constructor(action, gameObject, maze){
-        super(action, gameObject, maze);
+    constructor(gameObject, maze){
+        super(gameObject, maze);
+        this.action = "drink"
     }    
 }

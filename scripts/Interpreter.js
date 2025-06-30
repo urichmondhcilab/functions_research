@@ -1,5 +1,11 @@
+/**
+ * Carries out the action associated with a game object
+ */
 class Interpreter{
-
+    /**
+     * Executes an action in block on a game object in block
+     * @param {Block} block a unit of action to be taken on a gameObject
+     */
     static interpret(block){
         const gameObject = block.gameObject;
         const action = block.action;

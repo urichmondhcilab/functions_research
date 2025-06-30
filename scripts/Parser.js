@@ -12,6 +12,10 @@ class Parser{
         this.gameObject = gameObject;
     }
 
+    /**
+     * parses placedblocks so that each block is a single action
+     * @returns a list of blocks
+     */
     parse(){
         for(const block of this.placedBlocks){
             if (block.classList.contains("move")) {
@@ -19,14 +23,14 @@ class Parser{
                 const numberInput = block.querySelector('input[type="number"]');
                 const timesToMove = numberInput ? parseInt(numberInput.value) : 0; 
                 for (let i = 0; i < timesToMove; i++){
-                    this.ASTBlocks.push(new Move("move", direction, this.gameObject, this.maze));
+                    this.ASTBlocks.push(new Move(direction, this.gameObject, this.maze));
                 }                                                
             }
             else if (block.classList.contains("drink")){
-                    this.ASTBlocks.push(new Drink("drink", this.gameObject, this.maze));                
+                    this.ASTBlocks.push(new Drink(this.gameObject, this.maze));                
             }
             else if (block.classList.contains("eat")){
-                    this.ASTBlocks.push(new Eat("eat", this.gameObject, this.maze));    
+                    this.ASTBlocks.push(new Eat(this.gameObject, this.maze));    
             }            
         }
 
