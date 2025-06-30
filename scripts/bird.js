@@ -102,7 +102,7 @@ class Bird{
  * @param {Array} curMaze, current array of the maze, houses tiles
  */
   //Data structure all the tiles until the end
-  move(direction, steps, curMaze) {
+  move(direction, curMaze) {
 
     //If this is the chicks first move, set the current tile to the first in maze
     // console.log(curMaze);
@@ -132,6 +132,12 @@ class Bird{
       this.birdie.style.left = this.curTile.x;
       this.birdie.style.top = this.curTile.y;
   }
+
+start(curMaze) {
+  this.curTile = curMaze[0][0];
+  this.birdie.style.left = this.curTile.x;
+  this.birdie.style.top = this.curTile.y;  
+}  
 
 
 /**

@@ -6,12 +6,14 @@ function allowDrop(event) {
 // set a "draggedElementState" to keep track of the selection on the dropdown
 let draggedElementState = null;
 let trashObj = document.getElementById("trash")
+let blockRemoveObj = document.getElementById("block-remove")
+let instCount = 0;
+
 trashObj.addEventListener("dragover", dragOverTrash);
 trashObj.addEventListener("drop", trashDrop);
-let blockRemoveObj = document.getElementById("block-remove")
 blockRemoveObj.addEventListener("dragover", dragOverTrash);
 blockRemoveObj.addEventListener("drop", trashDrop);
-let instCount = 0;
+
 
 // When the dragging starts, save the move selected to the "draggedElementState"
 document.addEventListener('dragstart', (event) => {
@@ -31,7 +33,11 @@ document.addEventListener('dragstart', (event) => {
     draggedElementState = {
         element: draggedElement,
     };
-}
+    } else if (draggedElement && draggedElement.classList.contains("start")){
+        draggedElementState = {
+            element: draggedElement,
+        };    
+    }
 });
 
 // Drop function handles creating a new block in the canvas after a block is dragged there

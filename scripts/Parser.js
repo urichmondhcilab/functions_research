@@ -28,11 +28,14 @@ class Parser{
                     }                                                
                 }
                 else if (block.classList.contains("drink")){
-                        this.ASTBlocks.push(new Drink(gameObject, this.maze));                
+                    this.ASTBlocks.push(new Drink(gameObject, this.maze));                
                 }
                 else if (block.classList.contains("eat")){
-                        this.ASTBlocks.push(new Eat(gameObject, this.maze));    
-                }            
+                    this.ASTBlocks.push(new Eat(gameObject, this.maze));    
+                } 
+                else if (block.classList.contains("start")){
+                    this.ASTBlocks.push(new Start(gameObject, this.maze));
+                }           
             }
         }
         return this.ASTBlocks;

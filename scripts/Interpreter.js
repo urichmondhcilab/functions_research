@@ -11,14 +11,16 @@ class Interpreter{
         const action = block.action;
         switch (action){
             case "move":            
-               gameObject.move(block.direction, 1, block.maze.maze);
+               gameObject.move(block.direction, block.maze.maze);
                 break;
             case "eat":
                 gameObject.eat();
                 break;
             case "drink":
                 gameObject.drink();                
-                break
+                break;
+            case "start":
+                gameObject.start(block.maze.maze);
         }
     }
 }

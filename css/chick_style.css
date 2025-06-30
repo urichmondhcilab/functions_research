@@ -91,6 +91,10 @@ html, body {
   background-color: salmon;
 }
 
+.start{
+  background-color: rgb(32, 108, 108);
+}
+
 .run-reset-buttons {
   padding-top: 2.5rem;
   display: flex;
