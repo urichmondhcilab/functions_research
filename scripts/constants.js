@@ -60,4 +60,3 @@ let blockCount = 0;
 let running = false;
 let placedBlocks = null;
 let ast = null;
-// let interpreter = null;

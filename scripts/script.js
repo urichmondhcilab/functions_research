@@ -74,9 +74,7 @@ function createMother(){
  * In every time interval, for all the current birds,
  * we move them left or right by setting the birds left property
  * We also switch between the two chick resting poses by checking for either a 1 or 0 value
- * 
  * Checks if currently eating/drinking, if so, skips resting image change until finished
- * 
  * Note that the bird is an html image element
  * Instead, of moving, we update the images. We use the same idea as we used updating the mother image, instead we go through all the birds
  * present within the array. 
@@ -160,7 +158,6 @@ async function birdAction(){
   updateMotherHen();
   updateBirds();
   allBirds = allBirds.filter(removeBirds);
-  // console.log(running + "in birdAction");
   await runCode(selectedBirds);
 }
 
@@ -220,10 +217,6 @@ function repositionGameObjects(){
   
 }
 
-(function(){
-  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
-})();
-
 
 async function initializeBlockIdentifiers(){
   console.log("clicked");
@@ -245,40 +238,8 @@ async function runCode(){
   if (blockCount === ast.length) running = false;  
 }
 
-// async function runCode(){
-//   if (!running) return;
-//   console.log("runing in runCode");
-//   if (blockCount >= 0 && blockCount < placedBlocks.length){
-//     let block = placedBlocks[blockCount];
-//     let chick = selectedBirds;    
-//     if (block.classList.contains("move")) {
-//       console.log("move");
-//         // get the direction and the number of steps to move
-//         const move = block.dataset.move;
-//         const numberInput = block.querySelector('input[type="number"]');
-//         const moveValue = numberInput ? parseInt(numberInput.value) : 0;
-//         let curMaze = maze.maze;
-//         chick.move(move, moveValue, curMaze);        
-
-//         //Moves current chick in desired direction and amount, based on current maze position
-//     // 2nd action: drink
-//     } else if (block.classList.contains("drink")) {
-//         // do the drink action
-//         chick.drink();              
-    
-//     // 3rd action: eat
-//     } else if (block.classList.contains("eat")) {
-//       // do the eat action
-//       chick.eat();          
-//     }    
-//     blockCount++;
-//   }
-//   if (blockCount === placedBlocks.length) running = false;
-// }
 
 
-    // Initialize draggable blocks
-makeDraggable();  
 
 /**
  * The program starts here
@@ -301,3 +262,11 @@ document.getElementById('block-reset').addEventListener('click', function () {
     const blocks = blockDrop.querySelectorAll('.block');
     blocks.forEach(block => block.remove());
   });
+
+// set up the maze
+(function(){
+  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
+})();
+
+// Initialize draggable blocks
+makeDraggable();  

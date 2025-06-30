@@ -5,7 +5,7 @@ class Interpreter{
         const action = block.action;
         switch (action){
             case "move":            
-                gameObject.move(block.direction, 1, block.maze);
+               gameObject.move(block.direction, 1, block.maze.maze);
                 break;
             case "eat":
                 gameObject.eat();

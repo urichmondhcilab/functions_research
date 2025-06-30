@@ -16,6 +16,7 @@ class Bird{
  */
   constructor(birdId){
     // give the bird an id
+    currentAngle = (currentAngle + 45) % 360;
     this.id = birdId;
 
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
@@ -24,26 +25,20 @@ class Bird{
     birdImg.className = "chick";
     birdImg.style.border= "none";
     birdDiv.appendChild(birdImg)
+
     this.birdie = birdDiv;
-
-    let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
-    let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
-    let hasMoved = false;
-    let isDrinking = false;
-    let isEating = false;
-    currentAngle = (currentAngle + 45) % 360;
-
-    this.birdie.currImageFlag= 0;
-    this.birdie.deathImgFlag = 0;
-
+    this.birdie.deathImgFlag = 0;    
     this.birdie.className = 'chickCont';
-    this.birdie.style.position="absolute";
-
-    this.birdie.style.left= left;
-    this.birdie.style.top = top;
+    this.birdie.style.position="absolute";    
+    this.birdie.style.left= `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
+    this.birdie.style.top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;    
     this.xIndex = 0;
     this.yIndex = 0;
     this.curTile = null
+
+    let hasMoved = false;
+    let isDrinking = false;
+    let isEating = false;
 
     // handle "this" that refers to the event object and "this" that refers to the object
     // bind the the the object to the member function
@@ -81,6 +76,7 @@ class Bird{
       this.birdie.firstChild.src = chickImagePaths[Math.round (Math.random() * (chickImagePaths.length - 1))];    
   }
 
+
 /**
  * Moves the chick to the desired end tile, one step at a time
  * @param {string} direction is the direction to move in
@@ -91,14 +87,12 @@ class Bird{
   move(direction, steps, curMaze) {
 
     //If this is the chicks first move, set the current tile to the first in maze
-    if (this.curTile === null){
+    // console.log(curMaze);
+    if (this.curTile === null){   
       this.curTile = curMaze[0][0];
     }
 
-    //Loops through the number of steps
     //adjusts the index of the tile to move to +-1
-    for(let i=0; i<steps; i++){
-      setTimeout(() => {
         switch (direction) {
           case "up":
               this.yIndex = Math.max(this.yIndex - 1, 0);
@@ -119,13 +113,10 @@ class Bird{
       //Display new position
       this.birdie.style.left = this.curTile.x;
       this.birdie.style.top = this.curTile.y;
-      }, 1000 * i);
-
-    }
   }
 
 
-async drink() {
+drink() {
   //Checks tile image, if water, changes to splash image, then reverts
   if(this.curTile.div.style.backgroundImage == `url("${"images/water/water.svg"}")`){
     this.isDrinking = true;
@@ -140,7 +131,7 @@ async drink() {
   }
 }
 
-  async eat() {
+  eat() {
     //Checks tile image, if food, changes to eat image, then reverts
     if(this.curTile.div.style.backgroundImage == `url("${"images/food/food.svg"}")`){
       this.isEating = true;
