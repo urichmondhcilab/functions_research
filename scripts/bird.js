@@ -128,11 +128,8 @@ class Bird{
 async drink() {
   //Checks tile image, if water, changes to splash image, then reverts
   if(this.curTile.div.style.backgroundImage == `url("${"images/water/water.svg"}")`){
-
     this.isDrinking = true;
     this.birdie.firstChild.src = 'images/chicks/Squarton_splashing.svg';
-    // await new Promise(resolve => setTimeout(resolve, 1000)); // delay 1 second
-    // this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
     this.isDrinking = false;
 
   //Else, changes to death image and sets variables to despawn
@@ -148,8 +145,6 @@ async drink() {
     if(this.curTile.div.style.backgroundImage == `url("${"images/food/food.svg"}")`){
       this.isEating = true;
       this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
-      // await new Promise(resolve => setTimeout(resolve, 1000)); // delay 1 second
-      // this.birdie.firstChild.src = 'images/chicks/squarton_resting_position_1.svg';
       this.isEating = false;
 
     //Else, changes to death image and sets variables to despawn

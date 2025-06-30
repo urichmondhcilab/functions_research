@@ -5,8 +5,8 @@ class Move extends Block{
      * @param {Bird} gameObject the object to move
      * @param {Maze} maze where the bird is moved
      */
-    constructor(direction, gameObject, maze){
-        super(gameObject, maze);
-        this.direction = this.direction;
+    constructor(action, direction, gameObject, maze){
+        super(action, gameObject, maze);
+        this.direction = direction;
     }    
 }

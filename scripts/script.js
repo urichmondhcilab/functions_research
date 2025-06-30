@@ -232,40 +232,49 @@ async function initializeBlockIdentifiers(){
   // console.log(placedBlocks);
   running = true;
   let parser = new Parser(selectedBirds, placedBlocks, maze);
-  let ast = parser.parse();
+  ast = parser.parse();
   console.log(ast);
 }
 
 async function runCode(){
   if (!running) return;
-  console.log("runing in runCode");
-  if (blockCount >= 0 && blockCount < placedBlocks.length){
-    let block = placedBlocks[blockCount];
-    let chick = selectedBirds;    
-    if (block.classList.contains("move")) {
-      console.log("move");
-        // get the direction and the number of steps to move
-        const move = block.dataset.move;
-        const numberInput = block.querySelector('input[type="number"]');
-        const moveValue = numberInput ? parseInt(numberInput.value) : 0;
-        let curMaze = maze.maze;
-        chick.move(move, moveValue, curMaze);        
-
-        //Moves current chick in desired direction and amount, based on current maze position
-    // 2nd action: drink
-    } else if (block.classList.contains("drink")) {
-        // do the drink action
-        chick.drink();              
-    
-    // 3rd action: eat
-    } else if (block.classList.contains("eat")) {
-      // do the eat action
-      chick.eat();          
-    }    
+  if (blockCount >= 0 && blockCount < ast.length){
+    Interpreter.interpret(ast[blockCount]);
     blockCount++;
   }
-  if (blockCount === placedBlocks.length) running = false;
+  if (blockCount === ast.length) running = false;  
 }
+
+// async function runCode(){
+//   if (!running) return;
+//   console.log("runing in runCode");
+//   if (blockCount >= 0 && blockCount < placedBlocks.length){
+//     let block = placedBlocks[blockCount];
+//     let chick = selectedBirds;    
+//     if (block.classList.contains("move")) {
+//       console.log("move");
+//         // get the direction and the number of steps to move
+//         const move = block.dataset.move;
+//         const numberInput = block.querySelector('input[type="number"]');
+//         const moveValue = numberInput ? parseInt(numberInput.value) : 0;
+//         let curMaze = maze.maze;
+//         chick.move(move, moveValue, curMaze);        
+
+//         //Moves current chick in desired direction and amount, based on current maze position
+//     // 2nd action: drink
+//     } else if (block.classList.contains("drink")) {
+//         // do the drink action
+//         chick.drink();              
+    
+//     // 3rd action: eat
+//     } else if (block.classList.contains("eat")) {
+//       // do the eat action
+//       chick.eat();          
+//     }    
+//     blockCount++;
+//   }
+//   if (blockCount === placedBlocks.length) running = false;
+// }
 
 
     // Initialize draggable blocks

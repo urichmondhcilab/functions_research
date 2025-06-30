@@ -21,17 +21,18 @@ class Parser{
         for(const block of placedBlocks){
             if (block.classList.contains("move")) {
                 const direction = block.dataset.move;
+                console.log("the direction" + direction);
                 const numberInput = block.querySelector('input[type="number"]');
                 const timesToMove = numberInput ? parseInt(numberInput.value) : 0; 
                 for (let i = 0; i < timesToMove; i++){
-                    ASTBlocks.push(new Move(direction, gameObject, maze));
+                    ASTBlocks.push(new Move("move", direction, gameObject, maze));
                 }                                                
             }
             else if (block.classList.contains("drink")){
-                    ASTBlocks.push(new Drink(gameObject, maze));                
+                    ASTBlocks.push(new Drink("drink", gameObject, maze));                
             }
             else if (block.classList.contains("eat")){
-                    ASTBlocks.push(new Eat(gameObject, maze));    
+                    ASTBlocks.push(new Eat("eat", gameObject, maze));    
             }            
         }
 

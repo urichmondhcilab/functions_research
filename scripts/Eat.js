@@ -4,7 +4,7 @@ class Eat extends Block{
      * @param {Bird} gameObject the object to move
      * @param {Maze} maze where the bird is moved
      */
-    constructor(gameObject, maze){
-        super(gameObject, maze);
+    constructor(action, gameObject, maze){
+        super(action, gameObject, maze);
     }    
 }
