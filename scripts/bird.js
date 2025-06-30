@@ -56,12 +56,18 @@ class Bird{
   async displayCodeEditor(e){
     let codeEditor = document.getElementById("codeEditor");
     codeEditor.firstChild.nodeValue = "chick " + this.id;
-    this.birdie.style.border = ".1rem solid cyan";    
     console.log(selectedBirds);
     if (selectedBirds != null && selectedBirds !== undefined){
-      selectedBirds.birdie.style.border = "none";
+      for (const selectedBird of selectedBirds){
+        selectedBird.birdie.style.border = "none";
+      }
     }
-    selectedBirds = this;
+    if (motherHen !== null && motherHen !== undefined){
+      motherHen.mother.style.border = "none";
+    }
+
+    this.birdie.style.border = ".1rem solid cyan";       
+    selectedBirds = [this];
   }
 
   updateBirdPosition(){

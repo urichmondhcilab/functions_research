@@ -28,8 +28,27 @@ class Mother{
         this.mother.style.left= `${Math.floor(centerX) - motherOffsetX}px`;
         this.mother.style.top = `${Math.floor(centerY) - motherOffsetY}px`;      
       }
+
+    this.selectAllBirds = this.selectAllBirds.bind(this);      
+      motherImg.addEventListener('click', this.selectAllBirds);
   
       game_canvas.appendChild(this.mother);
     }
+
+    selectAllBirds(e){
+
+      let codeEditor = document.getElementById("codeEditor");
+      console.log(selectedBirds);
+      if (selectedBirds != null && selectedBirds !== undefined){
+        for (const selectedBird of selectedBirds){
+          selectedBird.birdie.style.border = "none";
+        }
+      }
+      this.mother.style.border = ".1rem solid cyan";    
+      selectedBirds = allBirds;      
+
+    }
+
+
   }
   

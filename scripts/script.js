@@ -62,10 +62,10 @@ function createBird(){
 function createMother(){
   if(motherHen == null){
     motherHen = new Mother();
-    motherHen.mother.addEventListener("click", function () {
-      selectedBirds.length = 0;
-      selectedBirds = allBirds;
-   });
+  //   motherHen.mother.addEventListener("click", function () {
+  //     selectedBirds.length = 0;
+  //     selectedBirds = allBirds;
+  //  });
   }
 }
 
@@ -158,7 +158,7 @@ async function birdAction(){
   updateMotherHen();
   updateBirds();
   allBirds = allBirds.filter(removeBirds);
-  await runCode(selectedBirds);
+  await runCode();
 }
 
 /**
@@ -237,6 +237,9 @@ async function runCode(){
   }
   if (blockCount === ast.length) running = false;  
 }
+
+
+
 
 
 
