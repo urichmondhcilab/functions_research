@@ -22,8 +22,8 @@ let mazeStartY = (window.innerHeight * 0.7);
 let mazeWidth = (window.innerWidth * 0.6);
 let mazeHeight = (window.innerHeight  * 0.8);
 
-let chickImagePaths = ['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'];
-let state = [
+const chickImagePaths = ['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'];
+const state = [
     {   name : "BLOCK",
         color : "grey",
         image_path : "none"
@@ -52,8 +52,8 @@ let state = [
     },            
 ]
 
-let NUMBER_OF_TILES_X = 10;
-let NUMBER_OF_TILES_Y = 1;
+const NUMBER_OF_TILES_X = 10;
+const NUMBER_OF_TILES_Y = 1;
 
 let selectedBirds = null;
 let blockCount = 0;
