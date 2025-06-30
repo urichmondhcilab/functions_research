@@ -30,8 +30,11 @@ class Bird{
     this.birdie.deathImgFlag = 0;    
     this.birdie.className = 'chickCont';
     this.birdie.style.position="absolute";    
-    this.birdie.style.left= `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
-    this.birdie.style.top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;    
+    // this.birdie.style.left= `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
+    // this.birdie.style.top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;    
+
+    this.birdie.style.left= `${Math.floor(birdStartX  + Math.random() * birdEndX)}px`;
+    this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;;       
     this.xIndex = 0;
     this.yIndex = 0;
     this.curTile = null
@@ -70,6 +73,9 @@ class Bird{
     selectedBirds = [this];
   }
 
+  /**
+   * update the bird position when the screen has been resized
+   */
   updateBirdPosition(){
     let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
     let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
@@ -78,10 +84,12 @@ class Bird{
     this.birdie.style.top = top;      
   }
 
+  /**
+   * update the bird sprite to a random sprite
+   */
   updateBird(){
       this.birdie.firstChild.src = chickImagePaths[Math.round (Math.random() * (chickImagePaths.length - 1))];    
   }
-
 
 /**
  * Moves the chick to the desired end tile, one step at a time
@@ -122,6 +130,10 @@ class Bird{
   }
 
 
+/**
+ * changes the bird sprite to the drinking sprite
+ * the bird dies when it tries to drink on a tile that is not a water tiel
+ */
 drink() {
   //Checks tile image, if water, changes to splash image, then reverts
   if(this.curTile.div.style.backgroundImage == `url("${"images/water/water.svg"}")`){
@@ -137,6 +149,10 @@ drink() {
   }
 }
 
+/**
+ * changes the bird sprite to the eating sprite
+ * the bird dies if it tries to eat on a plank that is not an eating plank
+ */
   eat() {
     //Checks tile image, if food, changes to eat image, then reverts
     if(this.curTile.div.style.backgroundImage == `url("${"images/food/food.svg"}")`){
