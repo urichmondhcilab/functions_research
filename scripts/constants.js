@@ -10,9 +10,9 @@ let screenHeight = window.innerHeight;
 let motherOffsetX = (window.innerWidth * 0.6)/ 4;
 let motherOffsetY = window.innerHeight / 8;
 
-let birdStartX = motherOffsetX;
+let birdStartX =(window.innerWidth * 0.3);
 let birdStartY = window.innerHeight * 0.5;
-let birdEndX = window.innerWidth * 0.6 - motherOffsetX;
+let birdEndX = window.innerWidth * 0.6 - birdStartX;
 let birdEndY = window.innerHeight * 0.6 - birdStartY;
 
 
@@ -63,7 +63,8 @@ const NUMBER_OF_TILES_X = 10;
 const NUMBER_OF_TILES_Y = 1;
 
 let selectedBirds = null;
-let blockCount = 0;
-let running = false;
 let placedBlocks = null;
 let ast = null;
+let blockCount = 0;
+let running = false;
+

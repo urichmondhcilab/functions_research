@@ -62,10 +62,6 @@ function createBird(){
 function createMother(){
   if(motherHen == null){
     motherHen = new Mother();
-  //   motherHen.mother.addEventListener("click", function () {
-  //     selectedBirds.length = 0;
-  //     selectedBirds = allBirds;
-  //  });
   }
 }
 
@@ -194,6 +190,11 @@ function repositionGameObjects(){
   positionX = centerX - offsetX; // we subtract the X offset to shift the chick left
   positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
   radius = screenWidth / 12; // the radius is relative to the width and height of the screen
+
+  birdStartX =(window.innerWidth * 0.3);
+  birdStartY = window.innerHeight * 0.5;
+  birdEndX = window.innerWidth * 0.6 - birdStartX;
+  birdEndY = window.innerHeight * 0.6 - birdStartY;
 
   // update maze location variables 
   mazeStartX = 0;

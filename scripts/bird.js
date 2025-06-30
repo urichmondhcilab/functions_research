@@ -34,7 +34,7 @@ class Bird{
     // this.birdie.style.top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;    
 
     this.birdie.style.left= `${Math.floor(birdStartX  + Math.random() * birdEndX)}px`;
-    this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;;       
+    this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;    
     this.xIndex = 0;
     this.yIndex = 0;
     this.curTile = null
@@ -77,11 +77,15 @@ class Bird{
    * update the bird position when the screen has been resized
    */
   updateBirdPosition(){
-    let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
-    let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
+    // let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
+    // let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
     currentAngle = (currentAngle + 45) % 360;
-    this.birdie.style.left= left;
-    this.birdie.style.top = top;      
+
+    this.birdie.style.left= `${Math.floor(birdStartX  + Math.random() * birdEndX)}px`;
+    this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;   
+
+    // this.birdie.style.left= left;
+    // this.birdie.style.top = top;      
   }
 
   /**
