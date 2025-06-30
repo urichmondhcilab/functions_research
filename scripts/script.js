@@ -160,7 +160,7 @@ async function birdAction(){
   updateMotherHen();
   updateBirds();
   allBirds = allBirds.filter(removeBirds);
-  console.log(running + "in birdAction");
+  // console.log(running + "in birdAction");
   await runCode(selectedBirds);
 }
 
@@ -229,8 +229,11 @@ async function initializeBlockIdentifiers(){
   console.log("clicked");
   blockCount = 0;
   placedBlocks = document.querySelectorAll('#canvas .block');
-  console.log(placedBlocks);
+  // console.log(placedBlocks);
   running = true;
+  let parser = new Parser(selectedBirds, placedBlocks, maze);
+  let ast = parser.parse();
+  console.log(ast);
 }
 
 async function runCode(){
@@ -283,3 +286,9 @@ runObject.addEventListener('click', initializeBlockIdentifiers);
 // Add event listeners for drag and drop functionality on the canvas
 canvas.addEventListener('drop', drop);
 canvas.addEventListener('dragover', allowDrop);
+
+// reset button clears all the blocks from the canvas, but does not reset the chicken
+document.getElementById('block-reset').addEventListener('click', function () {
+    const blocks = blockDrop.querySelectorAll('.block');
+    blocks.forEach(block => block.remove());
+  });

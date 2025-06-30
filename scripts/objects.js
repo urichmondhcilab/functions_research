@@ -17,11 +17,7 @@ const canvas = document.getElementById('canvas');
 const blockDrop = document.getElementById('block-drop');
 
 
-    // reset button clears all the blocks from the canvas, but does not reset the chicken
-    document.getElementById('block-reset').addEventListener('click', function () {
-        const blocks = blockDrop.querySelectorAll('.block');
-        blocks.forEach(block => block.remove());
-     });
+
     
 
 
