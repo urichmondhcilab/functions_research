@@ -107,7 +107,9 @@ class Bird{
     //If this is the chicks first move, set the current tile to the first in maze
     // console.log(curMaze);
     if (this.curTile === null){   
-      this.curTile = curMaze[0][0];
+      this.die();
+      return;
+      //this.curTile = curMaze[0][0];
     }
 
     //adjusts the index of the tile to move to +-1
@@ -153,9 +155,7 @@ drink() {
 
   //Else, changes to death image and sets variables to despawn
   }else{
-    this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
-    this.birdie.deathImgFlag = 1;
-    this.lifeSpan = 0;
+    this.die();
   }
 }
 
@@ -172,9 +172,14 @@ drink() {
 
     //Else, changes to death image and sets variables to despawn
     }else{
-      this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
-      this.birdie.deathImgFlag = 1;
-      this.lifeSpan = 0;
+      this.die();
     }
+  }
+
+
+  die(){
+    this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
+    this.birdie.deathImgFlag = 1;
+    this.lifeSpan = 0;  
   }
 }
