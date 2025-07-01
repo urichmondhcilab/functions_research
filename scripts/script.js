@@ -30,7 +30,7 @@ let maze = null;
  * In this case it receives the function birdAction and runs it every 1000 milliseconds
  */
 function animateGameObjects(){
-  setInterval(birdAction, 1000);
+  setInterval(birdAction, 800);
 }
 
 
@@ -75,7 +75,6 @@ function createMother(){
  * Instead, of moving, we update the images. We use the same idea as we used updating the mother image, instead we go through all the birds
  * present within the array. 
  */
-
 function updateBirds(){
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
 
@@ -238,11 +237,6 @@ async function runCode(){
   }
   if (blockCount === ast.length) running = false;  
 }
-
-
-
-
-
 
 
 /**

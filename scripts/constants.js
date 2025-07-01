@@ -10,9 +10,9 @@ let screenHeight = window.innerHeight;
 let motherOffsetX = (window.innerWidth * 0.6)/ 4;
 let motherOffsetY = window.innerHeight / 8;
 
-let birdStartX =(window.innerWidth * 0.3);
+let birdStartX =(window.innerWidth * 0.25);
 let birdStartY = window.innerHeight * 0.5;
-let birdEndX = window.innerWidth * 0.6 - birdStartX;
+let birdEndX = window.innerWidth * 0.5 - birdStartX;
 let birdEndY = window.innerHeight * 0.6 - birdStartY;
 
 

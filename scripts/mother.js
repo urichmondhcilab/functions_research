@@ -9,7 +9,6 @@
  */
 class Mother{
     constructor(){
-    //   this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
       let motherDiv = document.createElement('div');
       let motherImg = document.createElement('img');
       motherImg.className = "mother";

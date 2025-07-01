@@ -2,26 +2,27 @@ html, body {
   margin: 0; 
   height: 100%; 
   overflow: hidden;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .chickCont{
-  width: 6%;
-  height: 12%;
+  width: 3%;
+  height: 8%;
 }
 
 .chick{
-  width: 60%;
-  height: 60%;
+  width: 100%;
+  height: 100%;
 }
 
 .motherCont{
-  width: 30%;
-  height: 30%;
+  width: 15%;
+  height: 25%;
 }
 
 .mother{
-  width: 50%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
 
 }
 
@@ -92,7 +93,7 @@ html, body {
 }
 
 .start{
-  background-color: rgb(32, 108, 108);
+  background-color: #7EBC61;
 }
 
 .run-reset-buttons {
