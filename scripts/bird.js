@@ -31,14 +31,11 @@ class Bird{
     this.birdie.style.position="absolute";     
 
     this.birdie.style.left= `${Math.floor(birdStartX  + Math.random() * birdEndX)}px`;
-    this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;    
+    this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;  
+    this.checkTop();
     this.xIndex = 0;
     this.yIndex = 0;
     this.curTile = null;
-
-    // let hasMoved = false;
-    // let isDrinking = false;
-    // let isEating = false;
 
     // handle "this" that refers to the event object and "this" that refers to the object
     // bind the the the object to the member function
@@ -70,6 +67,7 @@ class Bird{
     selectedBirds = [this];
   }
 
+
   /**
    * update the bird position when the screen has been resized
    */
@@ -78,6 +76,7 @@ class Bird{
     this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;     
   }
 
+
   /**
    * update the bird sprite to a random sprite
    */
@@ -85,6 +84,15 @@ class Bird{
       this.birdie.firstChild.src = chickImagePaths[Math.round (Math.random() * (chickImagePaths.length - 1))];    
   }
 
+/**
+ * move the bird to the start of the maze
+ * @param {Maze} curMaze 
+ */
+start(curMaze) {
+  this.curTile = curMaze[0][0];
+  this.birdie.style.left = this.curTile.x;
+  this.birdie.style.top = this.curTile.y;  
+}    
 
 /**
  * Moves the chick to the desired end tile, one step at a time
@@ -124,16 +132,6 @@ move(direction, curMaze) {
 }
 
 /**
- * move the bird to the start of the maze
- * @param {Maze} curMaze 
- */
-start(curMaze) {
-  this.curTile = curMaze[0][0];
-  this.birdie.style.left = this.curTile.x;
-  this.birdie.style.top = this.curTile.y;  
-}  
-
-/**
  * changes the bird sprite to the drinking sprite
  * the bird dies when it tries to drink on a tile that is not a water tiel
  */
@@ -144,6 +142,7 @@ drink() {
     this.die();
   }
 }
+
 
 /**
  * changes the bird sprite to the eating sprite
@@ -157,6 +156,7 @@ drink() {
     }
   }
 
+
 /**
  * call to remove bird from list of birds
  */
@@ -164,5 +164,22 @@ drink() {
     this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
     this.birdie.deathImgFlag = 1;
     this.lifeSpan = 0;  
+  }
+
+
+  checkTop(){
+    let i = 0;
+    let thisBirdTop = this.birdie.style.top;
+    let intThisBirdTop = parseInt(thisBirdTop.slice(0, thisBirdTop.length - 2));
+    while (allBirds && i < allBirds.length){
+      let birdTop = allBirds[i].birdie.style.top;
+      let intBirdTop = parseInt(birdTop.slice(0, birdTop.length - 2));
+      if (intThisBirdTop > intBirdTop){
+        zIndex--;
+        this.birdie.style.zIndex = zIndex;
+        return;
+      }
+      i++;
+    }
   }
 }
