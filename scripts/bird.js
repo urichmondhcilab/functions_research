@@ -134,8 +134,13 @@ move(direction, curMaze) {
     //Gets the tile from updated indexes
     this.curTile = curMaze[this.yIndex][this.xIndex];
     //Display in new position
-    this.birdie.style.left = this.curTile.x;
-    this.birdie.style.top = this.curTile.y;
+    let top = parseInt(slicePX(this.curTile.y) - slicePX(this.curTile.height) / 8);
+    let left = parseInt(slicePX(this.curTile.x) + slicePX(this.curTile.width) / 4);  
+    this.birdie.style.left= `${left}px`;
+    this.birdie.style.top = `${top}px`;     
+
+    // this.birdie.style.left = this.curTile.x;
+    // this.birdie.style.top = this.curTile.y;
 }
 
 /**

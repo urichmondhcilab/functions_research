@@ -53,7 +53,7 @@ const state = [
 ]
 
 const NUMBER_OF_TILES_X = 10;
-const NUMBER_OF_TILES_Y = 1;
+const NUMBER_OF_TILES_Y = 2;
 
 let selectedBirds = null;
 let placedBlocks = null;
