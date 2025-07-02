@@ -16,7 +16,6 @@ class Bird{
  */
   constructor(birdId){
     // give the bird an id
-    currentAngle = (currentAngle + 45) % 360;
     this.id = birdId;
 
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
@@ -29,9 +28,7 @@ class Bird{
     this.birdie = birdDiv;
     this.birdie.deathImgFlag = 0;    
     this.birdie.className = 'chickCont';
-    this.birdie.style.position="absolute";    
-    // this.birdie.style.left= `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
-    // this.birdie.style.top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;    
+    this.birdie.style.position="absolute";     
 
     this.birdie.style.left= `${Math.floor(birdStartX  + Math.random() * birdEndX)}px`;
     this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;    
@@ -77,15 +74,8 @@ class Bird{
    * update the bird position when the screen has been resized
    */
   updateBirdPosition(){
-    // let left = `${(positionX) + Math.floor(radius * Math.cos(currentAngle * (Math.PI / 180)))}px`;
-    // let top = `${(positionY) + Math.floor(radius * Math.sin(currentAngle * (Math.PI / 180)))}px`;
-    currentAngle = (currentAngle + 45) % 360;
-
     this.birdie.style.left= `${Math.floor(birdStartX  + Math.random() * birdEndX)}px`;
-    this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;   
-
-    // this.birdie.style.left= left;
-    // this.birdie.style.top = top;      
+    this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;     
   }
 
   /**
@@ -98,7 +88,7 @@ class Bird{
 /**
  * Moves the chick to the desired end tile, one step at a time
  * @param {string} direction is the direction to move in
- * @param {Int} steps, amount of steps/tiles to move
+ * @param {Integer} steps, amount of steps/tiles to move
  * @param {Array} curMaze, current array of the maze, houses tiles
  */
   //Data structure all the tiles until the end
@@ -176,7 +166,9 @@ drink() {
     }
   }
 
-
+/**
+ * call to remove bird from list of birds
+ */
   die(){
     this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
     this.birdie.deathImgFlag = 1;

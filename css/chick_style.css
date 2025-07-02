@@ -30,9 +30,9 @@ html, body {
   game_canvas is the class name associated with the left area of the document
   background-image sets the source of the image
   background-size sets the size of the image. 
-    background-color sets the color of the portion of the screen not covered by the image
-    background position set the image to the center
-    background-attachment - determines if the image is scrollable
+  background-color sets the color of the portion of the screen not covered by the image
+  background position set the image to the center
+  background-attachment - determines if the image is scrollable
  */
 #game_canvas{
   width: 70%;
@@ -121,6 +121,15 @@ html, body {
 #num-input{
   box-sizing: border-box;
   width: 50%;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.2rem;
+}
+
+.move-select{
+  border: none;
+  border-radius: 0.2rem;  
+  padding: 0.1rem;  
 }
 
 #trash{

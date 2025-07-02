@@ -4,10 +4,6 @@
 /**
  * currentNumberOfBirds is a counter for the number of birds created at each timeInterval
  * allBirds an array that will hold bird objects as they are created
- * currentAngle I'm placing birds at a radius from a point and incrementing this angle
- * every time interval
- * radius is the distance of my bird from by choosen center 
- * motherCreated is a boolean value, true if mother created.
  * motherHen is the mother hen object, once created.
  * currWater is the amount of Water objects present. 
  * waterObj stores the references to Mother objects. 
@@ -18,7 +14,6 @@ let currWater = 0;
 let allBirds = [];
 let motherHen = null;
 let waterObj = [];
-let currentAngle = 0;
 let maze = null;
 
 
@@ -184,7 +179,7 @@ function repositionGameObjects(){
   motherOffsetY = window.innerHeight / 8; 
   centerX = (window.innerWidth * 0.6)/ 2;
   centerY = window.innerHeight / 2;
-  offsetX = 0; //screenWidth * 0.07; // offset is 7% of the screen width
+  offsetX = 0;
   offsetY = screenWidth * 0.09; // offset is 9% of the screen width
   positionX = centerX - offsetX; // we subtract the X offset to shift the chick left
   positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
@@ -222,7 +217,6 @@ async function initializeBlockIdentifiers(){
   console.log("clicked");
   blockCount = 0;
   placedBlocks = document.querySelectorAll('#canvas .block');
-  // console.log(placedBlocks);
   running = true;
   let parser = new Parser(selectedBirds, placedBlocks, maze);
   ast = parser.parse();
