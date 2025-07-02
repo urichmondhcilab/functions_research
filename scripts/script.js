@@ -104,6 +104,7 @@ function updateMotherHen(){
   currMom.currImageFlag = flag * -1;
 }
 
+
 /**
  * remove bird receives a bird, reduces its life, determines if the life is <= 0
  * if the life is less than or equal 0, the bird is removed from the body of the html.
@@ -150,6 +151,7 @@ async function birdAction(){
   allBirds = allBirds.filter(removeBirds);
   await runCode();
 }
+
 
 /**
  * resets the current number of birds 
@@ -212,7 +214,10 @@ function repositionGameObjects(){
   
 }
 
-
+/**
+ * retrieve all programming blocks and parse them to an ast
+ * Our AST is a list of collapsed blocks.
+ */
 async function initializeBlockIdentifiers(){
   console.log("clicked");
   blockCount = 0;
@@ -223,6 +228,10 @@ async function initializeBlockIdentifiers(){
   console.log(ast);
 }
 
+/**
+ * Executes action in each block of the AST
+ * @returns early if block codes are not currently being executed
+ */
 async function runCode(){
   if (!running) return;
   if (blockCount >= 0 && blockCount < ast.length){

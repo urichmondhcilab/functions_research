@@ -14,9 +14,6 @@ let birdStartX =(window.innerWidth * 0.25);
 let birdStartY = window.innerHeight * 0.5;
 let birdEndX = window.innerWidth * 0.5 - birdStartX;
 let birdEndY = window.innerHeight * 0.6 - birdStartY;
-let zindex = MAX_NUMBER_OF_BIRDS;
-let minBirdTop = screenHeight;
-
 
 let centerX = (window.innerWidth * 0.6)/ 2;
 let centerY = window.innerHeight / 2;
@@ -34,29 +31,23 @@ let mazeHeight = (window.innerHeight  * 0.8);
 const chickImagePaths = ['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'];
 const state = [
     {   name : "BLOCK",
-        color : "grey",
         image_path : "none"
     },
     {   name : "WATER",
-        color : "skyblue",
         image_path: "images/water/water.svg"
 
     },
     {   name : "FOOD",
-        color : "brown",
         image_path: "images/food/food.svg"
 
     },
     {   name : "PLANK",
-        color : "brown",
         image_path : "images/planks/plank.svg"
     },   
     {   name : "PLANK",
-        color : "brown",
         image_path : "images/planks/plank.svg"
     },     
     {   name : "PLANK",
-        color : "brown",
         image_path : "images/planks/plank.svg"
     },            
 ]
