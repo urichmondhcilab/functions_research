@@ -34,11 +34,11 @@ class Bird{
     this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;    
     this.xIndex = 0;
     this.yIndex = 0;
-    this.curTile = null
+    this.curTile = null;
 
-    let hasMoved = false;
-    let isDrinking = false;
-    let isEating = false;
+    // let hasMoved = false;
+    // let isDrinking = false;
+    // let isEating = false;
 
     // handle "this" that refers to the event object and "this" that refers to the object
     // bind the the the object to the member function
@@ -85,65 +85,61 @@ class Bird{
       this.birdie.firstChild.src = chickImagePaths[Math.round (Math.random() * (chickImagePaths.length - 1))];    
   }
 
+
 /**
  * Moves the chick to the desired end tile, one step at a time
  * @param {string} direction is the direction to move in
  * @param {Integer} steps, amount of steps/tiles to move
  * @param {Array} curMaze, current array of the maze, houses tiles
  */
-  //Data structure all the tiles until the end
-  move(direction, curMaze) {
+move(direction, curMaze) {
 
-    //If this is the chicks first move, set the current tile to the first in maze
-    // console.log(curMaze);
-    if (this.curTile === null){   
-      this.die();
-      return;
-      //this.curTile = curMaze[0][0];
-    }
-
-    //adjusts the index of the tile to move to +-1
-        switch (direction) {
-          case "up":
-              this.yIndex = Math.max(this.yIndex - 1, 0);
-              break;
-          case "down":
-              this.yIndex = Math.min(this.yIndex + 1, NUMBER_OF_TILES_Y - 1);
-              break;
-          case "left":
-            this.xIndex = Math.max(this.xIndex - 1, 0);
-              break;
-          case "right":
-            this.xIndex = Math.min(this.xIndex + 1, NUMBER_OF_TILES_X - 1);
-              break;
-        }
-
-      //Gets the tile from updated indexes
-      this.curTile = curMaze[this.yIndex][this.xIndex];
-      //Display new position
-      this.birdie.style.left = this.curTile.x;
-      this.birdie.style.top = this.curTile.y;
+  //If this is the chicks first move, the bird dies
+  if (this.curTile === null){   
+    this.die();
+    return;
   }
 
+  //adjusts the index of the tile to move to +-1
+      switch (direction) {
+        case "up":
+            this.yIndex = Math.max(this.yIndex - 1, 0);
+            break;
+        case "down":
+            this.yIndex = Math.min(this.yIndex + 1, NUMBER_OF_TILES_Y - 1);
+            break;
+        case "left":
+          this.xIndex = Math.max(this.xIndex - 1, 0);
+            break;
+        case "right":
+          this.xIndex = Math.min(this.xIndex + 1, NUMBER_OF_TILES_X - 1);
+            break;
+      }
+
+    //Gets the tile from updated indexes
+    this.curTile = curMaze[this.yIndex][this.xIndex];
+    //Display in new position
+    this.birdie.style.left = this.curTile.x;
+    this.birdie.style.top = this.curTile.y;
+}
+
+/**
+ * move the bird to the start of the maze
+ * @param {Maze} curMaze 
+ */
 start(curMaze) {
   this.curTile = curMaze[0][0];
   this.birdie.style.left = this.curTile.x;
   this.birdie.style.top = this.curTile.y;  
 }  
 
-
 /**
  * changes the bird sprite to the drinking sprite
  * the bird dies when it tries to drink on a tile that is not a water tiel
  */
 drink() {
-  //Checks tile image, if water, changes to splash image, then reverts
-  if(this.curTile.div.style.backgroundImage == `url("${"images/water/water.svg"}")`){
-    this.isDrinking = true;
+  if(this.curTile.state.name == "WATER"){
     this.birdie.firstChild.src = 'images/chicks/Squarton_splashing.svg';
-    this.isDrinking = false;
-
-  //Else, changes to death image and sets variables to despawn
   }else{
     this.die();
   }
@@ -154,13 +150,8 @@ drink() {
  * the bird dies if it tries to eat on a plank that is not an eating plank
  */
   eat() {
-    //Checks tile image, if food, changes to eat image, then reverts
-    if(this.curTile.div.style.backgroundImage == `url("${"images/food/food.svg"}")`){
-      this.isEating = true;
+  if(this.curTile.state.name == "FOOD"){
       this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
-      this.isEating = false;
-
-    //Else, changes to death image and sets variables to despawn
     }else{
       this.die();
     }

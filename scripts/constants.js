@@ -14,6 +14,8 @@ let birdStartX =(window.innerWidth * 0.25);
 let birdStartY = window.innerHeight * 0.5;
 let birdEndX = window.innerWidth * 0.5 - birdStartX;
 let birdEndY = window.innerHeight * 0.6 - birdStartY;
+let zindex = MAX_NUMBER_OF_BIRDS;
+let minBirdTop = screenHeight;
 
 
 let centerX = (window.innerWidth * 0.6)/ 2;
