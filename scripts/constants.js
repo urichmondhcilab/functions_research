@@ -22,7 +22,6 @@ let offsetY = screenWidth * 0.09; // offset is 9% of the screen width
 let positionX = centerX - offsetX; // we subtract the X offset to shift the chick left
 let positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
 let radius = screenWidth / 12; // the radius is relative to the width and height of the screen
-let zIndex = MAX_NUMBER_OF_BIRDS * 2;
 
 let mazeStartX = 0;
 let mazeStartY = (window.innerHeight * 0.7);

@@ -14,7 +14,7 @@ class Bird{
  * The constructor initializes the birdId
  * @param {Number} birdId the number assigned to the bird when it was created 
  */
-  constructor(birdId){
+  constructor(birdId, maze){
     // give the bird an id
     this.id = birdId;
 
@@ -28,14 +28,15 @@ class Bird{
     this.birdie = birdDiv;
     this.birdie.deathImgFlag = 0;    
     this.birdie.className = 'chickCont';
-    this.birdie.style.position="absolute";     
-
-    this.birdie.style.left= `${Math.floor(birdStartX  + Math.random() * birdEndX)}px`;
-    this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;  
-    this.checkTop();
+    this.birdie.style.position="absolute";  
+    this.curTile = null;       
     this.xIndex = 0;
     this.yIndex = 0;
-    this.curTile = null;
+
+    // place birds on tiles
+    this.placeBird(maze);
+
+
 
     // handle "this" that refers to the event object and "this" that refers to the object
     // bind the the the object to the member function
@@ -167,19 +168,24 @@ drink() {
   }
 
 
-  checkTop(){
-    let i = 0;
-    let thisBirdTop = this.birdie.style.top;
-    let intThisBirdTop = parseInt(thisBirdTop.slice(0, thisBirdTop.length - 2));
-    while (allBirds && i < allBirds.length){
-      let birdTop = allBirds[i].birdie.style.top;
-      let intBirdTop = parseInt(birdTop.slice(0, birdTop.length - 2));
-      if (intThisBirdTop > intBirdTop){
-        zIndex--;
-        this.birdie.style.zIndex = zIndex;
-        return;
-      }
-      i++;
-    }
+  placeBird(maze){
+    let mazeArray = maze.maze;
+    let width = mazeArray.length;
+    let height = mazeArray[0].length;
+    let i = parseInt(Math.random() * width);
+    let j = parseInt(Math.random() * height);
+    let tile = mazeArray[i][j];
+    let top = parseInt(slicePX(tile.y) /*- (Math.random() * slicePX(tile.height)) / 4*/);
+    let left = parseInt(slicePX(tile.x) /*+ (Math.random() * slicePX(tile.width)) / 4*/);  
+    this.birdie.style.left= `${left}px`;
+    this.birdie.style.top = `${top}px`;  
+    this.curTile = tile;    
+    this.xIndex = j;
+    this.yIndex = i;
+    
+    console.log(top);
+    console.log(left);
   }
+
+
 }

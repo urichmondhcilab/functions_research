@@ -38,9 +38,9 @@ function animateGameObjects(){
  * to allow coding.
  * Remove event listener, remove redundance
  */
-function createBird(){
+function createBird(maze){
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
-    let birdie = new Bird(currentNumberOfBirds);
+    let birdie = new Bird(currentNumberOfBirds, maze);
       allBirds[currentNumberOfBirds] = birdie;
       currentNumberOfBirds++;
       birdCounter++;
@@ -144,8 +144,9 @@ function removeBirds(bird){
  * It keeps the birds for which removeBird returns true.
  */
 async function birdAction(){
+  console.log(maze);
   createMother();
-  createBird();
+  createBird(maze);
   updateMotherHen();
   updateBirds();
   allBirds = allBirds.filter(removeBirds);
@@ -241,6 +242,10 @@ async function runCode(){
   if (blockCount === ast.length) running = false;  
 }
 
+// set up the maze
+(function(){
+  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
+})();
 
 /**
  * The program starts here
@@ -264,10 +269,7 @@ document.getElementById('block-reset').addEventListener('click', function () {
     blocks.forEach(block => block.remove());
   });
 
-// set up the maze
-(function(){
-  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
-})();
+
 
 // Initialize draggable blocks
 makeDraggable();  
