@@ -198,6 +198,9 @@ function repositionGameObjects(){
   mazeStartY = (window.innerHeight * 0.7);
   mazeWidth = (window.innerWidth * 0.6);
   mazeHeight = (window.innerHeight  * 0.8);
+  
+  console.log("maze in reposition: " + maze);
+  if (maze) maze.upadateMazePosition(mazeStartX, mazeStartY, mazeWidth, mazeHeight);
 
 
   for (let i = 0; (i < currentNumberOfBirds) && (allBirds.length > 0); i++){
@@ -210,8 +213,7 @@ function repositionGameObjects(){
       motherHen.updateMomPosition();
     }
 
-    console.log("maze in reposition: " + maze);
-    if (maze) maze.upadateMazePosition(mazeStartX, mazeStartY, mazeWidth, mazeHeight);
+
   
 }
 

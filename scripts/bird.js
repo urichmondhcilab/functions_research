@@ -73,8 +73,14 @@ class Bird{
    * update the bird position when the screen has been resized
    */
   updateBirdPosition(){
-    this.birdie.style.left= `${Math.floor(birdStartX  + Math.random() * birdEndX)}px`;
-    this.birdie.style.top = `${Math.floor(birdStartY  + Math.random() * birdEndY)}px`;     
+    
+    // this.birdie.style.left= this.curTile.x;
+    // this.birdie.style.top = this.curTile.y; 
+    
+    let top = parseInt(slicePX(this.curTile.y) - slicePX(this.curTile.height) / 8);
+    let left = parseInt(slicePX(this.curTile.x) + slicePX(this.curTile.width) / 4);  
+    this.birdie.style.left= `${left}px`;
+    this.birdie.style.top = `${top}px`;     
   }
 
 
@@ -175,8 +181,8 @@ drink() {
     let i = parseInt(Math.random() * width);
     let j = parseInt(Math.random() * height);
     let tile = mazeArray[i][j];
-    let top = parseInt(slicePX(tile.y) /*- (Math.random() * slicePX(tile.height)) / 4*/);
-    let left = parseInt(slicePX(tile.x) /*+ (Math.random() * slicePX(tile.width)) / 4*/);  
+    let top = parseInt(slicePX(tile.y) - slicePX(tile.height) / 8);
+    let left = parseInt(slicePX(tile.x) + slicePX(tile.width) / 4);  
     this.birdie.style.left= `${left}px`;
     this.birdie.style.top = `${top}px`;  
     this.curTile = tile;    

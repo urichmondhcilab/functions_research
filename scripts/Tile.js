@@ -30,7 +30,8 @@ class Tile{
         this.div.style.height = this.height;
         this.div.style.width = this.width;
         this.div.style.left = this.x;
-        this.div.style.top = this.y;           
+        this.div.style.top = this.y;  
+        this.div.style.border = "0.1rem solid gold";         
 
     }
 
