@@ -97,6 +97,8 @@ class Bird{
  */
 start(curMaze) {
   this.curTile = curMaze[0][0];
+  this.yIndex = 0;
+  this.xIndex = 0;
   this.birdie.style.left = this.curTile.x;
   this.birdie.style.top = this.curTile.y;  
 }    
