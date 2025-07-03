@@ -26,7 +26,7 @@ let radius = screenWidth / 12; // the radius is relative to the width and height
 let mazeStartX = 0;
 let mazeStartY = (window.innerHeight * 0.7);
 let mazeWidth = (window.innerWidth * 0.6);
-let mazeHeight = (window.innerHeight  * 0.8);
+let mazeHeight = (window.innerHeight  * 0.9);
 
 const chickImagePaths = ['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'];
 const state = [

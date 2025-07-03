@@ -197,7 +197,7 @@ function repositionGameObjects(){
   mazeStartX = 0;
   mazeStartY = (window.innerHeight * 0.7);
   mazeWidth = (window.innerWidth * 0.6);
-  mazeHeight = (window.innerHeight  * 0.8);
+  mazeHeight = (window.innerHeight  * 0.9);
   
   console.log("maze in reposition: " + maze);
   if (maze) maze.upadateMazePosition(mazeStartX, mazeStartY, mazeWidth, mazeHeight);
