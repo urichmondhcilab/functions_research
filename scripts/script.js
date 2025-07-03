@@ -144,7 +144,7 @@ function removeBirds(bird){
  * It keeps the birds for which removeBird returns true.
  */
 async function birdAction(){
-  console.log(maze);
+  // console.log(maze);
   createMother();
   createBird(maze);
   updateMotherHen();
@@ -180,13 +180,13 @@ function repositionGameObjects(){
   screenHeight = window.innerHeight;
   motherOffsetX = (window.innerWidth * 0.6)/ 4;
   motherOffsetY = window.innerHeight / 8; 
-  centerX = (window.innerWidth * 0.6)/ 2;
-  centerY = window.innerHeight / 2;
-  offsetX = 0;
-  offsetY = screenWidth * 0.09; // offset is 9% of the screen width
-  positionX = centerX - offsetX; // we subtract the X offset to shift the chick left
-  positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
-  radius = screenWidth / 12; // the radius is relative to the width and height of the screen
+  // centerX = (window.innerWidth * 0.6)/ 2;
+  // centerY = window.innerHeight / 2;
+  // offsetX = 0;
+  // offsetY = screenWidth * 0.09; // offset is 9% of the screen width
+  // positionX = centerX - offsetX; // we subtract the X offset to shift the chick left
+  // positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
+  // radius = screenWidth / 12; // the radius is relative to the width and height of the screen
 
   birdStartX =(window.innerWidth * 0.3);
   birdStartY = window.innerHeight * 0.5;

@@ -96,9 +96,9 @@ class Bird{
  * @param {Maze} curMaze 
  */
 start(curMaze) {
-  this.curTile = curMaze[0][0];
   this.yIndex = 0;
-  this.xIndex = 0;
+  this.xIndex = 0;  
+  this.curTile = curMaze[this.xIndex][this.yIndex];
   this.birdie.style.left = this.curTile.x;
   this.birdie.style.top = this.curTile.y;  
 }    
@@ -106,7 +106,6 @@ start(curMaze) {
 /**
  * Moves the chick to the desired end tile, one step at a time
  * @param {string} direction is the direction to move in
- * @param {Integer} steps, amount of steps/tiles to move
  * @param {Array} curMaze, current array of the maze, houses tiles
  */
 move(direction, curMaze) {
@@ -195,10 +194,5 @@ drink() {
     this.curTile = tile;    
     this.xIndex = j;
     this.yIndex = i;
-    
-    console.log(top);
-    console.log(left);
   }
-
-
 }

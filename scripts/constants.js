@@ -17,11 +17,11 @@ let birdEndY = window.innerHeight * 0.6 - birdStartY;
 
 let centerX = (window.innerWidth * 0.6)/ 2;
 let centerY = window.innerHeight / 2;
-let offsetX = 0; //screenWidth * 0.07; // offset is 7% of the screen width
-let offsetY = screenWidth * 0.09; // offset is 9% of the screen width
-let positionX = centerX - offsetX; // we subtract the X offset to shift the chick left
-let positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
-let radius = screenWidth / 12; // the radius is relative to the width and height of the screen
+// let offsetX = 0; //screenWidth * 0.07; // offset is 7% of the screen width
+// let offsetY = screenWidth * 0.09; // offset is 9% of the screen width
+// let positionX = centerX - offsetX; // we subtract the X offset to shift the chick left
+// let positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
+// let radius = screenWidth / 12; // the radius is relative to the width and height of the screen
 
 let mazeStartX = 0;
 let mazeStartY = (window.innerHeight * 0.7);
