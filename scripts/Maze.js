@@ -57,7 +57,7 @@ class Maze{
         let i = 0;
         let j = 0;
 
-        console.log(this.maze);
+        // console.log(this.maze);
         while (i < this.maze.length){
             currentX = Math.floor(startX);
             j = 0;
