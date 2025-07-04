@@ -18,7 +18,6 @@ class Parser{
      * @returns a list of blocks
      */
     parse(){
-
         // create blocks without assigning game objects    
         this.parseOne();
 

@@ -15,6 +15,7 @@ let allBirds = [];
 let motherHen = null;
 let waterObj = [];
 let maze = null;
+let speed = 800;
 
 
 /**
@@ -25,7 +26,7 @@ let maze = null;
  * In this case it receives the function birdAction and runs it every 1000 milliseconds
  */
 function animateGameObjects(){
-  setInterval(birdAction, 800);
+  setInterval(birdAction, speed);
 }
 
 
@@ -228,6 +229,7 @@ async function initializeBlockIdentifiers(){
   running = true;
   let parser = new Parser(selectedBirds, placedBlocks, maze);
   ast = parser.parse();
+  speed = 100;
   console.log(ast);
 }
 
@@ -241,7 +243,9 @@ async function runCode(){
     Interpreter.interpret(ast[blockCount]);
     blockCount++;
   }
-  if (blockCount === ast.length) running = false;  
+  if (blockCount === ast.length){
+    speed = 800;
+    running = false};  
 }
 
 // set up the maze
