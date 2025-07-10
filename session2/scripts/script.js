@@ -178,7 +178,7 @@ function reset(){
   allBirds.forEach((bird, i) => {
     game_canvas.removeChild(bird.birdie);
   });
-
+  resetInterval(CREATE_BIRD_SPEED);
   allBirds = [];
 }
 
