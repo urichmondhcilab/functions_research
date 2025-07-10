@@ -1,0 +1,65 @@
+let instructions = ["First help her organize the order of her activities"]
+let instructionCount = 0;
+let nextButton = document.getElementById("next-btn");
+let displayObject = document.getElementById("instruction-display");
+let displayContainer = document.getElementById("instructions-container");
+let instructionObject = document.getElementById("instructions")
+let ssession1GameObject = document.getElementById("session1_game");
+
+//dragable elements
+let gatherObject = document.getElementById("session1_gather");
+let findPathObject = document.getElementById("session1_find_path");
+let guideChicks = document.getElementById("session1_guide_chicks")
+
+
+//elements to dragOver 
+let gatherTarget = document.getElementById("task1");
+let findPathTarget = document.getElementById("task2");
+let guideChicksTarget = document.getElementById("task3");
+
+nextButton.addEventListener("click", runThroughInstructions)
+
+gatherObject.addEventListener("dragstart", dragStartHandler);
+findPathObject.addEventListener("dragstart", dragStartHandler);
+guideChicks.addEventListener("dragstart", dragStartHandler);
+
+gatherTarget.addEventListener("dragover", dragOverHandler);
+findPathTarget.addEventListener("dragover", dragOverHandler);
+guideChicksTarget.addEventListener("dragover", dragOverHandler);
+
+gatherTarget.addEventListener("drop", dropHandler);
+findPathTarget.addEventListener("drop", dropHandler);
+guideChicksTarget.addEventListener("drop", dropHandler);
+
+function runThroughInstructions(){
+    if (instructionCount < instructions.length){
+        console.log(displayObject.firstChild.nodeValue);
+        displayObject.firstChild.nodeValue = instructions[instructionCount];
+        instructionCount++;
+    }
+    else{
+        // displayContainer.style.display = "none";
+        instructionObject.style.display = "none";
+        ssession1GameObject.className += " session1_gameplay";
+    }
+}
+
+function dragStartHandler(e){
+    e.dataTransfer.setData("text",e.target.id);
+}
+
+function dragOverHandler(e){
+    e.preventDefault();
+}
+
+function dropHandler(e){
+    e.preventDefault();
+    let data = e.dataTransfer.getData("text");
+
+    console.log("in drop handler");
+
+    e.target.appendChild(document.getElementById(data));    
+
+}
+
+

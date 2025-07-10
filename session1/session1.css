@@ -1,0 +1,105 @@
+.bground{
+    background-image: url("../images/game_environment/sceneD3.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+    /* background-color: skyblue; */
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+.instructions{
+    background-color: #6C7C17;
+    padding: 5rem;
+    text-align: center;
+    width: 30%;
+    border-radius: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;    
+}
+
+.instructions-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    /* background-color: red; */
+    justify-content: center;
+    align-items: center;
+}
+
+.instruction{
+    color: white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2rem;
+
+}
+
+.action-btn{
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.1rem;
+    color: white;
+    background-color: #FFC940;
+}
+
+#action{
+
+}
+
+.session1_game{
+    display: none;
+    background-color: #6C7C17;
+    width: 30%;  
+}
+
+.session1_gameplay{
+    display: flex;
+    flex-direction: row;
+    width: 40%; 
+    border-radius: 0.2rem; 
+    padding: 2rem;    
+}
+
+.session1_modules{
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.session1_tasks{
+    display: flex;
+    padding: 1rem;
+    justify-content: space-around;
+}
+
+.session1_task{
+    width: 20%;
+    height: 1.5rem;
+    border: 0.1rem inset #FFC940;
+    background-color: #FFC940;
+    border-radius: 0.2rem;
+    padding: 0.2rem;
+}
+
+.session1_mother_actions{
+    display: flex;
+    padding: 1rem;
+    justify-content: space-around;  
+}
+
+.session1_mother_action{
+    border: 0.1rem solid #FFC940;  
+    border-radius: 0.2rem;  
+    width: 20%;
+    padding: 0.2rem;
+    color: white;
+    text-align: center;
+}
