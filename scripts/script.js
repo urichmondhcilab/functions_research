@@ -181,13 +181,6 @@ function repositionGameObjects(){
   screenHeight = window.innerHeight;
   motherOffsetX = (window.innerWidth * 0.6)/ 4;
   motherOffsetY = window.innerHeight / 8; 
-  // centerX = (window.innerWidth * 0.6)/ 2;
-  // centerY = window.innerHeight / 2;
-  // offsetX = 0;
-  // offsetY = screenWidth * 0.09; // offset is 9% of the screen width
-  // positionX = centerX - offsetX; // we subtract the X offset to shift the chick left
-  // positionY = centerY + offsetY; // we add the Y offset to move the chick further down from the center
-  // radius = screenWidth / 12; // the radius is relative to the width and height of the screen
 
   birdStartX =(window.innerWidth * 0.3);
   birdStartY = window.innerHeight * 0.5;
@@ -212,10 +205,7 @@ function repositionGameObjects(){
 
     if(motherHen != null){
       motherHen.updateMomPosition();
-    }
-
-
-  
+    }  
 }
 
 /**
@@ -249,9 +239,15 @@ async function runCode(){
 }
 
 // set up the maze
-(function(){
-  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
-})();
+// (function(){
+//   maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
+// })();
+
+
+function blockResetHandler(e){
+  const blocks = blockDrop.querySelectorAll('.block');
+  blocks.forEach(block => block.remove());
+}
 
 /**
  * The program starts here
@@ -270,11 +266,21 @@ canvas.addEventListener('drop', drop);
 canvas.addEventListener('dragover', allowDrop);
 
 // reset button clears all the blocks from the canvas, but does not reset the chicken
-document.getElementById('block-reset').addEventListener('click', function () {
-    const blocks = blockDrop.querySelectorAll('.block');
-    blocks.forEach(block => block.remove());
-  });
+document.getElementById('block-reset').addEventListener('click', blockResetHandler
+  // function () {
+  //   const blocks = blockDrop.querySelectorAll('.block');
+  //   blocks.forEach(block => block.remove());
+  // }
+);
 
+
+
+// set up the maze
+function initMaze(){
+  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
+}
+
+maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
 
 
 // Initialize draggable blocks
