@@ -169,6 +169,7 @@ function reset(){
   allBirds = [];
 }
 
+
 /**
  * recomputes the position of the bird each time the screen is resized
  * by recomputing the centerLeft, centerTop, and radius 
@@ -208,6 +209,7 @@ function repositionGameObjects(){
     }  
 }
 
+
 /**
  * retrieve all programming blocks and parse them to an ast
  * Our AST is a list of collapsed blocks.
@@ -222,6 +224,7 @@ async function initializeBlockIdentifiers(){
   speed = 100;
   console.log(ast);
 }
+
 
 /**
  * Executes action in each block of the AST
@@ -238,16 +241,12 @@ async function runCode(){
     running = false};  
 }
 
-// set up the maze
-// (function(){
-//   maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
-// })();
-
 
 function blockResetHandler(e){
   const blocks = blockDrop.querySelectorAll('.block');
   blocks.forEach(block => block.remove());
 }
+
 
 /**
  * The program starts here
@@ -256,32 +255,38 @@ function blockResetHandler(e){
  * Once load occurs the function animateGameObjects is invoked
  * Once the reset button is clicked the function reset is invoked
  */
-window.addEventListener('load', animateGameObjects);
-window.addEventListener('resize', repositionGameObjects);
-reset_btn.addEventListener('click', reset);
-runObject.addEventListener('click', initializeBlockIdentifiers);
+function initSession2EventListeners(){
+  window.addEventListener('load', animateGameObjects);
+  window.addEventListener('resize', repositionGameObjects);
+  reset_btn.addEventListener('click', reset);
+  runObject.addEventListener('click', initializeBlockIdentifiers);
 
-// Add event listeners for drag and drop functionality on the canvas
-canvas.addEventListener('drop', drop);
-canvas.addEventListener('dragover', allowDrop);
+  // Add event listeners for drag and drop functionality on the canvas
+  canvas.addEventListener('drop', drop);
+  canvas.addEventListener('dragover', allowDrop);
 
-// reset button clears all the blocks from the canvas, but does not reset the chicken
-document.getElementById('block-reset').addEventListener('click', blockResetHandler
-  // function () {
-  //   const blocks = blockDrop.querySelectorAll('.block');
-  //   blocks.forEach(block => block.remove());
-  // }
-);
-
-
-
-// set up the maze
-function initMaze(){
-  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
+  // reset button clears all the blocks from the canvas, but does not reset the chicken
+  document.getElementById('block-reset').addEventListener('click', blockResetHandler);
 }
 
-maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
+
+/**
+ * Start the game
+ * initialize the event listeners
+ * set up the maze
+ * initialize draggable blocks
+ */
+function startGame(){
+  initSession2EventListeners();
+  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
+  makeDraggable();    
+}
+
+// start game
+startGame();
+
+// not useful now 
+// first steps to refactoring files to modules
+// export default startGame;
 
 
-// Initialize draggable blocks
-makeDraggable();  

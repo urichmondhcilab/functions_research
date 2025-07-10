@@ -44,6 +44,13 @@ export function session(){
         }
     }
 
+    function matched(){
+
+        return (gatherTarget.children.length > 0 && 
+                findPathTarget.children.length > 0 && 
+                guideChicksTarget.children.length > 0);
+    }
+
     function dragStartHandler(e){
         e.dataTransfer.setData("text",e.target.id);
     }
@@ -60,6 +67,9 @@ export function session(){
 
         e.target.appendChild(document.getElementById(data));    
         objToAdd.style.width = "90%";
+
+        console.log("")
+        if (matched()) {window.location.href = "../session2/index.html";}
 
     }
 }

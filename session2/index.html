@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/chick_style.css">
+    <link rel="stylesheet" href="css/banner_styles.css">
+    <title></title>
+  </head>
+
+  <!-- <body id="game_canvas"> -->
+<body>
+    <div class="container">
+      <div id="game_canvas">
+        <div class="banner" id="banner">
+          <div class="game_status">
+            <div class="points">chicks</div>
+            <div id="point_number" class="points">0</div>
+            <div id="reset" class="reset">reset</div>
+            <!--display code editor on-click-->
+            <div id="codeEditor" class="points">Here!</div> 
+          </div>
+
+          <div class="login_status">
+            <h3 id="authStatus">Not Signed In</h3>
+            <button id="loginButton">Login</button>
+            <button id="registerButton">Register</button>
+            <button id="logoutButton">Logout</button>
+          </div>
+        </div>
+
+        <div class="login-popup" id="login-popup">
+          <!-- Sign In Form -->
+          <div id="signInForm">
+            <h3>Email/Password Sign In</h3>
+            <input type="email" id="email" placeholder="Email" />
+            <input type="password" id="password" placeholder="Password" />
+            <button id="emailSignInBtn">Sign In</button>
+          </div>
+
+          <!-- Google Sign In -->
+          <div>
+            <h3>Sign In with Google</h3>
+            <button id="googleSignInBtn">Sign In with Google</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side, where block coding interface appears -->
+      <div id="game_operations">
+
+        <div class="top-right" id="canvas">
+          <div class="run-reset-buttons">
+              <button  id="block-reset">Reset</button>
+              <button  id="run">Run</button>
+          </div>
+          <div id="block-drop">
+          </div>
+          <div id="trash">trash</div>
+        </div>
+
+          <div class="bottom-right">
+            <!-- Movement block to move the chicks -->
+            <div class="draggable move block" data-move="up" draggable="true">
+                move
+                <select class="move-select">
+                    <option value="right">right</option>                       
+                    <option value="left">left</option>
+                    <option value="up">up</option>
+                    <option value="down">down</option>
+                </select>
+                <input type="number" id="num-input" value="1"/>
+            </div>
+
+            <!-- Drink block to give the chicken an action -->
+            <div class="draggable drink" draggable="true">
+                drink
+            </div>
+            <div class="draggable eat" draggable="true">
+              eat
+            </div>
+            <div class="draggable start" draggable="true">
+              start
+            </div>
+
+            <div id="block-remove"></div>
+        </div>
+      </div>
+      </div>
+  </div>
+
+
+    <!-- point_number and reset ids are used to style the points and reset divs-->
+
+
+    <!-- include the different scripts that control the appearance, position, 
+     and eventual removel of the birds -->
+     <script type="text/javascript" src="scripts/utility.js"></script>     
+     <script type="text/javascript" src="scripts/Canvas.js"></script>
+     <script type="text/javascript" src="scripts/BlockLib.js"></script>     
+    <script type="text/javascript" src="scripts/constants.js"></script>
+    <script type="text/javascript" src="scripts/objects.js"></script>
+    <script type="text/javascript" src="scripts/bird.js"></script>
+    <script src="scripts/Tile.js"></script>
+    <script src="scripts/Maze.js"></script>  
+    <script id = "mom" type="text/javascript" src="scripts/mother.js"></script>   
+    <script type="text/javascript" src="scripts/Block.js"></script>      
+    <script type="text/javascript" src="scripts/Move.js"></script>  
+    <script type="text/javascript" src="scripts/Eat.js"></script>                        
+    <script type="text/javascript" src="scripts/Drink.js"></script>     
+    <script type="text/javascript" src="scripts/Start.js"></script>          
+    <script type="text/javascript" src="scripts/Parser.js"></script>      
+    <script type="text/javascript" src="scripts/Interpreter.js"></script>      
+    <script type="text/javascript" src="scripts/script.js"></script>
+    <!-- <script type="module" src="scripts/script.js"></script>      -->
+    <!-- <script type="module" src="scripts/blockScript.js"></script> -->
+     <script></script>
+  </body>
+
+</html>
