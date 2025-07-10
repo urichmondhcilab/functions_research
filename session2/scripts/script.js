@@ -15,7 +15,10 @@ let allBirds = [];
 let motherHen = null;
 let waterObj = [];
 let maze = null;
-let speed = 800;
+let speed = 50;
+let RUN_SPEED = 200;
+let CREATE_BIRD_SPEED = 50;
+let NORMAL_SPEED = 800;
 let gameInterval = null;
 
 
@@ -31,9 +34,10 @@ function animateGameObjects(){
 }
 
 
-function resetInterval(speed){
-    clearInterval(gameInterval);
-    gameInterval = setInterval(birdAction, speed);  
+function resetInterval(newSpeed){
+  speed = newSpeed;
+  clearInterval(gameInterval);
+  gameInterval = setInterval(birdAction, speed);  
 }
 
 
@@ -49,9 +53,11 @@ function resetInterval(speed){
 function createBird(maze){
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
     let birdie = new Bird(currentNumberOfBirds, maze);
-      allBirds[currentNumberOfBirds] = birdie;
-      currentNumberOfBirds++;
-      birdCounter++;
+    allBirds[currentNumberOfBirds] = birdie;
+    currentNumberOfBirds++;
+    birdCounter++;
+  }else if (speed === CREATE_BIRD_SPEED){
+    resetInterval(NORMAL_SPEED);
   }
 }
 
@@ -227,7 +233,7 @@ async function initializeBlockIdentifiers(){
   running = true;
   let parser = new Parser(selectedBirds, placedBlocks, maze);
   if (selectedBirds.length > 0){
-    resetInterval(200);
+    resetInterval(RUN_SPEED);
   }
   ast = parser.parse();
 }
@@ -244,7 +250,6 @@ async function runCode(){
     blockCount++;
   }
   if (blockCount === ast.length){
-    speed = 800;
     running = false;
     resetInterval(speed);
   };  
