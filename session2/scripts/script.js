@@ -16,6 +16,7 @@ let motherHen = null;
 let waterObj = [];
 let maze = null;
 let speed = 800;
+let gameInterval = null;
 
 
 /**
@@ -26,7 +27,13 @@ let speed = 800;
  * In this case it receives the function birdAction and runs it every 1000 milliseconds
  */
 function animateGameObjects(){
-  setInterval(birdAction, speed);
+  gameInterval = setInterval(birdAction, speed);
+}
+
+
+function resetInterval(speed){
+    clearInterval(gameInterval);
+    gameInterval = setInterval(birdAction, speed);  
 }
 
 
@@ -204,9 +211,9 @@ function repositionGameObjects(){
       currentBird.updateBirdPosition();
   } 
 
-    if(motherHen != null){
-      motherHen.updateMomPosition();
-    }  
+  if(motherHen != null){
+    motherHen.updateMomPosition();
+  }  
 }
 
 
@@ -215,14 +222,14 @@ function repositionGameObjects(){
  * Our AST is a list of collapsed blocks.
  */
 async function initializeBlockIdentifiers(){
-  console.log("clicked");
   blockCount = 0;
   placedBlocks = document.querySelectorAll('#canvas .block');
   running = true;
   let parser = new Parser(selectedBirds, placedBlocks, maze);
+  if (selectedBirds.length > 0){
+    resetInterval(200);
+  }
   ast = parser.parse();
-  speed = 100;
-  console.log(ast);
 }
 
 
@@ -238,10 +245,16 @@ async function runCode(){
   }
   if (blockCount === ast.length){
     speed = 800;
-    running = false};  
+    running = false;
+    resetInterval(speed);
+  };  
 }
 
 
+/**
+ * Remove blocks from canvas
+ * @param {Object} e 
+ */
 function blockResetHandler(e){
   const blocks = blockDrop.querySelectorAll('.block');
   blocks.forEach(block => block.remove());
