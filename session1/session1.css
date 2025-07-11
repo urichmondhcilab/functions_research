@@ -25,7 +25,7 @@
 
 .instructions-container{
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     width: 100%;
     height: 100%;
     /* background-color: red; */
@@ -42,14 +42,11 @@
 
 .action-btn{
     padding: 0.5rem;
+    width: 15%;
     border: none;
     border-radius: 0.1rem;
     color: white;
     background-color: #FFC940;
-}
-
-#action{
-
 }
 
 .session1_game{
@@ -63,7 +60,7 @@
     flex-direction: row;
     width: 40%; 
     border-radius: 0.2rem; 
-    padding: 2rem;    
+    padding: 3rem;    
 }
 
 .session1_modules{
@@ -86,7 +83,7 @@
     border: 0.1rem inset #FFC940;
     background-color: #FFC940;
     border-radius: 0.2rem;
-    padding: 0.2rem;
+    padding: 1rem;
 }
 
 .session1_mother_actions{

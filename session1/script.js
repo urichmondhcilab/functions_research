@@ -6,11 +6,14 @@ export function session(){
     let displayContainer = document.getElementById("instructions-container");
     let instructionObject = document.getElementById("instructions")
     let ssession1GameObject = document.getElementById("session1_game");
+    let birdImageObject = document.getElementById("bird_img");
 
     //dragable elements
     let gatherObject = document.getElementById("session1_gather");
     let findPathObject = document.getElementById("session1_find_path");
     let guideChicks = document.getElementById("session1_guide_chicks")
+    let birdImage = ["session2/images/mother_hen/Mother_Hen_1.svg", "session2/images/mother_hen/Mother_Hen_2.svg"];
+
 
 
     //elements to dragOver 
@@ -31,6 +34,14 @@ export function session(){
     gatherTarget.addEventListener("drop", dropHandler);
     findPathTarget.addEventListener("drop", dropHandler);
     guideChicksTarget.addEventListener("drop", dropHandler);
+
+    function interval(){
+        setInterval(changeChickenSprite, 1000);
+    }
+
+    function changeChickenSprite(){
+        birdImageObject.src = birdImage[Math.round(Math.random())];
+    }
 
     function runThroughInstructions(){
         if (instructionCount < instructions.length){
@@ -72,6 +83,8 @@ export function session(){
         if (matched()) {window.location.href = "../session2/index.html";}
 
     }
+
+    interval();
 }
 
 
