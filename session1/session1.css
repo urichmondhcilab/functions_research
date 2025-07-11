@@ -100,3 +100,13 @@
     color: white;
     text-align: center;
 }
+
+.order{
+    display: flex;
+    justify-content: space-around;
+}
+
+.order_item{
+    font-size: 2rem;
+    color: white;
+}
