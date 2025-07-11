@@ -251,7 +251,7 @@ async function runCode(){
   }
   if (blockCount === ast.length){
     running = false;
-    resetInterval(speed);
+    resetInterval(NORMAL_SPEED);
   };  
 }
 
