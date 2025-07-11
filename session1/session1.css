@@ -40,11 +40,14 @@
 
 .action-btn{
     padding: 0.5rem;
-    width: 15%;
+    width: 20%;
     border: none;
     border-radius: 0.1rem;
     color: white;
     background-color: #FFC940;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2rem; 
+    margin: 1rem;   
 }
 
 .session1_game{
