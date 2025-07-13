@@ -79,7 +79,7 @@
         objToAdd.style.width = "90%";
 
         console.log("")
-        if (matched()) {window.location.href = "../session2/index.html";}
+        if (matched()) {window.location.href = "session2/index.html";}
 
     }
 
