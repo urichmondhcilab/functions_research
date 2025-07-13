@@ -102,6 +102,13 @@
     text-align: center;
 }
 
+.session1_title{
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
 .order{
     display: flex;
     justify-content: space-around;
