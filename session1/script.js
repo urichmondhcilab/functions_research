@@ -1,4 +1,3 @@
-export function session(){
     let instructions = ["First help her organize the order of her activities"]
     let instructionCount = 0;
     let nextButton = document.getElementById("next-btn");
@@ -85,7 +84,7 @@ export function session(){
     }
 
     interval();
-}
+
 
 
 
