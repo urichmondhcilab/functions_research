@@ -47,6 +47,16 @@ const state = [
     },            
 ]
 
+const ENDSTATE = {
+    name : "END",
+    image_path : "images/planks/end_plank.svg"
+}
+
+const STARTSTATE = {
+    name : "START",
+    image_path : "images/planks/start_plank.svg"
+}
+
 const NUMBER_OF_TILES_X = 10;
 const NUMBER_OF_TILES_Y = 2;
 

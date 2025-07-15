@@ -45,7 +45,17 @@ class Maze{
         }        
 
         // console.log(this.maze[0])
+        // i = this.maze.length - 1;
+        // j = this.maze[0].length - 1;
+        // let endTile = this.maze[i][j];
+        // game_canvas.removeChild(endTile.div);                
+        // this.maze[i][j] = new Tile(endTile.x, endTile.y, endTile.width, endTile.height, ENDSTATE); 
+        // endTile = this.maze[i][j];
+        // game_canvas.appendChild(endTile.div);
+        this.setStart();
+        this.setEnd();
     }
+
 
     upadateMazePosition(startX, startY, endX, endY){
 
@@ -79,4 +89,24 @@ class Maze{
         this.tileWidth = Math.floor((width - startX) / (NUMBER_OF_TILES_X - 1)); //-1 is here to make the amount of tiles in  the x 1-indexed 
         this.tileHeight = Math.floor((height - startY) / NUMBER_OF_TILES_Y);   
     }
+
+    setEnd(){
+        let i = this.maze.length - 1;
+        let j = this.maze[0].length - 1;
+        let endTile = this.maze[i][j];
+        game_canvas.removeChild(endTile.div);                
+        this.maze[i][j] = new Tile(endTile.x, endTile.y, endTile.width, endTile.height, ENDSTATE); 
+        endTile = this.maze[i][j];
+        game_canvas.appendChild(endTile.div);        
+    }
+
+    setStart(){
+        let i = 0;
+        let j = 0;
+        let startTile = this.maze[i][j];
+        game_canvas.removeChild(startTile.div);                
+        this.maze[i][j] = new Tile(startTile.x, startTile.y, startTile.width, startTile.height, STARTSTATE); 
+        startTile = this.maze[i][j];
+        game_canvas.appendChild(startTile.div);        
+    }    
 }
