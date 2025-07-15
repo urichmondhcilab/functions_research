@@ -1,4 +1,4 @@
-    let instructions = ["First help her organize the order of her activities"]
+    let instructions = ["First help her plan"]
     let instructionCount = 0;
     let nextButton = document.getElementById("next-btn");
     let displayObject = document.getElementById("instruction-display");
@@ -6,6 +6,7 @@
     let instructionObject = document.getElementById("instructions")
     let ssession1GameObject = document.getElementById("session1_game");
     let birdImageObject = document.getElementById("bird_img");
+    let planTextObject = document.getElementById("session_title");
 
     //dragable elements
     let gatherObject = document.getElementById("session1_gather");
@@ -79,7 +80,11 @@
         objToAdd.style.width = "90%";
 
         console.log("")
-        if (matched()) {window.location.href = "session2/index.html";}
+        if (matched()) {
+            window.location.href = "session2/index.html";
+        }else{
+            planTextObject.firstChild.nodeValue = "what should she do next?"
+        }
 
     }
 
