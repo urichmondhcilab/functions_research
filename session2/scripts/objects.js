@@ -12,6 +12,9 @@ let list = document.getElementById("list");
 let runObject = document.getElementById('run');
 const canvas = document.getElementById('canvas');
 const blockDrop = document.getElementById('block-drop');
+const hintText = document.getElementById('hint_text');
+const nextButton = document.getElementById('next_button');
+const hintContainer = document.getElementById("hints");
 
 
 

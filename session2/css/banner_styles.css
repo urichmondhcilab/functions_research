@@ -90,3 +90,32 @@
     gap: 1rem;
 }
 
+
+#hints{
+    position: absolute;
+    width: 50rem;
+    align-self: center;
+    background-color: #6C7C17;
+    padding: 2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+#hint_text{
+    font-size: 2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+#next_button{
+    background-color: #FFC940;
+    font-size: 2rem;
+    align-self: center;
+    padding: 0.5rem;
+    border-radius: 0.2rem;
+
+}
+

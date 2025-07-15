@@ -20,6 +20,7 @@ let RUN_SPEED = 200;
 let CREATE_BIRD_SPEED = 50;
 let NORMAL_SPEED = 800;
 let gameInterval = null;
+let instructionIndex = 0;
 
 
 /**
@@ -274,7 +275,7 @@ function blockResetHandler(e){
  * Once the reset button is clicked the function reset is invoked
  */
 function initSession2EventListeners(){
-  window.addEventListener('load', animateGameObjects);
+  // window.addEventListener('load', animateGameObjects);
   window.addEventListener('resize', repositionGameObjects);
   reset_btn.addEventListener('click', reset);
   runObject.addEventListener('click', initializeBlockIdentifiers);
@@ -295,16 +296,24 @@ function initSession2EventListeners(){
  * initialize draggable blocks
  */
 function startGame(){
+  animateGameObjects();
   initSession2EventListeners();
   maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
   makeDraggable();    
 }
 
-// start game
-startGame();
 
-// not useful now 
-// first steps to refactoring files to modules
-// export default startGame;
+function displayInstructions(){
+  if (instructionIndex < instructions.length){
+    hintText.firstChild.nodeValue = instructions[instructionIndex];
+    instructionIndex++;
+  }else {
+    hintContainer.style.display = "none";
+    startGame();
+  }
+}
+
+// start game
+nextButton.addEventListener('click', displayInstructions);
 
 

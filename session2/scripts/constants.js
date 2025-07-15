@@ -66,3 +66,10 @@ let ast = null;
 let blockCount = 0;
 let running = false;
 
+
+const instructions = ["click on the mother hen to program a path for all the chicks", 
+                        "use the blocks to right to find a path through the maze",
+                        "drag the block you want into the blue space",
+                        "watch out, the chicks are running out of time!" ];
+
+
