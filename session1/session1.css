@@ -40,7 +40,7 @@
 
 .action-btn{
     padding: 0.5rem;
-    width: 20%;
+    width: 6rem;
     border: none;
     border-radius: 0.1rem;
     color: white;
@@ -96,7 +96,7 @@
 .session1_mother_action{
     border: 0.1rem solid #FFC940;  
     border-radius: 0.2rem;  
-    width: 20%;
+    width: 7rem;
     padding: 0.2rem;
     color: white;
     text-align: center;
