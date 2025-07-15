@@ -180,12 +180,20 @@ drink() {
   }
 
 
+  /**
+   * birds cannot be placed on a block
+   * @param {Object} maze 
+   */
   placeBird(maze){
     let mazeArray = maze.maze;
     let width = mazeArray.length;
     let height = mazeArray[0].length;
     let i = parseInt(Math.random() * width);
     let j = parseInt(Math.random() * height);
+    while (mazeArray[i][j].state.name == "BLOCK"){
+      i = parseInt(Math.random() * width);
+      j = parseInt(Math.random() * height);
+    }
     let tile = mazeArray[i][j];
     let top = parseInt(slicePX(tile.y) - slicePX(tile.height) / 8);
     let left = parseInt(slicePX(tile.x) + slicePX(tile.width) / 4);  
