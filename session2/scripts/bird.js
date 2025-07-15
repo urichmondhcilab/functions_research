@@ -111,7 +111,7 @@ start(curMaze) {
 move(direction, curMaze) {
 
   //If this is the chicks first move, the bird dies
-  if (this.curTile === null){   
+  if (this.curTile === null || this.curTile.state.name === "BLOCK"){   
     this.die();
     return;
   }
