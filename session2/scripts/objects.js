@@ -15,6 +15,7 @@ const blockDrop = document.getElementById('block-drop');
 const hintText = document.getElementById('hint_text');
 const nextButton = document.getElementById('next_button');
 const hintContainer = document.getElementById("hints");
+const hintImage = document.getElementById("hint_image");
 
 
 

@@ -305,7 +305,8 @@ function startGame(){
 
 function displayInstructions(){
   if (instructionIndex < instructions.length){
-    hintText.firstChild.nodeValue = instructions[instructionIndex];
+    hintText.firstChild.nodeValue = instructions[instructionIndex].text;
+    hintImage.src = instructions[instructionIndex].image_path;
     instructionIndex++;
   }else {
     hintContainer.style.display = "none";

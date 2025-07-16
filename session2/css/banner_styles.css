@@ -93,21 +93,33 @@
 
 #hints{
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);        
     width: 50rem;
-    align-self: center;
     background-color: #6C7C17;
     padding: 2rem;
     color: white;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-
 }
+
+#hint_wrapper{
+    display: flex;
+    justify-content: center;
+}
+
 
 #hint_text{
     font-size: 2rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
+    align-self: center;
+}
+
+#hint_image{
+    width: 100%;
 }
 
 #next_button{
