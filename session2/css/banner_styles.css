@@ -122,12 +122,21 @@
     width: 100%;
 }
 
-#next_button{
+#next_button, #back_button{
     background-color: #FFC940;
     font-size: 2rem;
     align-self: center;
     padding: 0.5rem;
     border-radius: 0.2rem;
+}
 
+#navigation_wrapper{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+#close_button{
+    align-self: flex-end;
 }
 

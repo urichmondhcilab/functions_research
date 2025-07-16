@@ -20,7 +20,7 @@ let RUN_SPEED = 200;
 let CREATE_BIRD_SPEED = 50;
 let NORMAL_SPEED = 800;
 let gameInterval = null;
-let instructionIndex = 0;
+let instructionIndex = -1;
 
 
 /**
@@ -303,18 +303,34 @@ function startGame(){
 }
 
 
-function displayInstructions(){
-  if (instructionIndex < instructions.length){
+function displayInstructions(e){
+  switch (e.target.id){
+    case "back_button":
+      instructionIndex--;
+      break;
+    case "next_button":
+      instructionIndex++;
+      break;
+  }
+  if (instructionIndex >= 0 && instructionIndex < instructions.length){
     hintText.firstChild.nodeValue = instructions[instructionIndex].text;
     hintImage.src = instructions[instructionIndex].image_path;
-    instructionIndex++;
-  }else {
+  }else if (instructionIndex >= instructions.length){
     hintContainer.style.display = "none";
     startGame();
+  }else{
+    instructionIndex = -1;
   }
+}
+
+function closeInstructions(){
+    hintContainer.style.display = "none";
+    startGame();  
 }
 
 // start game
 nextButton.addEventListener('click', displayInstructions);
+closeButton.addEventListener('click', closeInstructions);
+backButton.addEventListener('click', displayInstructions)
 
 
