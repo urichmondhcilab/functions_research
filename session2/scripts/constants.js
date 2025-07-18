@@ -67,17 +67,16 @@ let blockCount = 0;
 let running = false;
 
 
-const instructions = [{ text: "click on the mother hen to program a path for all the chicks",
-                        image_path: "images/mother_hen/Mother_Hen_1.svg"},
+const instructions = [{text: "click on a bird to program its path",
+                            image_path: "images/chicks/squarton_resting_position_1.svg"},    
+                        {   text: "click on the mother hen to program a path for all the chicks",
+                            image_path: "images/mother_hen/Mother_Hen_1.svg"},
 
                         {   text: "use the blocks to right to find a path through the maze",
                             image_path : "images/planks/plank.svg"},
 
                         {   text: "drag the block you want into the blue space",
-                            image_path : "images/instruction_images/code_blocks_1.png"
-
-                        },
-
+                            image_path : "images/instruction_images/code_blocks_1.png"},
                        {    text: "watch out, the chicks are running out of time!",
                             image_path : "images/chicks/squarton_dead.svg"
                        } ];

@@ -20,7 +20,7 @@ let RUN_SPEED = 200;
 let CREATE_BIRD_SPEED = 50;
 let NORMAL_SPEED = 800;
 let gameInterval = null;
-let instructionIndex = -1;
+let instructionIndex = 0;
 
 
 /**
@@ -304,23 +304,26 @@ function startGame(){
 
 
 function displayInstructions(e){
-  switch (e.target.id){
-    case "back_button":
-      instructionIndex--;
-      break;
-    case "next_button":
-      instructionIndex++;
-      break;
-  }
+  instructionIndex++;  
+  console.log(instructionIndex);  
   if (instructionIndex >= 0 && instructionIndex < instructions.length){
     hintText.firstChild.nodeValue = instructions[instructionIndex].text;
     hintImage.src = instructions[instructionIndex].image_path;
   }else if (instructionIndex >= instructions.length){
     hintContainer.style.display = "none";
     startGame();
-  }else{
-    instructionIndex = -1;
   }
+}
+
+function displayInstructionsBackwards(){
+  instructionIndex--;
+  if (instructionIndex >= 0 && instructionIndex < instructions.length){
+    hintText.firstChild.nodeValue = instructions[instructionIndex].text;
+    hintImage.src = instructions[instructionIndex].image_path;
+  }else if (instructionIndex < 0){
+    instructionIndex = 0;
+  }
+  console.log(instructionIndex);  
 }
 
 function closeInstructions(){
@@ -331,6 +334,6 @@ function closeInstructions(){
 // start game
 nextButton.addEventListener('click', displayInstructions);
 closeButton.addEventListener('click', closeInstructions);
-backButton.addEventListener('click', displayInstructions)
+backButton.addEventListener('click', displayInstructionsBackwards)
 
 
