@@ -23,7 +23,6 @@ html, body {
 .mother{
   width: 100%;
   height: 100%;
-
 }
 
 /* 
@@ -50,19 +49,21 @@ html, body {
 }
 
 #game_operations {
-    width: 28%;
+    width: 25%;
     position: fixed;
     right: 0px;
     z-index: 2;
-
 }
 
 .top-right {
     height: 50vh;
-    padding: 3rem;
+    padding-top: 15vh;
+    padding-left: 6%;
+    padding-right: 6%;
     overflow: scroll;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
 }
 
 .bottom-right {
@@ -99,8 +100,8 @@ html, body {
 .run-reset-buttons {
   display: flex;
   gap: 1rem;
-  justify-content: flex-start;
   padding-bottom: 1rem;
+  padding-top: 1rem;
 }
 
 
@@ -127,16 +128,9 @@ html, body {
 }
 
 #trash{
-  text-align: center;
   align-self: flex-end;
-  margin-right: -1.75rem;
-  margin-bottom: -1.75rem;
   background-image: url('../images/game_buttons/trash_can.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  height: 5rem;
-  width: 4rem;
+  margin-left: auto;
 }
 
 
@@ -149,7 +143,7 @@ html, body {
 }
 
 
-#block-reset, #run{
+#block-reset, #run, #trash{
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -171,7 +165,7 @@ html, body {
   position: fixed;
   top: 0px;
   right: 0px;
-  transform: translate(25%, 2%);
+  transform: translate(27%, 2%);
   z-index: 1;
 }
 
