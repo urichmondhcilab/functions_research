@@ -160,12 +160,12 @@ html, body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  width: 50%;
+  width: 48%;
   height: 100%;
   position: fixed;
   top: 0px;
   right: 0px;
-  transform: translate(27%, 2%);
+  transform: translate(40%, 2%);
   z-index: 1;
 }
 

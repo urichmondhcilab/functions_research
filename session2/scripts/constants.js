@@ -7,8 +7,8 @@ const WIDTH_OFFSET = Math.min(window.innerWidth, window.innerHeight) / 4;
 
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
-let motherOffsetX = (window.innerWidth * 0.6)/ 4;
-let motherOffsetY = window.innerHeight / 8;
+let motherOffsetX = (window.innerWidth * 0.6)/ 8;
+let motherOffsetY = window.innerHeight / 10;
 
 let birdStartX =(window.innerWidth * 0.25);
 let birdStartY = window.innerHeight * 0.5;
@@ -18,9 +18,9 @@ let birdEndY = window.innerHeight * 0.6 - birdStartY;
 let centerX = (window.innerWidth * 0.6)/ 2;
 let centerY = window.innerHeight / 2;
 
-let mazeStartX = 0;
+let mazeStartX = (window.innerWidth * 0.15);
 let mazeStartY = (window.innerHeight * 0.7);
-let mazeWidth = (window.innerWidth * 0.6);
+let mazeWidth = (window.innerWidth * 0.7);
 let mazeHeight = (window.innerHeight  * 0.9);
 
 const chickImagePaths = ['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'];
