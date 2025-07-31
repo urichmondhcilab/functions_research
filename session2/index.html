@@ -10,6 +10,7 @@
   <!-- <body id="game_canvas"> -->
 <body>
     <div class="container">
+    
       <div id="hints">
         <div id="close_button">&times; </div>
         <div id="hint_wrapper">
@@ -17,12 +18,16 @@
           <div id="hint_text"> click on a bird to program its path </div> 
         </div>
 
+
+
         <!-- click the mother bird to control all the birds -->
         <!-- watch out the chicks are running out of time! -->
          <div id="navigation_wrapper">
           <div id="back_button">Back</div>
           <div id="next_button">Next</div>
          </div>
+
+
 
         </div>
       <div id="game_canvas">
@@ -66,12 +71,12 @@
 
         <div class="top-right" id="canvas">
           <div class="run-reset-buttons">
-              <button  id="block-reset">Reset</button>
-              <button  id="run">Run</button>
+              <div  id="block-reset"></div>
+              <div  id="run"></div>
           </div>
           <div id="block-drop">
           </div>
-          <div id="trash">trash</div>
+          <div id="trash"></div>
         </div>
 
           <div class="bottom-right">
@@ -102,6 +107,10 @@
         </div>
       </div>
       </div>
+
+        <div id="block-image_background">
+
+         </div>        
   </div>
 
 
@@ -118,7 +127,7 @@
     <script type="text/javascript" src="scripts/bird.js"></script>
     <script src="scripts/Tile.js"></script>
     <script src="scripts/Maze.js"></script>  
-    <script id = "mom" type="text/javascript" src="scripts/mother.js"></script>   
+    <script type="text/javascript" src="scripts/mother.js"></script>   
     <script type="text/javascript" src="scripts/Block.js"></script>      
     <script type="text/javascript" src="scripts/Move.js"></script>  
     <script type="text/javascript" src="scripts/Eat.js"></script>                        

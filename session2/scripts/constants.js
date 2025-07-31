@@ -26,7 +26,7 @@ let mazeHeight = (window.innerHeight  * 0.9);
 const chickImagePaths = ['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'];
 const state = [
     {   name : "BLOCK",
-        image_path : "images/boulder.webp"
+        image_path : "images/boulder_and_interface/boulder.svg"
     },
     {   name : "WATER",
         image_path: "images/water/water.svg"

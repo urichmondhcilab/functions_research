@@ -31,7 +31,7 @@
     font-family: sans-serif;
     position: fixed;
     left: 0px;
-    right: 0px;
+    /* right: 0px; */
 }
 
 .banner h3 {
@@ -96,7 +96,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);        
-    width: 50rem;
+    width: 40rem;
     background-color: #6C7C17;
     padding: 2rem;
     color: white;
