@@ -95,12 +95,13 @@ html, body {
 
 .drink {
   background-color: #FFC940;
-  background-image: url("../images/game_buttons/drink_button.svg");
+  /* background-image: url("../images/game_buttons/drink_button.svg"); */
 }
 
 .eat {
   background-color: white;
-  background-image: url("../images/game_buttons/eat_button.svg");
+  color: #7EBB61;
+  /* background-image: url("../images/game_buttons/eat_button.svg"); */
 }
 
 .start{
