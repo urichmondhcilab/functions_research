@@ -10,6 +10,11 @@
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.bird_container{
+    /* background-color: yellow; */
+    width: 30%;
+}
+
 #bird_img{
     width: 90%;
 }
@@ -22,11 +27,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 2rem;    
+    gap: 2rem;   
+    /* background-color: red;  */
 }
 
 .instructions-container{
     background-color: #6C7C17;
+    /* border: 0.1rem solid blue; */
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -35,22 +42,28 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-
 }
+
+/**
+            <div id="instruction-wrapper">
+                <div class="bird_container"><img id="bird_img" src="session2/images/mother_hen/Mother_Hen_1.svg" alt=""></div>
+                <div id="instructions" class="instructions">
+                */
 
 #instruction-wrapper{
     display: flex;
     width: 100%;
     height: 100%;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+    /* border: 0.1rem solid yellow; */
 }
 
 .instruction{
     color: white;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 2rem;
-
+    width: 70%;
 }
 
 .action-btn{
@@ -83,13 +96,13 @@
 .session1_game{
     display: none;
     background-color: #6C7C17;
-    width: 30%;  
+    width: 100%;  
 }
 
 .session1_gameplay{
     display: flex;
     flex-direction: row;
-    width: 40%; 
+    width: 100%; 
     border-radius: 0.2rem; 
     padding: 3rem;    
 }

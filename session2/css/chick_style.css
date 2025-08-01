@@ -49,7 +49,7 @@ html, body {
 }
 
 #game_operations {
-    width: 25%;
+    width: 27%;
     position: fixed;
     right: 0px;
     z-index: 2;
@@ -76,25 +76,35 @@ html, body {
 }
 
 .draggable, .block {
-  background-color: #88c;
+  /* background-color: #88c; */
   color: white;
   padding: .5rem;
   width: 100%;
+  height: 5%;
   cursor: pointer;
   text-align: center;
   border-radius: 0.3rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 200%;  
 }
 
-.drink {
-  background-color: cornflowerblue;
-}
-
-.eat {
+.move{
   background-color: salmon;
 }
 
+.drink {
+  background-color: #FFC940;
+  background-image: url("../images/game_buttons/drink_button.svg");
+}
+
+.eat {
+  background-color: white;
+  background-image: url("../images/game_buttons/eat_button.svg");
+}
+
 .start{
-  background-color: #7EBC61;
+  background-color: #7EBB61;
 }
 
 .run-reset-buttons {
@@ -103,7 +113,6 @@ html, body {
   padding-bottom: 1rem;
   padding-top: 1rem;
 }
-
 
 #block-drop{
   display: flex;
@@ -160,6 +169,7 @@ html, body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  /* background-color: skyblue; */
   width: 48%;
   height: 100%;
   position: fixed;

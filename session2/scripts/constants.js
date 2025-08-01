@@ -73,10 +73,11 @@ const instructions = [{text: "click on a bird to program its path",
                             image_path: "images/mother_hen/Mother_Hen_1.svg"},
 
                         {   text: "use the blocks to right to find a path through the maze",
-                            image_path : "images/planks/plank.svg"},
+                            image_path : "images/game_buttons/eat_button.svg"},
 
                         {   text: "drag the block you want into the blue space",
-                            image_path : "images/instruction_images/code_blocks_1.png"},
+                            image_path : "images/boulder_and_interface/game_options_interface.svg"},
+
                        {    text: "watch out, the chicks are running out of time!",
                             image_path : "images/chicks/squarton_dead.svg"
                        } ];

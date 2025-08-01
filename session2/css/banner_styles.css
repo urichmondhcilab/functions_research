@@ -109,12 +109,17 @@
     justify-content: center;
 }
 
+#hint_image_wrapper{
+    flex-grow: 1;
+}
+
 
 #hint_text{
     font-size: 2rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     align-self: center;
+    flex-grow: 2;
 }
 
 #hint_image{
