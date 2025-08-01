@@ -49,13 +49,21 @@ html, body {
 }
 
 #game_operations {
+  background-image: url("../images/boulder_and_interface/game_options_interface.svg");
+  background-position: top;
+  background-size: 100% 80%;
+  background-repeat: no-repeat;
     width: 27%;
     position: fixed;
     right: 0px;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .top-right {
+    width: 80%;
     height: 50vh;
     padding-top: 15vh;
     padding-left: 6%;
@@ -138,7 +146,6 @@ html, body {
 }
 
 #trash{
-  align-self: flex-end;
   background-image: url('../images/game_buttons/trash_can.svg');
   margin-left: auto;
 }
@@ -161,11 +168,14 @@ html, body {
   height: 3rem;
   border-radius: 50%;
   background-color: white;
-  padding: 0.2rem;
-  
+  padding: 0.1rem;
 }
 
-#block-image_background{
+#block-reset:hover, #run:hover{
+  background-color:#FFC940;
+}
+
+/* #block-image_background{
   background-image: url("../images/boulder_and_interface/game_options_interface.svg");
   background-repeat: no-repeat;
   background-position: center;
@@ -178,5 +188,5 @@ html, body {
   right: 0px;
   transform: translate(40%, 2%);
   z-index: 1;
-}
+} */
 
