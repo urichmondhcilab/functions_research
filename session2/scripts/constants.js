@@ -30,11 +30,9 @@ const state = [
     },
     {   name : "WATER",
         image_path: "images/water/water.svg"
-
     },
     {   name : "FOOD",
         image_path: "images/food/food.svg"
-
     },
     {   name : "PLANK",
         image_path : "images/planks/plank.svg"
