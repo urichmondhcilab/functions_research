@@ -21,17 +21,30 @@ class Bird{
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
     let birdDiv = document.createElement('div');
     let birdImg = document.createElement('img');
+    let selectionDiv = document.createElement('div');
+    selectionDiv.style.position = "absolute";
+    selectionDiv.style.top = "0px";
+    selectionDiv.style.left = "0px";
+    selectionDiv.style.width = "150%";
+    selectionDiv.style.height = "150%";
+    selectionDiv.style.transform = "translate(-25%, -25%)"
+    // selectionDiv.style.border = "0.1rem solid red";
+    selectionDiv.style.display = "none";
     birdImg.className = "chick";
     birdImg.style.border= "none";
     birdDiv.appendChild(birdImg)
+    birdDiv.appendChild(selectionDiv);
 
     this.birdie = birdDiv;
+    this.selectionDiv = selectionDiv;
     this.birdie.deathImgFlag = 0;    
     this.birdie.className = 'chickCont';
     this.birdie.style.position="absolute";  
     this.curTile = null;       
     this.xIndex = 0;
     this.yIndex = 0;
+    this.selected = false;
+    this.selectionCount = 0;
 
     // place birds on tiles
     this.placeBird(maze);
@@ -58,13 +71,22 @@ class Bird{
     if (selectedBirds != null && selectedBirds !== undefined){
       for (const selectedBird of selectedBirds){
         selectedBird.birdie.style.border = "none";
+        selectedBird.selected = false;
+        selectedBird.selectionDiv.style.display = "none";
       }
     }
     if (motherHen !== null && motherHen !== undefined){
       motherHen.mother.style.border = "none";
     }
 
-    this.birdie.style.border = ".1rem solid cyan";       
+    // this.birdie.style.border = ".1rem solid cyan"; 
+    this.selectionDiv.style.backgroundImage = "url('images/star_animation_frames/seven.svg')" ;  
+    this.selectionDiv.style.backgroundRepeat = "no-repeat";
+    this.selectionDiv.style.backgroundPosition = "center";
+    this.selectionDiv.style.backgroundSize = "cover";
+    this.selectionDiv.style.display = "block";
+    this.selected = true;
+    this.selectedColorIndex = Math.floor(Math.random() * SELECTED_BIRD_COLOR_PALETTE_COUNT) + 1;
     selectedBirds = [this];
   }
 
@@ -80,7 +102,8 @@ class Bird{
     let top = parseInt(slicePX(this.curTile.y) - slicePX(this.curTile.height) / 8);
     let left = parseInt(slicePX(this.curTile.x) + slicePX(this.curTile.width) / 4);  
     this.birdie.style.left= `${left}px`;
-    this.birdie.style.top = `${top}px`;     
+    this.birdie.style.top = `${top}px`;   
+    
   }
 
 
@@ -88,7 +111,19 @@ class Bird{
    * update the bird sprite to a random sprite
    */
   updateBird(){
-      this.birdie.firstChild.src = chickImagePaths[Math.round (Math.random() * (chickImagePaths.length - 1))];    
+      // this.birdie.firstChild.src = "";
+      if (this.selected){
+        if (this.selectionCount > chickSelectionStars.length - 1) this.selectionCount = 0
+        // console.log(this.selectedColorIndex);        
+        this.selectionDiv.style.backgroundImage = `url(${chickSelectionStars[this.selectionCount++]})`;
+        this.birdie.firstChild.src = chickImagePaths[this.selectedColorIndex][Math.round (Math.random() * (chickImagePaths[this.selectedColorIndex].length - 1))];           
+        console.log(Math.round (Math.random() * (chickImagePaths[this.selectedColorIndex].length - 1)));
+        // console.log(chickImagePaths[this.selectedColorIndex][Math.round (Math.random() * chickImagePaths[this.selectedColorIndex].length - 1)]);
+
+      }
+      else{
+        this.birdie.firstChild.src = chickImagePaths[0][Math.round (Math.random() * (chickImagePaths[0].length - 1))];   
+      }
   }
 
 /**

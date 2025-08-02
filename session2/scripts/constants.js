@@ -23,7 +23,24 @@ let mazeStartY = (window.innerHeight * 0.7);
 let mazeWidth = (window.innerWidth * 0.7);
 let mazeHeight = (window.innerHeight  * 0.9);
 
-const chickImagePaths = ['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'];
+const chickImagePaths = [['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'],
+                            ['images/poses/green_bird_poses/rest1.svg', 'images/poses/green_bird_poses/rest2.svg'],
+                            ['images/poses/orange_bird_poses/rest1.svg', 'images/poses/orange_bird_poses/rest2.svg'],
+                            ['images/poses/brown_bird_poses/rest1.svg', 'images/poses/brown_bird_poses/rest2.svg'],
+                            ['images/poses/pink_bird_poses/rest1.svg', 'images/poses/pink_bird_poses/rest2.svg'],
+                            ['images/poses/blue_bird_poses/rest1.svg', 'images/poses/blue_bird_poses/rest2.svg'],
+                            ['images/poses/light_blue_bird_poses/rest1.svg', 'images/poses/light_blue_bird_poses/rest2.svg'],
+                            ['images/poses/purple_bird_poses/rest1.svg', 'images/poses/purple_bird_poses/rest2.svg'],
+                            ['images/poses/red_bird_poses/rest1.svg', 'images/poses/red_bird_poses/rest2.svg'],
+                        ];
+
+const chickSelectionStars = ['images/star_animation_frames/one.svg',
+    'images/star_animation_frames/two.svg',
+    'images/star_animation_frames/three.svg',
+    'images/star_animation_frames/four.svg',
+    'images/star_animation_frames/five.svg',
+    'images/star_animation_frames/six.svg',
+    'images/star_animation_frames/seven.svg'];
 const state = [
     {   name : "BLOCK",
         image_path : "images/boulder_and_interface/boulder.svg"
@@ -63,6 +80,7 @@ let placedBlocks = null;
 let ast = null;
 let blockCount = 0;
 let running = false;
+const SELECTED_BIRD_COLOR_PALETTE_COUNT = chickImagePaths.length - 1;
 
 
 const instructions = [{text: "click on a bird to program its path",
@@ -79,5 +97,7 @@ const instructions = [{text: "click on a bird to program its path",
                        {    text: "watch out, the chicks are running out of time!",
                             image_path : "images/chicks/squarton_dead.svg"
                        } ];
+
+
 
 
