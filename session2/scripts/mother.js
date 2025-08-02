@@ -56,7 +56,7 @@ class Mother{
         selectedBird.selectionDiv.style.display = "block";
         selectedBird.selected = true;
         selectedBird.selectedColorIndex = Math.floor(Math.random() * SELECTED_BIRD_COLOR_PALETTE_COUNT) + 1;         
-        console.log( selectedBird.selectionDiv.style.backgroundRepeat) ;
+        // console.log( selectedBird.selectionDiv.style.backgroundRepeat) ;
       }
 
     }

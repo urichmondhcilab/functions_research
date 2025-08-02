@@ -68,6 +68,7 @@ function drop(event) {
         newBlock.addEventListener("dragstart", dragStartHandler); // allow dragging to trash
         document.getElementById('block-drop').appendChild(newBlock);
         newBlock.style.width = "90%";
+        // newBlock.style.padding = "0px";
         draggedElementState = null;
     }
 }

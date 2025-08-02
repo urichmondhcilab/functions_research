@@ -77,7 +77,8 @@ html, body {
 .bottom-right {
     height: 50vh;
     width: 75%;
-    padding: 3rem;
+    padding-right: 3rem;
+    padding-bottom: 6rem;
 }
 
 .bottom-right, .draggable{
@@ -87,10 +88,13 @@ html, body {
 .draggable, .block {
   color: white;
   padding: .5rem;
-  height: 5%;
+  height: 10%;
   cursor: pointer;
   text-align: center;
   border-radius: 0.3rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .move{
@@ -98,14 +102,14 @@ html, body {
 }
 
 .drink {
-  background-color: #FFC940;
-  /* background-image: url("../images/game_buttons/drink_button.svg"); */
+  /* background-color: #FFC940; */
+  background-image: url("../images/game_buttons/drink_button.svg");
 }
 
 .eat {
-  background-color: white;
-  color: #7EBB61;
-  /* background-image: url("../images/game_buttons/eat_button.svg"); */
+  /* background-color: white; */
+  /*color: #7EBB61; */
+  background-image: url("../images/game_buttons/eat_button.svg");
 }
 
 .start{
@@ -142,12 +146,6 @@ html, body {
   padding: 0.1rem;  
 }
 
-#trash{
-  background-image: url('../images/game_buttons/trash_can.svg');
-  margin-left: auto;
-}
-
-
 #block-reset{
   background-image: url("../images/game_buttons/refresh_key.svg");  
 }
@@ -156,6 +154,12 @@ html, body {
   background-image: url("../images/game_buttons/play_button.svg"); 
 }
 
+#trash{
+  background-image: url('../images/game_buttons/trash_can.svg');
+  margin-left: auto;
+  border: 0.5rem solid white !important;
+  box-sizing: border-box;
+}
 
 #block-reset, #run, #trash{
   background-position: center;

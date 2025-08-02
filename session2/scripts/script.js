@@ -18,7 +18,7 @@ let maze = null;
 let speed = 50;
 let RUN_SPEED = 200;
 let CREATE_BIRD_SPEED = 50;
-let NORMAL_SPEED = 800;
+let NORMAL_SPEED = 200;
 let gameInterval = null;
 let instructionIndex = 0;
 
