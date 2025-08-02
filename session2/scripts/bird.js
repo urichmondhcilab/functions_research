@@ -49,8 +49,6 @@ class Bird{
     // place birds on tiles
     this.placeBird(maze);
 
-
-
     // handle "this" that refers to the event object and "this" that refers to the object
     // bind the the the object to the member function
     this.displayCodeEditor = this.displayCodeEditor.bind(this);
@@ -112,6 +110,7 @@ class Bird{
    */
   updateBird(){
       // this.birdie.firstChild.src = "";
+      // console.log(this.selected);           
       if (this.selected){
         if (this.selectionCount > chickSelectionStars.length - 1) this.selectionCount = 0
         // console.log(this.selectedColorIndex);        

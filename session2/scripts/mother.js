@@ -44,7 +44,20 @@ class Mother{
         }
       }
       this.mother.style.border = ".1rem solid cyan";    
-      selectedBirds = allBirds;      
+      selectedBirds = allBirds;    
+      
+      for (const selectedBird of selectedBirds){
+        selectedBird.birdie.style.border = "none";
+
+        //Activate stars and colors
+        selectedBird.selectionDiv.style.backgroundRepeat = "no-repeat";
+        selectedBird.selectionDiv.style.backgroundPosition = "center";
+        selectedBird.selectionDiv.style.backgroundSize = "cover";
+        selectedBird.selectionDiv.style.display = "block";
+        selectedBird.selected = true;
+        selectedBird.selectedColorIndex = Math.floor(Math.random() * SELECTED_BIRD_COLOR_PALETTE_COUNT) + 1;         
+        console.log( selectedBird.selectionDiv.style.backgroundRepeat) ;
+      }
 
     }
 
