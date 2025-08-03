@@ -174,7 +174,8 @@ move(direction, curMaze) {
     let top = parseInt(slicePX(this.curTile.y) - slicePX(this.curTile.height) / 8);
     let left = parseInt(slicePX(this.curTile.x) + slicePX(this.curTile.width) / 4);  
     this.birdie.style.left= `${left}px`;
-    this.birdie.style.top = `${top}px`;     
+    this.birdie.style.top = `${top}px`;  
+    moveSound.play();   
 
     // this.birdie.style.left = this.curTile.x;
     // this.birdie.style.top = this.curTile.y;
@@ -187,6 +188,7 @@ move(direction, curMaze) {
 drink() {
   if(this.curTile.state.name == "WATER"){
     this.birdie.firstChild.src = 'images/chicks/Squarton_splashing.svg';
+    drinkSound.play();
   }else{
     this.die();
   }
@@ -200,6 +202,7 @@ drink() {
   eat() {
   if(this.curTile.state.name == "FOOD"){
       this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
+      eatSound.play();
     }else{
       this.die();
     }

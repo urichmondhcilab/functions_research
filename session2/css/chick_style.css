@@ -3,6 +3,9 @@ html, body {
   height: 100%; 
   overflow: hidden;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .chickCont{
@@ -34,8 +37,8 @@ html, body {
   background-attachment - determines if the image is scrollable
  */
 #game_canvas{
-  width: 100%;
-  height: 100vh;
+  width: 100vw;
+  height: 56vw;
   background-image: url('../images/game_environment/scene.svg'); /*set the source for the image*/
   background-repeat: no-repeat;
   background-position: center;
@@ -51,9 +54,11 @@ html, body {
 #game_operations {
   background-image: url("../images/boulder_and_interface/game_options_interface.svg");
   background-position: top;
-  background-size: 100% 80%;
+  background-size: 45vw 56vw;
   background-repeat: no-repeat;
-    width: 27%;
+    width: 27vw;
+    height: 56vw;
+    /* height: 100vh; */
     position: fixed;
     right: 0px;
     z-index: 2;
@@ -64,8 +69,8 @@ html, body {
 
 .top-right {
     width: 80%;
-    height: 50vh;
-    padding-top: 15vh;
+    height: 60%;
+    padding-top: 35%;
     padding-left: 6%;
     padding-right: 6%;
     overflow: scroll;
@@ -75,9 +80,9 @@ html, body {
 }
 
 .bottom-right {
-    height: 50vh;
+    height: 40%;
     width: 75%;
-    padding-right: 3rem;
+    /* padding-right: 3rem; */
     padding-bottom: 6rem;
 }
 
@@ -87,11 +92,13 @@ html, body {
 
 .draggable, .block {
   color: white;
-  padding: .5rem;
+  padding-top: 5%;
+  padding-bottom: 5%;
   height: 10%;
+  width: 90%;
   cursor: pointer;
   text-align: center;
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -167,11 +174,12 @@ html, body {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 3rem;
-  height: 3rem;
+  width: 10%;
+  aspect-ratio: 1/1;
+  /* height: 10%; */
   border-radius: 50%;
   background-color: white;
-  padding: 0.1rem;
+  padding: 1%;
 }
 
 #block-reset:hover, #run:hover{

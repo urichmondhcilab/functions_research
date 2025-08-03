@@ -100,4 +100,9 @@ const instructions = [{text: "click on a bird to program its path",
 
 
 
+const moveSound = new Audio('sound_mp3/Movement.mp3');
+const eatSound = new Audio('sound_mp3/Eating.mp3');
+const drinkSound = new Audio('sound_mp3/Drinking.mp3');
+
+
 
