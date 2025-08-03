@@ -158,7 +158,7 @@ html, body {
 #trash{
   background-image: url('../images/game_buttons/trash_can.svg');
   margin-left: auto;
-  border: 0.5rem solid white !important;
+  border: 0.5rem solid white;
   box-sizing: border-box;
 }
 

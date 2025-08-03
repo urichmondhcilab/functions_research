@@ -69,9 +69,8 @@ function drop(event) {
         newBlock.addEventListener("dragstart", dragStartHandler); // allow dragging to trash
         document.getElementById('block-drop').appendChild(newBlock);
         newBlock.style.width = "90%";
-        // newBlock.style.padding = "0px";
         newBlock.style.position = "relative";
-        trashObj.style.backgroundColor = "white";
+
 
 
         let translateValue = instCount * -11
@@ -99,8 +98,8 @@ function trashDrop(e){
     let delObject = document.getElementById(data);
     //removes that object
     delObject.remove();
-        e.target.style.backgroundColor = "#FFC940";
-    e.target.style.borderColor = "#FFC940";
+    e.target.style.backgroundColor = "white";
+    e.target.style.borderColor = "white";
 }
 
 function dragStartHandler(e){
