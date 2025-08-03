@@ -10,6 +10,7 @@ let blockRemoveObj = document.getElementById("block-remove")
 let instCount = 0;
 
 trashObj.addEventListener("dragover", dragOverTrash);
+trashObj.addEventListener("dragleave", dragExitTrash);
 trashObj.addEventListener("drop", trashDrop);
 blockRemoveObj.addEventListener("dragover", dragOverTrash);
 blockRemoveObj.addEventListener("drop", trashDrop);
@@ -69,6 +70,12 @@ function drop(event) {
         document.getElementById('block-drop').appendChild(newBlock);
         newBlock.style.width = "90%";
         // newBlock.style.padding = "0px";
+        newBlock.style.position = "relative";
+        trashObj.style.backgroundColor = "white";
+
+
+        let translateValue = instCount * -11
+        newBlock.style.transform = `translate(0%, ${translateValue}%)`;
         draggedElementState = null;
     }
 }
@@ -76,6 +83,12 @@ function drop(event) {
 
 function dragOverTrash(e){
     e.preventDefault();
+    e.target.style.backgroundColor = "#FFC940";
+    e.target.style.borderColor = "#FFC940";
+}
+
+function dragExitTrash(e){
+     e.target.style.backgroundColor = "white";   
 }
 
 function trashDrop(e){
@@ -86,6 +99,8 @@ function trashDrop(e){
     let delObject = document.getElementById(data);
     //removes that object
     delObject.remove();
+        e.target.style.backgroundColor = "#FFC940";
+    e.target.style.borderColor = "#FFC940";
 }
 
 function dragStartHandler(e){

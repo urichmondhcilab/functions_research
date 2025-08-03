@@ -113,7 +113,8 @@ html, body {
 }
 
 .start{
-  background-color: #7EBB61;
+  /* background-color: #7EBB61; */
+  background-image: url("../images/game_buttons/start_button.svg");  
 }
 
 .run-reset-buttons {
@@ -160,6 +161,7 @@ html, body {
   border: 0.5rem solid white !important;
   box-sizing: border-box;
 }
+
 
 #block-reset, #run, #trash{
   background-position: center;

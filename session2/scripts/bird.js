@@ -54,6 +54,7 @@ class Bird{
     this.displayCodeEditor = this.displayCodeEditor.bind(this);
 
     birdImg.addEventListener("click", this.displayCodeEditor);
+    selectionDiv.addEventListener("click", this.displayCodeEditor);
 
     game_canvas.appendChild(this.birdie);
   }
@@ -68,6 +69,7 @@ class Bird{
     console.log(selectedBirds);
     if (selectedBirds != null && selectedBirds !== undefined){
       for (const selectedBird of selectedBirds){
+        console.log("in for loop");
         selectedBird.birdie.style.border = "none";
         selectedBird.selected = false;
         selectedBird.selectionDiv.style.display = "none";
@@ -116,7 +118,7 @@ class Bird{
         // console.log(this.selectedColorIndex);        
         this.selectionDiv.style.backgroundImage = `url(${chickSelectionStars[this.selectionCount++]})`;
         this.birdie.firstChild.src = chickImagePaths[this.selectedColorIndex][Math.round (Math.random() * (chickImagePaths[this.selectedColorIndex].length - 1))];           
-        console.log(Math.round (Math.random() * (chickImagePaths[this.selectedColorIndex].length - 1)));
+        // console.log(Math.round (Math.random() * (chickImagePaths[this.selectedColorIndex].length - 1)));
         // console.log(chickImagePaths[this.selectedColorIndex][Math.round (Math.random() * chickImagePaths[this.selectedColorIndex].length - 1)]);
 
       }
