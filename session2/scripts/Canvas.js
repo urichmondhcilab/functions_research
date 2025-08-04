@@ -73,9 +73,24 @@ function drop(event) {
 
 
 
-        let translateValue = instCount * -11
-        newBlock.style.transform = `translate(0%, ${translateValue}%)`;
+        // let translateValue = instCount * -11;
+        // newBlock.style.transform = `translate(0%, ${translateValue}%)`;
+        reorderItems(document.getElementById('block-drop'));
         draggedElementState = null;
+    }
+}
+
+
+function reorderItems(parent){
+    let nodeList = parent.childNodes;
+    console.log(nodeList);
+    index = 0;
+    let translateValue = 0;   
+    for (node of nodeList){
+        translateValue = index * - 12;
+        node.style.transform = `translate(0%, ${translateValue}%)`
+        index++;
+
     }
 }
 
@@ -84,6 +99,7 @@ function dragOverTrash(e){
     e.preventDefault();
     e.target.style.backgroundColor = "#FFC940";
     e.target.style.borderColor = "#FFC940";
+
 }
 
 function dragExitTrash(e){
@@ -100,6 +116,7 @@ function trashDrop(e){
     delObject.remove();
     e.target.style.backgroundColor = "white";
     e.target.style.borderColor = "white";
+    reorderItems(document.getElementById('block-drop'));    
 }
 
 function dragStartHandler(e){

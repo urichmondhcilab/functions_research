@@ -83,17 +83,25 @@
 }
 
 .close-btn{
- align-self: flex-end;
- width: 3%;
- /* height: 3%; */
- aspect-ratio: 1/1;
+ /* align-self: flex-end;
+ width: 3rem;
+height: 3rem;
  border-radius: 50%;
- padding: 2%;
+ padding: 1rem;
  border: none;
  margin: 2%;
  color: white;
- font-weight: bold;
- text-align: center;
+ /* font-weight: bold; */
+ /* text-align: center;
+ font-size: 1rem; */
+    align-self: flex-end;
+    width: 1rem;
+    height: 1rem;
+    text-align: center;
+    border-radius: 50%;
+    padding: 1rem; 
+    margin: 1rem;
+    color: white;
 }
 
 .close-btn:hover{
