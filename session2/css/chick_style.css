@@ -22,17 +22,17 @@ html, body {
   width: 12%;
   aspect-ratio: 9/12 ;
   /* height: 25%; */
-  border: 0.1rem solid red;
+  /* border: 0.1rem solid red; */
 }
 
 .mother{
   width: 100%;
   height: 100%;
-  border: 0.1rem solid blue;  
+  /* border: 0.1rem solid blue;   */
 }
 
 /* 
-  game_canvas is the class name associated with the left area of the document
+  game_canvas is the class name associated with the left area of the documentinstruction1
   background-image sets the source of the image
   background-size sets the size of the image. 
   background-color sets the color of the portion of the screen not covered by the image
@@ -86,7 +86,7 @@ html, body {
     height: 40%;
     width: 75%;
     /* padding-right: 3rem; */
-    padding-bottom: 6rem;
+    padding-bottom: 6%;
 }
 
 .bottom-right, .draggable{
@@ -95,8 +95,8 @@ html, body {
 
 .draggable, .block {
   color: white;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
   height: 10%;
   width: 90%;
   cursor: pointer;
@@ -105,6 +105,7 @@ html, body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  font-size: 1vw;
 }
 
 .move{
@@ -129,7 +130,7 @@ html, body {
 
 .run-reset-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 1.5%;
   padding-bottom: 1rem;
   padding-top: 1rem;
 }
@@ -148,13 +149,16 @@ html, body {
   width: 50%;
   border: none;
   border-radius: 0.2rem;
-  padding: 0.2rem;
+  padding: 0.2%;
+  font-size: 1vw;  
 }
 
 .move-select{
+  width: 25%;
   border: none;
   border-radius: 0.2rem;  
-  padding: 0.1rem;  
+  padding: 0.1%; 
+  font-size: 1vw;   
 }
 
 #block-reset{
@@ -168,8 +172,8 @@ html, body {
 #trash{
   background-image: url('../images/game_buttons/trash_can.svg');
   margin-left: auto;
-  border: 0.5rem solid white;
-  box-sizing: border-box;
+  /* border: 0.5% solid white; */
+  /* box-sizing: border-box; */
 }
 
 
@@ -177,7 +181,7 @@ html, body {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 10%;
+  width: 12%;
   aspect-ratio: 1/1;
   /* height: 10%; */
   border-radius: 50%;

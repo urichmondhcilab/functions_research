@@ -5,14 +5,14 @@
 
 .points, .reset, .back
 {
-  padding: 0.2em;
+  padding: 0.2vw;
   border-radius: 0.2em;
   color: white;
   background-color: black;
   text-align: center;
   font-family: "Gill Sans", sans-serif;
   display: inline;
-  font-size: 1.8em;
+  font-size: 1.5vw;
 }
 
 .back a{
@@ -39,14 +39,14 @@
 }
 
 .banner button {
-    height: 2rem;
-    width: 7rem;
+    height: 2vw;
+    width: 7vw;
     font-weight: bold;
-    font-size: larger;
+    font-size: 1.5vw;
     border: 0;
     background-color: white;
-    border-radius: .25rem;
-    border: 2px solid black;
+    border-radius: .25vw;
+    border: 0.2vw solid black;
 }
 
 .banner button:hover {
@@ -95,13 +95,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);        
-    width: 40rem;
+    width: 40%;
     background-color: #6C7C17;
-    padding: 2rem;
+    padding: 1%;
     color: white;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1%;
 }
 
 #hint_wrapper{
@@ -115,7 +115,7 @@
 
 
 #hint_text{
-    font-size: 2rem;
+    font-size: 2vw;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     align-self: center;
@@ -128,15 +128,15 @@
 
 #next_button, #back_button{
     background-color: #FFC940;
-    font-size: 2rem;
+    font-size: 2vw;
     align-self: center;
-    padding: 0.5rem;
+    padding: 0.5vw;
     border-radius: 0.2rem;
 }
 
 #navigation_wrapper{
     display: flex;
-    gap: 1rem;
+    gap: 1vw;
     justify-content: center;
 }
 
