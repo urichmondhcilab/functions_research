@@ -162,7 +162,8 @@ async function birdAction(){
   // console.log(maze);
   createMother();
   createBird(maze);
-  updateMotherHen();
+  // updateMotherHen();
+  motherHen.updateMotherHen();
   updateBirds();
   allBirds = allBirds.filter(removeBirds);
   await runCode();
@@ -191,22 +192,19 @@ function reset(){
  */
 function repositionGameObjects(){
   //reset the positions of the birds based on new screen size
+  backgroundImageWidth = window.innerWidth;
+  backgroundImageHeight = window.innerWidth * 0.56; // keep the aspect ration of the background image
 
-  screenWidth = window.innerWidth;
-  screenHeight = window.innerHeight;
-  motherOffsetX = (window.innerWidth * 0.6)/ 4;
-  motherOffsetY = window.innerHeight / 8; 
+  centerX = (backgroundImageWidth) / 2;
+  centerY = window.innerHeight / 2;
 
-  birdStartX =(window.innerWidth * 0.3);
-  birdStartY = window.innerHeight * 0.5;
-  birdEndX = window.innerWidth * 0.6 - birdStartX;
-  birdEndY = window.innerHeight * 0.6 - birdStartY;
+  motherPosX = centerX - backgroundImageWidth * 0.25;
+  motherPosY = centerY - backgroundImageHeight * 0.15;
 
-  // update maze location variables 
-  mazeStartX = 0;
-  mazeStartY = (window.innerHeight * 0.7);
-  mazeWidth = (window.innerWidth * 0.6);
-  mazeHeight = (window.innerHeight  * 0.9);
+  mazeStartX = (backgroundImageWidth * 0.20);
+  mazeStartY = centerY + backgroundImageHeight * 0.15 ;
+  mazeWidth = (backgroundImageWidth * 0.7);
+  mazeHeight = centerY + backgroundImageHeight * 0.4;
   
   console.log("maze in reposition: " + maze);
   if (maze) maze.upadateMazePosition(mazeStartX, mazeStartY, mazeWidth, mazeHeight);
@@ -219,6 +217,7 @@ function repositionGameObjects(){
   } 
 
   if(motherHen != null){
+    console.log("updating mom position");
     motherHen.updateMomPosition();
   }  
 }

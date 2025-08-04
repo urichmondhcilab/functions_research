@@ -13,22 +13,18 @@ class Mother{
       let motherImg = document.createElement('img');
       motherImg.className = "mother";
       motherImg.src = 'images/mother_hen/Mother_Hen_1.svg';
-      motherDiv.appendChild(motherImg);
+
 
       this.mother = motherDiv;
       this.mother.currImageFlag = 1;
       this.mother.className = 'motherCont';
       this.mother.style.position="absolute";
 
-      this.mother.style.left = `${Math.floor(centerX) - motherOffsetX}px`;
-      this.mother.style.top = `${Math.floor(centerY) - motherOffsetY}px`;
+      motherDiv.appendChild(motherImg);      
+      this.updateMomPosition();
 
-      this.updateMomPosition = function(){
-        this.mother.style.left= `${Math.floor(centerX) - motherOffsetX}px`;
-        this.mother.style.top = `${Math.floor(centerY) - motherOffsetY}px`;      
-      }
 
-    this.selectAllBirds = this.selectAllBirds.bind(this);      
+      this.selectAllBirds = this.selectAllBirds.bind(this);      
       motherImg.addEventListener('click', this.selectAllBirds);
   
       game_canvas.appendChild(this.mother);
@@ -58,9 +54,26 @@ class Mother{
         selectedBird.selectedColorIndex = Math.floor(Math.random() * SELECTED_BIRD_COLOR_PALETTE_COUNT) + 1;         
         // console.log( selectedBird.selectionDiv.style.backgroundRepeat) ;
       }
-
     }
 
+    updateMomPosition(){
+      this.mother.style.left= `${Math.floor(motherPosX)}px`;
+      this.mother.style.top = `${Math.floor(motherPosY)}px`;      
+    }   
+    
+    /**
+     * To update the mother image, We first set currMom to the mother DOM object. 
+     * We use a simple 1-0 switching if-else block to make sure the switch happens every tick (If 0, we are on img2. If 1, we are on img1.)
+     * The mother object has the field currImageFlag built into it so that this switching can happen.
+     */
+    updateMotherHen(){
+      let currMom = this.mother;
+      let currMomImage = currMom.firstChild;
+      let flag = currMom.currImageFlag;
+
+      currMomImage.src = (flag == 1) ? 'images/mother_hen/Mother_Hen_2.svg' : 'images/mother_hen/Mother_Hen_1.svg';
+      currMom.currImageFlag = flag * -1;
+    }    
 
   }
   
