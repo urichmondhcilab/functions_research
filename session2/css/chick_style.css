@@ -21,8 +21,6 @@ html, body {
 .motherCont{
   width: 12%;
   aspect-ratio: 9/12 ;
-  /* height: 25%; */
-  /* border: 0.1rem solid red; */
 }
 
 .mother{
@@ -61,7 +59,6 @@ html, body {
   background-repeat: no-repeat;
     width: 27vw;
     height: 56vw;
-    /* height: 100vh; */
     position: fixed;
     right: 0px;
     z-index: 2;
@@ -85,7 +82,6 @@ html, body {
 .bottom-right {
     height: 40%;
     width: 75%;
-    /* padding-right: 3rem; */
     padding-bottom: 6%;
 }
 
@@ -113,18 +109,14 @@ html, body {
 }
 
 .drink {
-  /* background-color: #FFC940; */
   background-image: url("../images/game_buttons/drink_button.svg");
 }
 
 .eat {
-  /* background-color: white; */
-  /*color: #7EBB61; */
   background-image: url("../images/game_buttons/eat_button.svg");
 }
 
 .start{
-  /* background-color: #7EBB61; */
   background-image: url("../images/game_buttons/start_button.svg");  
 }
 
@@ -172,10 +164,7 @@ html, body {
 #trash{
   background-image: url('../images/game_buttons/trash_can.svg');
   margin-left: auto;
-  /* border: 0.5% solid white; */
-  /* box-sizing: border-box; */
 }
-
 
 #block-reset, #run, #trash{
   background-position: center;
@@ -183,7 +172,6 @@ html, body {
   background-repeat: no-repeat;
   width: 12%;
   aspect-ratio: 1/1;
-  /* height: 10%; */
   border-radius: 50%;
   background-color: white;
   padding: 1%;

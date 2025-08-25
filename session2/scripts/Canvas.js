@@ -90,7 +90,6 @@ function reorderItems(parent){
         translateValue = index * - 12;
         node.style.transform = `translate(0%, ${translateValue}%)`
         index++;
-
     }
 }
 

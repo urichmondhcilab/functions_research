@@ -95,9 +95,6 @@ class Bird{
    * update the bird position when the screen has been resized
    */
   updateBirdPosition(){
-    
-    // this.birdie.style.left= this.curTile.x;
-    // this.birdie.style.top = this.curTile.y; 
     console.log(this.curTile.height);
     let top = parseInt(slicePX(this.curTile.y) /*- slicePX(this.curTile.height) / 8*/);
     let left = parseInt(slicePX(this.curTile.x) + slicePX(this.curTile.width) / 4);  
@@ -110,17 +107,11 @@ class Bird{
   /**
    * update the bird sprite to a random sprite
    */
-  updateBird(){
-      // this.birdie.firstChild.src = "";
-      // console.log(this.selected);           
+  updateBird(){        
       if (this.selected){
-        if (this.selectionCount > chickSelectionStars.length - 1) this.selectionCount = 0
-        // console.log(this.selectedColorIndex);        
+        if (this.selectionCount > chickSelectionStars.length - 1) this.selectionCount = 0  
         this.selectionDiv.style.backgroundImage = `url(${chickSelectionStars[this.selectionCount++]})`;
-        this.birdie.firstChild.src = chickImagePaths[this.selectedColorIndex][Math.round (Math.random() * (chickImagePaths[this.selectedColorIndex].length - 1))];           
-        // console.log(Math.round (Math.random() * (chickImagePaths[this.selectedColorIndex].length - 1)));
-        // console.log(chickImagePaths[this.selectedColorIndex][Math.round (Math.random() * chickImagePaths[this.selectedColorIndex].length - 1)]);
-
+        this.birdie.firstChild.src = chickImagePaths[this.selectedColorIndex][Math.round (Math.random() * (chickImagePaths[this.selectedColorIndex].length - 1))]; 
       }
       else{
         this.birdie.firstChild.src = chickImagePaths[0][Math.round (Math.random() * (chickImagePaths[0].length - 1))];   
@@ -170,15 +161,18 @@ move(direction, curMaze) {
 
     //Gets the tile from updated indexes
     this.curTile = curMaze[this.yIndex][this.xIndex];
+  
+
     //Display in new position
     let top = parseInt(slicePX(this.curTile.y) /*- slicePX(this.curTile.height) / 8*/);
     let left = parseInt(slicePX(this.curTile.x) + slicePX(this.curTile.width) / 4);  
     this.birdie.style.left= `${left}px`;
     this.birdie.style.top = `${top}px`;  
     moveSound.play();   
-
-    // this.birdie.style.left = this.curTile.x;
-    // this.birdie.style.top = this.curTile.y;
+    if (this.curTile.state.name === "BLOCK"){   
+      this.die();
+      return;
+    }    
 }
 
 /**
@@ -216,6 +210,7 @@ drink() {
     this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
     this.birdie.deathImgFlag = 1;
     this.lifeSpan = 0;  
+    dieSound.play();
   }
 
 

@@ -87,7 +87,7 @@ const instructions = [{text: "click on a bird to program its path",
                         {   text: "click on the mother hen to program a path for all the chicks",
                             image_path: "images/mother_hen/Mother_Hen_1.svg"},
 
-                        {   text: "use the blocks to right to find a path through the maze",
+                        {   text: "use the blocks to the right to find a path through the maze",
                             image_path : "images/game_buttons/eat_button.svg"},
 
                         {   text: "drag the block you want into the blue space",
@@ -99,9 +99,12 @@ const instructions = [{text: "click on a bird to program its path",
 
 
 
-const moveSound = new Audio('sound_mp3/Movement.mp3');
-const eatSound = new Audio('sound_mp3/Eating.mp3');
-const drinkSound = new Audio('sound_mp3/Drinking.mp3');
+// const moveSound = new Audio('sound_mp3/Movement.mp3');
+const moveSound = new Audio('sound_mp3/move.wav');
+const eatSound = new Audio('sound_mp3/correct.wav');
+const drinkSound = new Audio('sound_mp3/correct.wav');
+const dieSound = new Audio('sound_mp3/die.wav');
+
 
 
 

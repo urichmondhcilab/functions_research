@@ -11,27 +11,19 @@
 
 .bird_container{
     width: 30%;
-    /* background-color: skyblue; */
 }
 
 #bird_img{
     width: 90%;
-    /* height: 10%; */
 }
 
 .instructions{
-    /* padding: 1%; */
     text-align: center;
     width: 70%;
     height: 100%;
-
-    /* border-radius: 0.2rem; */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    /* align-content: center; */
-    /* gap: 2%; */
-    /* background-color: red; */
 }
 
 .instructions-container{
@@ -52,48 +44,25 @@
     width: 100%;
     height: 100%;
     align-items: stretch;
-    /* background-color: blue; */
 }
 
 .instruction{
     color: white;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 2vw;
-
-    /* width: 70%; */
-    /* background-color: blue; */
-    /* align-self: center; */
-}
-
-.action{
-    /* background-color: brown; */
 }
 
 .action-btn{
     padding: 1%;
-    /* width: 20%; */
     border: none;
     border-radius: 0.1rem;
     color: white;
     background-color: #FFC940;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 2vw; 
-    /* margin: 1%;    */
-    /* text-align: center; */
 }
 
 .close-btn{
- /* align-self: flex-end;
- width: 3rem;
-height: 3rem;
- border-radius: 50%;
- padding: 1rem;
- border: none;
- margin: 2%;
- color: white;
- /* font-weight: bold; */
- /* text-align: center;
- font-size: 1rem; */
     align-self: flex-end;
     width: 1rem;
     height: 1rem;
@@ -125,7 +94,6 @@ height: 3rem;
 
 .session1_modules{
     width: 100%;
-    /* background-color: red; */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
