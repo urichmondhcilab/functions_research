@@ -172,7 +172,20 @@ move(direction, curMaze) {
     if (this.curTile.state.name === "BLOCK"){   
       this.die();
       return;
-    }    
+    }
+    
+    if (this.curTile.state.name == "END"){
+      console.log("ended maze!");
+
+      //Get current count in int form
+      let curFinishCount = parseInt(finished_counter.textContent, 10);
+      curFinishCount++;
+      finished_counter.textContent = curFinishCount;
+      this.lifeSpan = 0;
+      removeBirds(this.birdie);
+      //Disapear chick (animation/sound)
+      //update finished counter
+    }
 }
 
 /**
@@ -214,17 +227,17 @@ drink() {
   }
 
 
-  /**
-   * birds cannot be placed on a block
-   * @param {Object} maze 
-   */
+/**
+* birds cannot be placed on a block, start or end
+* @param {Object} maze 
+*/
   placeBird(maze){
     let mazeArray = maze.maze;
     let width = mazeArray.length;
     let height = mazeArray[0].length;
     let i = parseInt(Math.random() * width);
     let j = parseInt(Math.random() * height);
-    while (mazeArray[i][j].state.name == "BLOCK"){
+    while (mazeArray[i][j].state.name == "BLOCK" || mazeArray[i][j].state.name == "START" || mazeArray[i][j].state.name == "END"){
       i = parseInt(Math.random() * width);
       j = parseInt(Math.random() * height);
     }

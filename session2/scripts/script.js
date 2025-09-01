@@ -23,6 +23,7 @@ let gameInterval = null;
 let instructionIndex = 0;
 
 
+
 /**
  * animateGameObjects by changing sprites
  * runs setInterval 
@@ -34,13 +35,11 @@ function animateGameObjects(){
   gameInterval = setInterval(birdAction, speed);
 }
 
-
 function resetInterval(newSpeed){
   speed = newSpeed;
   clearInterval(gameInterval);
   gameInterval = setInterval(birdAction, speed);  
 }
-
 
 /**
  * In a time interval, if we have not exceeded the maximum number of birds,
@@ -166,9 +165,17 @@ async function birdAction(){
   motherHen.updateMotherHen();
   updateBirds();
   allBirds = allBirds.filter(removeBirds);
+  //Checks if GameOver Conditions are met
+  gameOverCheck();
   await runCode();
 }
 
+function gameOverCheck(){
+  if (birdCounter == 0){
+    GameOverElement = document.getElementById("game_over");
+    GameOverElement.style.display = 'flex';
+  }
+}
 
 /**
  * resets the current number of birds 
@@ -176,12 +183,16 @@ async function birdAction(){
  * clears the array of birds
  */
 function reset(){
-  currentNumberOfBirds = 0;
+  birdCounter = 0;
+  currentNumberOfBirds = birdCounter;
+  point_number.textContent = birdCounter;
   allBirds.forEach((bird, i) => {
     game_canvas.removeChild(bird.birdie);
   });
   resetInterval(CREATE_BIRD_SPEED);
   allBirds = [];
+  GameOverElement = document.getElementById("game_over");
+  GameOverElement.style.display = 'none';
 }
 
 
@@ -277,6 +288,7 @@ function initSession2EventListeners(){
   // window.addEventListener('load', animateGameObjects);
   window.addEventListener('resize', repositionGameObjects);
   reset_btn.addEventListener('click', reset);
+  game_reset_button.addEventListener('click', reset);
   runObject.addEventListener('click', initializeBlockIdentifiers);
 
   // Add event listeners for drag and drop functionality on the canvas
