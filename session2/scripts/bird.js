@@ -223,7 +223,7 @@ drink() {
     this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
     this.birdie.deathImgFlag = 1;
     this.lifeSpan = 0;  
-    dieSound.play();
+    dieSound.play();    
   }
 
 
@@ -237,11 +237,16 @@ drink() {
     let height = mazeArray[0].length;
     let i = parseInt(Math.random() * width);
     let j = parseInt(Math.random() * height);
-    while (mazeArray[i][j].state.name == "BLOCK" || mazeArray[i][j].state.name == "START" || mazeArray[i][j].state.name == "END"){
+    while (mazeArray[i][j].state.name == "BLOCK" || mazeArray[i][j].state.name == "START" || mazeArray[i][j].state.name == "END"|| mazeArray[i][j].occupied == true){
       i = parseInt(Math.random() * width);
       j = parseInt(Math.random() * height);
     }
     let tile = mazeArray[i][j];
+    //checks if it cann finish the maze from start position
+    if (!this.canFinishMaze(mazeArray, i, j)){
+      console.log(this.id + " can not finish the maze");
+    }
+    tile.occupied = true;
     let top = parseInt(slicePX(tile.y) /*+ slicePX(tile.height) / 16*/);
     let left = parseInt(slicePX(tile.x) + slicePX(tile.width) / 4);  
     this.birdie.style.left= `${left}px`;
@@ -249,5 +254,27 @@ drink() {
     this.curTile = tile;    
     this.xIndex = j;
     this.yIndex = i;
+  }
+
+  canFinishMaze(maze, x,y, visited = new Set()){
+    if (x <0 || y <0 ||  x >= maze.length || y >= maze[0].length){
+      return false;
+    }
+
+    //base case, wall, out of bounds, visited, return
+    if (maze[x][y].state.name == "BLOCK" || maze[x][y].state.name == "START" || visited.has(`${x},${y}`)){
+      return false;
+    }
+
+    //Returns true, if it can reach the end
+    if (maze[x][y].state.name == "END"){
+      return true;
+    }
+  
+    //adds to visited
+    visited.add(`${x},${y}`);
+
+    return (this.canFinishMaze(maze,x+1,y,visited) || this.canFinishMaze(maze,x-1,y,visited)
+     || this.canFinishMaze(maze,x,y+1,visited) || this.canFinishMaze(maze,x,y-1,visited))
   }
 }

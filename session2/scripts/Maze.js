@@ -83,6 +83,17 @@ class Maze{
         }        
     }
 
+    //can be used to change maze/recreate the format for full reset
+    mazeRevert(){
+        for (let i=0; i<this.maze.length; i++){
+            for(let j=0; j < this.maze[i].length; j++){
+                this.maze[i][j].occupied = false;
+            }
+        }
+
+    }
+
+
 
     #init(startX, startY, width, height){
         // compute the width and height of each tile

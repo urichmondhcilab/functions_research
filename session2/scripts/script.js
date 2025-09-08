@@ -56,6 +56,7 @@ function createBird(maze){
     allBirds[currentNumberOfBirds] = birdie;
     currentNumberOfBirds++;
     birdCounter++;
+    
   }else if (speed === CREATE_BIRD_SPEED){
     resetInterval(NORMAL_SPEED);
   }
@@ -191,10 +192,16 @@ function reset(){
   });
   resetInterval(CREATE_BIRD_SPEED);
   allBirds = [];
+  if (maze) {
+    maze.mazeRevert();
+  }
   GameOverElement = document.getElementById("game_over");
   GameOverElement.style.display = 'none';
 }
 
+function resetMaze(){
+  
+}
 
 /**
  * recomputes the position of the bird each time the screen is resized
