@@ -17,6 +17,7 @@ class Bird{
   constructor(birdId, maze){
     // give the bird an id
     this.id = birdId;
+    this.maze = maze
 
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
     let birdDiv = document.createElement('div');
@@ -158,10 +159,13 @@ move(direction, curMaze) {
           this.xIndex = Math.min(this.xIndex + 1, NUMBER_OF_TILES_X - 1);
             break;
       }
-
+    //Tile no longer occupied
+    //NEEDS TO ACCOUNT FOR BIRDS
+    this.curTile.occupied = false;
     //Gets the tile from updated indexes
     this.curTile = curMaze[this.yIndex][this.xIndex];
-  
+    this.curTile.occupied = true;
+
 
     //Display in new position
     let top = parseInt(slicePX(this.curTile.y) /*- slicePX(this.curTile.height) / 8*/);
@@ -181,8 +185,7 @@ move(direction, curMaze) {
       let curFinishCount = parseInt(finished_counter.textContent, 10);
       curFinishCount++;
       finished_counter.textContent = curFinishCount;
-      this.lifeSpan = 0;
-      removeBirds(this.birdie);
+      // this.lifeSpan = 0;
       //Disapear chick (animation/sound)
       //update finished counter
     }
@@ -215,15 +218,21 @@ drink() {
     }
   }
 
-
+      //this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
+    //this.birdie.deathImgFlag = 1;
 /**
  * call to remove bird from list of birds
  */
   die(){
-    this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
-    this.birdie.deathImgFlag = 1;
-    this.lifeSpan = 0;  
-    dieSound.play();    
+    if(this.curTile){
+      this.curTile.occupied = false;
+    }
+
+    dieSound.play();
+    //lifespan resets
+    this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
+    //Places bird on new open spot in maze.
+    this.placeBird(maze);
   }
 
 
@@ -242,10 +251,6 @@ drink() {
       j = parseInt(Math.random() * height);
     }
     let tile = mazeArray[i][j];
-    //checks if it cann finish the maze from start position
-    if (!this.canFinishMaze(mazeArray, i, j)){
-      console.log(this.id + " can not finish the maze");
-    }
     tile.occupied = true;
     let top = parseInt(slicePX(tile.y) /*+ slicePX(tile.height) / 16*/);
     let left = parseInt(slicePX(tile.x) + slicePX(tile.width) / 4);  
@@ -254,27 +259,5 @@ drink() {
     this.curTile = tile;    
     this.xIndex = j;
     this.yIndex = i;
-  }
-
-  canFinishMaze(maze, x,y, visited = new Set()){
-    if (x <0 || y <0 ||  x >= maze.length || y >= maze[0].length){
-      return false;
-    }
-
-    //base case, wall, out of bounds, visited, return
-    if (maze[x][y].state.name == "BLOCK" || maze[x][y].state.name == "START" || visited.has(`${x},${y}`)){
-      return false;
-    }
-
-    //Returns true, if it can reach the end
-    if (maze[x][y].state.name == "END"){
-      return true;
-    }
-  
-    //adds to visited
-    visited.add(`${x},${y}`);
-
-    return (this.canFinishMaze(maze,x+1,y,visited) || this.canFinishMaze(maze,x-1,y,visited)
-     || this.canFinishMaze(maze,x,y+1,visited) || this.canFinishMaze(maze,x,y-1,visited))
   }
 }

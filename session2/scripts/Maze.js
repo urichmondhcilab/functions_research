@@ -54,6 +54,12 @@ class Maze{
         // game_canvas.appendChild(endTile.div);
         this.setStart();
         this.setEnd();
+        if (!this.canFinishMaze()){
+            console.log("can NOT finish the maze");
+          }
+        else{
+            console.log("can finish the maze")
+        }
     }
 
 
@@ -83,7 +89,8 @@ class Maze{
         }        
     }
 
-    //can be used to change maze/recreate the format for full reset
+    //right now, only replaces maze.occupied attributes, so maze and be refreshed,
+    //and chicks can then spawn anywhere again.
     mazeRevert(){
         for (let i=0; i<this.maze.length; i++){
             for(let j=0; j < this.maze[i].length; j++){
@@ -92,6 +99,39 @@ class Maze{
         }
 
     }
+
+  /**
+   * 
+   * @param {*} x, the chicks current x index in the maze, at intial call (0)
+   * @param {*} y, the chicks current x index in the maze, at initial call (0)
+   * @param {*} visited, a set that keeps track of indexes of maze already visited
+   * @returns Recursive call for all possible next moves from current spot.
+   */
+  canFinishMaze(x = 0,y = 0, visited = new Set()){
+    //Makes sure not out of bounds, if so ends recursion
+    if (x <0 || y <0 ||  x >= this.maze.length || y >= this.maze[0].length){
+      return false;
+    }
+
+    let tile = this.maze[x][y];
+
+    //Makes sure chicks path end if on a wall, the start or a previously visited tile
+    if (tile.state.name == "BLOCK" || visited.has(`${x},${y}`)){
+      return false;
+    }
+
+    //Returns true, if it can reach the end in some path
+    if (tile.state.name == "END"){
+      return true;
+    }
+  
+    //adds current index on maze to visited
+    visited.add(`${x},${y}`);
+    
+    //recurive call for all possible moves, only one true (at any call/level) needed for true, to return true.
+    return (this.canFinishMaze(x+1,y,visited) || this.canFinishMaze(x-1,y,visited)
+     || this.canFinishMaze(x,y+1,visited) || this.canFinishMaze(x,y-1,visited))
+  }
 
 
 

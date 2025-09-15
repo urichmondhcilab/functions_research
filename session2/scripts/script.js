@@ -98,9 +98,9 @@ function updateBirds(){
       currentBird.updateBird();
     }
 
-    if(currentBird && currentBird.birdie.deathImgFlag == 1){
-      currentBird.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
-    }
+    // if(currentBird && currentBird.birdie.deathImgFlag == 1){
+    //   currentBird.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
+    // }
   }
 }
 
@@ -131,22 +131,27 @@ function updateMotherHen(){
  * @param {Bird} bird 
  * @returns a boolean that indicates whether to keep or remove the bird
  */
-function removeBirds(bird){
+function respawnBirds(bird){
   point_number.textContent = birdCounter;
   if (!bird) return false;
   let keepBird = true;
   bird.lifeSpan = bird.lifeSpan - 1;
 
+  //figure out how to alter this to different animation
   if(bird.lifeSpan == 2){
     bird.birdie.deathImgFlag = 1;
   }
 
   if (bird.lifeSpan <= 0){
-    game_canvas.removeChild(bird.birdie);
-    keepBird = false;
-    birdCounter--;
+    bird.die();
+    return keepBird;
   }
-
+  //Checks if bird is on end tile, if so removes bird from allbirds
+  if(bird.curTile.state.name === "END"){
+    game_canvas.removeChild(bird.birdie);
+    birdCounter--;
+    return false;
+  }
   return keepBird;
 }
 
@@ -165,7 +170,7 @@ async function birdAction(){
   // updateMotherHen();
   motherHen.updateMotherHen();
   updateBirds();
-  allBirds = allBirds.filter(removeBirds);
+  allBirds = allBirds.filter(respawnBirds);
   //Checks if GameOver Conditions are met
   gameOverCheck();
   await runCode();
@@ -195,12 +200,28 @@ function reset(){
   if (maze) {
     maze.mazeRevert();
   }
+  finished_counter.textContent = "0"
   GameOverElement = document.getElementById("game_over");
   GameOverElement.style.display = 'none';
 }
 
+//Probably only either for game over or explicit choice, triggered by reset button at top
+//for now to show functionality
+/**
+ * calls reset() to reset birds and revert maze attributes (not needed)
+ * iterates through current maze and removes the DOM elements from the screen
+ * creates a new Maze
+ */
 function resetMaze(){
-  
+  reset();
+  if (maze){
+    for(let i =0; i<maze.maze.length; i++){
+      for(let j=0; j<maze.maze[i].length; j++){
+        game_canvas.removeChild(maze.maze[i][j].div);
+      }
+    }
+    maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
+  }
 }
 
 /**
@@ -294,7 +315,7 @@ function blockResetHandler(e){
 function initSession2EventListeners(){
   // window.addEventListener('load', animateGameObjects);
   window.addEventListener('resize', repositionGameObjects);
-  reset_btn.addEventListener('click', reset);
+  reset_btn.addEventListener('click', resetMaze);
   game_reset_button.addEventListener('click', reset);
   runObject.addEventListener('click', initializeBlockIdentifiers);
 
