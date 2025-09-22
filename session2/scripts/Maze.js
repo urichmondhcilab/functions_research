@@ -11,54 +11,63 @@ class Maze{
     constructor(startX, startY, endX, endY){
 
         this.#init(startX, startY, endX, endY);
-        // initialize maze to empty array. Each entry is a tile object
-        this.maze = [];
-        let currentX = Math.floor(startX);
-        let currentY = Math.floor(startY) + 1; //+ 1 is here to make the amount of tiles in the y 1-indexed
-        endX = Math.floor(endX);
-        endY = Math.floor(endY);
 
-        let i = 0;
-        let j = 0;
+        //Loops creation of maze, until one that can be finished from start is created.
+        this.travesable = false;
+        while (!this.travesable){
+            //removes any existing maze from DOM
+            this.removeMazeDOM();
 
-        //create each tile add add each tile to maze and the DOM
-        while (i < NUMBER_OF_TILES_Y){
-            let mazeY = [];     
-            j = 0;       
-            currentX = Math.floor(startX);
+            // initialize maze to empty array. Each entry is a tile object
+            this.maze = [];
+            let currentX = Math.floor(startX);
+            let currentY = Math.floor(startY) + 1; //+ 1 is here to make the amount of tiles in the y 1-indexed
+            endX = Math.floor(endX);
+            endY = Math.floor(endY);
 
-            while(j < NUMBER_OF_TILES_X){
-                let currentState = state[Math.floor(Math.random() * state.length)];
-                let tile = new Tile(currentX + 'px', currentY + 'px', this.tileWidth + 'px', this.tileHeight + 'px', currentState);
-            
-                game_canvas.appendChild(tile.div);
-                currentX = currentX + (this.tileWidth);
-                mazeY.push(tile)
-                j++;
+            let i = 0;
+            let j = 0;
+
+            //create each tile add add each tile to maze and the DOM
+            while (i < NUMBER_OF_TILES_Y){
+                let mazeY = [];     
+                j = 0;       
+                currentX = Math.floor(startX);
+
+                while(j < NUMBER_OF_TILES_X){
+                    let currentState = state[Math.floor(Math.random() * state.length)];
+                    let tile = new Tile(currentX + 'px', currentY + 'px', this.tileWidth + 'px', this.tileHeight + 'px', currentState);
+                
+                    game_canvas.appendChild(tile.div);
+                    currentX = currentX + (this.tileWidth);
+                    mazeY.push(tile)
+                    j++;
+                }
+
+                this.maze.push(mazeY)
+                currentY = currentY + (this.tileHeight);   
+                startX = Math.floor(startX * 0.7); //edit start x and end x to turn in with the background.
+                endX = Math.floor(endX * 1.1);
+                i++;
+            }        
+
+            // console.log(this.maze[0])
+            // i = this.maze.length - 1;
+            // j = this.maze[0].length - 1;
+            // let endTile = this.maze[i][j];
+            // game_canvas.removeChild(endTile.div);                
+            // this.maze[i][j] = new Tile(endTile.x, endTile.y, endTile.width, endTile.height, ENDSTATE); 
+            // endTile = this.maze[i][j];
+            // game_canvas.appendChild(endTile.div);
+            this.setStart();
+            this.setEnd();
+            if (!this.canFinishMaze()){
+                console.log("can NOT finish the maze");
             }
-
-            this.maze.push(mazeY)
-            currentY = currentY + (this.tileHeight);   
-            startX = Math.floor(startX * 0.7); //edit start x and end x to turn in with the background.
-            endX = Math.floor(endX * 1.1);
-            i++;
-        }        
-
-        // console.log(this.maze[0])
-        // i = this.maze.length - 1;
-        // j = this.maze[0].length - 1;
-        // let endTile = this.maze[i][j];
-        // game_canvas.removeChild(endTile.div);                
-        // this.maze[i][j] = new Tile(endTile.x, endTile.y, endTile.width, endTile.height, ENDSTATE); 
-        // endTile = this.maze[i][j];
-        // game_canvas.appendChild(endTile.div);
-        this.setStart();
-        this.setEnd();
-        if (!this.canFinishMaze()){
-            console.log("can NOT finish the maze");
-          }
-        else{
-            console.log("can finish the maze")
+            else{
+                console.log("can finish the maze");
+                this.travesable = true;
+            }
         }
     }
 
@@ -95,6 +104,19 @@ class Maze{
         for (let i=0; i<this.maze.length; i++){
             for(let j=0; j < this.maze[i].length; j++){
                 this.maze[i][j].occupied = false;
+            }
+        }
+    }
+
+    removeMazeDOM(){
+        if(!this.maze){
+            return;
+        }
+        for(let row of this.maze){
+            for(let tile of row){
+                if(tile && tile.div && tile.div.parentNode){
+                    tile.div.parentNode.removeChild(tile.div);
+                }
             }
         }
 
