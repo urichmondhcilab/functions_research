@@ -50,7 +50,9 @@ class Maze{
                 endX = Math.floor(endX * 1.1);
                 i++;
             }        
-
+            this.setStart();
+            this.setEnd();
+            
             // console.log(this.maze[0])
             // i = this.maze.length - 1;
             // j = this.maze[0].length - 1;
@@ -59,8 +61,7 @@ class Maze{
             // this.maze[i][j] = new Tile(endTile.x, endTile.y, endTile.width, endTile.height, ENDSTATE); 
             // endTile = this.maze[i][j];
             // game_canvas.appendChild(endTile.div);
-            this.setStart();
-            this.setEnd();
+
             if (!this.canFinishMaze()){
                 console.log("can NOT finish the maze");
             }
@@ -181,5 +182,9 @@ class Maze{
         this.maze[i][j] = new Tile(startTile.x, startTile.y, startTile.width, startTile.height, STARTSTATE); 
         startTile = this.maze[i][j];
         game_canvas.appendChild(startTile.div);        
-    }    
+    }
+
+    mazeCreate(){
+
+    }
 }

@@ -46,6 +46,7 @@ class Bird{
     this.yIndex = 0;
     this.selected = false;
     this.selectionCount = 0;
+    this.points = 5;
 
     // place birds on tiles
     this.placeBird(maze);
@@ -144,26 +145,39 @@ move(direction, curMaze) {
     return;
   }
 
+  let newX = this.xIndex;
+  let newY = this.yIndex;
   //adjusts the index of the tile to move to +-1
       switch (direction) {
         case "up":
-            this.yIndex = Math.max(this.yIndex - 1, 0);
+            newY = Math.max(newY - 1, 0);
             break;
         case "down":
-            this.yIndex = Math.min(this.yIndex + 1, NUMBER_OF_TILES_Y - 1);
+            newY = Math.min(newY + 1, NUMBER_OF_TILES_Y - 1);
             break;
         case "left":
-          this.xIndex = Math.max(this.xIndex - 1, 0);
+          newX = Math.max(newX - 1, 0);
             break;
         case "right":
-          this.xIndex = Math.min(this.xIndex + 1, NUMBER_OF_TILES_X - 1);
+          newX = Math.min(newX + 1, NUMBER_OF_TILES_X - 1);
             break;
       }
+
+    //Gets the tile from updated indexes, check if it will be a block
+    //if so returns
+    const newTile = curMaze[newY][newX];
+    if (newTile.state.name === "BLOCK"){
+      dieSound.play();
+      this.updatePoints(-1);
+      return;
+    }
     //Tile no longer occupied
-    //NEEDS TO ACCOUNT FOR BIRDS
     this.curTile.occupied = false;
-    //Gets the tile from updated indexes
-    this.curTile = curMaze[this.yIndex][this.xIndex];
+    //else sets this. variables
+    this.xIndex = newX;
+    this.yIndex = newY;
+    this.curTile = newTile;
+    //new tile now occupied
     this.curTile.occupied = true;
 
 
@@ -173,14 +187,15 @@ move(direction, curMaze) {
     this.birdie.style.left= `${left}px`;
     this.birdie.style.top = `${top}px`;  
     moveSound.play();   
+
     if (this.curTile.state.name === "BLOCK"){   
-      this.die();
+      //this.die();
       return;
     }
     
     if (this.curTile.state.name == "END"){
       console.log("ended maze!");
-
+      this.updatePoints(10);
       //Get current count in int form
       let curFinishCount = parseInt(finished_counter.textContent, 10);
       curFinishCount++;
@@ -199,6 +214,7 @@ drink() {
   if(this.curTile.state.name == "WATER"){
     this.birdie.firstChild.src = 'images/chicks/Squarton_splashing.svg';
     drinkSound.play();
+    this.updatePoints(1);
   }else{
     this.die();
   }
@@ -213,6 +229,7 @@ drink() {
   if(this.curTile.state.name == "FOOD"){
       this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
       eatSound.play();
+      this.updatePoints(1);
     }else{
       this.die();
     }
@@ -227,7 +244,7 @@ drink() {
     if(this.curTile){
       this.curTile.occupied = false;
     }
-
+    this.updatePoints(-1);
     dieSound.play();
     //lifespan resets
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
@@ -259,5 +276,14 @@ drink() {
     this.curTile = tile;    
     this.xIndex = j;
     this.yIndex = i;
+  }
+
+/**
+ * takes in an int and adjusts the birds point total to its value
+ * @param {int} val, value of points to be updated
+ */
+  updatePoints(val){
+    this.points += val;
+    console.log(this.points)
   }
 }

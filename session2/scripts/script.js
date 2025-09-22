@@ -224,6 +224,7 @@ function resetMaze(){
   }
 }
 
+
 /**
  * recomputes the position of the bird each time the screen is resized
  * by recomputing the centerLeft, centerTop, and radius 
@@ -325,6 +326,8 @@ function initSession2EventListeners(){
 
   // reset button clears all the blocks from the canvas, but does not reset the chicken
   document.getElementById('block-reset').addEventListener('click', blockResetHandler);
+
+  //Monitor activity that leads to points
 }
 
 
