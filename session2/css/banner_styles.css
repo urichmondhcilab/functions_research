@@ -65,23 +65,42 @@
     left: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2);
+    grid-template-rows: repeat(2, 1fr);
     gap: .5rem;
     align-items: center;
     flex-shrink: 1;
     background-color: transparent;
+    padding-top: 2rem;
+    justify-items: center;
+}
+
+.point_display{
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    gap: .03rem;
+    width: 4.5rem;
+    height: 2rem;
+}
+
+.chick_icon{
+    height: 100%;
+    /* width: auto; */
+     max-width: 40%; 
+    object-fit: contain;
+    /* flex-basis: 30%; */
+    /* flex-shrink: 0; */
 }
 
 .point_count{
     display: flex;
     width: 100%;
-    height: 100%;
     color: white;
-    background-color: rgb(0, 0, 0);
     padding: .2vw;
     border-radius: .2em;
     text-align: center;
-    display: block;
+    white-space: nowrap;
+    flex: 1;
 }
 
 .login-popup {
