@@ -15,11 +15,11 @@
   font-size: 1.5vw;
 }
 
+
 .back a{
     color: inherit;
     text-decoration: inherit;
 }
-
 
 .banner {
     height: 3rem;
@@ -31,7 +31,7 @@
     font-family: sans-serif;
     position: fixed;
     left: 0px;
-    /* right: 0px; */
+    flex-wrap: nowrap;
 }
 
 .banner h3 {
@@ -59,6 +59,29 @@
 .banner button:active {
     background-color: #6C7C17;
     /* background-color: rgb(110, 168, 23); */
+}
+
+.points_container{
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2);
+    gap: .5rem;
+    align-items: center;
+    flex-shrink: 1;
+    background-color: transparent;
+}
+
+.point_count{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: rgb(0, 0, 0);
+    padding: .2vw;
+    border-radius: .2em;
+    text-align: center;
+    display: block;
 }
 
 .login-popup {

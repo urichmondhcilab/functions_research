@@ -47,6 +47,7 @@ class Bird{
     this.selected = false;
     this.selectionCount = 0;
     this.points = 5;
+    this.finished = false;
 
     // place birds on tiles
     this.placeBird(maze);
@@ -59,6 +60,13 @@ class Bird{
     selectionDiv.addEventListener("click", this.displayCodeEditor);
 
     game_canvas.appendChild(this.birdie);
+
+    //make a lifespan DOM elements:
+    this.point_count = document.createElement("div");
+    this.point_count.id = this.id + ' points';
+    this.point_count.className = 'point_count';
+    this.point_count.innerText = this.id + ': ' + this.lifeSpan;
+    document.getElementById("points_container").appendChild(this.point_count);
   }
 
   /**
@@ -118,6 +126,16 @@ class Bird{
       else{
         this.birdie.firstChild.src = chickImagePaths[0][Math.round (Math.random() * (chickImagePaths[0].length - 1))];   
       }
+  }
+
+  /**
+   * Redcuce Lifespan by 1, update counter
+   */
+  pointDecrement(){
+    if(!this.finished){
+      this.lifeSpan = this.lifeSpan - 1;
+      this.point_count.innerText = this.id + ': ' + this.lifeSpan;
+    }
   }
 
 /**
@@ -197,9 +215,11 @@ move(direction, curMaze) {
       console.log("ended maze!");
       this.updatePoints(10);
       //Get current count in int form
-      let curFinishCount = parseInt(finished_counter.textContent, 10);
-      curFinishCount++;
-      finished_counter.textContent = curFinishCount;
+      this.finished = true;
+      this.point_count.innerText = this.id + ': ' + '!!!';
+      // curFinishCount++;
+      // finished_counter.textContent = curFinishCount;
+      this.point_count.style.backgroundColor = "green";
       // this.lifeSpan = 0;
       //Disapear chick (animation/sound)
       //update finished counter

@@ -135,8 +135,7 @@ function respawnBirds(bird){
   point_number.textContent = birdCounter;
   if (!bird) return false;
   let keepBird = true;
-  bird.lifeSpan = bird.lifeSpan - 1;
-
+  bird.pointDecrement();
   //figure out how to alter this to different animation
   if(bird.lifeSpan == 2){
     bird.birdie.deathImgFlag = 1;
