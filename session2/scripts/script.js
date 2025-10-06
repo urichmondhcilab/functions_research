@@ -22,8 +22,9 @@ let NORMAL_SPEED = 200;
 let gameInterval = null;
 let instructionIndex = 0;
 
-
-
+let nextGame = false;
+let curLevel = 0;
+let mazeElements = 3;
 /**
  * animateGameObjects by changing sprites
  * runs setInterval 
@@ -51,6 +52,7 @@ function resetInterval(newSpeed){
  * Remove event listener, remove redundance
  */
 function createBird(maze){
+  //if (!maze) return;
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
     let birdie = new Bird(currentNumberOfBirds, maze);
     allBirds[currentNumberOfBirds] = birdie;
@@ -163,11 +165,17 @@ function respawnBirds(bird){
  * It keeps the birds for which removeBird returns true.
  */
 async function birdAction(){
-  // console.log(maze);
-  createMother();
-  createBird(maze);
-  // updateMotherHen();
-  motherHen.updateMotherHen();
+  //createMother();
+  if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
+    createBird(maze);
+  }
+  resetInterval(NORMAL_SPEED);
+
+  if(motherHen){
+    updateMotherHen();
+    motherHen.updateMotherHen();
+  }
+
   updateBirds();
   allBirds = allBirds.filter(respawnBirds);
   //Checks if GameOver Conditions are met
@@ -176,11 +184,42 @@ async function birdAction(){
 }
 
 function gameOverCheck(){
-  if (birdCounter == 0){
-    GameOverElement = document.getElementById("game_over");
-    GameOverElement.style.display = 'flex';
+  if (birdCounter == 0 || nextGame == true){
+    nextGame = false;
+    newLevel();
   }
 }
+
+function newLevel(){
+  curLevel++;
+  //INSERT: Display transistion/instructions
+  if (curLevel > MAX_LEVEL){
+    GameOverElement = document.getElementById("game_over");
+    GameOverElement.style.display = 'flex';
+    return;
+  }
+    newLevelConfig(curLevel);
+}
+
+function newLevelConfig(level){
+  const levelconfig = levelAttributes[level];
+  if (!levelconfig) return;
+
+  console.log(`Start Level: ${level}`);
+
+  //Gets the level set number of birds (int), include mother (bool) and range of states (int)
+  MAX_NUMBER_OF_BIRDS = levelconfig.max_Birds;
+  createMom = levelconfig.mother_include;
+  mazeElements = levelconfig.state_range;
+  
+  //Resets birds
+  reset();
+  //Resets Maze
+  resetMaze();
+  if (createMom){
+    createMother();
+  }
+  }
 
 /**
  * resets the current number of birds 
@@ -199,9 +238,17 @@ function reset(){
   if (maze) {
     maze.mazeRevert();
   }
-  finished_counter.textContent = "0"
+  if(motherHen){
+    game_canvas.removeChild(motherHen.mother);
+    motherHen = null;
+  }
+
+  //finished_counter.textContent = "0"
   GameOverElement = document.getElementById("game_over");
   GameOverElement.style.display = 'none';
+  
+  let ChickDisplay = document.getElementById("points_container");
+  ChickDisplay.innerHTML = ""
 }
 
 //Probably only either for game over or explicit choice, triggered by reset button at top
@@ -212,17 +259,19 @@ function reset(){
  * creates a new Maze
  */
 function resetMaze(){
-  reset();
   if (maze){
     for(let i =0; i<maze.maze.length; i++){
       for(let j=0; j<maze.maze[i].length; j++){
         game_canvas.removeChild(maze.maze[i][j].div);
       }
     }
-    maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
   }
+  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight, mazeElements); 
 }
 
+function nextLevel(){
+  nextGame = true;
+}
 
 /**
  * recomputes the position of the bird each time the screen is resized
@@ -327,6 +376,9 @@ function initSession2EventListeners(){
   document.getElementById('block-reset').addEventListener('click', blockResetHandler);
 
   //Monitor activity that leads to points
+
+  //Allows to skip to next level of game
+  document.getElementById('nextLevel').addEventListener('click', nextLevel);
 }
 
 
@@ -369,12 +421,10 @@ function displayInstructionsBackwards(){
 
 function closeInstructions(){
     hintContainer.style.display = "none";
-    startGame();  
+    startGame();
 }
 
 // start game
 nextButton.addEventListener('click', displayInstructions);
 closeButton.addEventListener('click', closeInstructions);
-backButton.addEventListener('click', displayInstructionsBackwards)
-
-
+backButton.addEventListener('click', displayInstructionsBackwards);

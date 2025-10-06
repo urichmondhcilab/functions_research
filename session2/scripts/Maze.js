@@ -8,18 +8,18 @@ class Maze{
      * @param {Number} endX The end pixel of the Maze along the horizontal
      * @param {Number} endY The end pixel of the Maze along the vertical
      */
-    constructor(startX, startY, endX, endY){
+    constructor(startX, startY, endX, endY, stateLen=3){
 
-        this.#init(startX, startY, endX, endY);
+        this.#init(startX, startY, endX, endY, stateLen);
 
         //Loops creation of maze, until one that can be finished from start is created.
         this.travesable = false;
         while (!this.travesable){
-            this.generateMaze(startX, startY, endX, endY);
+            this.generateMaze(startX, startY, endX, endY, stateLen);
         }
     }
 
-    generateMaze(startX, startY, endX, endY){
+    generateMaze(startX, startY, endX, endY, stateLen){
         this.removeMazeDOM();
                    //removes any existing maze from DOM
                    this.removeMazeDOM();
@@ -41,7 +41,7 @@ class Maze{
                        currentX = Math.floor(startX);
        
                        while(j < NUMBER_OF_TILES_X){
-                           let currentState = state[Math.floor(Math.random() * state.length)];
+                           let currentState = state[Math.floor(Math.random() * stateLen)];
                            let tile = new Tile(currentX + 'px', currentY + 'px', this.tileWidth + 'px', this.tileHeight + 'px', currentState);
                        
                            game_canvas.appendChild(tile.div);

@@ -1,6 +1,8 @@
 const MIN_LIFE_SPAN = 100;
 const MAX_LIFE_SPAN = 500; // actually 100 + 500
-const MAX_NUMBER_OF_BIRDS = 8;
+let MAX_NUMBER_OF_BIRDS = 1;
+//Edit
+
 
 // const HEIGHT_OFFSET = window.innerHeight / 4;
 // const WIDTH_OFFSET = Math.min(window.innerWidth, window.innerHeight) / 4;
@@ -41,15 +43,6 @@ const chickSelectionStars = ['images/star_animation_frames/one.svg',
     'images/star_animation_frames/six.svg',
     'images/star_animation_frames/seven.svg'];
 const state = [
-    {   name : "BLOCK",
-        image_path : "images/boulder_and_interface/boulder.svg"
-    },
-    {   name : "WATER",
-        image_path: "images/water/water.svg"
-    },
-    {   name : "FOOD",
-        image_path: "images/food/food.svg"
-    },
     {   name : "PLANK",
         image_path : "images/planks/plank.svg"
     },   
@@ -58,7 +51,16 @@ const state = [
     },     
     {   name : "PLANK",
         image_path : "images/planks/plank.svg"
-    },            
+    },      
+    {   name : "WATER",
+        image_path: "images/water/water.svg"
+    },
+    {   name : "FOOD",
+        image_path: "images/food/food.svg"
+    },
+    {   name : "BLOCK",
+        image_path : "images/boulder_and_interface/boulder.svg"
+    }
 ]
 
 const ENDSTATE = {
@@ -97,14 +99,37 @@ const instructions = [{text: "click on a bird to program its path",
                             image_path : "images/chicks/squarton_dead.svg"
                        } ];
 
+const levelAttributes = {
+    1:{
+        description: "Level 1, 1 Bird, food, water, planks",
+        max_Birds: 1,
+        state_range: 5,
+        mother_include: false,
+    },
+    2:{
+        description: "Level 2, 1 Bird, full maze",
+        max_Birds: 1,
+        state_range: 6,
+        mother_include: false,
+    },
+    3:{
+        description: "Level 3, 3 Birds, full maze",
+        max_Birds: 3,
+        state_range: 6,
+        mother_include: true,
+    },
+    4:{
+        description: "Level 4, 8 Birds, full maze",
+        max_Birds: 8,
+        state_range: 6,
+        mother_include: true,
+    },
+}
 
+let MAX_LEVEL = 4;
 
 // const moveSound = new Audio('sound_mp3/Movement.mp3');
 const moveSound = new Audio('sound_mp3/move.wav');
 const eatSound = new Audio('sound_mp3/correct.wav');
 const drinkSound = new Audio('sound_mp3/correct.wav');
 const dieSound = new Audio('sound_mp3/die.wav');
-
-
-
-
