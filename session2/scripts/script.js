@@ -22,7 +22,9 @@ let NORMAL_SPEED = 200;
 let gameInterval = null;
 let instructionIndex = 0;
 
-
+let nextGame = false;
+let curLevel = 0;
+let mazeElements = 3;
 /**
  * animateGameObjects by changing sprites
  * runs setInterval 
@@ -34,13 +36,11 @@ function animateGameObjects(){
   gameInterval = setInterval(birdAction, speed);
 }
 
-
 function resetInterval(newSpeed){
   speed = newSpeed;
   clearInterval(gameInterval);
   gameInterval = setInterval(birdAction, speed);  
 }
-
 
 /**
  * In a time interval, if we have not exceeded the maximum number of birds,
@@ -52,11 +52,13 @@ function resetInterval(newSpeed){
  * Remove event listener, remove redundance
  */
 function createBird(maze){
+  //if (!maze) return;
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
     let birdie = new Bird(currentNumberOfBirds, maze);
     allBirds[currentNumberOfBirds] = birdie;
     currentNumberOfBirds++;
     birdCounter++;
+    
   }else if (speed === CREATE_BIRD_SPEED){
     resetInterval(NORMAL_SPEED);
   }
@@ -98,9 +100,9 @@ function updateBirds(){
       currentBird.updateBird();
     }
 
-    if(currentBird && currentBird.birdie.deathImgFlag == 1){
-      currentBird.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
-    }
+    // if(currentBird && currentBird.birdie.deathImgFlag == 1){
+    //   currentBird.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
+    // }
   }
 }
 
@@ -131,22 +133,26 @@ function updateMotherHen(){
  * @param {Bird} bird 
  * @returns a boolean that indicates whether to keep or remove the bird
  */
-function removeBirds(bird){
+function respawnBirds(bird){
   point_number.textContent = birdCounter;
   if (!bird) return false;
   let keepBird = true;
-  bird.lifeSpan = bird.lifeSpan - 1;
-
+  bird.pointDecrement();
+  //figure out how to alter this to different animation
   if(bird.lifeSpan == 2){
     bird.birdie.deathImgFlag = 1;
   }
 
   if (bird.lifeSpan <= 0){
-    game_canvas.removeChild(bird.birdie);
-    keepBird = false;
-    birdCounter--;
+    bird.die();
+    return keepBird;
   }
-
+  //Checks if bird is on end tile, if so removes bird from allbirds
+  if(bird.curTile.state.name === "END"){
+    game_canvas.removeChild(bird.birdie);
+    birdCounter--;
+    return false;
+  }
   return keepBird;
 }
 
@@ -159,16 +165,61 @@ function removeBirds(bird){
  * It keeps the birds for which removeBird returns true.
  */
 async function birdAction(){
-  // console.log(maze);
-  createMother();
-  createBird(maze);
-  // updateMotherHen();
-  motherHen.updateMotherHen();
+  //createMother();
+  if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
+    createBird(maze);
+  }
+  resetInterval(NORMAL_SPEED);
+
+  if(motherHen){
+    updateMotherHen();
+    motherHen.updateMotherHen();
+  }
+
   updateBirds();
-  allBirds = allBirds.filter(removeBirds);
+  allBirds = allBirds.filter(respawnBirds);
+  //Checks if GameOver Conditions are met
+  gameOverCheck();
   await runCode();
 }
 
+function gameOverCheck(){
+  if (birdCounter == 0 || nextGame == true){
+    nextGame = false;
+    newLevel();
+  }
+}
+
+function newLevel(){
+  curLevel++;
+  //INSERT: Display transistion/instructions
+  if (curLevel > MAX_LEVEL){
+    GameOverElement = document.getElementById("game_over");
+    GameOverElement.style.display = 'flex';
+    return;
+  }
+    newLevelConfig(curLevel);
+}
+
+function newLevelConfig(level){
+  const levelconfig = levelAttributes[level];
+  if (!levelconfig) return;
+
+  console.log(`Start Level: ${level}`);
+
+  //Gets the level set number of birds (int), include mother (bool) and range of states (int)
+  MAX_NUMBER_OF_BIRDS = levelconfig.max_Birds;
+  createMom = levelconfig.mother_include;
+  mazeElements = levelconfig.state_range;
+  
+  //Resets birds
+  reset();
+  //Resets Maze
+  resetMaze();
+  if (createMom){
+    createMother();
+  }
+  }
 
 /**
  * resets the current number of birds 
@@ -176,14 +227,51 @@ async function birdAction(){
  * clears the array of birds
  */
 function reset(){
-  currentNumberOfBirds = 0;
+  birdCounter = 0;
+  currentNumberOfBirds = birdCounter;
+  point_number.textContent = birdCounter;
   allBirds.forEach((bird, i) => {
     game_canvas.removeChild(bird.birdie);
   });
   resetInterval(CREATE_BIRD_SPEED);
   allBirds = [];
+  if (maze) {
+    maze.mazeRevert();
+  }
+  if(motherHen){
+    game_canvas.removeChild(motherHen.mother);
+    motherHen = null;
+  }
+
+  //finished_counter.textContent = "0"
+  GameOverElement = document.getElementById("game_over");
+  GameOverElement.style.display = 'none';
+  
+  let ChickDisplay = document.getElementById("points_container");
+  ChickDisplay.innerHTML = ""
 }
 
+//Probably only either for game over or explicit choice, triggered by reset button at top
+//for now to show functionality
+/**
+ * calls reset() to reset birds and revert maze attributes (not needed)
+ * iterates through current maze and removes the DOM elements from the screen
+ * creates a new Maze
+ */
+function resetMaze(){
+  if (maze){
+    for(let i =0; i<maze.maze.length; i++){
+      for(let j=0; j<maze.maze[i].length; j++){
+        game_canvas.removeChild(maze.maze[i][j].div);
+      }
+    }
+  }
+  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight, mazeElements); 
+}
+
+function nextLevel(){
+  nextGame = true;
+}
 
 /**
  * recomputes the position of the bird each time the screen is resized
@@ -276,7 +364,8 @@ function blockResetHandler(e){
 function initSession2EventListeners(){
   // window.addEventListener('load', animateGameObjects);
   window.addEventListener('resize', repositionGameObjects);
-  reset_btn.addEventListener('click', reset);
+  reset_btn.addEventListener('click', resetMaze);
+  game_reset_button.addEventListener('click', reset);
   runObject.addEventListener('click', initializeBlockIdentifiers);
 
   // Add event listeners for drag and drop functionality on the canvas
@@ -285,6 +374,11 @@ function initSession2EventListeners(){
 
   // reset button clears all the blocks from the canvas, but does not reset the chicken
   document.getElementById('block-reset').addEventListener('click', blockResetHandler);
+
+  //Monitor activity that leads to points
+
+  //Allows to skip to next level of game
+  document.getElementById('nextLevel').addEventListener('click', nextLevel);
 }
 
 
@@ -327,12 +421,10 @@ function displayInstructionsBackwards(){
 
 function closeInstructions(){
     hintContainer.style.display = "none";
-    startGame();  
+    startGame();
 }
 
 // start game
 nextButton.addEventListener('click', displayInstructions);
 closeButton.addEventListener('click', closeInstructions);
-backButton.addEventListener('click', displayInstructionsBackwards)
-
-
+backButton.addEventListener('click', displayInstructionsBackwards);

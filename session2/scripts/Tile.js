@@ -17,6 +17,7 @@ class Tile{
         this.width = width;
         this.height = height;
         this.state = state;
+        this.occupied = false;
 
         // html element properties
         this.div = document.createElement("div");

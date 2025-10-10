@@ -17,6 +17,7 @@ class Bird{
   constructor(birdId, maze){
     // give the bird an id
     this.id = birdId;
+    this.maze = maze
 
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
     let birdDiv = document.createElement('div');
@@ -45,6 +46,7 @@ class Bird{
     this.yIndex = 0;
     this.selected = false;
     this.selectionCount = 0;
+    this.finished = false;
 
     // place birds on tiles
     this.placeBird(maze);
@@ -57,6 +59,26 @@ class Bird{
     selectionDiv.addEventListener("click", this.displayCodeEditor);
 
     game_canvas.appendChild(this.birdie);
+
+    //create a point_display div to hold chick image and point counter
+    this.point_display = document.createElement('div');
+    this.point_display.className = 'point_display'
+
+    //creates a chick image for each chick in point counter
+    this.chick_Icon = document.createElement("img");
+    this.chick_Icon.src = chickImagePaths[0][0];
+    this.chick_Icon.className = "chick_icon";
+
+    //Create a assocaited count for lifespan points
+    this.point_count = document.createElement("div");
+    this.point_count.id = this.id + ' points';
+    this.point_count.className = 'point_count';
+    this.point_count.innerText = ': ' + this.lifeSpan;
+
+    this.point_display.appendChild(this.chick_Icon);
+    this.point_display.appendChild(this.point_count);
+
+    document.getElementById("points_container").appendChild(this.point_display);
   }
 
   /**
@@ -111,11 +133,25 @@ class Bird{
       if (this.selected){
         if (this.selectionCount > chickSelectionStars.length - 1) this.selectionCount = 0  
         this.selectionDiv.style.backgroundImage = `url(${chickSelectionStars[this.selectionCount++]})`;
-        this.birdie.firstChild.src = chickImagePaths[this.selectedColorIndex][Math.round (Math.random() * (chickImagePaths[this.selectedColorIndex].length - 1))]; 
+        let chick_color = chickImagePaths[this.selectedColorIndex][Math.round (Math.random() * (chickImagePaths[this.selectedColorIndex].length - 1))];
+        this.birdie.firstChild.src = chick_color; 
+        this.chick_Icon.src = chick_color;
       }
       else{
-        this.birdie.firstChild.src = chickImagePaths[0][Math.round (Math.random() * (chickImagePaths[0].length - 1))];   
+        let chick_color = chickImagePaths[0][Math.round (Math.random() * (chickImagePaths[0].length - 1))];
+        this.birdie.firstChild.src = chick_color;
+        this.chick_Icon.src = chick_color;   
       }
+  }
+
+  /**
+   * Redcuce Lifespan by 1, update counter
+   */
+  pointDecrement(){
+    if(!this.finished){
+      this.lifeSpan = this.lifeSpan - 1;
+      this.point_count.innerText = ': ' + this.lifeSpan;
+    }
   }
 
 /**
@@ -143,25 +179,41 @@ move(direction, curMaze) {
     return;
   }
 
+  let newX = this.xIndex;
+  let newY = this.yIndex;
   //adjusts the index of the tile to move to +-1
       switch (direction) {
         case "up":
-            this.yIndex = Math.max(this.yIndex - 1, 0);
+            newY = Math.max(newY - 1, 0);
             break;
         case "down":
-            this.yIndex = Math.min(this.yIndex + 1, NUMBER_OF_TILES_Y - 1);
+            newY = Math.min(newY + 1, NUMBER_OF_TILES_Y - 1);
             break;
         case "left":
-          this.xIndex = Math.max(this.xIndex - 1, 0);
+          newX = Math.max(newX - 1, 0);
             break;
         case "right":
-          this.xIndex = Math.min(this.xIndex + 1, NUMBER_OF_TILES_X - 1);
+          newX = Math.min(newX + 1, NUMBER_OF_TILES_X - 1);
             break;
       }
 
-    //Gets the tile from updated indexes
-    this.curTile = curMaze[this.yIndex][this.xIndex];
-  
+    //Gets the tile from updated indexes, check if it will be a block
+    //if so returns
+    const newTile = curMaze[newY][newX];
+    if (newTile.state.name === "BLOCK"){
+      dieSound.play();
+      this.updatePoints(-25);
+      return;
+    }
+    //Tile no longer occupied
+    this.curTile.occupied = false;
+    //else sets this. variables
+    this.xIndex = newX;
+    this.yIndex = newY;
+    this.curTile = newTile;
+    //new tile now occupied
+    this.curTile.occupied = true;
+
 
     //Display in new position
     let top = parseInt(slicePX(this.curTile.y) /*- slicePX(this.curTile.height) / 8*/);
@@ -169,10 +221,23 @@ move(direction, curMaze) {
     this.birdie.style.left= `${left}px`;
     this.birdie.style.top = `${top}px`;  
     moveSound.play();   
+
     if (this.curTile.state.name === "BLOCK"){   
-      this.die();
+      //this.die();
       return;
-    }    
+    }
+    
+    if (this.curTile.state.name == "END"){
+      console.log("ended maze!");
+      this.updatePoints(100);
+      //Get current count in int form
+      this.finished = true;
+      this.point_count.innerText = ': !!!';
+      this.point_display.style.backgroundColor = "green";
+      // this.lifeSpan = 0;
+      //Disapear chick (animation/sound)
+      //update finished counter
+    }
 }
 
 /**
@@ -183,6 +248,7 @@ drink() {
   if(this.curTile.state.name == "WATER"){
     this.birdie.firstChild.src = 'images/chicks/Squarton_splashing.svg';
     drinkSound.play();
+    this.updatePoints(50);
   }else{
     this.die();
   }
@@ -197,38 +263,46 @@ drink() {
   if(this.curTile.state.name == "FOOD"){
       this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
       eatSound.play();
+      this.updatePoints(50);
     }else{
       this.die();
     }
   }
 
-
+      //this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
+    //this.birdie.deathImgFlag = 1;
 /**
  * call to remove bird from list of birds
  */
   die(){
-    this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
-    this.birdie.deathImgFlag = 1;
-    this.lifeSpan = 0;  
+    if(this.curTile){
+      this.curTile.occupied = false;
+    }
+    this.updatePoints(-50);
     dieSound.play();
+    //lifespan resets
+    this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
+    //Places bird on new open spot in maze.
+    this.placeBird(maze);
   }
 
 
-  /**
-   * birds cannot be placed on a block
-   * @param {Object} maze 
-   */
+/**
+* birds cannot be placed on a block, start or end
+* @param {Object} maze 
+*/
   placeBird(maze){
     let mazeArray = maze.maze;
     let width = mazeArray.length;
     let height = mazeArray[0].length;
     let i = parseInt(Math.random() * width);
     let j = parseInt(Math.random() * height);
-    while (mazeArray[i][j].state.name == "BLOCK"){
+    while (mazeArray[i][j].state.name == "BLOCK" || mazeArray[i][j].state.name == "START" || mazeArray[i][j].state.name == "END"|| mazeArray[i][j].occupied == true){
       i = parseInt(Math.random() * width);
       j = parseInt(Math.random() * height);
     }
     let tile = mazeArray[i][j];
+    tile.occupied = true;
     let top = parseInt(slicePX(tile.y) /*+ slicePX(tile.height) / 16*/);
     let left = parseInt(slicePX(tile.x) + slicePX(tile.width) / 4);  
     this.birdie.style.left= `${left}px`;
@@ -236,5 +310,14 @@ drink() {
     this.curTile = tile;    
     this.xIndex = j;
     this.yIndex = i;
+  }
+
+/**
+ * takes in an int and adjusts the birds point total to its value
+ * @param {int} val, value of points to be updated
+ */
+  updatePoints(val){
+    this.lifeSpan += val;
+    console.log(this.lifeSpan)
   }
 }

@@ -39,7 +39,8 @@ class Mother{
           selectedBird.birdie.style.border = "none";
         }
       }
-      this.mother.style.border = ".1rem solid cyan";    
+      //Change to mother sparkling
+      this.mother.style.border = ".1rem solid cyan";  
       selectedBirds = allBirds;    
       
       for (const selectedBird of selectedBirds){

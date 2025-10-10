@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-.points, .reset, .back
+.points, .reset, .back, .finished
 {
   padding: 0.2vw;
   border-radius: 0.2em;
@@ -15,11 +15,11 @@
   font-size: 1.5vw;
 }
 
+
 .back a{
     color: inherit;
     text-decoration: inherit;
 }
-
 
 .banner {
     height: 3rem;
@@ -31,7 +31,7 @@
     font-family: sans-serif;
     position: fixed;
     left: 0px;
-    /* right: 0px; */
+    flex-wrap: nowrap;
 }
 
 .banner h3 {
@@ -59,6 +59,48 @@
 .banner button:active {
     background-color: #6C7C17;
     /* background-color: rgb(110, 168, 23); */
+}
+
+.points_container{
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: .5rem;
+    align-items: center;
+    flex-shrink: 1;
+    background-color: transparent;
+    padding-top: 2rem;
+    justify-items: center;
+}
+
+.point_display{
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    gap: .03rem;
+    width: 4.5rem;
+    height: 2rem;
+}
+
+.chick_icon{
+    height: 100%;
+    /* width: auto; */
+     max-width: 40%; 
+    object-fit: contain;
+    /* flex-basis: 30%; */
+    /* flex-shrink: 0; */
+}
+
+.point_count{
+    display: flex;
+    width: 100%;
+    color: white;
+    padding: .2vw;
+    border-radius: .2em;
+    text-align: center;
+    white-space: nowrap;
+    flex: 1;
 }
 
 .login-popup {
@@ -90,7 +132,7 @@
     gap: 1rem;
 }
 
-#hints{
+#hints, #game_over{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -104,7 +146,7 @@
     gap: 1%;
 }
 
-#hint_wrapper{
+#hint_wrapper, #game_over_wrapper{
     display: flex;
     justify-content: center;
 }
@@ -114,7 +156,7 @@
 }
 
 
-#hint_text{
+#hint_text, #game_over_Text{
     font-size: 2vw;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
@@ -126,7 +168,7 @@
     width: 100%;
 }
 
-#next_button, #back_button{
+#next_button, #back_button, #game_reset_button{
     background-color: #FFC940;
     font-size: 2vw;
     align-self: center;
@@ -154,3 +196,7 @@
     color: black;
 }
 
+#game_over{
+        display: none;
+        z-index: 1;
+}

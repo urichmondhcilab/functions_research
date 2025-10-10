@@ -10,7 +10,7 @@
   <!-- <body id="game_canvas"> -->
 <body>
     <div class="container">
-    
+      
       <div id="hints">
         <div id="close_button">&times; </div>
         <div id="hint_wrapper">
@@ -24,6 +24,13 @@
           <div id="next_button">Next</div>
          </div>
         </div>
+        
+        <div id=game_over>
+          <div id="game_over_wrapper">
+            <div id="game_over_Text">Game Over, keep going you got this!</div>
+            <div id="game_reset_button">Reset</div>
+          </div>
+      </div>
 
       <div id="game_canvas">
         <div class="banner" id="banner">
@@ -34,15 +41,20 @@
             <div id="reset" class="reset">Reset</div>
             <!--display code editor on-click-->
             <div id="codeEditor" class="points">Here!</div> 
+            <div id="nextLevel" class="points">Next</div>
           </div>
+          
+            <div class="points_container" id="points_container"></div>
 
-          <div class="login_status">
-            <h3 id="authStatus">Not Signed In</h3>
-            <button id="loginButton">Login</button>
-            <button id="registerButton">Register</button>
-            <button id="logoutButton">Logout</button>
-          </div>
-        </div>
+            <div class="login_status">
+              <h3 id="authStatus">Not Signed In</h3>
+              <button id="loginButton">Login</button>
+              <button id="registerButton">Register</button>
+              <button id="logoutButton">Logout</button>
+            </div>
+
+
+
 
         <div class="login-popup" id="login-popup">
           <!-- Sign In Form -->
