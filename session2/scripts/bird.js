@@ -47,6 +47,7 @@ class Bird{
     this.selected = false;
     this.selectionCount = 0;
     this.finished = false;
+    this.hasConsumed = false;
 
     // place birds on tiles
     this.placeBird(maze);
@@ -213,7 +214,8 @@ move(direction, curMaze) {
     this.curTile = newTile;
     //new tile now occupied
     this.curTile.occupied = true;
-
+    //no can eat on new tile
+    this.hasConsumed = false;
 
     //Display in new position
     let top = parseInt(slicePX(this.curTile.y) /*- slicePX(this.curTile.height) / 8*/);
@@ -245,12 +247,13 @@ move(direction, curMaze) {
  * the bird dies when it tries to drink on a tile that is not a water tiel
  */
 drink() {
-  if(this.curTile.state.name == "WATER"){
+  if(this.curTile.state.name == "WATER" && !this.hasConsumed){
     this.birdie.firstChild.src = 'images/chicks/Squarton_splashing.svg';
+    this.hasConsumed = true;
     drinkSound.play();
     this.updatePoints(50);
-  }else{
-    this.die();
+  // }else{
+  //   this.die();
   }
 }
 
@@ -260,12 +263,13 @@ drink() {
  * the bird dies if it tries to eat on a plank that is not an eating plank
  */
   eat() {
-  if(this.curTile.state.name == "FOOD"){
+  if(this.curTile.state.name == "FOOD" && !this.hasConsumed){
       this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
+      this.hasConsumed = true;
       eatSound.play();
       this.updatePoints(50);
-    }else{
-      this.die();
+    // }else{
+    //   this.die();
     }
   }
 
@@ -279,6 +283,7 @@ drink() {
       this.curTile.occupied = false;
     }
     this.updatePoints(-50);
+    this.hasConsumed = false;
     dieSound.play();
     //lifespan resets
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);

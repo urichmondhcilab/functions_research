@@ -1,6 +1,7 @@
     let instructions = ["First help her plan"]
     let instructionCount = 0;
     let nextButton = document.getElementById("next-btn");
+    let skipButton = document.getElementById("skip-btn")
     let displayObject = document.getElementById("instruction-display");
     let displayContainer = document.getElementById("instructions-container");
     let instructionObject = document.getElementById("instructions")
@@ -21,7 +22,8 @@
     let findPathTarget = document.getElementById("task2");
     let guideChicksTarget = document.getElementById("task3");
 
-    nextButton.addEventListener("click", runThroughInstructions)
+    nextButton.addEventListener("click", runThroughInstructions);
+    skipButton.addEventListener("click", skipInstructions);
 
     gatherObject.addEventListener("dragstart", dragStartHandler);
     findPathObject.addEventListener("dragstart", dragStartHandler);
@@ -53,6 +55,10 @@
             instructionObject.style.display = "none";
             ssession1GameObject.className += " session1_gameplay";
         }
+    }
+
+    function skipInstructions(){
+            window.location.href = "session2/index.html";
     }
 
     function matched(){
