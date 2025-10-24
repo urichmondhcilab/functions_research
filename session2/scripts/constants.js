@@ -96,7 +96,7 @@ const instructions = [{text: "click on a bird to program its path",
                             image_path : "images/boulder_and_interface/game_options_interface.svg"},
 
                        {    text: "watch out, the chicks are running out of time!",
-                            image_path : "images/chicks/squarton_dead.svg"
+                            image_path : "images/chicks/squarton_resting_position_1.svg"
                        } ];
 
 const levelAttributes = {
