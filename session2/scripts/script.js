@@ -25,6 +25,8 @@ let instructionIndex = 0;
 let nextGame = false;
 let curLevel = 0;
 let mazeElements = 3;
+
+
 /**
  * animateGameObjects by changing sprites
  * runs setInterval 
@@ -143,7 +145,7 @@ function respawnBirds(bird){
     bird.birdie.deathImgFlag = 1;
   }
 
-  if (bird.lifeSpan <= 0){
+  if (bird.lifeSpan <= 0 && !running){
     bird.die();
     return keepBird;
   }
@@ -166,7 +168,7 @@ function respawnBirds(bird){
  */
 async function birdAction(){
   //createMother();
-  if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
+  if (!running && currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
     createBird(maze);
   }
   resetInterval(NORMAL_SPEED);
@@ -213,13 +215,17 @@ function newLevelConfig(level){
   mazeElements = levelconfig.state_range;
   
   //Resets birds
-  reset();
+  ResetLevel();
   //Resets Maze
-  resetMaze();
   if (createMom){
     createMother();
   }
-  }
+}
+
+function ResetLevel(){
+  reset();
+  resetMaze();
+}
 
 /**
  * resets the current number of birds 
@@ -235,9 +241,9 @@ function reset(){
   });
   resetInterval(CREATE_BIRD_SPEED);
   allBirds = [];
-  if (maze) {
-    maze.mazeRevert();
-  }
+  // if (maze) {
+  //   maze.mazeRevert();
+  // }
   if(motherHen){
     game_canvas.removeChild(motherHen.mother);
     motherHen = null;
@@ -364,8 +370,8 @@ function blockResetHandler(e){
 function initSession2EventListeners(){
   // window.addEventListener('load', animateGameObjects);
   window.addEventListener('resize', repositionGameObjects);
-  reset_btn.addEventListener('click', resetMaze);
-  game_reset_button.addEventListener('click', reset);
+  reset_btn.addEventListener('click', ResetLevel);
+  game_reset_button.addEventListener('click', ResetLevel);
   runObject.addEventListener('click', initializeBlockIdentifiers);
 
   // Add event listeners for drag and drop functionality on the canvas
@@ -392,7 +398,7 @@ function startGame(){
   animateGameObjects();
   initSession2EventListeners();
   maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
-  makeDraggable();    
+  makeDraggable();
 }
 
 
