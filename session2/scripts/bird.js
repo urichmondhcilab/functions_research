@@ -221,8 +221,10 @@ move(direction, curMaze) {
     let top = parseInt(slicePX(this.curTile.y) /*- slicePX(this.curTile.height) / 8*/);
     let left = parseInt(slicePX(this.curTile.x) + slicePX(this.curTile.width) / 4);  
     this.birdie.style.left= `${left}px`;
-    this.birdie.style.top = `${top}px`;  
-    moveSound.play();   
+    this.birdie.style.top = `${top}px`;
+
+    moveSound.currentTime = 0;
+    moveSound.play();
 
     if (this.curTile.state.name === "BLOCK"){   
       //this.die();
@@ -236,7 +238,6 @@ move(direction, curMaze) {
       this.finished = true;
       this.point_count.innerText = ': !!!';
       this.point_display.style.backgroundColor = "green";
-      // this.lifeSpan = 0;
       //Disapear chick (animation/sound)
       //update finished counter
     }
@@ -323,6 +324,6 @@ drink() {
  */
   updatePoints(val){
     this.lifeSpan += val;
-    console.log(this.lifeSpan)
+    console.log(this.lifeSpan);
   }
 }

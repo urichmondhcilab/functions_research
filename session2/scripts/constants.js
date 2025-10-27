@@ -1,5 +1,5 @@
-const MIN_LIFE_SPAN = 10;
-const MAX_LIFE_SPAN = 50; // actually 100 + 500
+const MIN_LIFE_SPAN = 100;
+const MAX_LIFE_SPAN = 500; // actually 100 + 500
 let MAX_NUMBER_OF_BIRDS = 1;
 //Edit
 

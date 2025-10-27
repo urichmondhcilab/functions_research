@@ -116,6 +116,10 @@ html, body {
   background-image: url("../images/game_buttons/eat_button.svg");
 }
 
+.hidden{
+  display: none;
+}
+
 .start{
   background-image: url("../images/game_buttons/start_button.svg");  
 }

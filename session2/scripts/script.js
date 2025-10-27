@@ -213,7 +213,18 @@ function newLevelConfig(level){
   MAX_NUMBER_OF_BIRDS = levelconfig.max_Birds;
   createMom = levelconfig.mother_include;
   mazeElements = levelconfig.state_range;
-  
+
+  const drinkBlock = document.getElementById("drink");
+  const eatBlock = document.getElementById("eat");
+    if (level >= 1){
+      drinkBlock.classList.remove('hidden');
+      eatBlock.classList.remove('hidden');
+    }
+    else{
+      drinkBlock.classList.add('hidden');
+      eatBlock.classList.add('hidden');
+    }
+
   //Resets birds
   ResetLevel();
   //Resets Maze
