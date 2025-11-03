@@ -370,7 +370,7 @@ function blockResetHandler(e){
   blocks.forEach(block => block.remove());
 }
 
-
+ 
 /**
  * The program starts here
  * An event listener runs in the background waiting for an event to occur on an element
@@ -410,6 +410,7 @@ function startGame(){
   initSession2EventListeners();
   maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
   makeDraggable();
+  TouchDrag();
 }
 
 
