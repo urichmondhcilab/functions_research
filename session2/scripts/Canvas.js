@@ -120,11 +120,18 @@ function trashDrop(e){
     //gets the id of the object to be deleted (unique)
     let data = e.dataTransfer.getData("text");
     //gets the object to be deleted by unique ID
-    let delObject = document.getElementById(data);
-    //removes that object
-    delObject.remove();
+    deleteBlockbyId(data);
     e.target.style.backgroundColor = "white";
     e.target.style.borderColor = "white";
+    reorderItems(document.getElementById('block-drop'));    
+}
+
+function deleteBlockbyId(id){
+    const delObject = document.getElementById(id);
+    if (!delObject){
+        return;
+    }
+    delObject.remove();
     reorderItems(document.getElementById('block-drop'));    
 }
 
@@ -228,10 +235,21 @@ function TouchStart(e, block){
 
     //Stores the block object the clone is refferencing
     //preserves the state of the block if it has a select value
-    draggedElementState = {
-        element: block,
-        selectedValue: block.querySelector('select')?.value || null
-    };
+    if(block.classList.contains('draggable')){
+        draggedElementState = {
+            element: block,
+            selectedValue: block.querySelector('select')?.value || null,
+            fromCanvas: false
+        };
+
+    }
+    else if (block.classList.contains('block')){
+        draggedElementState = {
+            element: block,
+            selectedValue: block.querySelector('select')?.value || null,
+            fromCanvas: true
+        }; 
+    }
 
     //keeps the block following the finger by computing the offset
     Xoffset = touch.clientX - block.getBoundingClientRect().left;
@@ -273,9 +291,27 @@ function TouchEnd(e){
     curBlock.style.display = 'none';
     //Finds the element at the current coordinates of the touch
     //if over block-drop, sets that, otherwise null
-    const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY)?.closest('#block-drop');
+    let dropTarget = document.elementFromPoint(touch.clientX, touch.clientY)?.closest('#block-drop');
+    if (draggedElementState?.fromCanvas){
+        dropTarget = null;
+    }
+    //detects drop over trash
+    const trashTarget =  document.elementFromPoint(touch.clientX, touch.clientY)?.closest('#trash, #block-remove');
+
     //returns clone visibility
     curBlock.style.display = '';
+
+    if (trashTarget){
+        if (draggedElementState?.fromCanvas){
+            deleteBlockbyId(draggedElementState.element.id);
+        }
+
+        curBlock.remove();
+        curBlock = null;
+        draggedElementState = null;
+        return;
+
+    }
 
     //checks if touch was ended over block drop
     if (dropTarget) {
