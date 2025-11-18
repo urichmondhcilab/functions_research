@@ -181,3 +181,30 @@ html, body {
   background-color:#FFC940;
 }
 
+
+#transition_image_container{
+  /* display: flex; */
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  z-index: 100;
+}
+
+
+#transition_image{
+  background-image: url("../images/game_buttons/play_button.svg");
+  background-size: contain ;
+  /* position: absolute;
+  z-index: 1000; */
+
+  height: 50%;
+  width: 50%;
+  margin: auto;
+  
+
+
+
+  background-repeat: no-repeat;
+}

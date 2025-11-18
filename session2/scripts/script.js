@@ -22,6 +22,8 @@ let NORMAL_SPEED = 200;
 let gameInterval = null;
 let instructionIndex = 0;
 
+let isTransition = false;
+let isStart = true;
 let nextGame = false;
 let curLevel = 0;
 let mazeElements = 3;
@@ -178,6 +180,8 @@ async function birdAction(){
     motherHen.updateMotherHen();
   }
 
+  if (isTransition || isStart) transitionImageContainer.style.width = transitionImageContainer.style.width == "100%" ? "99%" : "100%";
+
   updateBirds();
   allBirds = allBirds.filter(respawnBirds);
   //Checks if GameOver Conditions are met
@@ -188,7 +192,8 @@ async function birdAction(){
 function gameOverCheck(){
   if (birdCounter == 0 || nextGame == true){
     nextGame = false;
-    newLevel();
+    // newLevel();
+    transitionBeforeNewLevel();
   }
 }
 
@@ -221,6 +226,18 @@ function newLevelConfig(level){
   if (createMom){
     createMother();
   }
+
+  // clear transition window
+  // if (isTransition){
+  //   isTransition = false;
+  //   transitionImageContainer.style.display = "none";
+  // }
+}
+
+
+function transitionBeforeNewLevel(){
+  transitionImageContainer.style.display = "flex";
+  isTransition = true;
 }
 
 function ResetLevel(){
@@ -386,6 +403,8 @@ function initSession2EventListeners(){
 
   //Allows to skip to next level of game
   document.getElementById('nextLevel').addEventListener('click', nextLevel);
+
+
 }
 
 
@@ -402,36 +421,52 @@ function startGame(){
   makeDraggable();
 }
 
-
-function displayInstructions(e){
-  instructionIndex++;  
-  console.log(instructionIndex);  
-  if (instructionIndex >= 0 && instructionIndex < instructions.length){
-    hintText.firstChild.nodeValue = instructions[instructionIndex].text;
-    hintImage.src = instructions[instructionIndex].image_path;
-  }else if (instructionIndex >= instructions.length){
-    hintContainer.style.display = "none";
+function choosStartOrTransition(){
+  transitionImageContainer.style.display = "none";  
+  if (isStart){
     startGame();
+    isStart = false;
   }
-}
-
-function displayInstructionsBackwards(){
-  instructionIndex--;
-  if (instructionIndex >= 0 && instructionIndex < instructions.length){
-    hintText.firstChild.nodeValue = instructions[instructionIndex].text;
-    hintImage.src = instructions[instructionIndex].image_path;
-  }else if (instructionIndex < 0){
-    instructionIndex = 0;
+  if (isTransition){
+    newLevel();
+    isTransition = false;
   }
-  console.log(instructionIndex);  
+
 }
 
-function closeInstructions(){
-    hintContainer.style.display = "none";
-    startGame();
-}
 
-// start game
-nextButton.addEventListener('click', displayInstructions);
-closeButton.addEventListener('click', closeInstructions);
-backButton.addEventListener('click', displayInstructionsBackwards);
+// function displayInstructions(e){
+//   instructionIndex++;  
+//   console.log(instructionIndex);  
+//   if (instructionIndex >= 0 && instructionIndex < instructions.length){
+//     hintText.firstChild.nodeValue = instructions[instructionIndex].text;
+//     hintImage.src = instructions[instructionIndex].image_path;
+//   }else if (instructionIndex >= instructions.length){
+//     hintContainer.style.display = "none";
+//     startGame();
+//   }
+// }
+
+// function displayInstructionsBackwards(){
+//   instructionIndex--;
+//   if (instructionIndex >= 0 && instructionIndex < instructions.length){
+//     hintText.firstChild.nodeValue = instructions[instructionIndex].text;
+//     hintImage.src = instructions[instructionIndex].image_path;
+//   }else if (instructionIndex < 0){
+//     instructionIndex = 0;
+//   }
+//   console.log(instructionIndex);  
+// }
+
+// function closeInstructions(){
+//     hintContainer.style.display = "none";
+//     startGame();
+// }
+
+// // start game
+// nextButton.addEventListener('click', displayInstructions);
+// closeButton.addEventListener('click', closeInstructions);
+// backButton.addEventListener('click', displayInstructionsBackwards);
+
+
+  transitionImageContainer.addEventListener('click', choosStartOrTransition);

@@ -18,6 +18,7 @@ const closeButton = document.getElementById("close_button");
 const backButton = document.getElementById("back_button");
 const hintContainer = document.getElementById("hints");
 const hintImage = document.getElementById("hint_image");
+const transitionImageContainer = document.getElementById("transition_image_container");
 
 
 
