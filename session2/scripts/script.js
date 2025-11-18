@@ -213,6 +213,7 @@ function newLevelConfig(level){
   MAX_NUMBER_OF_BIRDS = levelconfig.max_Birds;
   createMom = levelconfig.mother_include;
   mazeElements = levelconfig.state_range;
+  game_canvas.style.backgroundImage = levelconfig.background_image_path;
   
   //Resets birds
   ResetLevel();

@@ -40,7 +40,7 @@ html, body {
 #game_canvas{
   width: 100vw;
   height: 56vw;
-  background-image: url('../images/game_environment/scene.svg'); /*set the source for the image*/
+  background-image: url('../images/game_environment/scene3.svg'); /*set the source for the image*/
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

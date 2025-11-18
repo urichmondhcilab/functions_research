@@ -1,5 +1,5 @@
-const MIN_LIFE_SPAN = 10;
-const MAX_LIFE_SPAN = 50; // actually 100 + 500
+const MIN_LIFE_SPAN = 500;
+const MAX_LIFE_SPAN = 1000; // actually 100 + 500
 let MAX_NUMBER_OF_BIRDS = 1;
 //Edit
 
@@ -105,24 +105,28 @@ const levelAttributes = {
         max_Birds: 1,
         state_range: 5,
         mother_include: false,
+        background_image_path: "url('images/game_environment/scene2.svg')"  
     },
     2:{
         description: "Level 2, 1 Bird, full maze",
         max_Birds: 1,
         state_range: 6,
         mother_include: false,
+        background_image_path: "url('images/game_environment/scene3.svg')"        
     },
     3:{
         description: "Level 3, 3 Birds, full maze",
         max_Birds: 3,
         state_range: 6,
         mother_include: true,
+        background_image_path: "url('images/game_environment/scene.svg')"          
     },
     4:{
         description: "Level 4, 8 Birds, full maze",
         max_Birds: 8,
         state_range: 6,
         mother_include: true,
+        background_image_path: "url('images/game_environment/scene2.svg')"        
     },
 }
 
