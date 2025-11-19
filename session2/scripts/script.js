@@ -24,6 +24,10 @@ let instructionIndex = 0;
 
 let isTransition = false;
 let isStart = true;
+let transistionWidth = 0;
+let transistionHeight = 0;
+
+
 let nextGame = false;
 let curLevel = 0;
 let mazeElements = 3;
@@ -180,7 +184,19 @@ async function birdAction(){
     motherHen.updateMotherHen();
   }
 
-  if (isTransition || isStart) transitionImageContainer.style.width = transitionImageContainer.style.width == "100%" ? "99%" : "100%";
+  if (isTransition || isStart){ 
+
+    if (transistionWidth < 50){
+      transistionWidth += 5;
+      transistionHeight += 5;
+      transitionImage.style.width = transistionWidth + "%";
+      transitionImage.style.height = transistionHeight + "%";
+    }else{
+      transitionImageContainer.style.width = transitionImageContainer.style.width == "100%" ? "99%" : "100%";
+    }
+
+
+    }
 
   updateBirds();
   allBirds = allBirds.filter(respawnBirds);
@@ -237,6 +253,8 @@ function newLevelConfig(level){
 
 function transitionBeforeNewLevel(){
   transitionImageContainer.style.display = "flex";
+  transistionWidth = 0;
+  transistionHeight = 0;
   isTransition = true;
 }
 

@@ -89,6 +89,7 @@
 
           <div class="bottom-right">
             <!-- Movement block to move the chicks -->
+
             <div class="draggable move block" data-move="up" draggable="true">
                 move
                 <select class="move-select">
@@ -98,6 +99,11 @@
                     <option value="down">down</option>
                 </select>
                 <input type="number" id="num-input" value="1"/>
+
+                <div id="visible-move-container">
+                  <div id="visible-move"></div>
+                  <div id="visible-number"></div>
+                </div>
             </div>
 
             <!-- Drink block to give the chicken an action -->

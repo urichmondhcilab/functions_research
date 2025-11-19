@@ -190,21 +190,49 @@ html, body {
   height: 100%;
   align-items: center;
   z-index: 100;
+  background-image: url("../images/pop_up.svg");
+    background-repeat: no-repeat;
+  background-size: contain ;
+  /* background-color: red; */
+  background-position: center;
 }
 
 
 #transition_image{
   background-image: url("../images/game_buttons/play_button.svg");
-  background-size: contain ;
+  background-size: cover ;
+  background-position: center;
   /* position: absolute;
   z-index: 1000; */
 
+  /* background-color: blue; */
   height: 50%;
   width: 50%;
   margin: auto;
-  
-
-
-
   background-repeat: no-repeat;
+}
+
+#visible-move-container{
+  display: flex;
+  width: 100%;
+  z-index: 100;
+  background-color: red;
+  height: 100%;
+}
+
+#visible-move{
+  background-image: url("../images/game_buttons/Up\ Button.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 50%;
+}
+
+
+#visible-number{
+  background-image: url("../images/game_buttons/Number\ 0.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;  
+  width: 50%;
 }
