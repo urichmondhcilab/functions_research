@@ -236,3 +236,57 @@ html, body {
   background-size: cover;  
   width: 50%;
 }
+
+#num0, #num1, #num2, #num3, #num4, #num5, #num6, #num7, #num8, #num9, #num10, #move-up, #move-down, #move-right, #move-left {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 15%;
+  width: 100%;
+  z-index: 1000;
+}
+
+#num0{
+  background-image: url("../images/numbers/number0.svg");
+}
+
+#num1{
+  background-image: url("../images/numbers/number1.svg");
+}
+#num2{
+  background-image: url("../images/numbers/number2.svg");
+}
+#num3{
+  background-image: url("../images/numbers/number3.svg");
+}
+#num4{
+  background-image: url("../images/numbers/number4.svg");
+}
+#num5{
+  background-image: url("../images/numbers/number5.svg");
+}
+#num6{
+  background-image: url("../images/numbers/number6.svg");
+}
+#num7{
+  background-image: url("../images/numbers/number7.svg");
+}
+#num8{
+  background-image: url("../images/numbers/number8.svg");
+}
+#num9{
+  background-image: url("../images/numbers/number9.svg");
+}
+
+
+#move-left{
+  background-image: url("../images/directions");
+}
+#number-list{
+  position: relative;
+  top: -700%;
+  list-style: none;
+  height: 1000%;
+  width: 100%;
+  display: none;
+}

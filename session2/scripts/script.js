@@ -24,8 +24,8 @@ let instructionIndex = 0;
 
 let isTransition = false;
 let isStart = true;
-let transistionWidth = 0;
-let transistionHeight = 0;
+let transitionWidth = 0;
+let transitionHeight = 0;
 
 
 let nextGame = false;
@@ -186,11 +186,11 @@ async function birdAction(){
 
   if (isTransition || isStart){ 
 
-    if (transistionWidth < 50){
-      transistionWidth += 5;
-      transistionHeight += 5;
-      transitionImage.style.width = transistionWidth + "%";
-      transitionImage.style.height = transistionHeight + "%";
+    if (parseInt(transitionWidth) < 50){
+      transitionWidth += 5;
+      transitionHeight += 5;
+      transitionImage.style.width = transitionWidth + "%";
+      transitionImage.style.height = transitionHeight + "%";
     }else{
       transitionImageContainer.style.width = transitionImageContainer.style.width == "100%" ? "99%" : "100%";
     }
@@ -208,14 +208,15 @@ async function birdAction(){
 function gameOverCheck(){
   if (birdCounter == 0 || nextGame == true){
     nextGame = false;
-    // newLevel();
-    transitionBeforeNewLevel();
+    newLevel();
+
   }
 }
 
 function newLevel(){
   curLevel++;
   //INSERT: Display transistion/instructions
+    transitionBeforeNewLevel();  
   if (curLevel > MAX_LEVEL){
     GameOverElement = document.getElementById("game_over");
     GameOverElement.style.display = 'flex';
@@ -242,19 +243,13 @@ function newLevelConfig(level){
   if (createMom){
     createMother();
   }
-
-  // clear transition window
-  // if (isTransition){
-  //   isTransition = false;
-  //   transitionImageContainer.style.display = "none";
-  // }
 }
 
 
 function transitionBeforeNewLevel(){
   transitionImageContainer.style.display = "flex";
-  transistionWidth = 0;
-  transistionHeight = 0;
+  transitionWidth = 0;
+  transitionHeight = 0;
   isTransition = true;
 }
 
@@ -422,7 +417,13 @@ function initSession2EventListeners(){
   //Allows to skip to next level of game
   document.getElementById('nextLevel').addEventListener('click', nextLevel);
 
+  visibleNumber.addEventListener('click', displayNumbers)
+  numberList.addEventListener('click', resetDisplayedNumber)
 
+  //eventlistners for when a number image is clicked
+  for (numObject in numObjects){
+    numObject.addEventListener('click', resetDisplayedNumber);
+  }
 }
 
 
@@ -446,10 +447,27 @@ function choosStartOrTransition(){
     isStart = false;
   }
   if (isTransition){
-    newLevel();
+    // newLevel();
     isTransition = false;
   }
 
+}
+
+
+function displayNumbers(e){
+  if (numberList.style.display == "none"){
+    numberList.style.display = "block";
+  }else{
+    numberList.style.display = "none";    
+  }
+}
+
+function resetDisplayedNumber(e){
+  console.log(e.target.id);
+  let id  = (e.target.id).slice(0,3) + "ber" + (e.target.id).slice(-1);
+  console.log(id);
+
+  visibleNumber.style.backgroundImage = `url(${'images/numbers/' + id + '.svg'})`;
 }
 
 
