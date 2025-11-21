@@ -1,7 +1,8 @@
     let instructions = ["First help her plan"]
     let instructionCount = 0;
     let nextButton = document.getElementById("next-btn");
-    let skipButton = document.getElementById("skip-btn")
+    let skipButton = document.getElementById("skip-btn");
+    let closeButton = document.getElementById("close-btn");
     let displayObject = document.getElementById("instruction-display");
     let displayContainer = document.getElementById("instructions-container");
     let instructionObject = document.getElementById("instructions")
@@ -24,7 +25,7 @@
 
     nextButton.addEventListener("click", runThroughInstructions);
     skipButton.addEventListener("click", skipInstructions);
-
+    closeButton.addEventListener("click", skipInstructions)
     gatherObject.addEventListener("dragstart", dragStartHandler);
     findPathObject.addEventListener("dragstart", dragStartHandler);
     guideChicks.addEventListener("dragstart", dragStartHandler);

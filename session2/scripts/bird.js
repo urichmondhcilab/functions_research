@@ -227,7 +227,6 @@ move(direction, curMaze) {
     moveSound.play();
 
     if (this.curTile.state.name === "BLOCK"){   
-      //this.die();
       return;
     }
     
@@ -253,8 +252,6 @@ drink() {
     this.hasConsumed = true;
     drinkSound.play();
     this.updatePoints(50);
-  // }else{
-  //   this.die();
   }
 }
 
@@ -269,13 +266,9 @@ drink() {
       this.hasConsumed = true;
       eatSound.play();
       this.updatePoints(50);
-    // }else{
-    //   this.die();
     }
   }
 
-      //this.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
-    //this.birdie.deathImgFlag = 1;
 /**
  * call to remove bird from list of birds
  */

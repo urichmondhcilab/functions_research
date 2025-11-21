@@ -26,25 +26,34 @@ blockRemoveObj.addEventListener("drop", trashDrop);
 document.addEventListener('dragstart', (event) => {
     const draggedElement = event.target.closest('.draggable');
     // If the element is a move block, include the selectedValue
-    if (draggedElement && draggedElement.classList.contains("move")) {
-        draggedElementState = {
-            element: draggedElement,
-            selectedValue: draggedElement.querySelector('select').value,
-        };
-    // If the element is a drink block, only include the element
-    } else if (draggedElement && draggedElement.classList.contains("drink")) {
-        draggedElementState = {
-            element: draggedElement,
-        };
-    } else if (draggedElement && draggedElement.classList.contains("eat")) {
+    if(!draggedElement){
+        return;
+    }
     draggedElementState = {
         element: draggedElement,
+        selectedValue: draggedElement.querySelector('select')?.value || null
     };
-    } else if (draggedElement && draggedElement.classList.contains("start")){
-        draggedElementState = {
-            element: draggedElement,
-        };    
-    }
+
+    event.dataTransfer.setData("text", draggedElement.id);
+    // if (draggedElement && draggedElement.classList.contains("move")) {
+    //     draggedElementState = {
+    //         element: draggedElement,
+    //         selectedValue: draggedElement.querySelector('select').value,
+    //     };
+    // // If the element is a drink block, only include the element
+    // } else if (draggedElement && draggedElement.classList.contains("drink")) {
+    //     draggedElementState = {
+    //         element: draggedElement,
+    //     };
+    // } else if (draggedElement && draggedElement.classList.contains("eat")) {
+    // draggedElementState = {
+    //     element: draggedElement,
+    // };
+    // } else if (draggedElement && draggedElement.classList.contains("start")){
+    //     draggedElementState = {
+    //         element: draggedElement,
+    //     };    
+    // }
 });
 
 
@@ -53,35 +62,9 @@ function drop(event) {
     event.preventDefault();
     if (draggedElementState) {
         const newBlock = createBlockClone(draggedElementState);
-        // const draggedElement = draggedElementState.element;
-        // const selectedValue = draggedElementState.selectedValue;
-        // const newBlock = draggedElement.cloneNode(true);
-        // const dropdown = newBlock.querySelector('select');
 
-        // if it's a move block, make sure the dropdown contains the same value
-        // if (dropdown) {
-        //     dropdown.value = selectedValue;
-        //     newBlock.dataset.move = dropdown.value;
-
-        //     // Listen to see if it's changed again after it's already in the canvas
-        //     dropdown.addEventListener('change', (e) => {
-        //         newBlock.dataset.move = e.target.value;
-        //     });
-        // }
         createNewBlock(newBlock);
         document.getElementById('block-drop').appendChild(newBlock);
-
-        // instCount++;
-        // newBlock.id = "instruction" + instCount;
-        // // Add the new element to the canvas
-        // newBlock.classList.remove('draggable');
-        // newBlock.classList.add('block');
-        // newBlock.setAttribute("draggable", true); // make sure it's draggable
-        // newBlock.addEventListener("dragstart", dragStartHandler); // allow dragging to trash
-        // newBlock.style.width = "90%";
-        // newBlock.style.position = "relative";
-
-
 
         // let translateValue = instCount * -11;
         // newBlock.style.transform = `translate(0%, ${translateValue}%)`;
@@ -220,9 +203,20 @@ function TouchStart(e, block){
 
     //Clones block for visualization of moving
     curBlock = block.cloneNode(true);
+    // curBlock.style.pointerEvents = "none";
     curBlock.classList.add('dragging');
     curBlock.style.position = 'absolute';
-
+    const computed = window.getComputedStyle(block);
+    curBlock.style.background = computed.background;
+    curBlock.style.border = computed.border;
+    curBlock.style.color = computed.color;
+    curBlock.style.padding = computed.padding;
+    curBlock.style.fontFamily = computed.fontFamily;
+    curBlock.style.fontSize = computed.fontSize;
+    curBlock.style.fontWeight = computed.fontWeight;
+    curBlock.style.lineHeight = computed.lineHeight;
+    curBlock.style.boxSizing = "border-box";
+    curBlock.style.pointerEvents = "none";
     //Right now position at top right of block at finger: Change??
     curBlock.style.left = `${touch.clientX}px`;
     curBlock.style.top = `${touch.clientY}px`;
