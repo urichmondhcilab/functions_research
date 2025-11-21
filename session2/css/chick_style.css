@@ -221,7 +221,7 @@ html, body {
 }
 
 #visible-move{
-  background-image: url("../images/game_buttons/Up\ Button.svg");
+  background-image: url("../images/direction/up.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -230,14 +230,23 @@ html, body {
 
 
 #visible-number{
-  background-image: url("../images/game_buttons/Number\ 0.svg");
+  background-image: url("../images/numbers/number0.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;  
   width: 50%;
 }
 
-#num0, #num1, #num2, #num3, #num4, #num5, #num6, #num7, #num8, #num9, #num10, #move-up, #move-down, #move-right, #move-left {
+#num0, #num1, #num2, #num3, #num4, #num5, #num6, #num7, #num8, #num9, #num10 {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 15%;
+  width: 100%;
+  z-index: 1000;
+}
+
+#move-up, #move-down, #move-right, #move-left {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -280,9 +289,22 @@ html, body {
 
 
 #move-left{
-  background-image: url("../images/directions");
+  background-image: url("../images/direction/left.svg");
 }
-#number-list{
+
+#move-right{
+  background-image: url("../images/direction/right.svg");
+}
+
+#move-up{
+  background-image: url("../images/direction/up.svg");
+}
+
+#move-down{
+  background-image: url("../images/direction/down.svg");
+}
+
+#number-list, #move-list{
   position: relative;
   top: -700%;
   list-style: none;

@@ -418,12 +418,20 @@ function initSession2EventListeners(){
   document.getElementById('nextLevel').addEventListener('click', nextLevel);
 
   visibleNumber.addEventListener('click', displayNumbers)
+
   numberList.addEventListener('click', resetDisplayedNumber)
 
   //eventlistners for when a number image is clicked
   for (numObject in numObjects){
     numObject.addEventListener('click', resetDisplayedNumber);
   }
+
+  visibleMove.addEventListener('click', displayMoves)  
+  moveList.addEventListener('click', resetMove)
+  moveUp.addEventListener('click', resetMove)
+  moveDown.addEventListener('click', resetMove)
+  moveLeft.addEventListener('click', resetMove)
+  moveRight.addEventListener('click', resetMove)
 }
 
 
@@ -469,6 +477,27 @@ function resetDisplayedNumber(e){
 
   visibleNumber.style.backgroundImage = `url(${'images/numbers/' + id + '.svg'})`;
 }
+
+
+function resetMove(e){
+  console.log(e.target.id);
+
+  let id  = (e.target.id).slice(5,);
+  console.log(id);
+
+  if (id.trim() != "list")
+    visibleMove.style.backgroundImage = `url(${'images/direction/' + id + '.svg'})`;  
+}
+
+function displayMoves(e){
+  if (moveList.style.display == "none"){
+    moveList.style.display = "block";
+  }else{
+    moveList.style.display = "none";    
+  }
+}
+
+
 
 
 // function displayInstructions(e){

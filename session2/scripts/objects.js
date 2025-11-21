@@ -27,7 +27,12 @@ const numberList = document.getElementById("number-list");
 for (let i in 10){
     numObjects.push(document.getElementById("num" + i))
 }
-
+const visibleMove = document.getElementById("visible-move");
+const moveList = document.getElementById("move-list")
+const moveRight = document.getElementById("move-right");
+const moveLeft = document.getElementById("move-left");
+const moveUp = document.getElementById("move-up");
+const moveDown = document.getElementById("move-down");
 
 
 
