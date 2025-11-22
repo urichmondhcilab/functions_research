@@ -471,7 +471,7 @@ function displayNumbers(e){
 }
 
 function resetDisplayedNumber(e){
-  console.log(e.target.id);
+  // console.log(e.target.id);
   let id  = (e.target.id).slice(0,3) + "ber" + (e.target.id).slice(-1);
   console.log(id);
 
@@ -480,7 +480,7 @@ function resetDisplayedNumber(e){
 
 
 function resetMove(e){
-  console.log(e.target.id);
+  // console.log(e.target.id);
 
   let id  = (e.target.id).slice(5,);
   console.log(id);

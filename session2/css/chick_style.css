@@ -188,8 +188,8 @@ html, body {
   /* display: flex; */
   display: flex;
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 56vw;
   align-items: center;
   z-index: 100;
   background-image: url("../images/pop_up.svg");

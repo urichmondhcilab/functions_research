@@ -38,10 +38,10 @@ document.addEventListener('dragstart', (event) => {
         draggedElementState = {
             element: draggedElement,
         };    
-    } else if (draggedElement && draggedElement.classList.contains("new-move")){
-        console.log("new move");
+    } else if (draggedElement && draggedElement.classList.contains("new-move")){     
         draggedElementState = {
             element: draggedElement,
+            move: "true"
         };         
     }
 });
@@ -54,6 +54,7 @@ function drop(event) {
         const selectedValue = draggedElementState.selectedValue;
         const newBlock = draggedElement.cloneNode(true);
         const dropdown = newBlock.querySelector('select');
+        const move = draggedElementState.move;
 
         // if it's a move block, make sure the dropdown contains the same value
         if (dropdown) {
@@ -64,6 +65,13 @@ function drop(event) {
             dropdown.addEventListener('change', (e) => {
                 newBlock.dataset.move = e.target.value;
             });
+            console.log("moving");
+        }
+
+        if(move){
+            console.log("moving");
+            console.log(draggedElement.querySelector("visible-move"))
+            // draggedElement.querySelector("visible-move").addEventListener('click', (e)=>{ console.log("moving")})
         }
         instCount++;
         newBlock.id = "instruction" + instCount;

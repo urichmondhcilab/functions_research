@@ -117,7 +117,18 @@ class Parser{
                 this.ASTBlocks.push(new Start(null, this.maze));
             }
             else if (block.classList.contains("new-move")){
-                console.log(block.style.backgroundImage)
+                // using image name to determine moves!
+                let visibleMove = window.getComputedStyle(block.querySelector("#visible-move")).backgroundImage;
+                let visibleNumber = window.getComputedStyle(block.querySelector("#visible-number")).backgroundImage;                
+                const direction = visibleMove.split('/').at(-1).split('.')[0]; // split path by /, select last entry, split by .
+                const timesToMove = visibleNumber.split('/').at(-1).split('.')[0].slice(-1);
+                console.log(direction);
+                console.log(timesToMove)
+                for (let i = 0; i < timesToMove; i++){
+                    this.ASTBlocks.push(new Move(direction, null, this.maze));
+                }                   
+                // console.log(window.getComputedStyle(block.querySelector("#visible-move")).backgroundImage);
+                // console.log(times);
             }
         }          
     }
