@@ -57,20 +57,33 @@ function drop(event) {
         const move = draggedElementState.move;
 
         // if it's a move block, make sure the dropdown contains the same value
-        if (dropdown) {
-            dropdown.value = selectedValue;
-            newBlock.dataset.move = dropdown.value;
+        // if (dropdown) {
+        //     dropdown.value = selectedValue;
+        //     newBlock.dataset.move = dropdown.value;
 
-            // Listen to see if it's changed again after it's already in the canvas
-            dropdown.addEventListener('change', (e) => {
-                newBlock.dataset.move = e.target.value;
-            });
-            console.log("moving");
-        }
+        //     // Listen to see if it's changed again after it's already in the canvas
+        //     dropdown.addEventListener('change', (e) => {
+        //         newBlock.dataset.move = e.target.value;
+        //     });
+        //     console.log("moving");
+        // }
 
         if(move){
-            console.log("moving");
-            console.log(draggedElement.querySelector("visible-move"))
+
+            newBlock.querySelector(".visible-number").addEventListener('click', displayNumbers);
+            newBlock.querySelector(".number-list").addEventListener('click', resetDisplayedNumber);
+
+            for (let i in 10){
+                newBlock.querySelector(".num" + i).addEventListener('click', resetDisplayedNumber);
+            }            
+
+            console.log(newBlock.querySelector(".visible-move"));
+            newBlock.querySelector(".visible-move").addEventListener('click', displayMoves)
+            newBlock.querySelector(".move-list").addEventListener('click', resetMove);
+            newBlock.querySelector(".move-right").addEventListener('click', resetMove);
+            newBlock.querySelector(".move-left").addEventListener('click', resetMove);
+            newBlock.querySelector(".move-up").addEventListener('click', resetMove);
+            newBlock.querySelector(".move-down").addEventListener('click', resetMove);            
             // draggedElement.querySelector("visible-move").addEventListener('click', (e)=>{ console.log("moving")})
         }
         instCount++;

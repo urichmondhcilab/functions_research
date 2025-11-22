@@ -98,16 +98,16 @@ class Parser{
     parseOne(){
         // create blocks without assigning game objects
         for(const block of this.placedBlocks){
-            if (block.classList.contains("move")) {
-                const direction = block.dataset.move;
-                const numberInput = block.querySelector('input[type="number"]');
-                const timesToMove = numberInput ? parseInt(numberInput.value) : 0; 
-                console.log("timesToMove: " + timesToMove);
-                for (let i = 0; i < timesToMove; i++){
-                    this.ASTBlocks.push(new Move(direction, null, this.maze));
-                }                                                
-            }
-            else if (block.classList.contains("drink")){
+            // if (block.classList.contains("move")) {
+            //     const direction = block.dataset.move;
+            //     const numberInput = block.querySelector('input[type="number"]');
+            //     const timesToMove = numberInput ? parseInt(numberInput.value) : 0; 
+            //     console.log("timesToMove: " + timesToMove);
+            //     for (let i = 0; i < timesToMove; i++){
+            //         this.ASTBlocks.push(new Move(direction, null, this.maze));
+            //     }                                                
+            // }
+            if (block.classList.contains("drink")){
                 this.ASTBlocks.push(new Drink(null, this.maze));                
             }
             else if (block.classList.contains("eat")){
@@ -118,8 +118,8 @@ class Parser{
             }
             else if (block.classList.contains("new-move")){
                 // using image name to determine moves!
-                let visibleMove = window.getComputedStyle(block.querySelector("#visible-move")).backgroundImage;
-                let visibleNumber = window.getComputedStyle(block.querySelector("#visible-number")).backgroundImage;                
+                let visibleMove = window.getComputedStyle(block.querySelector(".visible-move")).backgroundImage;
+                let visibleNumber = window.getComputedStyle(block.querySelector(".visible-number")).backgroundImage;                
                 const direction = visibleMove.split('/').at(-1).split('.')[0]; // split path by /, select last entry, split by .
                 const timesToMove = visibleNumber.split('/').at(-1).split('.')[0].slice(-1);
                 console.log(direction);

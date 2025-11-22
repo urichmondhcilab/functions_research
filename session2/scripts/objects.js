@@ -21,18 +21,18 @@ const hintContainer = document.getElementById("hints");
 const hintImage = document.getElementById("hint_image");
 const transitionImageContainer = document.getElementById("transition_image_container");
 const transitionImage = document.getElementById("transition_image");
-const visibleNumber = document.getElementById("visible-number");
-const numberList = document.getElementById("number-list");
+const visibleNumber = document.querySelector(".visible-number");
+const numberList = document.querySelector(".number-list");
 
 for (let i in 10){
-    numObjects.push(document.getElementById("num" + i))
+    numObjects.push(document.querySelector(".num" + i))
 }
-const visibleMove = document.getElementById("visible-move");
-const moveList = document.getElementById("move-list")
-const moveRight = document.getElementById("move-right");
-const moveLeft = document.getElementById("move-left");
-const moveUp = document.getElementById("move-up");
-const moveDown = document.getElementById("move-down");
+const visibleMove = document.querySelector(".visible-move");
+const moveList = document.querySelector(".move-list")
+const moveRight = document.querySelector(".move-right");
+const moveLeft = document.querySelector(".move-left");
+const moveUp = document.querySelector(".move-up");
+const moveDown = document.querySelector(".move-down");
 
 
 

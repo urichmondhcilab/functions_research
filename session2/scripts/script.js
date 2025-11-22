@@ -458,43 +458,53 @@ function choosStartOrTransition(){
     // newLevel();
     isTransition = false;
   }
-
 }
 
 
 function displayNumbers(e){
-  if (numberList.style.display == "none"){
-    numberList.style.display = "block";
+  const targetNumberList = e.target.querySelector('.number-list')
+  if (targetNumberList.style.display == "none"){
+    targetNumberList.style.display = "block";
   }else{
-    numberList.style.display = "none";    
+    targetNumberList.style.display = "none";    
   }
 }
 
 function resetDisplayedNumber(e){
   // console.log(e.target.id);
-  let id  = (e.target.id).slice(0,3) + "ber" + (e.target.id).slice(-1);
+  const targetVisibleNumber = e.target.parentNode.parentNode;
+  let id  = (e.target.className).slice(0,3) + "ber" + (e.target.className).slice(-1);
   console.log(id);
 
-  visibleNumber.style.backgroundImage = `url(${'images/numbers/' + id + '.svg'})`;
+  targetVisibleNumber.style.backgroundImage = `url(${'images/numbers/' + id + '.svg'})`;
+  e.target.parentNode.style.display = "none";
 }
 
 
 function resetMove(e){
-  // console.log(e.target.id);
+  const targetVisibleMove = e.target.parentNode.parentNode;
 
-  let id  = (e.target.id).slice(5,);
-  console.log(id);
+  let className = (e.target.className).slice(5,);
+  // console.log(id);
 
-  if (id.trim() != "list")
-    visibleMove.style.backgroundImage = `url(${'images/direction/' + id + '.svg'})`;  
+  if (className.trim() != "list")
+    targetVisibleMove.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;  
+  e.target.parentNode.style.display = "none";
 }
 
+
 function displayMoves(e){
-  if (moveList.style.display == "none"){
-    moveList.style.display = "block";
-  }else{
-    moveList.style.display = "none";    
+  const targetMoveList = e.target.querySelector('.move-list');
+  console.log("displayMove");
+  console.log(e.target.querySelector('.move-list'));
+  if (targetMoveList){
+    if (targetMoveList.style.display == "none"){
+      targetMoveList.style.display = "block";
+    }else{
+      targetMoveList.style.display = "none";    
+    }
   }
+
 }
 
 
