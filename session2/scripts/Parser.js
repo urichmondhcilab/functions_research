@@ -115,7 +115,10 @@ class Parser{
             } 
             else if (block.classList.contains("start")){
                 this.ASTBlocks.push(new Start(null, this.maze));
-            }           
+            }
+            else if (block.classList.contains("new-move")){
+                console.log(block.style.backgroundImage)
+            }
         }          
     }
 

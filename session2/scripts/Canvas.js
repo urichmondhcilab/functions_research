@@ -38,6 +38,11 @@ document.addEventListener('dragstart', (event) => {
         draggedElementState = {
             element: draggedElement,
         };    
+    } else if (draggedElement && draggedElement.classList.contains("new-move")){
+        console.log("new move");
+        draggedElementState = {
+            element: draggedElement,
+        };         
     }
 });
 

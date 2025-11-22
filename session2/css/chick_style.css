@@ -81,8 +81,9 @@ html, body {
 
 .bottom-right {
     height: 40%;
-    width: 75%;
+    width: 80%;
     padding-bottom: 6%;
+    /* background-color: rebeccapurple; */
 }
 
 .bottom-right, .draggable{
@@ -102,6 +103,7 @@ html, body {
   background-position: center;
   background-size: contain;
   font-size: 1vw;
+  /* background-color: #FFC940; */
 }
 
 .move{
@@ -215,9 +217,12 @@ html, body {
 #visible-move-container{
   display: flex;
   width: 100%;
-  z-index: 100;
-  background-color: red;
   height: 100%;
+  /* z-index: 100; */
+  background-color: red;
+  margin: 0px;
+  padding: 0px;
+
 }
 
 #visible-move{
@@ -226,6 +231,8 @@ html, body {
   background-repeat: no-repeat;
   background-size: cover;
   width: 50%;
+  height: 100%;
+  background-color: blue;
 }
 
 
@@ -235,6 +242,8 @@ html, body {
   background-repeat: no-repeat;
   background-size: cover;  
   width: 50%;
+  height: 100%;
+  margin-left: -5%;
 }
 
 #num0, #num1, #num2, #num3, #num4, #num5, #num6, #num7, #num8, #num9, #num10 {
@@ -308,7 +317,13 @@ html, body {
   position: relative;
   top: -700%;
   list-style: none;
-  height: 1000%;
+  height: 700%;
   width: 100%;
   display: none;
+}
+
+.new-move{
+    padding: 0px;
+    height: 20%;
+    width: 100%;
 }
