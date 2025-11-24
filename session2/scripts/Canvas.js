@@ -31,17 +31,9 @@ document.addEventListener('dragstart', (event) => {
     }
     draggedElementState = {
         element: draggedElement,
+        move : draggedElement.classList.contains("new-move")
     };
-    } else if (draggedElement && draggedElement.classList.contains("start")){
-        draggedElementState = {
-            element: draggedElement,
-        };    
-    } else if (draggedElement && draggedElement.classList.contains("new-move")){     
-        draggedElementState = {
-            element: draggedElement,
-            move: "true"
-        };         
-    }
+
 });
 
 
@@ -49,60 +41,9 @@ document.addEventListener('dragstart', (event) => {
 function drop(event) {
     event.preventDefault();
     if (draggedElementState) {
-        const draggedElement = draggedElementState.element;
-        // const selectedValue = draggedElementState.selectedValue;
-        const newBlock = draggedElement.cloneNode(true);
-        // const dropdown = newBlock.querySelector('select');
-        const move = draggedElementState.move;
-
-        // if it's a move block, make sure the dropdown contains the same value
-        // if (dropdown) {
-        //     dropdown.value = selectedValue;
-        //     newBlock.dataset.move = dropdown.value;
-
-        //     // Listen to see if it's changed again after it's already in the canvas
-        //     dropdown.addEventListener('change', (e) => {
-        //         newBlock.dataset.move = e.target.value;
-        //     });
-        //     console.log("moving");
-        // }
-
-        if(move){
-
-            newBlock.querySelector(".visible-number").addEventListener('click', displayNumbers);
-            newBlock.querySelector(".number-list").addEventListener('click', resetDisplayedNumber);
-
-            for (let i in 10){
-                newBlock.querySelector(".num" + i).addEventListener('click', resetDisplayedNumber);
-            }            
-
-            console.log(newBlock.querySelector(".visible-move"));
-            newBlock.querySelector(".visible-move").addEventListener('click', displayMoves)
-            newBlock.querySelector(".move-list").addEventListener('click', resetMove);
-            newBlock.querySelector(".move-right").addEventListener('click', resetMove);
-            newBlock.querySelector(".move-left").addEventListener('click', resetMove);
-            newBlock.querySelector(".move-up").addEventListener('click', resetMove);
-            newBlock.querySelector(".move-down").addEventListener('click', resetMove);            
-            // draggedElement.querySelector("visible-move").addEventListener('click', (e)=>{ console.log("moving")})
-            newBlock.style.width = "100%";
-        }else{
-            newBlock.style.width = "50%";            
-        }
-        instCount++;
-        newBlock.id = "instruction" + instCount;
-        // Add the new element to the canvas
-        newBlock.classList.remove('draggable');
-        newBlock.classList.add('block');
-        newBlock.setAttribute("draggable", true); // make sure it's draggable
-        newBlock.addEventListener("dragstart", dragStartHandler); // allow dragging to trash
-        const newBlock = createBlockClone(draggedElementState);
-
+        const newBlock = createBlockClone(draggedElementState);        
         createNewBlock(newBlock);
         document.getElementById('block-drop').appendChild(newBlock);
-        // newBlock.style.width = "90%";
-        newBlock.style.position = "relative";
-
-
 
         // let translateValue = instCount * -11;
         // newBlock.style.transform = `translate(0%, ${translateValue}%)`;
@@ -202,37 +143,46 @@ function dragStartHandler(e){
 //Shared Functions
 
 function createBlockClone(state){
-        const {element, selectedValue} = state;
-        const newBlock = element.cloneNode(true);
-        const dropdown = newBlock.querySelector('select');
+    const {element, move} = state;
+    const newBlock = element.cloneNode(true);
+    // const dropdown = newBlock.querySelector('select');
 
         // if it's a move block, make sure the dropdown contains the same value
-        if (dropdown) {
-            dropdown.value = selectedValue;
-            newBlock.dataset.move = dropdown.value;
+    if(move){
 
-            // Listen to see if it's changed again after it's already in the canvas
-            dropdown.addEventListener('change', (e) => {
-                newBlock.dataset.move = e.target.value;
-            });
+            newBlock.querySelector(".visible-number").addEventListener('click', displayNumbers);
+            newBlock.querySelector(".number-list").addEventListener('click', resetDisplayedNumber);
+
+            for (let i in 10){
+                newBlock.querySelector(".num" + i).addEventListener('click', resetDisplayedNumber);
+            }            
+
+            console.log(newBlock.querySelector(".visible-move"));
+            newBlock.querySelector(".visible-move").addEventListener('click', displayMoves)
+            newBlock.querySelector(".move-list").addEventListener('click', resetMove);
+            newBlock.querySelector(".move-right").addEventListener('click', resetMove);
+            newBlock.querySelector(".move-left").addEventListener('click', resetMove);
+            newBlock.querySelector(".move-up").addEventListener('click', resetMove);
+            newBlock.querySelector(".move-down").addEventListener('click', resetMove);            
+            // draggedElement.querySelector("visible-move").addEventListener('click', (e)=>{ console.log("moving")})
+            newBlock.style.width = "100%";
+        }else{
+            newBlock.style.width = "50%";            
         }
+
         return newBlock;
 }
 
-function createNewBlock(newBlock){
-    instCount++;
-    newBlock.id = "instruction" + instCount;
-    // Add the new element to the canvas
-    newBlock.classList.remove('draggable');
-    newBlock.classList.add('block');
-    newBlock.setAttribute("draggable", true); // make sure it's draggable
-    newBlock.addEventListener("dragstart", dragStartHandler); // allow dragging to trash
-    //document.getElementById('block-drop').appendChild(newBlock);
-    newBlock.style.width = "90%";
-    newBlock.style.position = "relative";
-    newBlock.style.left = "0px";
-    newBlock.style.top = "0px";
-    newBlock.style.zIndex = "";
+function createNewBlock(newBlock){     
+        instCount++;
+        newBlock.id = "instruction" + instCount;
+        // Add the new element to the canvas
+        newBlock.classList.remove('draggable');
+        newBlock.classList.add('block');
+        newBlock.setAttribute("draggable", true); // make sure it's draggable
+        newBlock.addEventListener("dragstart", dragStartHandler); // allow dragging to trash
+        // newBlock.style.width = "90%";
+        newBlock.style.position = "relative";    
 
     return newBlock;
 }
