@@ -79,10 +79,6 @@ class Bird{
     this.healthBarFill.className = "health_bar_fill";
 
     this.healthBarContainer.appendChild(this.healthBarFill);
- 
-    // this.point_count.id = this.id + ' points';
-    // this.point_count.className = 'point_count';
-    // this.point_count.innerText = ': ' + this.lifeSpan;
 
     this.point_display.appendChild(this.chick_Icon);
     this.point_display.appendChild(this.healthBarContainer);
@@ -95,9 +91,9 @@ class Bird{
    * @param {Object} e is the event object
    */
   async displayCodeEditor(e){
-    let codeEditor = document.getElementById("codeEditor");
-    codeEditor.firstChild.nodeValue = "chick " + this.id;
-    console.log(selectedBirds);
+    // let codeEditor = document.getElementById("codeEditor");
+    // codeEditor.firstChild.nodeValue = "chick " + this.id;
+    // console.log(selectedBirds);
     if (selectedBirds != null && selectedBirds !== undefined){
       for (const selectedBird of selectedBirds){
         console.log("in for loop");
@@ -110,7 +106,6 @@ class Bird{
       motherHen.mother.style.border = "none";
     }
 
-    // this.birdie.style.border = ".1rem solid cyan"; 
     this.selectionDiv.style.backgroundImage = "url('images/star_animation_frames/seven.svg')" ;  
     this.selectionDiv.style.backgroundRepeat = "no-repeat";
     this.selectionDiv.style.backgroundPosition = "center";
@@ -130,15 +125,16 @@ class Bird{
     let top = parseInt(slicePX(this.curTile.y) /*- slicePX(this.curTile.height) / 8*/);
     let left = parseInt(slicePX(this.curTile.x) + slicePX(this.curTile.width) / 4);  
     this.birdie.style.left= `${left}px`;
-    this.birdie.style.top = `${top}px`;   
+    this.birdie.style.top = `${top}px`; 
     
   }
 
 
   /**
    * update the bird sprite to a random sprite
+   * If selected, changes both chick sprite, and associated lifespan counter sprite to same color
    */
-  updateBird(){        
+  updateBird(){
       if (this.selected){
         if (this.selectionCount > chickSelectionStars.length - 1) this.selectionCount = 0  
         this.selectionDiv.style.backgroundImage = `url(${chickSelectionStars[this.selectionCount++]})`;
@@ -154,13 +150,13 @@ class Bird{
   }
 
   /**
-   * Redcuce Lifespan by 1, update counter
+   * Redcuce Lifespan by 1, sets life bar width to percent of current life / total
+   * sets color based on which 3rd of lifespan percent is
    */
   pointDecrement(){
     if(!this.finished){
       this.curLife -= 1;
       const lifePercent = this.curLife / this.lifeSpan;
-      console.log(lifePercent);
       this.healthBarFill.style.width = (lifePercent * 100) + "%";
       
       if (lifePercent > .66){
@@ -255,7 +251,6 @@ move(direction, curMaze) {
       this.updatePoints(100);
       //Get current count in int form
       this.finished = true;
-      this.point_count.innerText = ': !!!';
       this.point_display.style.backgroundColor = "green";
       //Disapear chick (animation/sound)
       //update finished counter
@@ -264,7 +259,7 @@ move(direction, curMaze) {
 
 /**
  * changes the bird sprite to the drinking sprite
- * the bird dies when it tries to drink on a tile that is not a water tiel
+ * Only works for water tiles, points are updated
  */
 drink() {
   if(this.curTile.state.name == "WATER" && !this.hasConsumed){
@@ -278,7 +273,7 @@ drink() {
 
 /**
  * changes the bird sprite to the eating sprite
- * the bird dies if it tries to eat on a plank that is not an eating plank
+ * Only works for food tiles, points are updated
  */
   eat() {
   if(this.curTile.state.name == "FOOD" && !this.hasConsumed){

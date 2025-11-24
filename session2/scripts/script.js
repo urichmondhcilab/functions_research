@@ -21,7 +21,7 @@ let CREATE_BIRD_SPEED = 50;
 let NORMAL_SPEED = 200;
 let gameInterval = null;
 let instructionIndex = 0;
-
+let executedBlockCount = 0;
 let nextGame = false;
 let curLevel = 0;
 let mazeElements = 3;
@@ -54,7 +54,7 @@ function resetInterval(newSpeed){
  * Remove event listener, remove redundance
  */
 function createBird(maze){
-  //if (!maze) return;
+  if (!maze) return;
   if (currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
     let birdie = new Bird(currentNumberOfBirds, maze);
     allBirds[currentNumberOfBirds] = birdie;
@@ -136,7 +136,7 @@ function updateMotherHen(){
  * @returns a boolean that indicates whether to keep or remove the bird
  */
 function respawnBirds(bird){
-  point_number.textContent = birdCounter;
+  // point_number.textContent = birdCounter;
   if (!bird) return false;
   let keepBird = true;
   bird.pointDecrement();
@@ -193,6 +193,7 @@ function gameOverCheck(){
 }
 
 function newLevel(){
+  console.log("moves for level " + curLevel + ":" + executedBlockCount)
   curLevel++;
   //INSERT: Display transistion/instructions
   if (curLevel > MAX_LEVEL){
@@ -227,17 +228,14 @@ function newLevelConfig(level){
 
   //Resets birds
   ResetLevel();
-  //Resets Maze
-  if (createMom){
-    createMother();
-  }
 }
 
 function ResetLevel(){
   reset();
   resetMaze();
-  if (createMom){
-    createMother();}
+  if (levelAttributes[curLevel].mother_include){
+    createMother();
+  }
 }
 
 /**
@@ -248,7 +246,7 @@ function ResetLevel(){
 function reset(){
   birdCounter = 0;
   currentNumberOfBirds = birdCounter;
-  point_number.textContent = birdCounter;
+  // point_number.textContent = birdCounter;
   allBirds.forEach((bird, i) => {
     game_canvas.removeChild(bird.birdie);
   });
@@ -262,6 +260,8 @@ function reset(){
     motherHen = null;
 
   }
+
+  executedBlockCount = 0;
 
   //finished_counter.textContent = "0"
   GameOverElement = document.getElementById("game_over");
@@ -349,11 +349,13 @@ async function initializeBlockIdentifiers(){
 
 /**
  * Executes action in each block of the AST
+ * records number of moves executed
  * @returns early if block codes are not currently being executed
  */
 async function runCode(){
   if (!running) return;
   if (blockCount >= 0 && blockCount < ast.length){
+    executedBlockCount += 1;
     Interpreter.interpret(ast[blockCount]);
     blockCount++;
   }
@@ -406,7 +408,7 @@ function initSession2EventListeners(){
  * Start the game
  * initialize the event listeners
  * set up the maze
- * initialize draggable blocks
+ * initialize draggable blocks, and enables touch (ipad)
  */
 function startGame(){
   animateGameObjects();

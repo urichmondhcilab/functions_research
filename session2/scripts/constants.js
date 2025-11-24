@@ -20,7 +20,7 @@ let motherPosX = centerX - backgroundImageWidth * 0.25;
 let motherPosY = centerY - backgroundImageHeight * 0.15;
 
 let mazeStartX = (backgroundImageWidth * 0.20);
-let mazeStartY = centerY + screenHeight * 0.15 ;
+let mazeStartY = centerY + screenHeight * 0.15;
 let mazeWidth = (backgroundImageWidth * 0.7);
 let mazeHeight = centerY + backgroundImageHeight * 0.4;
 
@@ -100,6 +100,12 @@ const instructions = [{text: "click on a bird to program its path",
                        } ];
 
 const levelAttributes = {
+    // 0:{
+    //     description: "Level 0, 1 Bird, planks",
+    //     max_Birds: 1,
+    //     state_range: 3,
+    //     mother_include: false,
+    // },
     1:{
         description: "Level 1, 1 Bird, food, water, planks",
         max_Birds: 1,

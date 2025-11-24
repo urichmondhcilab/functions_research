@@ -11,6 +11,7 @@ html, body {
 .chickCont{
   width: 3%;
   height: 8%;
+  transition: top 0.5s linear, left 0.5s linear;
 }
 
 .chick{

@@ -52,7 +52,7 @@ class Maze{
        
                        this.maze.push(mazeY)
                        currentY = currentY + (this.tileHeight);   
-                       startX = Math.floor(startX * 0.7); //edit start x and end x to turn in with the background.
+                       startX = Math.floor(startX); //edit start x and end x to turn in with the background.
                        endX = Math.floor(endX * 1.1);
                        i++;
                    }        
