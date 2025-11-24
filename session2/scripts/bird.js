@@ -20,6 +20,7 @@ class Bird{
     this.maze = maze
 
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
+    this.curLife = this.lifeSpan;
     let birdDiv = document.createElement('div');
     let birdImg = document.createElement('img');
     let selectionDiv = document.createElement('div');
@@ -70,14 +71,21 @@ class Bird{
     this.chick_Icon.src = chickImagePaths[0][0];
     this.chick_Icon.className = "chick_icon";
 
-    //Create a assocaited count for lifespan points
-    this.point_count = document.createElement("div");
-    this.point_count.id = this.id + ' points';
-    this.point_count.className = 'point_count';
-    this.point_count.innerText = ': ' + this.lifeSpan;
+    //Create a assocaited container for health bar
+    this.healthBarContainer = document.createElement("div");
+    this.healthBarContainer.className = "health_bar_container";
+
+    this.healthBarFill = document.createElement("div");
+    this.healthBarFill.className = "health_bar_fill";
+
+    this.healthBarContainer.appendChild(this.healthBarFill);
+ 
+    // this.point_count.id = this.id + ' points';
+    // this.point_count.className = 'point_count';
+    // this.point_count.innerText = ': ' + this.lifeSpan;
 
     this.point_display.appendChild(this.chick_Icon);
-    this.point_display.appendChild(this.point_count);
+    this.point_display.appendChild(this.healthBarContainer);
 
     document.getElementById("points_container").appendChild(this.point_display);
   }
@@ -150,8 +158,20 @@ class Bird{
    */
   pointDecrement(){
     if(!this.finished){
-      this.lifeSpan = this.lifeSpan - 1;
-      this.point_count.innerText = ': ' + this.lifeSpan;
+      this.curLife -= 1;
+      const lifePercent = this.curLife / this.lifeSpan;
+      console.log(lifePercent);
+      this.healthBarFill.style.width = (lifePercent * 100) + "%";
+      
+      if (lifePercent > .66){
+        this.healthBarFill.style.backgroundColor = "rgb(53, 255, 53)"
+      }
+      else if(lifePercent > .33){
+        this.healthBarFill.style.backgroundColor = "rgb(245, 237, 10)";
+      }
+      else{
+        this.healthBarFill.style.backgroundColor = "rgb(255, 115, 0)";
+      }
     }
   }
 
@@ -281,6 +301,7 @@ drink() {
     dieSound.play();
     //lifespan resets
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
+    this.curLife = this.lifeSpan;
     //Places bird on new open spot in maze.
     this.placeBird(maze);
   }
@@ -316,7 +337,7 @@ drink() {
  * @param {int} val, value of points to be updated
  */
   updatePoints(val){
-    this.lifeSpan += val;
-    console.log(this.lifeSpan);
+    this.curLife += val;
+    console.log(this.curLife);
   }
 }

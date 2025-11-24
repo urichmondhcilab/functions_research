@@ -236,6 +236,8 @@ function newLevelConfig(level){
 function ResetLevel(){
   reset();
   resetMaze();
+  if (createMom){
+    createMother();}
 }
 
 /**
@@ -258,6 +260,7 @@ function reset(){
   if(motherHen){
     game_canvas.removeChild(motherHen.mother);
     motherHen = null;
+
   }
 
   //finished_counter.textContent = "0"
