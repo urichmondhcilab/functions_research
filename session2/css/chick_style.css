@@ -11,6 +11,7 @@ html, body {
 .chickCont{
   width: 3%;
   height: 8%;
+  transition: top 0.5s linear, left 0.5s linear;
 }
 
 .chick{
@@ -117,6 +118,10 @@ html, body {
 
 .eat {
   background-image: url("../images/game_buttons/eat_button.svg");
+}
+
+.hidden{
+  display: none;
 }
 
 .start{

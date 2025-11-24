@@ -52,7 +52,7 @@ class Maze{
        
                        this.maze.push(mazeY)
                        currentY = currentY + (this.tileHeight);   
-                       startX = Math.floor(startX * 0.7); //edit start x and end x to turn in with the background.
+                       startX = Math.floor(startX); //edit start x and end x to turn in with the background.
                        endX = Math.floor(endX * 1.1);
                        i++;
                    }        
@@ -74,6 +74,7 @@ class Maze{
                    else{
                        console.log("can finish the maze");
                        this.travesable = true;
+                       console.log(this.shortestPath())
                    }
     }
 
@@ -161,7 +162,47 @@ class Maze{
      || this.canFinishMaze(x,y+1,visited) || this.canFinishMaze(x,y-1,visited))
   }
 
+  shortestPath(){
+    let rows = this.maze.length;
+    let cols = this.maze[0].length;
 
+    let queue = [];
+    let visited = new Set();
+
+    queue.push({x:0, y:0, dist:0});
+    visited.add('0,0');
+
+    const moves =[
+        [1,0],
+        [-1,0],
+        [0,1],
+        [0,-1]
+    ];
+
+    while(queue.length>0){
+        let { x, y, dist } = queue.shift();
+        let tile = this.maze[x][y];
+
+        if (tile.state.name == "END"){
+            return dist;
+        }
+
+        for (let [dx,dy] of moves){
+            let nx = x + dx;
+            let ny = y + dy;
+
+            if (nx>=0 && ny >= 0 && nx < rows && ny < cols){
+                let nextTile = this.maze[nx][ny];
+                let coords = `${nx},${ny}`;
+
+                if (!visited.has(coords) && nextTile.state.name != "BLOCK"){
+                    visited.add(coords);
+                    queue.push({x:nx, y:ny, dist: dist + 1});
+                }
+            }
+        }
+    }
+}
 
     #init(startX, startY, width, height){
         // compute the width and height of each tile
