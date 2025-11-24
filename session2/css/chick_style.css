@@ -45,6 +45,7 @@ html, body {
   background-position: center;
   background-size: cover;
   background-color: skyblue;
+  /* overflow-y: scroll; */
 }
 
 .container{
@@ -106,9 +107,9 @@ html, body {
   /* background-color: #FFC940; */
 }
 
-.move{
+/* .move{
   background-color: salmon;
-}
+} */
 
 .drink {
   background-image: url("../images/game_buttons/drink_button.svg");
@@ -136,7 +137,7 @@ html, body {
   width: 100%;
   flex-grow: 1;
   border: 0.1rem solid white;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 
 #num-input{
@@ -194,7 +195,7 @@ html, body {
   align-items: center;
   z-index: 100;
   background-image: url("../images/pop_up.svg");
-    background-repeat: no-repeat;
+  background-repeat: no-repeat;
   background-size: contain ;
   /* background-color: red; */
   background-position: center;
@@ -223,6 +224,7 @@ html, body {
   /* background-color: red; */
   margin: 0px;
   padding: 0px;
+  align-items: center;
 
 }
 
@@ -231,8 +233,10 @@ html, body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  margin-top: 1.8%;  
   width: 50%;
   height: 100%;
+  padding-bottom: 0px;
   /* background-color: blue; */
 }
 
@@ -244,7 +248,11 @@ html, body {
   background-size: cover;  
   width: 50%;
   height: 100%;
-  margin-left: -5%;
+  margin-top: 1.8%;
+  margin-right: 0px;
+  /* margin-bottom: -50%; */
+  margin-left: -5%; 
+  padding-bottom: 0px;
 }
 
 .num0, .num1, .num2, .num3, .num4, .num5, .num6, .num7, .num8, .num9, .num10 {
@@ -318,14 +326,16 @@ html, body {
   position: relative;
   top: 100%;
   list-style: none;
-  height: 500%;
+  height: 700%;
   width: 100%;
   display: none;
   overflow-y: auto;  
 }
 
 .new-move{
-    padding: 0px;
-    height: 20%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 17.5%;
     width: 100%;
+
 }

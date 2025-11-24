@@ -51,9 +51,9 @@ function drop(event) {
     event.preventDefault();
     if (draggedElementState) {
         const draggedElement = draggedElementState.element;
-        const selectedValue = draggedElementState.selectedValue;
+        // const selectedValue = draggedElementState.selectedValue;
         const newBlock = draggedElement.cloneNode(true);
-        const dropdown = newBlock.querySelector('select');
+        // const dropdown = newBlock.querySelector('select');
         const move = draggedElementState.move;
 
         // if it's a move block, make sure the dropdown contains the same value
@@ -85,6 +85,9 @@ function drop(event) {
             newBlock.querySelector(".move-up").addEventListener('click', resetMove);
             newBlock.querySelector(".move-down").addEventListener('click', resetMove);            
             // draggedElement.querySelector("visible-move").addEventListener('click', (e)=>{ console.log("moving")})
+            newBlock.style.width = "100%";
+        }else{
+            newBlock.style.width = "50%";            
         }
         instCount++;
         newBlock.id = "instruction" + instCount;
@@ -94,7 +97,7 @@ function drop(event) {
         newBlock.setAttribute("draggable", true); // make sure it's draggable
         newBlock.addEventListener("dragstart", dragStartHandler); // allow dragging to trash
         document.getElementById('block-drop').appendChild(newBlock);
-        newBlock.style.width = "90%";
+        // newBlock.style.width = "90%";
         newBlock.style.position = "relative";
 
 
@@ -112,9 +115,48 @@ function reorderItems(parent){
     console.log(nodeList);
     index = 0;
     let translateValue = 0;   
+        // if (nodeList[0].classList.contains("new-move")){
+        //     bottom = nodeList[0].childNodes[1].childNodes[1].getBoundingClientRect().bottom;
+
+        // }else{
+        //     bottom = nodeList[0].getBoundingClientRect().bottom;;
+        // } 
+    let prev = "";
+    let curr = "";
     for (node of nodeList){
-        translateValue = index * - 12;
-        node.style.transform = `translate(0%, ${translateValue}%)`
+        translateValue = index * - 22;        
+        // curr = node.classList.contains("new-move") ? "new-move" : "other";
+        // if (curr == "new-move" && prev == "other"){
+        //     translateValue -= 53;   
+        // }else if (curr == "new-move" && prev == "new-move"){
+        //     translateValue -= 10;   
+        // }else if (curr == "other" && prev == "new-move"){
+        //     translateValue -= 10;   
+        // }else if (curr == "other" && prev == "other"){
+        //     translateValue -= 22;   
+        // }else{
+        //     translateValue = 0;
+        // }
+
+
+        const currentClasses = node.classList;
+        console.log(node.classList);
+        if (node.classList.contains("new-move")){
+            node.style.transform = `translate(0%, ${translateValue}%)`;
+        }else{
+            node.style.transform = `translate(-50%, ${translateValue}%)`
+        }        
+        // if(index != 0){
+        //     if (node.classList.contains("new-move")){
+        //         node.childNodes[1].childNodes[1].style.top = bottom;
+        //         bottom = node.childNodes[1].childNodes[1].getBoundingClientRect().bottom
+        //     }else{
+        //        node.style.top = bottom;
+        //         bottom = node.getBoundingClientRect().bottom;
+        //     } 
+        // }
+        // console.log(bottom);  
+        prev = curr      
         index++;
     }
 }
