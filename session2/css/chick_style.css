@@ -85,6 +85,7 @@ html, body {
     height: 40%;
     width: 80%;
     padding-bottom: 6%;
+    overflow-y: scroll;
     /* background-color: rebeccapurple; */
 }
 
@@ -238,7 +239,7 @@ html, body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  margin-top: 1.8%;  
+  margin-top: 1.9%;  
   width: 50%;
   height: 100%;
   padding-bottom: 0px;
@@ -253,7 +254,7 @@ html, body {
   background-size: cover;  
   width: 50%;
   height: 100%;
-  margin-top: 1.8%;
+  margin-top: 1.9%;
   margin-right: 0px;
   /* margin-bottom: -50%; */
   margin-left: -5%; 
@@ -340,7 +341,7 @@ html, body {
 .new-move{
     padding-top: 0px;
     padding-bottom: 0px;
-    height: 17.5%;
+    height: 18%;
     width: 100%;
 
 }

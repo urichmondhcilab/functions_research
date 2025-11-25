@@ -176,12 +176,12 @@ function createBlockClone(state){
 function createNewBlock(newBlock){     
         instCount++;
         newBlock.id = "instruction" + instCount;
+
         // Add the new element to the canvas
         newBlock.classList.remove('draggable');
         newBlock.classList.add('block');
         newBlock.setAttribute("draggable", true); // make sure it's draggable
         newBlock.addEventListener("dragstart", dragStartHandler); // allow dragging to trash
-        // newBlock.style.width = "90%";
         newBlock.style.position = "relative";    
 
     return newBlock;
