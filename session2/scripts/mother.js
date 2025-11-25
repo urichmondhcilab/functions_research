@@ -31,8 +31,6 @@ class Mother{
     }
 
     selectAllBirds(e){
-
-      let codeEditor = document.getElementById("codeEditor");
       console.log(selectedBirds);
       if (selectedBirds != null && selectedBirds !== undefined){
         for (const selectedBird of selectedBirds){
@@ -40,7 +38,7 @@ class Mother{
         }
       }
       //Change to mother sparkling
-      this.mother.style.border = ".1rem solid cyan";  
+      // this.mother.style.border = ".1rem solid cyan";  
       selectedBirds = allBirds;    
       
       for (const selectedBird of selectedBirds){
