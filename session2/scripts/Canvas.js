@@ -44,9 +44,6 @@ function drop(event) {
         const newBlock = createBlockClone(draggedElementState);        
         createNewBlock(newBlock);
         document.getElementById('block-drop').appendChild(newBlock);
-
-        // let translateValue = instCount * -11;
-        // newBlock.style.transform = `translate(0%, ${translateValue}%)`;
         reorderItems(document.getElementById('block-drop'));
         draggedElementState = null;
     }
@@ -55,51 +52,13 @@ function drop(event) {
 
 function reorderItems(parent){
     let nodeList = parent.childNodes;
-    console.log(nodeList);
+    // console.log(nodeList);
     let index = 0;
     let translateValue = 0;   
-        // if (nodeList[0].classList.contains("new-move")){
-        //     bottom = nodeList[0].childNodes[1].childNodes[1].getBoundingClientRect().bottom;
 
-        // }else{
-        //     bottom = nodeList[0].getBoundingClientRect().bottom;;
-        // } 
-    let prev = "";
-    let curr = "";
     for (node of nodeList){
-        translateValue = index * - 22;        
-        // curr = node.classList.contains("new-move") ? "new-move" : "other";
-        // if (curr == "new-move" && prev == "other"){
-        //     translateValue -= 53;   
-        // }else if (curr == "new-move" && prev == "new-move"){
-        //     translateValue -= 10;   
-        // }else if (curr == "other" && prev == "new-move"){
-        //     translateValue -= 10;   
-        // }else if (curr == "other" && prev == "other"){
-        //     translateValue -= 22;   
-        // }else{
-        //     translateValue = 0;
-        // }
-
-
-        const currentClasses = node.classList;
-        console.log(node.classList);
-        if (node.classList.contains("new-move")){
-            node.style.transform = `translate(0%, ${translateValue}%)`;
-        }else{
-            node.style.transform = `translate(-50%, ${translateValue}%)`
-        }        
-        // if(index != 0){
-        //     if (node.classList.contains("new-move")){
-        //         node.childNodes[1].childNodes[1].style.top = bottom;
-        //         bottom = node.childNodes[1].childNodes[1].getBoundingClientRect().bottom
-        //     }else{
-        //        node.style.top = bottom;
-        //         bottom = node.getBoundingClientRect().bottom;
-        //     } 
-        // }
-        // console.log(bottom);  
-        prev = curr      
+        translateValue = index * -32
+        node.style.transform = `translate(${node.classList.contains("new-move") ? 0 : -50}%, ${translateValue}%)`;            
         index++;
     }
 }
