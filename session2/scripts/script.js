@@ -483,16 +483,11 @@ function displayNumbers(e){
   const targetNumberList = e.target.querySelector('.number-list')
   if (targetNumberList.style.display == "none"){
     targetNumberList.style.display = "block";
+    clearExpandedLists(targetNumberList);    
     // targetNumberList.focus();
   }else{
     targetNumberList.style.display = "none";    
   }
-}
-
-function hideList(e){
-  const targetMoveList = e.target.querySelector('.move-list');
-  if (targetMoveList)  
-    targetMoveList.style.display = none;
 }
 
 function resetDisplayedNumber(e){
@@ -541,11 +536,19 @@ function displayMoves(e){
 function clearExpandedLists(currList){
   let allLists = document.getElementById('block-drop');
   let moveLists = allLists.querySelectorAll('.move-list');
+  let numberLists = allLists.querySelectorAll('.number-list');
   console.log(moveLists);
+
   for (const lst of moveLists){
     if (currList != lst){
       lst.style.display = 'none';
     }
+  }
+
+  for (const numberList of numberLists){
+    if (currList != numberList){
+      numberList.style.display = 'none';
+    }    
   }
 }
 
