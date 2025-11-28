@@ -52,12 +52,11 @@ function drop(event) {
 
 function reorderItems(parent){
     let nodeList = parent.childNodes;
-    // console.log(nodeList);
     let index = 0;
     let translateValue = 0;   
 
     for (node of nodeList){
-        translateValue = index * -32
+        translateValue = index * -33
         node.style.transform = `translate(${node.classList.contains("new-move") ? 0 : -50}%, ${translateValue}%)`;            
         index++;
     }
