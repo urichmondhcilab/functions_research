@@ -440,7 +440,6 @@ function initSession2EventListeners(){
   //eventlistners for when a number image is clicked
   for (numObject in numObjects){
     numObject.addEventListener('click', resetDisplayedNumber);
-    numObject.addEventListener('blur', hideList);
   }
 
   visibleMove.addEventListener('click', displayMoves)  
@@ -450,12 +449,6 @@ function initSession2EventListeners(){
   moveLeft.addEventListener('click', resetMove)
   moveRight.addEventListener('click', resetMove)
 
-
-  moveList.addEventListener('blur', hideList)
-  moveUp.addEventListener('blur', hideList)
-  moveDown.addEventListener('blur', hideList)
-  moveLeft.addEventListener('blur', hideList)
-  moveRight.addEventListener('blur', hideList)  
 }
 
 
@@ -490,17 +483,19 @@ function displayNumbers(e){
   const targetNumberList = e.target.querySelector('.number-list')
   if (targetNumberList.style.display == "none"){
     targetNumberList.style.display = "block";
+    // targetNumberList.focus();
   }else{
     targetNumberList.style.display = "none";    
   }
 }
 
 function hideList(e){
-  e.target.style.display = none;
+  const targetMoveList = e.target.querySelector('.move-list');
+  if (targetMoveList)  
+    targetMoveList.style.display = none;
 }
 
 function resetDisplayedNumber(e){
-  // console.log(e.target.id);
   const targetVisibleNumber = e.target.parentNode.parentNode;
   let id  = (e.target.className).slice(0,3) + "ber" + (e.target.className).slice(-1);
   console.log(id);
@@ -510,11 +505,15 @@ function resetDisplayedNumber(e){
 }
 
 
+/**
+ * Resets the displayed move to the selected move image
+ * hides the list after selection
+ * @param {Object} e the object that triggers selection
+ */
 function resetMove(e){
   const targetVisibleMove = e.target.parentNode.parentNode;
 
   let className = (e.target.className).slice(5,);
-  // console.log(id);
 
   if (className.trim() != "list")
     targetVisibleMove.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;  
@@ -522,57 +521,33 @@ function resetMove(e){
 }
 
 
+/**
+ * Toggles the list of move directions. If it is visible it hides it and vice versa
+ * @param {Object} e is the object that is clicked toggle to list 
+ */
 function displayMoves(e){
   const targetMoveList = e.target.querySelector('.move-list');
-  console.log("displayMove");
-  console.log(e.target.querySelector('.move-list'));
   if (targetMoveList){
     if (targetMoveList.style.display == "none"){
       targetMoveList.style.display = "block";
-    }else{
+      clearExpandedLists(targetMoveList);
+    }else{     
       targetMoveList.style.display = "none";    
     }
   }
-
 }
 
 
-
-
-
-
-// function displayInstructions(e){
-//   instructionIndex++;  
-//   console.log(instructionIndex);  
-//   if (instructionIndex >= 0 && instructionIndex < instructions.length){
-//     hintText.firstChild.nodeValue = instructions[instructionIndex].text;
-//     hintImage.src = instructions[instructionIndex].image_path;
-//   }else if (instructionIndex >= instructions.length){
-//     hintContainer.style.display = "none";
-//     startGame();
-//   }
-// }
-
-// function displayInstructionsBackwards(){
-//   instructionIndex--;
-//   if (instructionIndex >= 0 && instructionIndex < instructions.length){
-//     hintText.firstChild.nodeValue = instructions[instructionIndex].text;
-//     hintImage.src = instructions[instructionIndex].image_path;
-//   }else if (instructionIndex < 0){
-//     instructionIndex = 0;
-//   }
-//   console.log(instructionIndex);  
-// }
-
-// function closeInstructions(){
-//     hintContainer.style.display = "none";
-//     startGame();
-// }
-
-// // start game
-// nextButton.addEventListener('click', displayInstructions);
-// closeButton.addEventListener('click', closeInstructions);
-// backButton.addEventListener('click', displayInstructionsBackwards);
+function clearExpandedLists(currList){
+  let allLists = document.getElementById('block-drop');
+  let moveLists = allLists.querySelectorAll('.move-list');
+  console.log(moveLists);
+  for (const lst of moveLists){
+    if (currList != lst){
+      lst.style.display = 'none';
+    }
+  }
+}
 
 
   transitionImageContainer.addEventListener('click', choosStartOrTransition);

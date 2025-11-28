@@ -126,8 +126,8 @@ function createBlockClone(state){
             newBlock.querySelector(".move-right").addEventListener('click', resetMove);
             newBlock.querySelector(".move-left").addEventListener('click', resetMove);
             newBlock.querySelector(".move-up").addEventListener('click', resetMove);
-            newBlock.querySelector(".move-down").addEventListener('click', resetMove);            
-            // draggedElement.querySelector("visible-move").addEventListener('click', (e)=>{ console.log("moving")})
+            newBlock.querySelector(".move-down").addEventListener('click', resetMove);   
+            
             newBlock.style.width = "100%";
         }else{
             newBlock.style.width = "50%";            
