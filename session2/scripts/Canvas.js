@@ -49,15 +49,20 @@ function drop(event) {
     }
 }
 
-
+/**
+ * Reposition items so they fit like puzzles 
+ * @param {Array} parent array of nodes (blocks on the canvas)
+ */
 function reorderItems(parent){
     let nodeList = parent.childNodes;
     let index = 0;
-    let translateValue = 0;   
+    let translateValue = 0; 
+    let zIndex = 1000;
 
     for (node of nodeList){
         translateValue = index * -33
-        node.style.transform = `translate(${node.classList.contains("new-move") ? 0 : -50}%, ${translateValue}%)`;            
+        node.style.transform = `translate(${node.classList.contains("new-move") ? 0 : -50}%, ${translateValue}%)`;     
+        node.style.zIndex = zIndex--;  
         index++;
     }
 }

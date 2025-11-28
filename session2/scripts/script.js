@@ -440,6 +440,7 @@ function initSession2EventListeners(){
   //eventlistners for when a number image is clicked
   for (numObject in numObjects){
     numObject.addEventListener('click', resetDisplayedNumber);
+    numObject.addEventListener('blur', hideList);
   }
 
   visibleMove.addEventListener('click', displayMoves)  
@@ -448,6 +449,13 @@ function initSession2EventListeners(){
   moveDown.addEventListener('click', resetMove)
   moveLeft.addEventListener('click', resetMove)
   moveRight.addEventListener('click', resetMove)
+
+
+  moveList.addEventListener('blur', hideList)
+  moveUp.addEventListener('blur', hideList)
+  moveDown.addEventListener('blur', hideList)
+  moveLeft.addEventListener('blur', hideList)
+  moveRight.addEventListener('blur', hideList)  
 }
 
 
@@ -487,6 +495,10 @@ function displayNumbers(e){
   }
 }
 
+function hideList(e){
+  e.target.style.display = none;
+}
+
 function resetDisplayedNumber(e){
   // console.log(e.target.id);
   const targetVisibleNumber = e.target.parentNode.parentNode;
@@ -523,6 +535,8 @@ function displayMoves(e){
   }
 
 }
+
+
 
 
 
