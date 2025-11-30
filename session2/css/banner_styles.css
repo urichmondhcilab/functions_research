@@ -24,13 +24,14 @@
 .banner {
     height: 3rem;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 1rem;
     padding-right: 2rem;
+    padding-top: 0.5%;
     font-family: sans-serif;
     position: fixed;
-    left: 0px;
+    /* left: 0px; */
     flex-wrap: nowrap;
 }
 
@@ -62,16 +63,10 @@
 }
 
 .points_container{
-    left: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: .5rem;
-    align-items: center;
-    flex-shrink: 1;
-    background-color: transparent;
-    padding-top: 2rem;
-    justify-items: center;
+    gap: 1%;
 }
 
 .point_display{
@@ -81,25 +76,26 @@
     gap: .03rem;
     width: 4.5rem;
     height: 2rem;
+    padding: 0.1rem;
 }
 
 .chick_icon{
     height: 100%;
-    width: auto;
-    max-width: 40%;
-    object-fit: contain;
-    flex-basis: 30%;
+    width: 50%;
+    /* max-width: 40%; */
+    object-fit: cover;
+    /* flex-basis: 30%; */
     flex-shrink: 0;
 }
 
 .health_bar_container{
     display: flex;
-    width: 100%;
+    width: 50%;
     height: 50%;
     background-color: #333;
-    border: 1px solid #666;
+    border: 0.01rem solid #666;
     overflow: hidden;
-    padding: .2vw;
+    /* padding: .2vw; */
     border-radius: .2em;
     white-space: nowrap;
     flex: 1;
@@ -208,3 +204,11 @@
         display: none;
         z-index: 1;
 }
+
+#new_points_container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    background-color: red;    
+}
+
