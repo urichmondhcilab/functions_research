@@ -63,6 +63,10 @@
     /* background-color: rgb(110, 168, 23); */
 }
 
+#authStatus{
+    font-size: 1.5vw;    
+}
+
 .points_container{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
