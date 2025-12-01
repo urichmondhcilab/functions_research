@@ -33,6 +33,7 @@
     position: fixed;
     /* left: 0px; */
     flex-wrap: nowrap;
+    width: 70%;
 }
 
 .banner h3 {
@@ -67,16 +68,17 @@
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 1%;
+    width: 30%;
 }
 
 .point_display{
     background-color: rgb(0, 0, 0);
     display: flex;
     align-items: center;
-    gap: .03rem;
-    width: 4.5rem;
-    height: 2rem;
-    padding: 0.2rem;
+    /* gap: .03rem; */
+    width: 95%;
+    height: 80%;
+    padding: 2%;
 }
 
 .chick_icon{
@@ -95,7 +97,6 @@
     background-color: #333;
     border: 0.01rem solid #666;
     overflow: hidden;
-    /* padding: .2vw; */
     border-radius: .2em;
     white-space: nowrap;
     flex: 1;
@@ -174,7 +175,7 @@
 
 #next_button, #back_button, #game_reset_button{
     background-color: #FFC940;
-    font-size: 2vw;
+    font-size: 2rem;
     align-self: center;
     padding: 0.5vw;
     border-radius: 0.2rem;
@@ -205,10 +206,13 @@
         z-index: 1;
 }
 
-#new_points_container{
+/* #new_points_container{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
     background-color: red;    
-}
-
+} */
+/* #banner{
+    background-color: red;
+    width: 70%;
+} */
