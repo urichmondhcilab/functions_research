@@ -110,6 +110,9 @@ class Bird{
     this.selectionDiv.style.backgroundRepeat = "no-repeat";
     this.selectionDiv.style.backgroundPosition = "center";
     this.selectionDiv.style.backgroundSize = "cover";
+
+    // this.selectionDiv.className = "chick_icon";
+
     this.selectionDiv.style.display = "block";
     this.selected = true;
     this.selectedColorIndex = Math.floor(Math.random() * SELECTED_BIRD_COLOR_PALETTE_COUNT) + 1;
