@@ -554,3 +554,21 @@ function clearExpandedLists(currList){
 
 
   transitionImageContainer.addEventListener('click', choosStartOrTransition);
+
+  function pulsatingStart(){
+    if (parseInt(transitionWidth) < 50){
+      transitionWidth += 5;
+      transitionHeight += 5;
+      transitionImage.style.width = transitionWidth + "%";
+      transitionImage.style.height = transitionHeight + "%";
+    }else{
+      transitionImageContainer.style.width = transitionImageContainer.style.width == "100%" ? "99%" : "100%";
+    }
+  }
+
+
+  // pulsating play button onload
+window.addEventListener('load', function (e){
+  speed = NORMAL_SPEED;
+  gameInterval = this.setInterval(pulsatingStart, speed)
+});
