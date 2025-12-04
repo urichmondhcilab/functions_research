@@ -33,16 +33,7 @@ let curLevel = 0;
 let mazeElements = 3;
 
 
-/**
- * animateGameObjects by changing sprites
- * runs setInterval 
- * setInterval(fun, ms) is a JavaScript function that receives a function fun
- * and runs fun every ms milliseconds
- * In this case it receives the function birdAction and runs it every 1000 milliseconds
- */
-function animateGameObjects(){
-  gameInterval = setInterval(birdAction, speed);
-}
+
 
 function resetInterval(newSpeed){
   speed = newSpeed;
@@ -165,45 +156,7 @@ function respawnBirds(bird){
 }
 
 
-/**
- * Every second a bird is created, 
- * birds are moved 
- * and birds that have completed livespan are removed
- * The filter function runs removeBird on each bird in allBirds.
- * It keeps the birds for which removeBird returns true.
- */
-async function birdAction(){
-  //createMother();
-  if (!running && currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
-    createBird(maze);
-  }
-  resetInterval(NORMAL_SPEED);
 
-  if(motherHen){
-    updateMotherHen();
-    motherHen.updateMotherHen();
-  }
-
-  if (isTransition || isStart){ 
-
-    if (parseInt(transitionWidth) < 50){
-      transitionWidth += 5;
-      transitionHeight += 5;
-      transitionImage.style.width = transitionWidth + "%";
-      transitionImage.style.height = transitionHeight + "%";
-    }else{
-      transitionImageContainer.style.width = transitionImageContainer.style.width == "100%" ? "99%" : "100%";
-    }
-
-
-    }
-
-  updateBirds();
-  allBirds = allBirds.filter(respawnBirds);
-  //Checks if GameOver Conditions are met
-  gameOverCheck();
-  await runCode();
-}
 
 function gameOverCheck(){
   if (birdCounter == 0 || nextGame == true){
@@ -216,15 +169,17 @@ function gameOverCheck(){
 function newLevel(){
   console.log("moves for level " + curLevel + ":" + executedBlockCount)
   curLevel++;
-  //INSERT: Display transistion/instructions
-    transitionBeforeNewLevel();  
+ 
   if (curLevel > MAX_LEVEL){
     GameOverElement = document.getElementById("game_over");
     GameOverElement.style.display = 'flex';
     return;
   }
+  //INSERT: Display transistion/instructions
+    transitionBeforeNewLevel();   
     newLevelConfig(curLevel);
 }
+
 
 function newLevelConfig(level){
   const levelconfig = levelAttributes[level];
@@ -311,8 +266,8 @@ function reset(){
  */
 function resetMaze(){
   if (maze){
-    for(let i =0; i<maze.maze.length; i++){
-      for(let j=0; j<maze.maze[i].length; j++){
+    for(let i = 0; i < maze.maze.length; i++){
+      for(let j = 0; j < maze.maze[i].length; j++){
         game_canvas.removeChild(maze.maze[i][j].div);
       }
     }
@@ -323,6 +278,7 @@ function resetMaze(){
 function nextLevel(){
   nextGame = true;
 }
+
 
 /**
  * recomputes the position of the bird each time the screen is resized
@@ -406,90 +362,27 @@ function blockResetHandler(e){
   blocks.forEach(block => block.remove());
 }
 
- 
-/**
- * The program starts here
- * An event listener runs in the background waiting for an event to occur on an element
- * In these two cases load and click
- * Once load occurs the function animateGameObjects is invoked
- * Once the reset button is clicked the function reset is invoked
- */
-function initSession2EventListeners(){
-  // window.addEventListener('load', animateGameObjects);
-  window.addEventListener('resize', repositionGameObjects);
-  reset_btn.addEventListener('click', ResetLevel);
-  game_reset_button.addEventListener('click', ResetLevel);
-  runObject.addEventListener('click', initializeBlockIdentifiers);
-
-  // Add event listeners for drag and drop functionality on the canvas
-  canvas.addEventListener('drop', drop);
-  canvas.addEventListener('dragover', allowDrop);
-
-  // reset button clears all the blocks from the canvas, but does not reset the chicken
-  document.getElementById('block-reset').addEventListener('click', blockResetHandler);
-
-  //Monitor activity that leads to points
-
-  //Allows to skip to next level of game
-  document.getElementById('nextLevel').addEventListener('click', nextLevel);
-
-  visibleNumber.addEventListener('click', displayNumbers)
-
-  numberList.addEventListener('click', resetDisplayedNumber)
-
-  //eventlistners for when a number image is clicked
-  for (numObject in numObjects){
-    numObject.addEventListener('click', resetDisplayedNumber);
-  }
-
-  visibleMove.addEventListener('click', displayMoves)  
-  moveList.addEventListener('click', resetMove)
-  moveUp.addEventListener('click', resetMove)
-  moveDown.addEventListener('click', resetMove)
-  moveLeft.addEventListener('click', resetMove)
-  moveRight.addEventListener('click', resetMove)
-
-}
-
 
 /**
- * Start the game
- * initialize the event listeners
- * set up the maze
- * initialize draggable blocks, and enables touch (ipad)
+ * Expands/hides a list associated with a number puzzle
+ * It also clears other expanded lists
+ * @param {Object} e is a clicked number puzzle
  */
-function startGame(){
-  animateGameObjects();
-  initSession2EventListeners();
-  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
-  makeDraggable();
-  TouchDrag();
-}
-
-function choosStartOrTransition(){
-  transitionImageContainer.style.display = "none";  
-  if (isStart){
-    startGame();
-    isStart = false;
-  }
-  if (isTransition){
-    // newLevel();
-    isTransition = false;
-  }
-}
-
-
 function displayNumbers(e){
   const targetNumberList = e.target.querySelector('.number-list')
   if (targetNumberList.style.display == "none"){
     targetNumberList.style.display = "block";
     clearExpandedLists(targetNumberList);    
-    // targetNumberList.focus();
   }else{
     targetNumberList.style.display = "none";    
   }
 }
 
+
+/**
+ * After a number is selected from the list of numbers, the main displayed puzzle image is updated
+ * @param {Object} e a number object from a list of numbers
+ */
 function resetDisplayedNumber(e){
   const targetVisibleNumber = e.target.parentNode.parentNode;
   let id  = (e.target.className).slice(0,3) + "ber" + (e.target.className).slice(-1);
@@ -533,11 +426,14 @@ function displayMoves(e){
 }
 
 
+/**
+ * Ensures that only one puzzle list is displayed at a time 
+ * @param {*} currList holds all the currently expanded list 
+ */
 function clearExpandedLists(currList){
   let allLists = document.getElementById('block-drop');
   let moveLists = allLists.querySelectorAll('.move-list');
   let numberLists = allLists.querySelectorAll('.number-list');
-  console.log(moveLists);
 
   for (const lst of moveLists){
     if (currList != lst){
@@ -552,22 +448,148 @@ function clearExpandedLists(currList){
   }
 }
 
+/**
+ * An event listener runs in the background waiting for an event to occur on an element
+ * In these two cases load and click
+ * Once load occurs the function animateGameObjects is invoked
+ * Once the reset button is clicked the function reset is invoked
+ */
+function initSession2EventListeners(){
+  window.addEventListener('resize', repositionGameObjects);
+  reset_btn.addEventListener('click', ResetLevel);
+  game_reset_button.addEventListener('click', ResetLevel);
+  runObject.addEventListener('click', initializeBlockIdentifiers);
 
-  transitionImageContainer.addEventListener('click', choosStartOrTransition);
+  // Add event listeners for drag and drop functionality on the canvas
+  canvas.addEventListener('drop', drop);
+  canvas.addEventListener('dragover', allowDrop);
 
-  function pulsatingStart(){
-    if (parseInt(transitionWidth) < 50){
-      transitionWidth += 5;
-      transitionHeight += 5;
-      transitionImage.style.width = transitionWidth + "%";
-      transitionImage.style.height = transitionHeight + "%";
-    }else{
-      transitionImageContainer.style.width = transitionImageContainer.style.width == "100%" ? "99%" : "100%";
-    }
+  // reset button clears all the blocks from the canvas, but does not reset the chicken
+  document.getElementById('block-reset').addEventListener('click', blockResetHandler);
+
+  //Monitor activity that leads to points
+
+  //Allows to skip to next level of game
+  document.getElementById('nextLevel').addEventListener('click', nextLevel);
+
+  visibleNumber.addEventListener('click', displayNumbers)
+
+  numberList.addEventListener('click', resetDisplayedNumber)
+
+  //eventlistners for when a number image is clicked
+  for (numObject in numObjects){
+    numObject.addEventListener('click', resetDisplayedNumber);
   }
 
+  // event listners for move puzzles
+  visibleMove.addEventListener('click', displayMoves)  
+  moveList.addEventListener('click', resetMove)
+  moveUp.addEventListener('click', resetMove)
+  moveDown.addEventListener('click', resetMove)
+  moveLeft.addEventListener('click', resetMove)
+  moveRight.addEventListener('click', resetMove)
+}
 
-  // pulsating play button onload
+/**
+ * Every second a bird is created, 
+ * birds are moved 
+ * and birds that have completed livespan are removed
+ * The filter function runs removeBird on each bird in allBirds.
+ * It keeps the birds for which removeBird returns true.
+ */
+async function birdAction(){
+  //createMother();
+  if (!running && currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
+    createBird(maze);
+  }
+  resetInterval(NORMAL_SPEED);
+
+  if(motherHen){
+    updateMotherHen();
+    motherHen.updateMotherHen();
+  }
+
+  if (isTransition || isStart){ 
+    pulsatingStart();
+  }
+
+  updateBirds();
+  allBirds = allBirds.filter(respawnBirds);
+  //Checks if GameOver Conditions are met
+  gameOverCheck();
+  await runCode();
+}
+
+
+/**
+ * animateGameObjects by changing sprites
+ * runs setInterval 
+ * setInterval(fun, ms) is a JavaScript function that receives a function fun
+ * and runs fun every ms milliseconds
+ * In this case it receives the function birdAction and runs it every 1000 milliseconds
+ */
+function animateGameObjects(){
+  gameInterval = setInterval(birdAction, speed);
+}
+
+/**
+ * Start the game
+ * initialize the event listeners
+ * set up the maze
+ * initialize draggable blocks, and enables touch (ipad)
+ */
+function startGame(){
+  initSession2EventListeners();  
+  animateGameObjects();
+  maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
+  makeDraggable();
+  TouchDrag();
+}
+
+
+/**
+ * Hides the transition display 
+ * clear the gameinterval started for the pulsating start button
+ * updates the current mode of play
+ */
+function choosStartOrTransition(){
+  transitionImageContainer.style.display = "none";  
+
+  if (isStart){
+    clearInterval(gameInterval);    
+    startGame();
+    isStart = false;
+  }
+  if (isTransition){
+    // newLevel();
+    // removeCurrentGameElements
+    // ConfigureNewLevel
+    // StartGame
+    isTransition = false;
+  }
+}
+
+
+/**
+ * increases/decreases the transition play button by 5%
+ */
+function pulsatingStart(){
+  if (parseInt(transitionWidth) < 50){
+    transitionWidth += 5;
+    transitionHeight += 5;
+    transitionImage.style.width = transitionWidth + "%";
+    transitionImage.style.height = transitionHeight + "%";
+  }else{
+    transitionImageContainer.style.width = transitionImageContainer.style.width == "100%" ? "99%" : "100%";
+  }
+}
+
+
+// click the transition button to start the game
+transitionImageContainer.addEventListener('click', choosStartOrTransition);
+
+
+// pulsating play button onload
 window.addEventListener('load', function (e){
   speed = NORMAL_SPEED;
   gameInterval = this.setInterval(pulsatingStart, speed)
