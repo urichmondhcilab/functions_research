@@ -35,6 +35,16 @@ const chickImagePaths = [['images/chicks/squarton_resting_position_1.svg', 'imag
                             ['images/poses/red_bird_poses/rest1.svg', 'images/poses/red_bird_poses/rest2.svg'],
                         ];
 
+const chickEndAnimationPoses = [['images/chicks/squarton_resting_position_1.svg'],
+                                ['images/poses/green_bird_poses/splash.svg'],
+                                ['images/poses/orange_bird_poses/splash.svg'],
+                                ['images/poses/brown_bird_poses/drink.svg'],
+                                ['images/poses/pink_bird_poses/drink.svg'],
+                                ['images/poses/blue_bird_poses/drink.svg'],
+                                ['images/poses/light_blue_bird_poses/drink.svg'],
+                                ['images/poses/purple_bird_poses/drink.svg'],
+                                ['images/poses/red_bird_poses/drink.svg']];
+
 const chickSelectionStars = ['images/star_animation_frames/one.svg',
     'images/star_animation_frames/two.svg',
     'images/star_animation_frames/three.svg',

@@ -72,7 +72,7 @@ class Mother{
 
       currMomImage.src = (flag == 1) ? 'images/mother_hen/Mother_Hen_2.svg' : 'images/mother_hen/Mother_Hen_1.svg';
       currMom.currImageFlag = flag * -1;
-    }    
+    }       
 
   }
   

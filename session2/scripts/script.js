@@ -105,19 +105,19 @@ function updateBirds(){
 }
 
 
-/**
- * To update the mother image, We first set currMom to the mother DOM object. 
- * We use a simple 1-0 switching if-else block to make sure the switch happens every tick (If 0, we are on img2. If 1, we are on img1.)
- * The mother object has the field currImageFlag built into it so that this switching can happen.
- */
-function updateMotherHen(){
-  let currMom = motherHen.mother;
-  let currMomImage = currMom.firstChild;
-  let flag = currMom.currImageFlag;
+// /**
+//  * To update the mother image, We first set currMom to the mother DOM object. 
+//  * We use a simple 1-0 switching if-else block to make sure the switch happens every tick (If 0, we are on img2. If 1, we are on img1.)
+//  * The mother object has the field currImageFlag built into it so that this switching can happen.
+//  */
+// function updateMotherHen(){
+//   let currMom = motherHen.mother;
+//   let currMomImage = currMom.firstChild;
+//   let flag = currMom.currImageFlag;
 
-  currMomImage.src = (flag == 1) ? 'images/mother_hen/Mother_Hen_2.svg' : 'images/mother_hen/Mother_Hen_1.svg';
-  currMom.currImageFlag = flag * -1;
-}
+//   currMomImage.src = (flag == 1) ? 'images/mother_hen/Mother_Hen_2.svg' : 'images/mother_hen/Mother_Hen_1.svg';
+//   currMom.currImageFlag = flag * -1;
+// }
 
 
 /**
@@ -147,9 +147,13 @@ function respawnBirds(bird){
   }
   //Checks if bird is on end tile, if so removes bird from allbirds
   if(bird.curTile.state.name === "END"){
-    game_canvas.removeChild(bird.birdie);
-    birdCounter--;
-    return false;
+    // animate the bird before remove
+    bird.gameCompletionAnimation();
+    if (bird.animationCount <= 0){
+      game_canvas.removeChild(bird.birdie);
+      birdCounter--;
+      return false;      
+    }
   }
   return keepBird;
 }
@@ -159,7 +163,6 @@ function gameOverCheck(){
   if (birdCounter == 0 || nextGame == true){
     nextGame = false;
     newLevel();
-
   }
 }
 
@@ -476,8 +479,10 @@ function initSession2EventListeners(){
   //Allows to skip to next level of game
   document.getElementById('nextLevel').addEventListener('click', nextLevel);
 
+  // currently selected number can be clicked on to display the list of numbers
   visibleNumber.addEventListener('click', displayNumbers)
 
+  // A number in the list of numbers may be selected by clicking on it 
   numberList.addEventListener('click', resetDisplayedNumber)
 
   //eventlistners for when a number image is clicked
@@ -515,7 +520,7 @@ async function birdAction(){
     resetInterval(NORMAL_SPEED);
 
     if(motherHen){
-      updateMotherHen();
+      // updateMotherHen();
       motherHen.updateMotherHen();
     }    
 

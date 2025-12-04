@@ -50,6 +50,9 @@ class Bird{
     this.finished = false;
     this.hasConsumed = false;
 
+    // animation variables
+    this.animationCount = 5;
+
     // place birds on tiles
     this.placeBird(maze);
 
@@ -337,5 +340,12 @@ drink() {
   updatePoints(val){
     this.curLife += val;
     console.log(this.curLife);
+  }
+
+
+  gameCompletionAnimation(){
+        let chick_color = chickEndAnimationPoses[this.selectedColorIndex][0];
+        this.birdie.firstChild.src = chick_color;    
+        this.animationCount -= 1;
   }
 }
