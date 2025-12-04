@@ -21,6 +21,7 @@ class Tile{
 
         // html element properties
         this.div = document.createElement("div");
+        this.div.className = "tile";
         this.div.style.backgroundImage = `url("${this.state.image_path}")`;
         this.div.style.backgroundPosition = "center";
         this.div.style.backgroundSize = "100% 70%";

@@ -33,13 +33,12 @@ let curLevel = 0;
 let mazeElements = 3;
 
 
-
-
 function resetInterval(newSpeed){
   speed = newSpeed;
   clearInterval(gameInterval);
   gameInterval = setInterval(birdAction, speed);  
 }
+
 
 /**
  * In a time interval, if we have not exceeded the maximum number of birds,
@@ -156,8 +155,6 @@ function respawnBirds(bird){
 }
 
 
-
-
 function gameOverCheck(){
   if (birdCounter == 0 || nextGame == true){
     nextGame = false;
@@ -165,6 +162,7 @@ function gameOverCheck(){
 
   }
 }
+
 
 function newLevel(){
   console.log("moves for level " + curLevel + ":" + executedBlockCount)
@@ -176,8 +174,9 @@ function newLevel(){
     return;
   }
   //INSERT: Display transistion/instructions
+    removeCurrentGameElements();
     transitionBeforeNewLevel();   
-    newLevelConfig(curLevel);
+    // newLevelConfig(curLevel);
 }
 
 
@@ -214,6 +213,7 @@ function transitionBeforeNewLevel(){
   transitionWidth = 0;
   transitionHeight = 0;
   isTransition = true;
+  // newLevelConfig(curLevel);  
 }
 
 function ResetLevel(){
@@ -244,7 +244,6 @@ function reset(){
   if(motherHen){
     game_canvas.removeChild(motherHen.mother);
     motherHen = null;
-
   }
 
   executedBlockCount = 0;
@@ -253,8 +252,13 @@ function reset(){
   GameOverElement = document.getElementById("game_over");
   GameOverElement.style.display = 'none';
   
-  let ChickDisplay = document.getElementById("points_container");
-  ChickDisplay.innerHTML = ""
+  let chickDisplay = document.getElementById("points_container");
+  chickDisplay.innerHTML = ""
+
+  // chickDisplayChildren = chickDisplay.children;
+  // chickDisplayChildren.forEach(chickPoint => {
+  //   chickDisplay.removeChild(chickPoint);
+  // });
 }
 
 //Probably only either for game over or explicit choice, triggered by reset button at top
@@ -499,25 +503,28 @@ function initSession2EventListeners(){
  */
 async function birdAction(){
   //createMother();
-  if (!running && currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
-    createBird(maze);
-  }
-  resetInterval(NORMAL_SPEED);
 
-  if(motherHen){
-    updateMotherHen();
-    motherHen.updateMotherHen();
-  }
 
   if (isTransition || isStart){ 
     pulsatingStart();
-  }
+  }else{
 
-  updateBirds();
-  allBirds = allBirds.filter(respawnBirds);
-  //Checks if GameOver Conditions are met
-  gameOverCheck();
-  await runCode();
+    if (!running && currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
+      createBird(maze);
+    }
+    resetInterval(NORMAL_SPEED);
+
+    if(motherHen){
+      updateMotherHen();
+      motherHen.updateMotherHen();
+    }    
+
+    updateBirds();
+    allBirds = allBirds.filter(respawnBirds);
+    //Checks if GameOver Conditions are met
+    gameOverCheck();
+    await runCode();    
+  }
 }
 
 
@@ -552,7 +559,7 @@ function startGame(){
  * clear the gameinterval started for the pulsating start button
  * updates the current mode of play
  */
-function choosStartOrTransition(){
+function chooseStartOrTransition(){
   transitionImageContainer.style.display = "none";  
 
   if (isStart){
@@ -561,12 +568,33 @@ function choosStartOrTransition(){
     isStart = false;
   }
   if (isTransition){
-    // newLevel();
-    // removeCurrentGameElements
+    resetInterval(NORMAL_SPEED);
+    // removeCurrentGameElements();
     // ConfigureNewLevel
+    newLevelConfig(curLevel);
     // StartGame
+    // startGame()
     isTransition = false;
   }
+}
+
+function removeCurrentGameElements(){
+  // remove tiles
+  let tiles = game_canvas.querySelectorAll(".tile");
+  console.log(tiles);
+  tiles.forEach(tile => {
+    game_canvas.removeChild(tile);
+  });
+  maze = null;
+
+  // resetCodeBlocks
+  blockResetHandler();
+
+  // clear birds and points
+  reset();
+
+  // reset the time interval
+    resetInterval(NORMAL_SPEED);  
 }
 
 
@@ -586,7 +614,7 @@ function pulsatingStart(){
 
 
 // click the transition button to start the game
-transitionImageContainer.addEventListener('click', choosStartOrTransition);
+transitionImageContainer.addEventListener('click', chooseStartOrTransition);
 
 
 // pulsating play button onload
