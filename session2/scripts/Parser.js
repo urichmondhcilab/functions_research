@@ -34,7 +34,7 @@ class Parser{
             k = i;
             while(k >= 0 && j < birdCount /*&& j <= k*/){
                 
-                console.log(k + " " + j + " " + i);
+                // console.log(k + " " + j + " " + i);
                 let block = this.ASTBlocks[k];
                 this.parseAction(block, this.gameObjects[j]);                
                 j++;
@@ -98,15 +98,6 @@ class Parser{
     parseOne(){
         // create blocks without assigning game objects
         for(const block of this.placedBlocks){
-            // if (block.classList.contains("move")) {
-            //     const direction = block.dataset.move;
-            //     const numberInput = block.querySelector('input[type="number"]');
-            //     const timesToMove = numberInput ? parseInt(numberInput.value) : 0; 
-            //     console.log("timesToMove: " + timesToMove);
-            //     for (let i = 0; i < timesToMove; i++){
-            //         this.ASTBlocks.push(new Move(direction, null, this.maze));
-            //     }                                                
-            // }
             if (block.classList.contains("drink")){
                 this.ASTBlocks.push(new Drink(null, this.maze));                
             }
@@ -122,15 +113,10 @@ class Parser{
                 let visibleNumber = window.getComputedStyle(block.querySelector(".visible-number")).backgroundImage;                
                 const direction = visibleMove.split('/').at(-1).split('.')[0]; // split path by /, select last entry, split by .
                 const timesToMove = visibleNumber.split('/').at(-1).split('.')[0].slice(-1);
-                console.log(direction);
-                console.log(timesToMove)
                 for (let i = 0; i < timesToMove; i++){
                     this.ASTBlocks.push(new Move(direction, null, this.maze));
                 }                   
-                // console.log(window.getComputedStyle(block.querySelector("#visible-move")).backgroundImage);
-                // console.log(times);
             }
         }          
     }
-
 }

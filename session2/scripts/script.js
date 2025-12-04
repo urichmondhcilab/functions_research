@@ -180,6 +180,14 @@ function newLevel(){
 }
 
 
+function transitionBeforeNewLevel(){
+  transitionImageContainer.style.display = "flex";
+  transitionWidth = 0;
+  transitionHeight = 0;
+  isTransition = true;
+}
+
+
 function newLevelConfig(level){
   const levelconfig = levelAttributes[level];
   if (!levelconfig) return;
@@ -208,14 +216,6 @@ function newLevelConfig(level){
 }
 
 
-function transitionBeforeNewLevel(){
-  transitionImageContainer.style.display = "flex";
-  transitionWidth = 0;
-  transitionHeight = 0;
-  isTransition = true;
-  // newLevelConfig(curLevel);  
-}
-
 function ResetLevel(){
   reset();
   resetMaze();
@@ -223,6 +223,7 @@ function ResetLevel(){
     createMother();
   }
 }
+
 
 /**
  * resets the current number of birds 
@@ -232,7 +233,6 @@ function ResetLevel(){
 function reset(){
   birdCounter = 0;
   currentNumberOfBirds = birdCounter;
-  // point_number.textContent = birdCounter;
   allBirds.forEach((bird, i) => {
     game_canvas.removeChild(bird.birdie);
   });
@@ -248,17 +248,15 @@ function reset(){
 
   executedBlockCount = 0;
 
-  //finished_counter.textContent = "0"
   GameOverElement = document.getElementById("game_over");
   GameOverElement.style.display = 'none';
   
+  // remove current points_display
   let chickDisplay = document.getElementById("points_container");
-  chickDisplay.innerHTML = ""
-
-  // chickDisplayChildren = chickDisplay.children;
-  // chickDisplayChildren.forEach(chickPoint => {
-  //   chickDisplay.removeChild(chickPoint);
-  // });
+  const staticChickChildrenArray = Array.from(chickDisplay.children);  
+  staticChickChildrenArray.forEach(chickPoint => {
+    chickPoint.remove();
+  });
 }
 
 //Probably only either for game over or explicit choice, triggered by reset button at top
@@ -373,12 +371,14 @@ function blockResetHandler(e){
  * @param {Object} e is a clicked number puzzle
  */
 function displayNumbers(e){
-  const targetNumberList = e.target.querySelector('.number-list')
-  if (targetNumberList.style.display == "none"){
-    targetNumberList.style.display = "block";
-    clearExpandedLists(targetNumberList);    
-  }else{
-    targetNumberList.style.display = "none";    
+  const targetNumberList = e.target.querySelector('.number-list');
+  if (targetNumberList != null){
+    if (targetNumberList.style.display == "none"){
+      targetNumberList.style.display = "block";
+      clearExpandedLists(targetNumberList);    
+    }else{
+      targetNumberList.style.display = "none";    
+    }
   }
 }
 
@@ -568,7 +568,7 @@ function chooseStartOrTransition(){
     isStart = false;
   }
   if (isTransition){
-    resetInterval(NORMAL_SPEED);
+    // resetInterval(NORMAL_SPEED);
     // removeCurrentGameElements();
     // ConfigureNewLevel
     newLevelConfig(curLevel);
@@ -581,7 +581,6 @@ function chooseStartOrTransition(){
 function removeCurrentGameElements(){
   // remove tiles
   let tiles = game_canvas.querySelectorAll(".tile");
-  console.log(tiles);
   tiles.forEach(tile => {
     game_canvas.removeChild(tile);
   });
