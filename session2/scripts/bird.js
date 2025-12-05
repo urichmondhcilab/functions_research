@@ -24,16 +24,8 @@ class Bird{
     let birdDiv = document.createElement('div');
     let birdImg = document.createElement('img');
     let selectionDiv = document.createElement('div');
-    selectionDiv.style.position = "absolute";
-    selectionDiv.style.top = "0px";
-    selectionDiv.style.left = "0px";
-    selectionDiv.style.width = "150%";
-    selectionDiv.style.height = "150%";
-    selectionDiv.style.transform = "translate(-25%, -25%)"
-    // selectionDiv.style.border = "0.1rem solid red";
-    selectionDiv.style.display = "none";
+    selectionDiv.className = "chick_selection";
     birdImg.className = "chick";
-    birdImg.style.border= "none";
     birdDiv.appendChild(birdImg)
     birdDiv.appendChild(selectionDiv);
 
@@ -41,7 +33,6 @@ class Bird{
     this.selectionDiv = selectionDiv;
     this.birdie.deathImgFlag = 0;    
     this.birdie.className = 'chickCont';
-    this.birdie.style.position="absolute";  
     this.curTile = null;       
     this.xIndex = 0;
     this.yIndex = 0;
@@ -94,9 +85,6 @@ class Bird{
    * @param {Object} e is the event object
    */
   async displayCodeEditor(e){
-    // let codeEditor = document.getElementById("codeEditor");
-    // codeEditor.firstChild.nodeValue = "chick " + this.id;
-    // console.log(selectedBirds);
     if (selectedBirds != null && selectedBirds !== undefined){
       for (const selectedBird of selectedBirds){
         console.log("in for loop");
@@ -112,12 +100,6 @@ class Bird{
     }
 
     this.selectionDiv.style.backgroundImage = "url('images/star_animation_frames/seven.svg')" ;  
-    this.selectionDiv.style.backgroundRepeat = "no-repeat";
-    this.selectionDiv.style.backgroundPosition = "center";
-    this.selectionDiv.style.backgroundSize = "cover";
-
-    // this.selectionDiv.className = "chick_icon";
-
     this.selectionDiv.style.display = "block";
     this.selected = true;
     this.selectedColorIndex = Math.floor(Math.random() * SELECTED_BIRD_COLOR_PALETTE_COUNT) + 1;

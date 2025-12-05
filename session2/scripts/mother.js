@@ -14,19 +14,15 @@ class Mother{
       motherImg.className = "mother";
       motherImg.src = 'images/mother_hen/Mother_Hen_1.svg';
 
-
       this.mother = motherDiv;
       this.mother.currImageFlag = 1;
       this.mother.className = 'motherCont';
-      this.mother.style.position = "absolute";
-
 
       this.selected = false;
       this.selectionCount = 0;
 
       motherDiv.appendChild(motherImg);      
       this.updateMomPosition();
-
 
       this.selectAllBirds = this.selectAllBirds.bind(this);      
       motherImg.addEventListener('click', this.selectAllBirds);
@@ -83,14 +79,10 @@ class Mother{
       this.selectionCount++;
       this.selectionCount = (this.selectionCount) % n;
       if (this.selected){
-        let x = `url('${chickSelectionStars[this.selectionCount]}')`;
-        console.log(x);
-        this.mother.style.backgroundImage = x;
-        // this.mother.style.backgroundSize = "cover";
-        // this.mother.style.backgroundPosition = "center";
-        // this.mother.style.backgroundRepeat = "no repeat";
+        let currImage = `url('${chickSelectionStars[this.selectionCount]}')`;
+        // console.log(x);
+        this.mother.style.backgroundImage = currImage;
       }
     }       
-
   }
   

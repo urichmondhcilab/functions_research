@@ -331,11 +331,13 @@ async function initializeBlockIdentifiers(){
   blockCount = 0;
   placedBlocks = document.querySelectorAll('#canvas .block');
   running = true;
-  let parser = new Parser(selectedBirds, placedBlocks, maze);
-  if (selectedBirds.length > 0){
+
+  if (selectedBirds != null && selectedBirds.length > 0){
     resetInterval(RUN_SPEED);
+    let parser = new Parser(selectedBirds, placedBlocks, maze);    
+    ast = parser.parse();    
   }
-  ast = parser.parse();
+
 }
 
 
@@ -346,12 +348,12 @@ async function initializeBlockIdentifiers(){
  */
 async function runCode(){
   if (!running) return;
-  if (blockCount >= 0 && blockCount < ast.length){
+  if (selectedBirds != null && selectedBirds.length > 0 && blockCount >= 0 && ast!= null && blockCount < ast.length){
     executedBlockCount += 1;
     Interpreter.interpret(ast[blockCount]);
     blockCount++;
   }
-  if (blockCount === ast.length){
+  if (selectedBirds != null && selectedBirds.length > 0 && ast != null && blockCount === ast.length){
     running = false;
     resetInterval(NORMAL_SPEED);
   };  
