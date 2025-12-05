@@ -107,6 +107,8 @@ class Bird{
     }
     if (motherHen !== null && motherHen !== undefined){
       motherHen.mother.style.border = "none";
+      motherHen.selected = false;
+      motherHen.mother.style.backgroundImage = "none";
     }
 
     this.selectionDiv.style.backgroundImage = "url('images/star_animation_frames/seven.svg')" ;  
@@ -147,8 +149,7 @@ class Bird{
         let chick_color = chickImagePaths[this.selectedColorIndex][Math.round (Math.random() * (chickImagePaths[this.selectedColorIndex].length - 1))];
         this.birdie.firstChild.src = chick_color; 
         this.chick_Icon.src = chick_color;
-      }
-      else{
+      }else{
         let chick_color = chickImagePaths[0][Math.round (Math.random() * (chickImagePaths[0].length - 1))];
         this.birdie.firstChild.src = chick_color;
         this.chick_Icon.src = chick_color;   

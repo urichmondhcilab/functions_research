@@ -18,7 +18,11 @@ class Mother{
       this.mother = motherDiv;
       this.mother.currImageFlag = 1;
       this.mother.className = 'motherCont';
-      this.mother.style.position="absolute";
+      this.mother.style.position = "absolute";
+
+
+      this.selected = false;
+      this.selectionCount = 0;
 
       motherDiv.appendChild(motherImg);      
       this.updateMomPosition();
@@ -52,6 +56,8 @@ class Mother{
         selectedBird.selected = true;
         selectedBird.selectedColorIndex = Math.floor(Math.random() * SELECTED_BIRD_COLOR_PALETTE_COUNT) + 1;         
         // console.log( selectedBird.selectionDiv.style.backgroundRepeat) ;
+
+        this.selected = true;
       }
     }
 
@@ -72,6 +78,18 @@ class Mother{
 
       currMomImage.src = (flag == 1) ? 'images/mother_hen/Mother_Hen_2.svg' : 'images/mother_hen/Mother_Hen_1.svg';
       currMom.currImageFlag = flag * -1;
+
+      let n = chickSelectionStars.length;
+      this.selectionCount++;
+      this.selectionCount = (this.selectionCount) % n;
+      if (this.selected){
+        let x = `url('${chickSelectionStars[this.selectionCount]}')`;
+        console.log(x);
+        this.mother.style.backgroundImage = x;
+        // this.mother.style.backgroundSize = "cover";
+        // this.mother.style.backgroundPosition = "center";
+        // this.mother.style.backgroundRepeat = "no repeat";
+      }
     }       
 
   }

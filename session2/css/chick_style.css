@@ -22,6 +22,9 @@ html, body {
 .motherCont{
   width: 12%;
   aspect-ratio: 9/12 ;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat
 }
 
 .mother{
