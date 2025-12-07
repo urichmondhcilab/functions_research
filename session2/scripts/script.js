@@ -168,7 +168,7 @@ function gameOverCheck(){
 
 
 function newLevel(){
-  console.log("moves for level " + curLevel + ":" + executedBlockCount)
+  // console.log("moves for level " + curLevel + ":" + executedBlockCount)
   curLevel++;
  
   if (curLevel > MAX_LEVEL){
@@ -222,7 +222,10 @@ function newLevelConfig(level){
 function ResetLevel(){
   reset();
   resetMaze();
+  console.log("current level");
+  console.log(curLevel);
   if (levelAttributes[curLevel].mother_include){
+    motherHen = null;
     createMother();
   }
 }
