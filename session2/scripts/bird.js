@@ -58,7 +58,8 @@ class Bird{
 
     //create a point_display div to hold chick image and point counter
     this.point_display = document.createElement('div');
-    this.point_display.className = 'point_display'
+    this.point_display.className = 'point_display';
+    this.point_display.addEventListener('click', this.displayCodeEditor);
 
     //creates a chick image for each chick in point counter
     this.chick_Icon = document.createElement("img");
@@ -68,6 +69,7 @@ class Bird{
     //Create a assocaited container for health bar
     this.healthBarContainer = document.createElement("div");
     this.healthBarContainer.className = "health_bar_container";
+
 
     this.healthBarFill = document.createElement("div");
     this.healthBarFill.className = "health_bar_fill";

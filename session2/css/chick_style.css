@@ -211,7 +211,6 @@ html, body {
   background-color:#FFC940;
 }
 
-
 #transition_image_container{
   /* display: flex; */
   display: flex;
@@ -226,7 +225,6 @@ html, body {
   /* background-color: red; */
   background-position: center;
 }
-
 
 #transition_image{
   background-image: url("../images/game_buttons/play_button.svg");
@@ -280,6 +278,7 @@ html, body {
   /* margin-bottom: -50%; */
   margin-left: -5%; 
   padding-bottom: 0px;
+  /* position: relative; */
 }
 
 .num0, .num1, .num2, .num3, .num4, .num5, .num6, .num7, .num8, .num9, .num10 {
@@ -358,11 +357,3 @@ html, body {
   display: none;
   overflow-y: auto;  
 }
-
-/* .new-move{
-    padding-top: 0px;
-    padding-bottom: 0px;
-    height: 18%;
-    width: 100%;
-
-} */
