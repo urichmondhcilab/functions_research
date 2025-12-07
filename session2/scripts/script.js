@@ -230,11 +230,13 @@ function ResetLevel(){
 
 /**
  * resets the current number of birds 
+ * resets selected birds
  * removes the birds on the screen
  * clears the array of birds
  */
 function reset(){
   birdCounter = 0;
+  selectedBirds = null;
   currentNumberOfBirds = birdCounter;
   allBirds.forEach((bird, i) => {
     game_canvas.removeChild(bird.birdie);
@@ -330,12 +332,17 @@ function repositionGameObjects(){
 async function initializeBlockIdentifiers(){
   blockCount = 0;
   placedBlocks = document.querySelectorAll('#canvas .block');
-  running = true;
 
-  if (selectedBirds != null && selectedBirds.length > 0){
+
+  console.log("placed blocks ");
+  console.log(placedBlocks);
+
+  if (selectedBirds != null && selectedBirds.length > 0 && placedBlocks != null && placedBlocks.length > 0){
+    running = true;    
     resetInterval(RUN_SPEED);
     let parser = new Parser(selectedBirds, placedBlocks, maze);    
-    ast = parser.parse();    
+    ast = parser.parse();  
+    // await runCode();
   }
 
 }
@@ -349,6 +356,7 @@ async function initializeBlockIdentifiers(){
 async function runCode(){
   if (!running) return;
   if (selectedBirds != null && selectedBirds.length > 0 && blockCount >= 0 && ast!= null && blockCount < ast.length){
+    console.log("selected birds: " + selectedBirds.length);
     executedBlockCount += 1;
     Interpreter.interpret(ast[blockCount]);
     blockCount++;
@@ -509,9 +517,6 @@ function initSession2EventListeners(){
  * It keeps the birds for which removeBird returns true.
  */
 async function birdAction(){
-  //createMother();
-
-
   if (isTransition || isStart){ 
     pulsatingStart();
   }else{
@@ -530,7 +535,8 @@ async function birdAction(){
     allBirds = allBirds.filter(respawnBirds);
     //Checks if GameOver Conditions are met
     gameOverCheck();
-    await runCode();    
+    // await runCode();   
+    runCode() ;
   }
 }
 
@@ -545,6 +551,7 @@ async function birdAction(){
 function animateGameObjects(){
   gameInterval = setInterval(birdAction, speed);
 }
+
 
 /**
  * Start the game
@@ -585,6 +592,11 @@ function chooseStartOrTransition(){
   }
 }
 
+
+/**
+ * remove game elements before next level
+ * remove tiles, clear the maze, the console, and birds
+ */
 function removeCurrentGameElements(){
   // remove tiles
   let tiles = game_canvas.querySelectorAll(".tile");
