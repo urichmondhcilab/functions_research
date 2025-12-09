@@ -12,7 +12,7 @@ html, body {
   position: absolute;
   width: 3%;
   height: 8%;
-  transition: top 0.5s linear, left 0.5s linear;
+  transition: top 0.01s linear, left 0.01s linear;
 }
 
 .chick{
@@ -27,7 +27,7 @@ html, body {
     left: 0px;
     width: 150%;
     height: 150%;
-    transform: translate(-25%, -25%);
+    /* transform: translate(-25%, -25%); */
     display: none;
     background-repeat: no-repeat;
     background-position: center;    

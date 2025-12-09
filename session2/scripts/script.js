@@ -306,7 +306,7 @@ function nextLevel(){
 function repositionGameObjects(){
   //reset the positions of the birds based on new screen size
   backgroundImageWidth = window.innerWidth;
-  backgroundImageHeight = window.innerWidth * 0.56; // keep the aspect ration of the background image
+  backgroundImageHeight = window.innerWidth * 0.56; // keep the aspect ratio of the background image
 
   centerX = (backgroundImageWidth) / 2;
   centerY = window.innerHeight / 2;
@@ -367,6 +367,7 @@ async function initializeBlockIdentifiers(){
 async function runCode(){
   if (!running) return;
   if (selectedBirds != null && selectedBirds.length > 0 && blockCount >= 0 && ast!= null && blockCount < ast.length){
+    // disable run button
     console.log("selected birds: " + selectedBirds.length);
     executedBlockCount += 1;
     Interpreter.interpret(ast[blockCount]);
@@ -374,6 +375,7 @@ async function runCode(){
   }
 
   if (selectedBirds != null && selectedBirds.length > 0 && ast != null && blockCount === ast.length){
+    // enable run button
     running = false;
     resetInterval(NORMAL_SPEED);
   };  
