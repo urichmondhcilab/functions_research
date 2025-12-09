@@ -13,6 +13,10 @@ let curBlock = null;
 let Xoffset = 0;
 let Yoffset = 0;
 
+let startX, startY;
+let isDragging = false;
+const DRAGTRESHOLD = 10;
+
 trashObj.addEventListener("dragover", dragOverTrash);
 trashObj.addEventListener("dragleave", dragExitTrash);
 trashObj.addEventListener("drop", trashDrop);
@@ -114,6 +118,11 @@ function createBlockClone(state){
     if(move){
 
         newBlock.querySelector(".visible-number").addEventListener('click', displayNumbers);
+        // newBlock.querySelector(".visible-number").addEventListener('touchstart', displayNumbers);
+        // newBlock.querySelector(".visible-number").addEventListener('touchend', displayNumbers);
+        // newBlock.querySelector(".visible-number").addEventListener('touchMove', displayNumbers);
+        
+        
         newBlock.querySelector(".number-list").addEventListener('click', resetDisplayedNumber);
 
         for (let i in 10){
@@ -191,6 +200,13 @@ function TouchStart(e, block){
     //gives current x/y position of that finger
     const touch = e.touches[0];
 
+
+    if (e.touches.length == 1){
+        startX = e.touches[0].pageX;
+        startY = e.touches[0].pageY;        
+        isDragging = false;
+    }
+
     //Clones block for visualization of moving
     curBlock = block.cloneNode(true);
     // curBlock.style.pointerEvents = "none";
@@ -222,7 +238,10 @@ function TouchStart(e, block){
     if(block.classList.contains('draggable')){
         draggedElementState = {
             element: block,
-            selectedValue: block.querySelector('select')?.value || null,
+            // selectedValue: block.querySelector('select')?.value || null,
+
+            // element: draggedElement,
+            move : block.classList.contains("new-move"),            
             fromCanvas: false
         };
 
@@ -230,7 +249,8 @@ function TouchStart(e, block){
     else if (block.classList.contains('block')){
         draggedElementState = {
             element: block,
-            selectedValue: block.querySelector('select')?.value || null,
+            // selectedValue: block.querySelector('select')?.value || null,
+            move : block.classList.contains("new-move"),                 
             fromCanvas: true
         }; 
     }
@@ -253,10 +273,21 @@ function TouchMove(e){
         return;
     }
 
-    //changes the position based on current position - original position from
-    //touchStart
-    curBlock.style.left = `${touch.clientX - Xoffset}px`;
-    curBlock.style.top = `${touch.clientY - Yoffset}px`;
+
+    if (startX && startY){
+        const diffX = Math.abs(e.touches[0].pageX - startX);
+        const diffY = Math.abs(e.touches[0].pageY - startY);
+
+        if (diffX > DRAGTRESHOLD && diffY > DRAGTRESHOLD){
+            //changes the position based on current position - original position from
+            //touchStart
+            curBlock.style.left = `${touch.clientX - Xoffset}px`;
+            curBlock.style.top = `${touch.clientY - Yoffset}px`;
+            isDragging = true;
+        }
+    }
+
+
 }
 
 //When finger is lifted/end of the touch event
@@ -266,6 +297,14 @@ function TouchEnd(e){
     if (!curBlock){
         return;
     }
+
+    // if (!isDragging){
+    //     if (curBlock.classList.contains('visible-move')){ 
+    //         displayMoves(e);
+    //         return;
+    //     }
+    //     return;
+    // }
 
     //refers to current touches
     //gives current x/y position of that finger
