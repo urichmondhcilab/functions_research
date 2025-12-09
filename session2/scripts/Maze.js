@@ -69,12 +69,12 @@ class Maze{
                    // game_canvas.appendChild(endTile.div);
        
                    if (!this.canFinishMaze()){
-                       console.log("can NOT finish the maze");
+                    //    console.log("can NOT finish the maze");
                    }
                    else{
-                       console.log("can finish the maze");
+                    //    console.log("can finish the maze");
                        this.travesable = true;
-                       console.log(this.shortestPath())
+                    //    console.log(this.shortestPath())
                    }
     }
 

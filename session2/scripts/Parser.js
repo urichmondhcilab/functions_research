@@ -55,7 +55,7 @@ class Parser{
             k = m;
             j = i
             while((k >= 0) && j < n){
-                console.log(k + " " + j + ". . . .")
+                // console.log(k + " " + j + ". . . .")
                 let block = this.ASTBlocks[k];
                 this.parseAction(block, this.gameObjects[j]);              
                 k--;

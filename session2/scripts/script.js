@@ -172,6 +172,7 @@ function newLevel(){
   curLevel++;
  
   if (curLevel > MAX_LEVEL){
+    // reset curLevel for reset
     GameOverElement = document.getElementById("game_over");
     GameOverElement.style.display = 'flex';
     return;
@@ -195,7 +196,7 @@ function newLevelConfig(level){
   const levelconfig = levelAttributes[level];
   if (!levelconfig) return;
 
-  console.log(`Start Level: ${level}`);
+  // console.log(`Start Level: ${level}`);
 
   //Gets the level set number of birds (int), include mother (bool) and range of states (int)
   MAX_NUMBER_OF_BIRDS = levelconfig.max_Birds;
@@ -220,8 +221,15 @@ function newLevelConfig(level){
 
 
 function ResetLevel(){
+  curLevel = curLevel > MAX_LEVEL ? MAX_LEVEL : curLevel;
+  // recreates bird 
   reset();
+
+  // recreates maze
   resetMaze();
+
+  // clears blocks
+  blockResetHandler();
   console.log("current level");
   console.log(curLevel);
   if (levelAttributes[curLevel].mother_include){
@@ -364,6 +372,7 @@ async function runCode(){
     Interpreter.interpret(ast[blockCount]);
     blockCount++;
   }
+
   if (selectedBirds != null && selectedBirds.length > 0 && ast != null && blockCount === ast.length){
     running = false;
     resetInterval(NORMAL_SPEED);

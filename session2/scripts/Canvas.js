@@ -113,25 +113,25 @@ function createBlockClone(state){
         // if it's a move block, make sure the dropdown contains the same value
     if(move){
 
-            newBlock.querySelector(".visible-number").addEventListener('click', displayNumbers);
-            newBlock.querySelector(".number-list").addEventListener('click', resetDisplayedNumber);
+        newBlock.querySelector(".visible-number").addEventListener('click', displayNumbers);
+        newBlock.querySelector(".number-list").addEventListener('click', resetDisplayedNumber);
 
-            for (let i in 10){
-                newBlock.querySelector(".num" + i).addEventListener('click', resetDisplayedNumber);
-            }            
+        for (let i in 10){
+            newBlock.querySelector(".num" + i).addEventListener('click', resetDisplayedNumber);
+        }            
 
-            console.log(newBlock.querySelector(".visible-move"));
-            newBlock.querySelector(".visible-move").addEventListener('click', displayMoves)
-            newBlock.querySelector(".move-list").addEventListener('click', resetMove);
-            newBlock.querySelector(".move-right").addEventListener('click', resetMove);
-            newBlock.querySelector(".move-left").addEventListener('click', resetMove);
-            newBlock.querySelector(".move-up").addEventListener('click', resetMove);
-            newBlock.querySelector(".move-down").addEventListener('click', resetMove);   
-            
-            newBlock.style.width = "100%";
-        }else{
-            newBlock.style.width = "50%";            
-        }
+        // console.log(newBlock.querySelector(".visible-move"));
+        newBlock.querySelector(".visible-move").addEventListener('click', displayMoves)
+        newBlock.querySelector(".move-list").addEventListener('click', resetMove);
+        newBlock.querySelector(".move-right").addEventListener('click', resetMove);
+        newBlock.querySelector(".move-left").addEventListener('click', resetMove);
+        newBlock.querySelector(".move-up").addEventListener('click', resetMove);
+        newBlock.querySelector(".move-down").addEventListener('click', resetMove);   
+        
+        newBlock.style.width = "100%";
+    }else{
+        newBlock.style.width = "50%";            
+    }
 
         return newBlock;
 }
