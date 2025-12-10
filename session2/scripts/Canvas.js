@@ -13,9 +13,9 @@ let curBlock = null;
 let Xoffset = 0;
 let Yoffset = 0;
 
-let startX, startY;
-let isDragging = false;
-const DRAGTRESHOLD = 10;
+// let startX, startY;
+// let isDragging = false;
+// const DRAGTRESHOLD = 100;
 
 trashObj.addEventListener("dragover", dragOverTrash);
 trashObj.addEventListener("dragleave", dragExitTrash);
@@ -119,7 +119,7 @@ function createBlockClone(state){
 
         newBlock.querySelector(".visible-number").addEventListener('click', displayNumbers);
         // newBlock.querySelector(".visible-number").addEventListener('touchstart', displayNumbers);
-        // newBlock.querySelector(".visible-number").addEventListener('touchend', displayNumbers);
+        newBlock.querySelector(".visible-number").addEventListener('touchend', displayNumbers);
         // newBlock.querySelector(".visible-number").addEventListener('touchMove', displayNumbers);
         
         
@@ -127,6 +127,8 @@ function createBlockClone(state){
 
         for (let i in 10){
             newBlock.querySelector(".num" + i).addEventListener('click', resetDisplayedNumber);
+            newBlock.querySelector(".num" + i).addEventListener('touchend', resetDisplayedNumber);
+
         }            
 
         // console.log(newBlock.querySelector(".visible-move"));
@@ -136,6 +138,13 @@ function createBlockClone(state){
         newBlock.querySelector(".move-left").addEventListener('click', resetMove);
         newBlock.querySelector(".move-up").addEventListener('click', resetMove);
         newBlock.querySelector(".move-down").addEventListener('click', resetMove);   
+
+        newBlock.querySelector(".visible-move").addEventListener('touchend', displayMoves)        
+        newBlock.querySelector(".move-list").addEventListener('touchend', resetMove);
+        newBlock.querySelector(".move-right").addEventListener('touchend', resetMove);
+        newBlock.querySelector(".move-left").addEventListener('touchend', resetMove);
+        newBlock.querySelector(".move-up").addEventListener('touchend', resetMove);
+        newBlock.querySelector(".move-down").addEventListener('touchend', resetMove);           
         
         newBlock.style.width = "100%";
     }else{
@@ -298,13 +307,13 @@ function TouchEnd(e){
         return;
     }
 
-    // if (!isDragging){
-    //     if (curBlock.classList.contains('visible-move')){ 
-    //         displayMoves(e);
-    //         return;
-    //     }
-    //     return;
-    // }
+        // if (!isDragging){
+        //     if (curBlock.classList.contains('visible-move')){ 
+        //         displayMoves(e);
+        //         return;
+        //     }
+        //     return;
+        // }
 
     //refers to current touches
     //gives current x/y position of that finger

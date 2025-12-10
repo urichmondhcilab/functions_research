@@ -33,6 +33,11 @@ let curLevel = 0;
 let mazeElements = 3;
 
 
+let startX, startY;
+let isDragging = false;
+const DRAGTRESHOLD = 100;
+
+
 function resetInterval(newSpeed){
   speed = newSpeed;
   clearInterval(gameInterval);
@@ -398,6 +403,7 @@ function blockResetHandler(e){
  * @param {Object} e is a clicked number puzzle
  */
 function displayNumbers(e){
+  console.log("displayNumber");
   const targetNumberList = e.target.querySelector('.number-list');
   if (targetNumberList != null){
     if (targetNumberList.style.display == "none"){
@@ -406,6 +412,23 @@ function displayNumbers(e){
     }else{
       targetNumberList.style.display = "none";    
     }
+  }
+}
+
+function eventBasedDisplayNumbers(e){
+  console.log("type");
+  console.log(e.type);
+  switch (e.type){
+    case 'click':
+      displayNumbers(e);
+      break;
+    case 'tocuhstart':
+      break;
+    case 'touchmove':
+      break;
+    case 'touchend':
+      displayNumbers(e);      
+      break
   }
 }
 
@@ -504,23 +527,36 @@ function initSession2EventListeners(){
   document.getElementById('nextLevel').addEventListener('click', nextLevel);
 
   // currently selected number can be clicked on to display the list of numbers
-  visibleNumber.addEventListener('click', displayNumbers)
+  visibleNumber.addEventListener('click', eventBasedDisplayNumbers);
+  visibleNumber.addEventListener('touchend', eventBasedDisplayNumbers);  
 
   // A number in the list of numbers may be selected by clicking on it 
-  numberList.addEventListener('click', resetDisplayedNumber)
+  numberList.addEventListener('click', resetDisplayedNumber);
+  numberList.addEventListener('touchend', resetDisplayedNumber);
 
   //eventlistners for when a number image is clicked
   for (numObject in numObjects){
     numObject.addEventListener('click', resetDisplayedNumber);
+    numObject.addEventListener('touchend', resetDisplayedNumber);
+
   }
 
   // event listners for move puzzles
-  visibleMove.addEventListener('click', displayMoves)  
+  visibleMove.addEventListener('click', displayMoves);
+  visibleMove.addEventListener('touchend', displayMoves);
+
   moveList.addEventListener('click', resetMove)
   moveUp.addEventListener('click', resetMove)
   moveDown.addEventListener('click', resetMove)
   moveLeft.addEventListener('click', resetMove)
   moveRight.addEventListener('click', resetMove)
+
+
+  moveList.addEventListener('touchend', resetMove)
+  moveUp.addEventListener('touchend', resetMove)
+  moveDown.addEventListener('touchend', resetMove)
+  moveLeft.addEventListener('touchend', resetMove)
+  moveRight.addEventListener('touchend', resetMove)  
 }
 
 /**
