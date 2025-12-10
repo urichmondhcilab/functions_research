@@ -45,13 +45,13 @@ class Maze{
                            let tile = new Tile(currentX + 'px', currentY + 'px', this.tileWidth + 'px', this.tileHeight + 'px', currentState);
                        
                            game_canvas.appendChild(tile.div);
-                           currentX = currentX + (this.tileWidth);
+                           currentX = currentX + (this.tileWidth / 1.45);
                            mazeY.push(tile)
                            j++;
                        }
        
                        this.maze.push(mazeY)
-                       currentY = currentY + (this.tileHeight);   
+                       currentY = currentY + (this.tileHeight / 1.5);   
                        startX = Math.floor(startX); //edit start x and end x to turn in with the background.
                        endX = Math.floor(endX * 1.1);
                        i++;

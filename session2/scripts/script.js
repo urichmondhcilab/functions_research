@@ -33,12 +33,22 @@ let curLevel = 0;
 let mazeElements = 3;
 
 
+/**
+ * animateGameObjects by changing sprites
+ * runs setInterval 
+ * setInterval(fun, ms) is a JavaScript function that receives a function fun
+ * and runs fun every ms milliseconds
+ * In this case it receives the function birdAction and runs it every 1000 milliseconds
+ */
+function animateGameObjects(){
+  gameInterval = setInterval(birdAction, speed);
+}
+
 function resetInterval(newSpeed){
   speed = newSpeed;
   clearInterval(gameInterval);
   gameInterval = setInterval(birdAction, speed);  
 }
-
 
 /**
  * In a time interval, if we have not exceeded the maximum number of birds,
@@ -105,19 +115,19 @@ function updateBirds(){
 }
 
 
-// /**
-//  * To update the mother image, We first set currMom to the mother DOM object. 
-//  * We use a simple 1-0 switching if-else block to make sure the switch happens every tick (If 0, we are on img2. If 1, we are on img1.)
-//  * The mother object has the field currImageFlag built into it so that this switching can happen.
-//  */
-// function updateMotherHen(){
-//   let currMom = motherHen.mother;
-//   let currMomImage = currMom.firstChild;
-//   let flag = currMom.currImageFlag;
+/**
+ * To update the mother image, We first set currMom to the mother DOM object. 
+ * We use a simple 1-0 switching if-else block to make sure the switch happens every tick (If 0, we are on img2. If 1, we are on img1.)
+ * The mother object has the field currImageFlag built into it so that this switching can happen.
+ */
+function updateMotherHen(){
+  let currMom = motherHen.mother;
+  let currMomImage = currMom.firstChild;
+  let flag = currMom.currImageFlag;
 
-//   currMomImage.src = (flag == 1) ? 'images/mother_hen/Mother_Hen_2.svg' : 'images/mother_hen/Mother_Hen_1.svg';
-//   currMom.currImageFlag = flag * -1;
-// }
+  currMomImage.src = (flag == 1) ? 'images/mother_hen/Mother_Hen_2.svg' : 'images/mother_hen/Mother_Hen_1.svg';
+  currMom.currImageFlag = flag * -1;
+}
 
 
 /**
@@ -147,49 +157,74 @@ function respawnBirds(bird){
   }
   //Checks if bird is on end tile, if so removes bird from allbirds
   if(bird.curTile.state.name === "END"){
-    // animate the bird before remove
-    bird.gameCompletionAnimation();
-    if (bird.animationCount <= 0){
-      game_canvas.removeChild(bird.birdie);
-      birdCounter--;
-      return false;      
-    }
+    game_canvas.removeChild(bird.birdie);
+    birdCounter--;
+    return false;
   }
   return keepBird;
 }
 
 
+/**
+ * Every second a bird is created, 
+ * birds are moved 
+ * and birds that have completed livespan are removed
+ * The filter function runs removeBird on each bird in allBirds.
+ * It keeps the birds for which removeBird returns true.
+ */
+async function birdAction(){
+  //createMother();
+  if (!running && currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
+    createBird(maze);
+  }
+  resetInterval(NORMAL_SPEED);
+
+  if(motherHen){
+    updateMotherHen();
+    motherHen.updateMotherHen();
+  }
+
+  if (isTransition || isStart){ 
+
+    if (parseInt(transitionWidth) < 50){
+      transitionWidth += 5;
+      transitionHeight += 5;
+      transitionImage.style.width = transitionWidth + "%";
+      transitionImage.style.height = transitionHeight + "%";
+    }else{
+      transitionImageContainer.style.width = transitionImageContainer.style.width == "100%" ? "99%" : "100%";
+    }
+
+
+    }
+
+  updateBirds();
+  allBirds = allBirds.filter(respawnBirds);
+  //Checks if GameOver Conditions are met
+  gameOverCheck();
+  await runCode();
+}
+
 function gameOverCheck(){
   if (birdCounter == 0 || nextGame == true){
     nextGame = false;
     newLevel();
+
   }
 }
-
 
 function newLevel(){
   console.log("moves for level " + curLevel + ":" + executedBlockCount)
   curLevel++;
- 
+  //INSERT: Display transistion/instructions
+    transitionBeforeNewLevel();  
   if (curLevel > MAX_LEVEL){
     GameOverElement = document.getElementById("game_over");
     GameOverElement.style.display = 'flex';
     return;
   }
-  //INSERT: Display transistion/instructions
-    removeCurrentGameElements();
-    transitionBeforeNewLevel();   
-    // newLevelConfig(curLevel);
+    newLevelConfig(curLevel);
 }
-
-
-function transitionBeforeNewLevel(){
-  transitionImageContainer.style.display = "flex";
-  transitionWidth = 0;
-  transitionHeight = 0;
-  isTransition = true;
-}
-
 
 function newLevelConfig(level){
   const levelconfig = levelAttributes[level];
@@ -219,6 +254,13 @@ function newLevelConfig(level){
 }
 
 
+function transitionBeforeNewLevel(){
+  transitionImageContainer.style.display = "flex";
+  transitionWidth = 0;
+  transitionHeight = 0;
+  isTransition = true;
+}
+
 function ResetLevel(){
   reset();
   resetMaze();
@@ -226,7 +268,6 @@ function ResetLevel(){
     createMother();
   }
 }
-
 
 /**
  * resets the current number of birds 
@@ -236,6 +277,7 @@ function ResetLevel(){
 function reset(){
   birdCounter = 0;
   currentNumberOfBirds = birdCounter;
+  // point_number.textContent = birdCounter;
   allBirds.forEach((bird, i) => {
     game_canvas.removeChild(bird.birdie);
   });
@@ -247,19 +289,17 @@ function reset(){
   if(motherHen){
     game_canvas.removeChild(motherHen.mother);
     motherHen = null;
+
   }
 
   executedBlockCount = 0;
 
+  //finished_counter.textContent = "0"
   GameOverElement = document.getElementById("game_over");
   GameOverElement.style.display = 'none';
   
-  // remove current points_display
-  let chickDisplay = document.getElementById("points_container");
-  const staticChickChildrenArray = Array.from(chickDisplay.children);  
-  staticChickChildrenArray.forEach(chickPoint => {
-    chickPoint.remove();
-  });
+  let ChickDisplay = document.getElementById("points_container");
+  ChickDisplay.innerHTML = ""
 }
 
 //Probably only either for game over or explicit choice, triggered by reset button at top
@@ -271,8 +311,8 @@ function reset(){
  */
 function resetMaze(){
   if (maze){
-    for(let i = 0; i < maze.maze.length; i++){
-      for(let j = 0; j < maze.maze[i].length; j++){
+    for(let i =0; i<maze.maze.length; i++){
+      for(let j=0; j<maze.maze[i].length; j++){
         game_canvas.removeChild(maze.maze[i][j].div);
       }
     }
@@ -283,7 +323,6 @@ function resetMaze(){
 function nextLevel(){
   nextGame = true;
 }
-
 
 /**
  * recomputes the position of the bird each time the screen is resized
@@ -367,101 +406,16 @@ function blockResetHandler(e){
   blocks.forEach(block => block.remove());
 }
 
-
+ 
 /**
- * Expands/hides a list associated with a number puzzle
- * It also clears other expanded lists
- * @param {Object} e is a clicked number puzzle
- */
-function displayNumbers(e){
-  const targetNumberList = e.target.querySelector('.number-list');
-  if (targetNumberList != null){
-    if (targetNumberList.style.display == "none"){
-      targetNumberList.style.display = "block";
-      clearExpandedLists(targetNumberList);    
-    }else{
-      targetNumberList.style.display = "none";    
-    }
-  }
-}
-
-
-/**
- * After a number is selected from the list of numbers, the main displayed puzzle image is updated
- * @param {Object} e a number object from a list of numbers
- */
-function resetDisplayedNumber(e){
-  const targetVisibleNumber = e.target.parentNode.parentNode;
-  let id  = (e.target.className).slice(0,3) + "ber" + (e.target.className).slice(-1);
-  console.log(id);
-
-  targetVisibleNumber.style.backgroundImage = `url(${'images/numbers/' + id + '.svg'})`;
-  e.target.parentNode.style.display = "none";
-}
-
-
-/**
- * Resets the displayed move to the selected move image
- * hides the list after selection
- * @param {Object} e the object that triggers selection
- */
-function resetMove(e){
-  const targetVisibleMove = e.target.parentNode.parentNode;
-
-  let className = (e.target.className).slice(5,);
-
-  if (className.trim() != "list")
-    targetVisibleMove.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;  
-  e.target.parentNode.style.display = "none";
-}
-
-
-/**
- * Toggles the list of move directions. If it is visible it hides it and vice versa
- * @param {Object} e is the object that is clicked toggle to list 
- */
-function displayMoves(e){
-  const targetMoveList = e.target.querySelector('.move-list');
-  if (targetMoveList){
-    if (targetMoveList.style.display == "none"){
-      targetMoveList.style.display = "block";
-      clearExpandedLists(targetMoveList);
-    }else{     
-      targetMoveList.style.display = "none";    
-    }
-  }
-}
-
-
-/**
- * Ensures that only one puzzle list is displayed at a time 
- * @param {*} currList holds all the currently expanded list 
- */
-function clearExpandedLists(currList){
-  let allLists = document.getElementById('block-drop');
-  let moveLists = allLists.querySelectorAll('.move-list');
-  let numberLists = allLists.querySelectorAll('.number-list');
-
-  for (const lst of moveLists){
-    if (currList != lst){
-      lst.style.display = 'none';
-    }
-  }
-
-  for (const numberList of numberLists){
-    if (currList != numberList){
-      numberList.style.display = 'none';
-    }    
-  }
-}
-
-/**
+ * The program starts here
  * An event listener runs in the background waiting for an event to occur on an element
  * In these two cases load and click
  * Once load occurs the function animateGameObjects is invoked
  * Once the reset button is clicked the function reset is invoked
  */
 function initSession2EventListeners(){
+  // window.addEventListener('load', animateGameObjects);
   window.addEventListener('resize', repositionGameObjects);
   reset_btn.addEventListener('click', ResetLevel);
   game_reset_button.addEventListener('click', ResetLevel);
@@ -479,10 +433,8 @@ function initSession2EventListeners(){
   //Allows to skip to next level of game
   document.getElementById('nextLevel').addEventListener('click', nextLevel);
 
-  // currently selected number can be clicked on to display the list of numbers
   visibleNumber.addEventListener('click', displayNumbers)
 
-  // A number in the list of numbers may be selected by clicking on it 
   numberList.addEventListener('click', resetDisplayedNumber)
 
   //eventlistners for when a number image is clicked
@@ -490,7 +442,6 @@ function initSession2EventListeners(){
     numObject.addEventListener('click', resetDisplayedNumber);
   }
 
-  // event listners for move puzzles
   visibleMove.addEventListener('click', displayMoves)  
   moveList.addEventListener('click', resetMove)
   moveUp.addEventListener('click', resetMove)
@@ -499,50 +450,6 @@ function initSession2EventListeners(){
   moveRight.addEventListener('click', resetMove)
 }
 
-/**
- * Every second a bird is created, 
- * birds are moved 
- * and birds that have completed livespan are removed
- * The filter function runs removeBird on each bird in allBirds.
- * It keeps the birds for which removeBird returns true.
- */
-async function birdAction(){
-  //createMother();
-
-
-  if (isTransition || isStart){ 
-    pulsatingStart();
-  }else{
-
-    if (!running && currentNumberOfBirds < MAX_NUMBER_OF_BIRDS){
-      createBird(maze);
-    }
-    resetInterval(NORMAL_SPEED);
-
-    if(motherHen){
-      // updateMotherHen();
-      motherHen.updateMotherHen();
-    }    
-
-    updateBirds();
-    allBirds = allBirds.filter(respawnBirds);
-    //Checks if GameOver Conditions are met
-    gameOverCheck();
-    await runCode();    
-  }
-}
-
-
-/**
- * animateGameObjects by changing sprites
- * runs setInterval 
- * setInterval(fun, ms) is a JavaScript function that receives a function fun
- * and runs fun every ms milliseconds
- * In this case it receives the function birdAction and runs it every 1000 milliseconds
- */
-function animateGameObjects(){
-  gameInterval = setInterval(birdAction, speed);
-}
 
 /**
  * Start the game
@@ -551,78 +458,107 @@ function animateGameObjects(){
  * initialize draggable blocks, and enables touch (ipad)
  */
 function startGame(){
-  initSession2EventListeners();  
   animateGameObjects();
+  initSession2EventListeners();
   maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight); 
   makeDraggable();
   TouchDrag();
 }
 
-
-/**
- * Hides the transition display 
- * clear the gameinterval started for the pulsating start button
- * updates the current mode of play
- */
-function chooseStartOrTransition(){
+function choosStartOrTransition(){
   transitionImageContainer.style.display = "none";  
-
   if (isStart){
-    clearInterval(gameInterval);    
     startGame();
     isStart = false;
   }
   if (isTransition){
-    // resetInterval(NORMAL_SPEED);
-    // removeCurrentGameElements();
-    // ConfigureNewLevel
-    newLevelConfig(curLevel);
-    // StartGame
-    // startGame()
+    // newLevel();
     isTransition = false;
   }
 }
 
-function removeCurrentGameElements(){
-  // remove tiles
-  let tiles = game_canvas.querySelectorAll(".tile");
-  tiles.forEach(tile => {
-    game_canvas.removeChild(tile);
-  });
-  maze = null;
 
-  // resetCodeBlocks
-  blockResetHandler();
-
-  // clear birds and points
-  reset();
-
-  // reset the time interval
-    resetInterval(NORMAL_SPEED);  
-}
-
-
-/**
- * increases/decreases the transition play button by 5%
- */
-function pulsatingStart(){
-  if (parseInt(transitionWidth) < 50){
-    transitionWidth += 5;
-    transitionHeight += 5;
-    transitionImage.style.width = transitionWidth + "%";
-    transitionImage.style.height = transitionHeight + "%";
+function displayNumbers(e){
+  const targetNumberList = e.target.querySelector('.number-list')
+  if (targetNumberList.style.display == "none"){
+    targetNumberList.style.display = "block";
   }else{
-    transitionImageContainer.style.width = transitionImageContainer.style.width == "100%" ? "99%" : "100%";
+    targetNumberList.style.display = "none";    
   }
 }
 
+function resetDisplayedNumber(e){
+  // console.log(e.target.id);
+  const targetVisibleNumber = e.target.parentNode.parentNode;
+  let id  = (e.target.className).slice(0,3) + "ber" + (e.target.className).slice(-1);
+  console.log(id);
 
-// click the transition button to start the game
-transitionImageContainer.addEventListener('click', chooseStartOrTransition);
+  targetVisibleNumber.style.backgroundImage = `url(${'images/numbers/' + id + '.svg'})`;
+  e.target.parentNode.style.display = "none";
+}
 
 
-// pulsating play button onload
-window.addEventListener('load', function (e){
-  speed = NORMAL_SPEED;
-  gameInterval = this.setInterval(pulsatingStart, speed)
-});
+function resetMove(e){
+  const targetVisibleMove = e.target.parentNode.parentNode;
+
+  let className = (e.target.className).slice(5,);
+  // console.log(id);
+
+  if (className.trim() != "list")
+    targetVisibleMove.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;  
+  e.target.parentNode.style.display = "none";
+}
+
+
+function displayMoves(e){
+  const targetMoveList = e.target.querySelector('.move-list');
+  console.log("displayMove");
+  console.log(e.target.querySelector('.move-list'));
+  if (targetMoveList){
+    if (targetMoveList.style.display == "none"){
+      targetMoveList.style.display = "block";
+    }else{
+      targetMoveList.style.display = "none";    
+    }
+  }
+
+}
+
+
+
+
+// function displayInstructions(e){
+//   instructionIndex++;  
+//   console.log(instructionIndex);  
+//   if (instructionIndex >= 0 && instructionIndex < instructions.length){
+//     hintText.firstChild.nodeValue = instructions[instructionIndex].text;
+//     hintImage.src = instructions[instructionIndex].image_path;
+//   }else if (instructionIndex >= instructions.length){
+//     hintContainer.style.display = "none";
+//     startGame();
+//   }
+// }
+
+// function displayInstructionsBackwards(){
+//   instructionIndex--;
+//   if (instructionIndex >= 0 && instructionIndex < instructions.length){
+//     hintText.firstChild.nodeValue = instructions[instructionIndex].text;
+//     hintImage.src = instructions[instructionIndex].image_path;
+//   }else if (instructionIndex < 0){
+//     instructionIndex = 0;
+//   }
+//   console.log(instructionIndex);  
+// }
+
+// function closeInstructions(){
+//     hintContainer.style.display = "none";
+//     startGame();
+// }
+
+// // start game
+// nextButton.addEventListener('click', displayInstructions);
+// closeButton.addEventListener('click', closeInstructions);
+// backButton.addEventListener('click', displayInstructionsBackwards);
+
+
+  transitionImageContainer.addEventListener('click', choosStartOrTransition);

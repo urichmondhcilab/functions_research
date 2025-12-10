@@ -49,6 +49,8 @@ class Bird{
     this.selectionCount = 0;
     this.finished = false;
     this.hasConsumed = false;
+    // this.isMoving = false;
+    this.lifeSpanDone = false;
 
     // animation variables
     this.animationCount = 5;
@@ -73,6 +75,8 @@ class Bird{
     this.chick_Icon = document.createElement("img");
     this.chick_Icon.src = chickImagePaths[0][0];
     this.chick_Icon.className = "chick_icon";
+
+    this.chick_Icon.addEventListener("click", this.displayCodeEditor);
 
     //Create a assocaited container for health bar
     this.healthBarContainer = document.createElement("div");
@@ -141,7 +145,7 @@ class Bird{
    * If selected, changes both chick sprite, and associated lifespan counter sprite to same color
    */
   updateBird(){
-      if (this.selected){
+      if (this.selected && !this.lifeSpanDone){
         if (this.selectionCount > chickSelectionStars.length - 1) this.selectionCount = 0  
         this.selectionDiv.style.backgroundImage = `url(${chickSelectionStars[this.selectionCount++]})`;
         let chick_color = chickImagePaths[this.selectedColorIndex][Math.round (Math.random() * (chickImagePaths[this.selectedColorIndex].length - 1))];
@@ -160,7 +164,7 @@ class Bird{
    * sets color based on which 3rd of lifespan percent is
    */
   pointDecrement(){
-    if(!this.finished){
+    if(!this.finished && !this.lifeSpanDone){
       this.curLife -= 1;
       const lifePercent = this.curLife / this.lifeSpan;
       this.healthBarFill.style.width = (lifePercent * 100) + "%";
@@ -173,8 +177,14 @@ class Bird{
       }
       else{
         this.healthBarFill.style.backgroundColor = "rgb(255, 115, 0)";
+
+        if(this.curLife <= 0){
+          this.lifeSpanDone = true;
+          this.die();
+        }
       }
     }
+
   }
 
 /**
@@ -182,11 +192,23 @@ class Bird{
  * @param {Maze} curMaze 
  */
 start(curMaze) {
+  if(this.lifeSpanDone){
+    return;
+  }
+  // this.birdie.style.transition = 'top 0.6s linear, left 0.6s linear';
   this.yIndex = 0;
   this.xIndex = 0;  
-  this.curTile = curMaze[this.xIndex][this.yIndex];
+  this.curTile = curMaze[this.yIndex][this.xIndex];
+
+  this.isMoving = true;
+
   this.birdie.style.left = this.curTile.x;
-  this.birdie.style.top = this.curTile.y;  
+  this.birdie.style.top = this.curTile.y;
+
+  // setTimeout(()=>{
+  //   this.isMoving = false;
+  // }, 600)
+
 }    
 
 /**
@@ -196,6 +218,14 @@ start(curMaze) {
  */
 move(direction, curMaze) {
 
+   if(this.isMoving){
+     return;
+   }
+
+  // this.birdie.style.transition = 'none';
+  if(this.lifeSpanDone){
+    return;
+  }
   //If this is the chicks first move, the bird dies
   if (this.curTile === null || this.curTile.state.name === "BLOCK"){   
     this.die();
@@ -268,7 +298,8 @@ move(direction, curMaze) {
  * Only works for water tiles, points are updated
  */
 drink() {
-  if(this.curTile.state.name == "WATER" && !this.hasConsumed){
+
+  if(this.curTile.state.name == "WATER" && !this.hasConsumed && !this.lifeSpanDone){
     this.birdie.firstChild.src = 'images/chicks/Squarton_splashing.svg';
     this.hasConsumed = true;
     drinkSound.play();
@@ -282,7 +313,7 @@ drink() {
  * Only works for food tiles, points are updated
  */
   eat() {
-  if(this.curTile.state.name == "FOOD" && !this.hasConsumed){
+  if(this.curTile.state.name == "FOOD" && !this.hasConsumed && !this.lifeSpanDone){
       this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
       this.hasConsumed = true;
       eatSound.play();
@@ -297,14 +328,43 @@ drink() {
     if(this.curTile){
       this.curTile.occupied = false;
     }
-    this.updatePoints(-50);
     this.hasConsumed = false;
-    dieSound.play();
-    //lifespan resets
-    this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
-    this.curLife = this.lifeSpan;
-    //Places bird on new open spot in maze.
-    this.placeBird(maze);
+    this.lifeSpanDone = true;
+
+    //Exit animation
+    this.exitAnimation();
+  }
+
+  exitAnimation(){
+    this.startFlying();
+    this.birdie.style.transition = "top 6s ease, left 6s ease";
+    this.birdie.style.transform = "rotate(-20deg)";
+
+    // console.log(document.getElementById("background"));
+
+    const bounds = document.getElementById("background").getBoundingClientRect();
+    this.birdie.style.left = (bounds.right + 100) + "px";
+    this.birdie.style.top = (bounds.top + 100) + "px";
+
+    setTimeout(()=> this.stopFlying(), 6000);
+  }
+
+  startFlying(){
+    if (this.flyingInterval) {
+      return;
+    }
+
+    this.flyingInterval = setInterval(()=>{
+      const Xmove = (Math.random()*6) -3;
+      const Ymove = (Math.random()*6) -3;
+      this.birdie.style.transform = `rotate(-20deg) translate(${Xmove}px, ${Ymove}px)`;
+    }, 60);
+  }
+
+  stopFlying(){
+    clearInterval(this.flyingInterval);
+    this.flyingInterval = null;
+    this.birdie.style.transform = "rotate(-20deg)";
   }
 
 

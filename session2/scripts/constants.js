@@ -1,5 +1,5 @@
-const MIN_LIFE_SPAN = 500;
-const MAX_LIFE_SPAN = 1000; // actually 100 + 500
+const MIN_LIFE_SPAN = 100;
+const MAX_LIFE_SPAN = 500; // actually 100 + 500
 let MAX_NUMBER_OF_BIRDS = 1;
 //Edit
 
@@ -16,12 +16,14 @@ let backgroundImageHeight = window.innerWidth * 0.56;
 let centerX = (backgroundImageWidth)/ 2;
 let centerY = window.innerHeight / 2;
 
-let motherPosX = centerX - backgroundImageWidth * 0.25;
-let motherPosY = centerY - backgroundImageHeight * 0.15;
+let motherPosX = centerX - backgroundImageWidth * 0.33;
+let motherPosY = centerY - backgroundImageWidth * 0.01;
+//let motherPosX = centerX - backgroundImageWidth * 0.25;
+//let motherPosY = centerY - backgroundImageHeight * 0.15;
 
-let mazeStartX = (backgroundImageWidth * 0.20);
+let mazeStartX = (backgroundImageWidth * 0.25);
 let mazeStartY = centerY + screenHeight * 0.15;
-let mazeWidth = (backgroundImageWidth * 0.7);
+let mazeWidth = (backgroundImageWidth * 0.85);
 let mazeHeight = centerY + backgroundImageHeight * 0.4;
 
 const chickImagePaths = [['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'],
