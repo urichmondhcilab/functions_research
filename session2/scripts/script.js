@@ -26,6 +26,8 @@ let isTransition = false;
 let isStart = true;
 let transitionWidth = 0;
 let transitionHeight = 0;
+let birdsFinished = 0;
+let countDown = false;
 
 
 let nextGame = false;
@@ -103,14 +105,9 @@ function updateBirds(){
     if (currentBird?.isDrinking || currentBird?.isEating) {
       continue;
     }
-
     if(currentBird && currentBird.lifeSpan > 1){
       currentBird.updateBird();
     }
-
-    // if(currentBird && currentBird.birdie.deathImgFlag == 1){
-    //   currentBird.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
-    // }
   }
 }
 
@@ -144,24 +141,30 @@ function updateMotherHen(){
 function respawnBirds(bird){
   // point_number.textContent = birdCounter;
   if (!bird) return false;
-  let keepBird = true;
-  bird.pointDecrement();
+
+  if (countDown){
+    bird.pointDecrement();
+  }
   //figure out how to alter this to different animation
   if(bird.lifeSpan == 2){
     bird.birdie.deathImgFlag = 1;
   }
 
-  if (bird.lifeSpan <= 0 && !running){
+  if (bird.curLife <= 0 && !running){
     bird.die();
-    return keepBird;
+    birdCounter--;
+    setTimeout(()=> game_canvas.removeChild(bird.birdie), 6000);
+    return false;
   }
+  
   //Checks if bird is on end tile, if so removes bird from allbirds
   if(bird.curTile.state.name === "END"){
     game_canvas.removeChild(bird.birdie);
     birdCounter--;
+    birdsFinished++;
     return false;
   }
-  return keepBird;
+  return true;
 }
 
 
@@ -206,14 +209,22 @@ async function birdAction(){
 }
 
 function gameOverCheck(){
-  if (birdCounter == 0 || nextGame == true){
+  const birdMax = levelAttributes[curLevel].max_Birds;
+
+  if (birdsFinished == birdMax || nextGame == true){
+    birdsFinished = 0;
     nextGame = false;
     newLevel();
+  }
 
+  if (birdCounter == 0 && birdsFinished != birdMax){
+    birdsFinished = 0
+    ResetLevel()
   }
 }
 
 function newLevel(){
+  countDown=false;
   console.log("moves for level " + curLevel + ":" + executedBlockCount)
   curLevel++;
   //INSERT: Display transistion/instructions
@@ -267,6 +278,8 @@ function ResetLevel(){
   if (levelAttributes[curLevel].mother_include){
     createMother();
   }
+  countDown=false;
+  transitionBeforeNewLevel(); 
 }
 
 /**
@@ -475,6 +488,7 @@ function choosStartOrTransition(){
     // newLevel();
     isTransition = false;
   }
+  countDown = true;
 }
 
 

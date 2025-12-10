@@ -136,7 +136,6 @@ class Bird{
     let left = parseInt(slicePX(this.curTile.x) + slicePX(this.curTile.width) / 4);  
     this.birdie.style.left= `${left}px`;
     this.birdie.style.top = `${top}px`; 
-    
   }
 
 
@@ -168,7 +167,6 @@ class Bird{
       this.curLife -= 1;
       const lifePercent = this.curLife / this.lifeSpan;
       this.healthBarFill.style.width = (lifePercent * 100) + "%";
-      
       if (lifePercent > .66){
         this.healthBarFill.style.backgroundColor = "rgb(53, 255, 53)"
       }

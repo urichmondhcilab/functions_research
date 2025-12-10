@@ -1,5 +1,5 @@
-const MIN_LIFE_SPAN = 100;
-const MAX_LIFE_SPAN = 500; // actually 100 + 500
+const MIN_LIFE_SPAN = 10;
+const MAX_LIFE_SPAN = 50; // actually 100 + 500
 let MAX_NUMBER_OF_BIRDS = 1;
 //Edit
 
@@ -112,12 +112,12 @@ const instructions = [{text: "click on a bird to program its path",
                        } ];
 
 const levelAttributes = {
-    // 0:{
-    //     description: "Level 0, 1 Bird, planks",
-    //     max_Birds: 1,
-    //     state_range: 3,
-    //     mother_include: false,
-    // },
+     0:{
+         description: "Level 0, 1 Bird, planks",
+         max_Birds: 1,
+         state_range: 3,
+         mother_include: false,
+     },
     1:{
         description: "Level 1, 1 Bird, food, water, planks",
         max_Birds: 1,
