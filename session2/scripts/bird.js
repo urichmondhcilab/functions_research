@@ -284,12 +284,13 @@ drink() {
     }
     this.updatePoints(-50);
     this.hasConsumed = false;
+    game_canvas.removeChild(this.birdie);    
     dieSound.play();
     //lifespan resets
-    this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
-    this.curLife = this.lifeSpan;
+    // this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
+    // this.curLife = this.lifeSpan;
     //Places bird on new open spot in maze.
-    this.placeBird(maze);
+    // this.placeBird(maze);
   }
 
 

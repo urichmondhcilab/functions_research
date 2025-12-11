@@ -35,7 +35,7 @@ let mazeElements = 3;
 
 let startX, startY;
 let isDragging = false;
-const DRAGTRESHOLD = 100;
+const DRAGTRESHOLD = 5;
 
 
 function resetInterval(newSpeed){
@@ -138,17 +138,22 @@ function updateBirds(){
  */
 function respawnBirds(bird){
   // point_number.textContent = birdCounter;
-  if (!bird) return false;
+  console.log("not bird: " + !bird)
+  // if (!bird) return false;
   let keepBird = true;
   bird.pointDecrement();
   //figure out how to alter this to different animation
-  if(bird.lifeSpan == 2){
+  if(bird.curLife == 2){
     bird.birdie.deathImgFlag = 1;
   }
 
-  if (bird.lifeSpan <= 0 && !running){
+  if (bird.curLife <= 0 /*&& !running*/){
+    console.log("life span less than 0");
     bird.die();
-    return keepBird;
+
+    birdCounter--;    
+    return false;
+    // return keepBird;
   }
   //Checks if bird is on end tile, if so removes bird from allbirds
   if(bird.curTile.state.name === "END"){
@@ -415,21 +420,40 @@ function displayNumbers(e){
   }
 }
 
-function eventBasedDisplayNumbers(e){
-  console.log("type");
-  console.log(e.type);
+
+function eventBasedDisplayNumbersOrMoves(e, displayOrResetAction){
   switch (e.type){
     case 'click':
-      displayNumbers(e);
+      displayOrResetAction(e);
       break;
+
     case 'tocuhstart':
+      if (e.touches.length == 1){
+          startX = e.touches[0].pageX;
+          startY = e.touches[0].pageY;        
+          isDragging = false;
+      }
       break;
+
     case 'touchmove':
+
+      if (startX && startY){
+          const diffX = Math.abs(e.touches[0].pageX - startX);
+          const diffY = Math.abs(e.touches[0].pageY - startY);
+
+          if (diffX > DRAGTRESHOLD && diffY > DRAGTRESHOLD){
+              //changes the position based on current position - original position from
+              //touchStart
+              isDragging = true;
+          }
+      }    
       break;
+
     case 'touchend':
-      displayNumbers(e);      
+
+        if (!isDragging)  displayOrResetAction(e);      
       break
-  }
+  }  
 }
 
 
@@ -527,8 +551,8 @@ function initSession2EventListeners(){
   document.getElementById('nextLevel').addEventListener('click', nextLevel);
 
   // currently selected number can be clicked on to display the list of numbers
-  visibleNumber.addEventListener('click', eventBasedDisplayNumbers);
-  visibleNumber.addEventListener('touchend', eventBasedDisplayNumbers);  
+  visibleNumber.addEventListener('click', function(e){ eventBasedDisplayNumbersOrMoves(e, displayNumbers)});
+  visibleNumber.addEventListener('touchend', function(e){ eventBasedDisplayNumbersOrMoves(e, displayNumbers)});  
 
   // A number in the list of numbers may be selected by clicking on it 
   numberList.addEventListener('click', resetDisplayedNumber);
@@ -542,8 +566,8 @@ function initSession2EventListeners(){
   }
 
   // event listners for move puzzles
-  visibleMove.addEventListener('click', displayMoves);
-  visibleMove.addEventListener('touchend', displayMoves);
+  visibleMove.addEventListener('click', function(e){eventBasedDisplayNumbersOrMoves(e, displayMoves)});
+  visibleMove.addEventListener('touchend', function(e){eventBasedDisplayNumbersOrMoves(e, displayMoves)});
 
   moveList.addEventListener('click', resetMove)
   moveUp.addEventListener('click', resetMove)

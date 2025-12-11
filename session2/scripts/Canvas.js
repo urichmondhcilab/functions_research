@@ -307,13 +307,7 @@ function TouchEnd(e){
         return;
     }
 
-        // if (!isDragging){
-        //     if (curBlock.classList.contains('visible-move')){ 
-        //         displayMoves(e);
-        //         return;
-        //     }
-        //     return;
-        // }
+    // if (!isDragging) return;
 
     //refers to current touches
     //gives current x/y position of that finger
