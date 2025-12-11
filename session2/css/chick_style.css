@@ -12,7 +12,7 @@ html, body {
   position: absolute;
   width: 3%;
   height: 8%;
-  transition: top 0.01s linear, left 0.01s linear;
+  transition: top 0.1s linear, left 0.1s linear;
 }
 
 .chick{
@@ -214,10 +214,14 @@ html, body {
 #transition_image_container{
   /* display: flex; */
   display: flex;
+  flex-direction: column;
   position: absolute;
-  width: 100vw;
-  height: 56vw;
+  /* width: 100vw;
+  height: 56vw; */
+  width: 50%;
+  height: 50%;
   align-items: center;
+  align-self: center;
   z-index: 100;
   background-image: url("../images/pop_up.svg");
   background-repeat: no-repeat;
@@ -228,17 +232,23 @@ html, body {
 
 #transition_image{
   background-image: url("../images/game_buttons/play_button.svg");
-  background-size: cover ;
+  background-size: contain ;
   background-position: center;
   /* position: absolute;
   z-index: 1000; */
-
-  /* background-color: blue; */
+/* 
+  background-color: blue; */
   height: 50%;
   width: 50%;
   margin: auto;
+  align-self: center;
   background-repeat: no-repeat;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
 }
+
+
 
 .visible-move-container{
   display: flex;

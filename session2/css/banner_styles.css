@@ -141,7 +141,7 @@
     gap: 1rem;
 }
 
-#hints, #game_over{
+#hints, #game_end{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -155,7 +155,7 @@
     gap: 1%;
 }
 
-#hint_wrapper, #game_over_wrapper{
+#hint_wrapper, #game_end_wrapper{
     display: flex;
     justify-content: center;
 }
@@ -165,7 +165,7 @@
 }
 
 
-#hint_text, #game_over_Text{
+#hint_text, #game_end_text{
     font-size: 2vw;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
@@ -205,7 +205,7 @@
     color: black;
 }
 
-#game_over{
+#game_end{
         display: none;
         z-index: 1;
 }

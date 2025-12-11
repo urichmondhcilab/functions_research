@@ -10,6 +10,7 @@
  */
 let currentNumberOfBirds = 0;
 let birdCounter = 0;
+let deadBirds = 0;
 let currWater = 0;
 let allBirds = [];
 let motherHen = null;
@@ -26,6 +27,7 @@ let isTransition = false;
 let isStart = true;
 let transitionWidth = 0;
 let transitionHeight = 0;
+let transitionMessage = "";
 
 
 let nextGame = false;
@@ -102,27 +104,8 @@ function updateBirds(){
     if(currentBird && currentBird.lifeSpan > 1){
       currentBird.updateBird();
     }
-
-    // if(currentBird && currentBird.birdie.deathImgFlag == 1){
-    //   currentBird.birdie.firstChild.src = 'images/chicks/squarton_dead.svg';
-    // }
   }
 }
-
-
-// /**
-//  * To update the mother image, We first set currMom to the mother DOM object. 
-//  * We use a simple 1-0 switching if-else block to make sure the switch happens every tick (If 0, we are on img2. If 1, we are on img1.)
-//  * The mother object has the field currImageFlag built into it so that this switching can happen.
-//  */
-// function updateMotherHen(){
-//   let currMom = motherHen.mother;
-//   let currMomImage = currMom.firstChild;
-//   let flag = currMom.currImageFlag;
-
-//   currMomImage.src = (flag == 1) ? 'images/mother_hen/Mother_Hen_2.svg' : 'images/mother_hen/Mother_Hen_1.svg';
-//   currMom.currImageFlag = flag * -1;
-// }
 
 
 /**
@@ -150,7 +133,7 @@ function respawnBirds(bird){
   if (bird.curLife <= 0 /*&& !running*/){
     console.log("life span less than 0");
     bird.die();
-
+    deadBirds++;
     birdCounter--;    
     return false;
     // return keepBird;
@@ -179,12 +162,18 @@ function gameOverCheck(){
 
 function newLevel(){
   // console.log("moves for level " + curLevel + ":" + executedBlockCount)
-  curLevel++;
+  // increase level if all birds were saved
+  transitionMessage = "Try Again!";
+  if (deadBirds < Math.ceil(levelAttributes[curLevel].max_Birds / 2)){
+    curLevel++;
+    transitionMessage = "Level " + (curLevel + 1);
+  }
+
  
   if (curLevel > MAX_LEVEL){
     // reset curLevel for reset
-    GameOverElement = document.getElementById("game_over");
-    GameOverElement.style.display = 'flex';
+    GameEndElement = document.getElementById("game_end");
+    GameEndElement.style.display = 'flex';
     return;
   }
   //INSERT: Display transistion/instructions
@@ -196,6 +185,7 @@ function newLevel(){
 
 function transitionBeforeNewLevel(){
   transitionImageContainer.style.display = "flex";
+  transitionImage.firstChild.nodeValue = transitionMessage;
   transitionWidth = 0;
   transitionHeight = 0;
   isTransition = true;
@@ -225,7 +215,7 @@ function newLevelConfig(level){
       eatBlock.classList.add('hidden');
     }
 
-  //Resets birds
+  //Resets birds, maze, blocks
   ResetLevel();
 }
 
@@ -239,9 +229,9 @@ function ResetLevel(){
   resetMaze();
 
   // clears blocks
-  blockResetHandler();
-  console.log("current level");
-  console.log(curLevel);
+  resetBlocks();
+
+  // include mother
   if (levelAttributes[curLevel].mother_include){
     motherHen = null;
     createMother();
@@ -257,6 +247,7 @@ function ResetLevel(){
  */
 function reset(){
   birdCounter = 0;
+  deadBirds = 0;
   selectedBirds = null;
   currentNumberOfBirds = birdCounter;
   allBirds.forEach((bird, i) => {
@@ -274,8 +265,8 @@ function reset(){
 
   executedBlockCount = 0;
 
-  GameOverElement = document.getElementById("game_over");
-  GameOverElement.style.display = 'none';
+  GameEndElement = document.getElementById("game_end");
+  GameEndElement.style.display = 'none';
   
   // remove current points_display
   let chickDisplay = document.getElementById("points_container");
@@ -396,7 +387,7 @@ async function runCode(){
  * Remove blocks from canvas
  * @param {Object} e 
  */
-function blockResetHandler(e){
+function resetBlocks(e){
   const blocks = blockDrop.querySelectorAll('.block');
   blocks.forEach(block => block.remove());
 }
@@ -543,7 +534,7 @@ function initSession2EventListeners(){
   canvas.addEventListener('dragover', allowDrop);
 
   // reset button clears all the blocks from the canvas, but does not reset the chicken
-  document.getElementById('block-reset').addEventListener('click', blockResetHandler);
+  document.getElementById('block-reset').addEventListener('click', resetBlocks);
 
   //Monitor activity that leads to points
 
@@ -656,12 +647,7 @@ function chooseStartOrTransition(){
     isStart = false;
   }
   if (isTransition){
-    // resetInterval(NORMAL_SPEED);
-    // removeCurrentGameElements();
-    // ConfigureNewLevel
     newLevelConfig(curLevel);
-    // StartGame
-    // startGame()
     isTransition = false;
   }
 }
@@ -680,7 +666,7 @@ function removeCurrentGameElements(){
   maze = null;
 
   // resetCodeBlocks
-  blockResetHandler();
+  resetBlocks();
 
   // clear birds and points
   reset();
@@ -700,7 +686,7 @@ function pulsatingStart(){
     transitionImage.style.width = transitionWidth + "%";
     transitionImage.style.height = transitionHeight + "%";
   }else{
-    transitionImageContainer.style.width = transitionImageContainer.style.width == "100%" ? "99%" : "100%";
+    transitionImage.style.width = transitionImage.style.width == "50%" ? "49%" : "50%";
   }
 }
 
