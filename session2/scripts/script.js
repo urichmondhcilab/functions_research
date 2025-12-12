@@ -373,21 +373,17 @@ function repositionGameObjects(){
  * Our AST is a list of collapsed blocks.
  */
 async function initializeBlockIdentifiers(){
+  if (running) return;
+
   blockCount = 0;
   placedBlocks = document.querySelectorAll('#canvas .block');
-
-
-  console.log("placed blocks ");
-  console.log(placedBlocks);
 
   if (selectedBirds != null && selectedBirds.length > 0 && placedBlocks != null && placedBlocks.length > 0){
     running = true;    
     resetInterval(RUN_SPEED);
     let parser = new Parser(selectedBirds, placedBlocks, maze);    
-    ast = parser.parse();  
-    // await runCode();
+    ast = parser.parse(); 
   }
-
 }
 
 
@@ -548,15 +544,7 @@ function clearExpandedLists(currList){
 function initSession2EventListeners(){
   window.addEventListener('resize', repositionGameObjects);
   reset_btn.addEventListener('click', ResetLevel);
-  game_end_text.addEventListener('click', function(e){ 
-    // console.log("clicked game_end_text")
-    // curLevel = 0;
-    // isStart = true;
-    // newLevel();
-    // pulsatingStart();
-    // newLevel();
-    window.location.reload();
-  });
+  game_end_text.addEventListener('click', function(e){window.location.reload();});
   runObject.addEventListener('click', initializeBlockIdentifiers);
 
   // Add event listeners for drag and drop functionality on the canvas
@@ -629,8 +617,7 @@ async function birdAction(){
     updateBirds();
     allBirds = allBirds.filter(respawnBirds);
     //Checks if GameOver Conditions are met
-    gameOverCheck();
-    // await runCode();   
+    gameOverCheck(); 
     runCode() ;
   }
 }
