@@ -29,16 +29,13 @@ let transitionWidth = 0;
 let transitionHeight = 0;
 let transitionMessage = "";
 
-
 let nextGame = false;
 let curLevel = 0;
 let mazeElements = 3;
 
-
 let startX, startY;
 let isDragging = false;
 const DRAGTRESHOLD = 5;
-
 
 function resetInterval(newSpeed){
   speed = newSpeed;
@@ -297,7 +294,7 @@ function resetBlocks(e){
 
 function ResetLevel(){
   curLevel = curLevel > MAX_LEVEL ? MAX_LEVEL : curLevel;
-  // recreates bird 
+  // recreates bird and mother
   reset();
 
   // recreates maze
@@ -319,14 +316,14 @@ function ResetLevel(){
  * remove tiles, clear the maze, the console, and birds
  */
 function removeCurrentGameElements(){
+  // clear birds and points
+  reset();
+
   // remove tiles
   removeMazeElements()
 
   // resetCodeBlocks
   resetBlocks();
-
-  // clear birds and points
-  reset();
 
   // reset the time interval
   resetInterval(NORMAL_SPEED);  
@@ -541,6 +538,7 @@ function clearExpandedLists(currList){
   }
 }
 
+
 /**
  * An event listener runs in the background waiting for an event to occur on an element
  * In these two cases load and click
@@ -683,9 +681,6 @@ function chooseStartOrTransition(){
     isTransition = false;
   }
 }
-
-
-
 
 
 /**
