@@ -11,7 +11,8 @@
 <body>
     <div class="container">
       <div id="transition_image_container">
-        <div id="transition_image" src="images/game_buttons/play_button.svg"></div>
+        <!-- <div id="transition_message"> Transition Message</div> -->
+        <div id="transition_image" src="images/game_buttons/play_button.svg">Level 1</div>
       </div>
       <!-- <div id="hints"> -->
         <!-- <div id="close_button">&times; </div>
@@ -27,10 +28,10 @@
          </div> -->
         <!-- </div> -->
         
-        <div id=game_over>
-          <div id="game_over_wrapper">
-            <div id="game_over_Text">Game Over, keep going you got this!</div>
-            <div id="game_reset_button">Reset</div>
+        <div id=game_end>
+          <div id="game_end_wrapper">
+            <div id="game_end_text">Play again!</div>
+            <!-- <div id="game_reset_button">Reset</div> -->
           </div>
       </div>
 
@@ -78,9 +79,19 @@
         <div class="top-right" id="canvas">
           <div id="block-drop"></div>
           <div class="run-reset-buttons">
+            <div id="block-reset-container"> 
               <div id="block-reset"></div>
-              <div id="run"></div>
-              <div id="trash"></div>              
+              <div id="run"></div>                 
+            </div>
+            <!-- <div id="run-container"> 
+              <div id="run"></div>              
+            </div> -->
+            <div id="trash-container"> 
+              <div id="trash"></div>             
+            </div>                        
+
+
+             
           </div>           
         </div>
 
