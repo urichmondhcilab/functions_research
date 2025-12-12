@@ -171,6 +171,7 @@
     text-align: center;
     align-self: center;
     flex-grow: 2;
+    /* background-color: #FFC940; */
 }
 
 #hint_image{
@@ -179,7 +180,7 @@
 
 #next_button, #back_button, #game_reset_button{
     background-color: #FFC940;
-    font-size: 2rem;
+    font-size: 1rem;
     align-self: center;
     padding: 0.5vw;
     border-radius: 0.2rem;

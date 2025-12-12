@@ -322,7 +322,7 @@ function TouchEnd(e){
         dropTarget = null;
     }
     //detects drop over trash
-    const trashTarget =  document.elementFromPoint(touch.clientX, touch.clientY)?.closest('#trash, #block-remove');
+    const trashTarget =  document.elementFromPoint(touch.clientX, touch.clientY)?.closest('#trash-container, #trash, #block-remove');
 
     //returns clone visibility
     curBlock.style.display = '';

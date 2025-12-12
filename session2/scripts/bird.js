@@ -325,7 +325,7 @@ drink() {
  */
   updatePoints(val){
     this.curLife += val;
-    console.log(this.curLife);
+    // console.log(this.curLife);
   }
 
 

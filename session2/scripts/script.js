@@ -120,8 +120,8 @@ function updateBirds(){
  * @returns a boolean that indicates whether to keep or remove the bird
  */
 function respawnBirds(bird){
-  // point_number.textContent = birdCounter;
-  console.log("not bird: " + !bird)
+  // // point_number.textContent = birdCounter;
+  // console.log("not bird: " + !bird)
   // if (!bird) return false;
   let keepBird = true;
   bird.pointDecrement();
@@ -164,7 +164,8 @@ function newLevel(){
   // console.log("moves for level " + curLevel + ":" + executedBlockCount)
   // increase level if all birds were saved
   transitionMessage = "Try Again!";
-  if (deadBirds < Math.ceil(levelAttributes[curLevel].max_Birds / 2)){
+  if (deadBirds == 0){  
+  // if (deadBirds < Math.ceil(levelAttributes[curLevel].max_Birds / 2)){
     curLevel++;
     transitionMessage = "Level " + (curLevel + 1);
   }
@@ -220,25 +221,6 @@ function newLevelConfig(level){
 }
 
 
-function ResetLevel(){
-  curLevel = curLevel > MAX_LEVEL ? MAX_LEVEL : curLevel;
-  // recreates bird 
-  reset();
-
-  // recreates maze
-  resetMaze();
-
-  // clears blocks
-  resetBlocks();
-
-  // include mother
-  if (levelAttributes[curLevel].mother_include){
-    motherHen = null;
-    createMother();
-  }
-}
-
-
 /**
  * resets the current number of birds 
  * resets selected birds
@@ -276,6 +258,7 @@ function reset(){
   });
 }
 
+
 //Probably only either for game over or explicit choice, triggered by reset button at top
 //for now to show functionality
 /**
@@ -284,18 +267,69 @@ function reset(){
  * creates a new Maze
  */
 function resetMaze(){
-  if (maze){
-    for(let i = 0; i < maze.maze.length; i++){
-      for(let j = 0; j < maze.maze[i].length; j++){
-        game_canvas.removeChild(maze.maze[i][j].div);
-      }
-    }
-  }
+  removeMazeElements();
   maze = new Maze(mazeStartX, mazeStartY, mazeWidth, mazeHeight, mazeElements); 
 }
 
 function nextLevel(){
   nextGame = true;
+}
+
+function removeMazeElements(){
+  // remove tiles
+  let tiles = game_canvas.querySelectorAll(".tile");
+  tiles.forEach(tile => {
+    game_canvas.removeChild(tile);
+  });
+  maze = null;
+}
+
+
+/**
+ * Remove blocks from canvas
+ * @param {Object} e 
+ */
+function resetBlocks(e){
+  const blocks = blockDrop.querySelectorAll('.block');
+  blocks.forEach(block => block.remove());
+}
+
+
+function ResetLevel(){
+  curLevel = curLevel > MAX_LEVEL ? MAX_LEVEL : curLevel;
+  // recreates bird 
+  reset();
+
+  // recreates maze
+  resetMaze();
+
+  // clears blocks
+  resetBlocks();
+
+  // include mother
+  if (levelAttributes[curLevel].mother_include){
+    motherHen = null;
+    createMother();
+  }
+}
+
+
+/**
+ * remove game elements before next level
+ * remove tiles, clear the maze, the console, and birds
+ */
+function removeCurrentGameElements(){
+  // remove tiles
+  removeMazeElements()
+
+  // resetCodeBlocks
+  resetBlocks();
+
+  // clear birds and points
+  reset();
+
+  // reset the time interval
+  resetInterval(NORMAL_SPEED);  
 }
 
 
@@ -369,7 +403,7 @@ async function runCode(){
   if (!running) return;
   if (selectedBirds != null && selectedBirds.length > 0 && blockCount >= 0 && ast!= null && blockCount < ast.length){
     // disable run button
-    console.log("selected birds: " + selectedBirds.length);
+    // console.log("selected birds: " + selectedBirds.length);
     executedBlockCount += 1;
     Interpreter.interpret(ast[blockCount]);
     blockCount++;
@@ -384,22 +418,12 @@ async function runCode(){
 
 
 /**
- * Remove blocks from canvas
- * @param {Object} e 
- */
-function resetBlocks(e){
-  const blocks = blockDrop.querySelectorAll('.block');
-  blocks.forEach(block => block.remove());
-}
-
-
-/**
  * Expands/hides a list associated with a number puzzle
  * It also clears other expanded lists
  * @param {Object} e is a clicked number puzzle
  */
 function displayNumbers(e){
-  console.log("displayNumber");
+  // console.log("displayNumber");
   const targetNumberList = e.target.querySelector('.number-list');
   if (targetNumberList != null){
     if (targetNumberList.style.display == "none"){
@@ -526,7 +550,15 @@ function clearExpandedLists(currList){
 function initSession2EventListeners(){
   window.addEventListener('resize', repositionGameObjects);
   reset_btn.addEventListener('click', ResetLevel);
-  game_reset_button.addEventListener('click', ResetLevel);
+  game_end_text.addEventListener('click', function(e){ 
+    // console.log("clicked game_end_text")
+    // curLevel = 0;
+    // isStart = true;
+    // newLevel();
+    // pulsatingStart();
+    // newLevel();
+    window.location.reload();
+  });
   runObject.addEventListener('click', initializeBlockIdentifiers);
 
   // Add event listeners for drag and drop functionality on the canvas
@@ -653,27 +685,7 @@ function chooseStartOrTransition(){
 }
 
 
-/**
- * remove game elements before next level
- * remove tiles, clear the maze, the console, and birds
- */
-function removeCurrentGameElements(){
-  // remove tiles
-  let tiles = game_canvas.querySelectorAll(".tile");
-  tiles.forEach(tile => {
-    game_canvas.removeChild(tile);
-  });
-  maze = null;
 
-  // resetCodeBlocks
-  resetBlocks();
-
-  // clear birds and points
-  reset();
-
-  // reset the time interval
-    resetInterval(NORMAL_SPEED);  
-}
 
 
 /**
