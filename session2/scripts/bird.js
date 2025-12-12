@@ -87,6 +87,9 @@ class Bird{
    * @param {Object} e is the event object
    */
   async displayCodeEditor(e){
+    if (running)
+      return;
+
     if (selectedBirds != null && selectedBirds !== undefined){
       for (const selectedBird of selectedBirds){
         console.log("in for loop");
@@ -95,6 +98,7 @@ class Bird{
         selectedBird.selectionDiv.style.display = "none";
       }
     }
+
     if (motherHen !== null && motherHen !== undefined){
       motherHen.mother.style.border = "none";
       motherHen.selected = false;
@@ -106,6 +110,7 @@ class Bird{
     this.selected = true;
     this.selectedColorIndex = Math.floor(Math.random() * SELECTED_BIRD_COLOR_PALETTE_COUNT) + 1;
     selectedBirds = [this];
+
   }
 
 
@@ -145,7 +150,7 @@ class Bird{
    * sets color based on which 3rd of lifespan percent is
    */
   pointDecrement(){
-    if(!this.finished){
+    if(!this.finished && !running){
       this.curLife -= 1;
       const lifePercent = this.curLife / this.lifeSpan;
       this.healthBarFill.style.width = (lifePercent * 100) + "%";
