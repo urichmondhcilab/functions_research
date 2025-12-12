@@ -178,7 +178,7 @@
     width: 100%;
 }
 
-#next_button, #back_button, #game_reset_button{
+#next_button, #back_button{
     background-color: #FFC940;
     font-size: 1rem;
     align-self: center;
