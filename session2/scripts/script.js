@@ -343,8 +343,8 @@ function repositionGameObjects(){
   centerX = (backgroundImageWidth) / 2;
   centerY = window.innerHeight / 2;
 
-  motherPosX = centerX - backgroundImageWidth * 0.25;
-  motherPosY = centerY - backgroundImageHeight * 0.15;
+  motherPosX = centerX - backgroundImageWidth * 0.35;
+  motherPosY = centerY - backgroundImageHeight * 0.06;
 
   mazeStartX = (backgroundImageWidth * 0.20);
   mazeStartY = centerY + backgroundImageHeight * 0.15 ;
