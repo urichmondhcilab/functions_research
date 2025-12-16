@@ -16,8 +16,11 @@ let backgroundImageHeight = window.innerWidth * 0.56;
 let centerX = (backgroundImageWidth)/ 2;
 let centerY = window.innerHeight / 2;
 
-let motherPosX = centerX - backgroundImageWidth * 0.25;
-let motherPosY = centerY - backgroundImageHeight * 0.15;
+let motherPosX = centerX - backgroundImageWidth * 0.35;
+// let motherPosX = centerX - backgroundImageWidth * 0.25;
+// let motherPosY = centerY - backgroundImageHeight * 0.15;
+let motherPosY = centerY - backgroundImageHeight * 0.06;
+
 
 let mazeStartX = (backgroundImageWidth * 0.20);
 let mazeStartY = centerY + screenHeight * 0.15;
