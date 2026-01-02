@@ -5,8 +5,9 @@ function allowDrop(event) {
 
 // set a "draggedElementState" to keep track of the selection on the dropdown
 let draggedElementState = null;
-let trashObj = document.getElementById("trash")
-let blockRemoveObj = document.getElementById("block-remove")
+let trashObj = document.getElementById("trash");
+let trashContainer = document.getElementById("trash-container");
+let blockRemoveObj = document.getElementById("block-remove");
 let instCount = 0;
 
 let curBlock = null;
@@ -20,6 +21,11 @@ let Yoffset = 0;
 trashObj.addEventListener("dragover", dragOverTrash);
 trashObj.addEventListener("dragleave", dragExitTrash);
 trashObj.addEventListener("drop", trashDrop);
+
+trashContainer.addEventListener("dragover", dragOverTrash);
+trashContainer.addEventListener("dragleave", dragExitTrash);
+trashContainer.addEventListener("drop", trashDrop);
+
 blockRemoveObj.addEventListener("dragover", dragOverTrash);
 blockRemoveObj.addEventListener("drop", trashDrop);
 
@@ -74,8 +80,8 @@ function reorderItems(parent){
 
 function dragOverTrash(e){
     e.preventDefault();
-    e.target.style.backgroundColor = "#FFC940";
-    e.target.style.borderColor = "#FFC940";
+    trashObj.style.backgroundColor = "#FFC940";
+    trashObj.style.borderColor = "#FFC940";
 
 }
 
@@ -89,8 +95,8 @@ function trashDrop(e){
     let data = e.dataTransfer.getData("text");
     //gets the object to be deleted by unique ID
     deleteBlockbyId(data);
-    e.target.style.backgroundColor = "white";
-    e.target.style.borderColor = "white";
+    trashObj.style.backgroundColor = "white";
+    trashObj.style.borderColor = "white";
     reorderItems(document.getElementById('block-drop'));    
 }
 
@@ -296,7 +302,14 @@ function TouchMove(e){
         }
     }
 
-
+    //detects drag over trash
+    const trashTarget =  document.elementFromPoint(touch.clientX, touch.clientY)?.closest('#trash-container, #trash, #block-remove');   
+    
+    if (trashTarget){
+        trashObj.style.backgroundColor = "#FFC940";
+    }else{
+        trashObj.style.backgroundColor = "white";        
+    }  
 }
 
 //When finger is lifted/end of the touch event
@@ -332,6 +345,7 @@ function TouchEnd(e){
             deleteBlockbyId(draggedElementState.element.id);
         }
 
+        trashObj.style.backgroundColor = "white";
         curBlock.remove();
         curBlock = null;
         draggedElementState = null;

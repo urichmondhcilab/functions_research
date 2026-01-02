@@ -578,18 +578,18 @@ function initSession2EventListeners(){
   visibleMove.addEventListener('click', function(e){eventBasedDisplayNumbersOrMoves(e, displayMoves)});
   visibleMove.addEventListener('touchend', function(e){eventBasedDisplayNumbersOrMoves(e, displayMoves)});
 
-  moveList.addEventListener('click', resetMove)
-  moveUp.addEventListener('click', resetMove)
-  moveDown.addEventListener('click', resetMove)
-  moveLeft.addEventListener('click', resetMove)
-  moveRight.addEventListener('click', resetMove)
+  moveList.addEventListener('click', resetMove);
+  moveUp.addEventListener('click', resetMove);
+  moveDown.addEventListener('click', resetMove);
+  moveLeft.addEventListener('click', resetMove);
+  moveRight.addEventListener('click', resetMove);
 
 
-  moveList.addEventListener('touchend', resetMove)
-  moveUp.addEventListener('touchend', resetMove)
-  moveDown.addEventListener('touchend', resetMove)
-  moveLeft.addEventListener('touchend', resetMove)
-  moveRight.addEventListener('touchend', resetMove)  
+  moveList.addEventListener('touchend', resetMove);
+  moveUp.addEventListener('touchend', resetMove);
+  moveDown.addEventListener('touchend', resetMove);
+  moveLeft.addEventListener('touchend', resetMove);
+  moveRight.addEventListener('touchend', resetMove);
 }
 
 /**
