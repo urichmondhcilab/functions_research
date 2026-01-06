@@ -43,7 +43,6 @@ document.addEventListener('dragstart', (event) => {
         element: draggedElement,
         move : draggedElement.classList.contains("new-move")
     };
-
 });
 
 
@@ -70,7 +69,7 @@ function reorderItems(parent){
     let zIndex = 1000;
 
     for (node of nodeList){
-        translateValue = index * -33
+        translateValue = index * -25
         node.style.transform = `translate(${node.classList.contains("new-move") ? 0 : -50}%, ${translateValue}%)`;     
         node.style.zIndex = zIndex--;  
         index++;
@@ -124,10 +123,8 @@ function createBlockClone(state){
     if(move){
 
         newBlock.querySelector(".visible-number").addEventListener('click', displayNumbers);
-        // newBlock.querySelector(".visible-number").addEventListener('touchstart', displayNumbers);
         newBlock.querySelector(".visible-number").addEventListener('touchend', displayNumbers);
-        // newBlock.querySelector(".visible-number").addEventListener('touchMove', displayNumbers);
-        
+
         
         newBlock.querySelector(".number-list").addEventListener('click', resetDisplayedNumber);
 
@@ -157,7 +154,7 @@ function createBlockClone(state){
         newBlock.style.width = "50%";            
     }
 
-        return newBlock;
+    return newBlock;
 }
 
 function createNewBlock(newBlock){     
@@ -248,9 +245,9 @@ function TouchStart(e, block){
     //Adds clone block to DOM
     document.body.appendChild(curBlock);
 
-    //Stores the block object the clone is refferencing
+    //Stores the block object the clone is referencing
     //preserves the state of the block if it has a select value
-    if(block.classList.contains('draggable')){
+    if(block.classList.contains('draggable')){ // any dragable block includ
         draggedElementState = {
             element: block,
             // selectedValue: block.querySelector('select')?.value || null,
@@ -261,6 +258,8 @@ function TouchStart(e, block){
         };
 
     }
+    // a dropped element has its draggable class removed and a block class added
+    // we are detecting elements from the canvas using this block class
     else if (block.classList.contains('block')){
         draggedElementState = {
             element: block,
@@ -331,12 +330,13 @@ function TouchEnd(e){
     //Finds the element at the current coordinates of the touch
     //if over block-drop, sets that, otherwise null
     let dropTarget = document.elementFromPoint(touch.clientX, touch.clientY)?.closest('#block-drop');
-    if (draggedElementState?.fromCanvas){
-        dropTarget = null;
-    }
+    // if (draggedElementState?.fromCanvas){
+    //     dropTarget = null;
+    // }
     //detects drop over trash
     const trashTarget =  document.elementFromPoint(touch.clientX, touch.clientY)?.closest('#trash-container, #trash, #block-remove');
 
+    
     //returns clone visibility
     curBlock.style.display = '';
 
@@ -354,7 +354,48 @@ function TouchEnd(e){
     }
 
     //checks if touch was ended over block drop
-    if (dropTarget) {
+    // if (dropTarget) {
+    //     if (draggedElementState?.fromCanvas){
+    //         return;
+    //     }           
+    //     //creates temporary block
+    //     const temp = curBlock;
+    //     //Calls touchdrop (to place block in code window)
+    //     TouchDrop(dropTarget);
+
+    //     //After 30ms, removes clone block from screen
+    //     //allows DOM to add element
+    //     setTimeout(() => {
+    //         temp.remove();
+    //         curBlock = null;
+    //     }, 30);
+    // //If not over block-drop, simply removes clone
+    // // also act as trash - remove from block drop
+    // } else {
+    //     if (draggedElementState?.fromCanvas){
+    //         deleteBlockbyId(draggedElementState.element.id);
+    //     }        
+    //     trashObj.style.backgroundColor = "white";
+    //     // document.getElementById("testDiv").innerHTML = Math.random() * 100;
+    //     document.getElementById("testDiv").innerHTML = draggedElementState.element.id;
+    //     curBlock.remove();
+    //     curBlock = null;
+    //     draggedElementState = null;
+    // }
+
+
+    if (dropTarget && draggedElementState?.fromCanvas){
+        // source: canvas
+        // target: canvas
+        // remove the feedback block
+        curBlock.remove();
+        curBlock = null;
+    }else if(dropTarget){
+        // source: other
+        // target: canvas
+        // the block is from the list of blocks and the taarget the canvas
+        // TouchDroup creates/clones a new block for the canvas
+
         //creates temporary block
         const temp = curBlock;
         //Calls touchdrop (to place block in code window)
@@ -365,11 +406,26 @@ function TouchEnd(e){
         setTimeout(() => {
             temp.remove();
             curBlock = null;
-        }, 30);
-    //If not over block-drop, simply removes clone
-    } else {
+        }, 30);        
+    }else if (draggedElementState?.fromCanvas){ // element from canvas but target is not canvas (i.e. every other element apart from the canvas is a trash)
+        // source: canvas
+        // target: other
+        // delete the block (i.e. any other area serves as trash)
+        // remove the feedback block
+        deleteBlockbyId(draggedElementState.element.id);
+        trashObj.style.backgroundColor = "white";
+        // document.getElementById("testDiv").innerHTML = Math.random() * 100;
+        document.getElementById("testDiv").innerHTML = draggedElementState.element.id;
         curBlock.remove();
         curBlock = null;
+        draggedElementState = null;        
+    }
+    else{ // any other drop area and 
+        // source : other 
+        // target : other 
+        // remove the feedback block
+        curBlock.remove();
+        curBlock = null;        
     }
 }
 

@@ -428,6 +428,22 @@ function displayNumbers(e){
   }
 }
 
+/**
+ * Toggles the list of move directions. If it is visible it hides it and vice versa
+ * @param {Object} e is the object that is clicked toggle to list 
+ */
+function displayMoves(e){
+  const targetMoveList = e.target.querySelector('.move-list');
+  if (targetMoveList != null){
+    if (targetMoveList.style.display == "none"){
+      targetMoveList.style.display = "block";
+      clearExpandedLists(targetMoveList);
+    }else{     
+      targetMoveList.style.display = "none";    
+    }
+  }
+}
+
 
 function eventBasedDisplayNumbersOrMoves(e, displayOrResetAction){
   switch (e.type){
@@ -495,21 +511,7 @@ function resetMove(e){
 }
 
 
-/**
- * Toggles the list of move directions. If it is visible it hides it and vice versa
- * @param {Object} e is the object that is clicked toggle to list 
- */
-function displayMoves(e){
-  const targetMoveList = e.target.querySelector('.move-list');
-  if (targetMoveList){
-    if (targetMoveList.style.display == "none"){
-      targetMoveList.style.display = "block";
-      clearExpandedLists(targetMoveList);
-    }else{     
-      targetMoveList.style.display = "none";    
-    }
-  }
-}
+
 
 
 /**
@@ -567,14 +569,14 @@ function initSession2EventListeners(){
   numberList.addEventListener('click', resetDisplayedNumber);
   numberList.addEventListener('touchend', resetDisplayedNumber);
 
-  //eventlistners for when a number image is clicked
+  //eventlisteners for when a number image is clicked
   for (numObject in numObjects){
     numObject.addEventListener('click', resetDisplayedNumber);
     numObject.addEventListener('touchend', resetDisplayedNumber);
 
   }
 
-  // event listners for move puzzles
+  // event listeners for move puzzles
   visibleMove.addEventListener('click', function(e){eventBasedDisplayNumbersOrMoves(e, displayMoves)});
   visibleMove.addEventListener('touchend', function(e){eventBasedDisplayNumbersOrMoves(e, displayMoves)});
 

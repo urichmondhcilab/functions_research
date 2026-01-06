@@ -282,6 +282,21 @@ transform: translateZ(0);
 
 }
 
+.visible-number{
+  background-image: url("../images/numbers/number0.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;  
+  margin-top: 1.8%;
+  margin-right: 0px;
+  /* margin-bottom: -50%; */
+  margin-left: -4%; 
+  width: 50%;
+  height: 100%;  
+  padding-bottom: 0px;
+  /* position: relative; */
+}
+
 .visible-move{
   background-image: url("../images/direction/up.svg");
   background-position: center;
@@ -296,20 +311,7 @@ transform: translateZ(0);
 }
 
 
-.visible-number{
-  background-image: url("../images/numbers/number0.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;  
-  width: 50%;
-  height: 100%;
-  margin-top: 1.8%;
-  margin-right: 0px;
-  /* margin-bottom: -50%; */
-  margin-left: -4%; 
-  padding-bottom: 0px;
-  /* position: relative; */
-}
+
 
 .num0, .num1, .num2, .num3, .num4, .num5, .num6, .num7, .num8, .num9{
   background-repeat: no-repeat;
@@ -379,6 +381,7 @@ transform: translateZ(0);
 }
 
 .number-list, .move-list{
+   background-color: blueviolet; 
   position: relative;
   top: 100%;
   list-style: none;
