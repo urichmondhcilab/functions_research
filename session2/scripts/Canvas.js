@@ -85,7 +85,7 @@ function dragOverTrash(e){
 }
 
 function dragExitTrash(e){
-     e.target.style.backgroundColor = "white";   
+     trashObj.style.backgroundColor = "white";   
 }
 
 function trashDrop(e){
@@ -330,9 +330,7 @@ function TouchEnd(e){
     //Finds the element at the current coordinates of the touch
     //if over block-drop, sets that, otherwise null
     let dropTarget = document.elementFromPoint(touch.clientX, touch.clientY)?.closest('#block-drop');
-    // if (draggedElementState?.fromCanvas){
-    //     dropTarget = null;
-    // }
+
     //detects drop over trash
     const trashTarget =  document.elementFromPoint(touch.clientX, touch.clientY)?.closest('#trash-container, #trash, #block-remove');
 
@@ -353,36 +351,6 @@ function TouchEnd(e){
 
     }
 
-    //checks if touch was ended over block drop
-    // if (dropTarget) {
-    //     if (draggedElementState?.fromCanvas){
-    //         return;
-    //     }           
-    //     //creates temporary block
-    //     const temp = curBlock;
-    //     //Calls touchdrop (to place block in code window)
-    //     TouchDrop(dropTarget);
-
-    //     //After 30ms, removes clone block from screen
-    //     //allows DOM to add element
-    //     setTimeout(() => {
-    //         temp.remove();
-    //         curBlock = null;
-    //     }, 30);
-    // //If not over block-drop, simply removes clone
-    // // also act as trash - remove from block drop
-    // } else {
-    //     if (draggedElementState?.fromCanvas){
-    //         deleteBlockbyId(draggedElementState.element.id);
-    //     }        
-    //     trashObj.style.backgroundColor = "white";
-    //     // document.getElementById("testDiv").innerHTML = Math.random() * 100;
-    //     document.getElementById("testDiv").innerHTML = draggedElementState.element.id;
-    //     curBlock.remove();
-    //     curBlock = null;
-    //     draggedElementState = null;
-    // }
-
 
     if (dropTarget && draggedElementState?.fromCanvas){
         // source: canvas
@@ -390,11 +358,13 @@ function TouchEnd(e){
         // remove the feedback block
         curBlock.remove();
         curBlock = null;
+
     }else if(dropTarget){
         // source: other
         // target: canvas
-        // the block is from the list of blocks and the taarget the canvas
+        // the block is from the list of blocks and the target is the canvas
         // TouchDroup creates/clones a new block for the canvas
+        // remove the feedback block
 
         //creates temporary block
         const temp = curBlock;
@@ -406,12 +376,14 @@ function TouchEnd(e){
         setTimeout(() => {
             temp.remove();
             curBlock = null;
-        }, 30);        
+        }, 30);   
+
     }else if (draggedElementState?.fromCanvas){ // element from canvas but target is not canvas (i.e. every other element apart from the canvas is a trash)
         // source: canvas
         // target: other
         // delete the block (i.e. any other area serves as trash)
         // remove the feedback block
+
         deleteBlockbyId(draggedElementState.element.id);
         trashObj.style.backgroundColor = "white";
         // document.getElementById("testDiv").innerHTML = Math.random() * 100;
@@ -423,6 +395,7 @@ function TouchEnd(e){
     else{ // any other drop area and 
         // source : other 
         // target : other 
+        // other is the list of posible blocks below the canvas 
         // remove the feedback block
         curBlock.remove();
         curBlock = null;        

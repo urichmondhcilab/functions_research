@@ -381,7 +381,7 @@ transform: translateZ(0);
 }
 
 .number-list, .move-list{
-   background-color: blueviolet; 
+   background-color: purple; 
   position: relative;
   top: 100%;
   list-style: none;
