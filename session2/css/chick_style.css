@@ -226,8 +226,6 @@ transform: translateZ(0);
   align-self: flex-end;
 }
 
-
-
 #block-reset:hover, #run:hover{
   background-color:#FFC940;
 }
@@ -310,9 +308,6 @@ transform: translateZ(0);
   /* flex-shrink: 0; */
 }
 
-
-
-
 .num0, .num1, .num2, .num3, .num4, .num5, .num6, .num7, .num8, .num9{
   background-repeat: no-repeat;
   background-size: cover;
@@ -334,7 +329,6 @@ transform: translateZ(0);
 .num0{
   background-image: url("../images/numbers/number0.svg");
 }
-
 .num1{
   background-image: url("../images/numbers/number1.svg");
 }
@@ -367,15 +361,12 @@ transform: translateZ(0);
 .move-left{
   background-image: url("../images/direction/left.svg");
 }
-
 .move-right{
   background-image: url("../images/direction/right.svg");
 }
-
 .move-up{
   background-image: url("../images/direction/up.svg");
 }
-
 .move-down{
   background-image: url("../images/direction/down.svg");
 }

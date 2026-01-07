@@ -81,7 +81,6 @@ function dragOverTrash(e){
     e.preventDefault();
     trashObj.style.backgroundColor = "#FFC940";
     trashObj.style.borderColor = "#FFC940";
-
 }
 
 function dragExitTrash(e){
@@ -250,9 +249,6 @@ function TouchStart(e, block){
     if(block.classList.contains('draggable')){ // any dragable block includ
         draggedElementState = {
             element: block,
-            // selectedValue: block.querySelector('select')?.value || null,
-
-            // element: draggedElement,
             move : block.classList.contains("new-move"),            
             fromCanvas: false
         };
@@ -263,7 +259,6 @@ function TouchStart(e, block){
     else if (block.classList.contains('block')){
         draggedElementState = {
             element: block,
-            // selectedValue: block.querySelector('select')?.value || null,
             move : block.classList.contains("new-move"),                 
             fromCanvas: true
         }; 
@@ -338,7 +333,7 @@ function TouchEnd(e){
     //returns clone visibility
     curBlock.style.display = '';
 
-    if (trashTarget){
+    if(trashTarget){
         if (draggedElementState?.fromCanvas){
             deleteBlockbyId(draggedElementState.element.id);
         }
@@ -348,11 +343,9 @@ function TouchEnd(e){
         curBlock = null;
         draggedElementState = null;
         return;
-
     }
 
-
-    if (dropTarget && draggedElementState?.fromCanvas){
+    if(dropTarget && draggedElementState?.fromCanvas){
         // source: canvas
         // target: canvas
         // remove the feedback block
@@ -378,7 +371,7 @@ function TouchEnd(e){
             curBlock = null;
         }, 30);   
 
-    }else if (draggedElementState?.fromCanvas){ // element from canvas but target is not canvas (i.e. every other element apart from the canvas is a trash)
+    }else if(draggedElementState?.fromCanvas){ // element from canvas but target is not canvas (i.e. every other element apart from the canvas is a trash)
         // source: canvas
         // target: other
         // delete the block (i.e. any other area serves as trash)

@@ -460,7 +460,6 @@ function eventBasedDisplayNumbersOrMoves(e, displayOrResetAction){
       break;
 
     case 'touchmove':
-
       if (startX && startY){
           const diffX = Math.abs(e.touches[0].pageX - startX);
           const diffY = Math.abs(e.touches[0].pageY - startY);
@@ -474,8 +473,7 @@ function eventBasedDisplayNumbersOrMoves(e, displayOrResetAction){
       break;
 
     case 'touchend':
-
-        if (!isDragging)  displayOrResetAction(e);      
+      if (!isDragging)  displayOrResetAction(e);      
       break
   }  
 }
@@ -509,9 +507,6 @@ function resetMove(e){
     targetVisibleMove.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;  
   e.target.parentNode.style.display = "none";
 }
-
-
-
 
 
 /**
@@ -612,7 +607,6 @@ async function birdAction(){
     resetInterval(NORMAL_SPEED);
 
     if(motherHen){
-      // updateMotherHen();
       motherHen.updateMotherHen();
     }    
 
