@@ -380,7 +380,7 @@ function TouchEnd(e){
         deleteBlockbyId(draggedElementState.element.id);
         trashObj.style.backgroundColor = "white";
         // document.getElementById("testDiv").innerHTML = Math.random() * 100;
-        document.getElementById("testDiv").innerHTML = draggedElementState.element.id;
+        // document.getElementById("testDiv").innerHTML = draggedElementState.element.id;
         curBlock.remove();
         curBlock = null;
         draggedElementState = null;        
