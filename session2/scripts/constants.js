@@ -1,5 +1,8 @@
-const MIN_LIFE_SPAN = 1000;
-const MAX_LIFE_SPAN = 5000; // actually 100 + 500
+// const MIN_LIFE_SPAN = 1000;
+// const MAX_LIFE_SPAN = 5000; // actually 100 + 500
+
+const MIN_LIFE_SPAN = 100;
+const MAX_LIFE_SPAN = 500; // actually 100 + 500
 let MAX_NUMBER_OF_BIRDS = 1;
 //Edit
 
@@ -20,7 +23,6 @@ let motherPosX = centerX - backgroundImageWidth * 0.35;
 // let motherPosX = centerX - backgroundImageWidth * 0.25;
 // let motherPosY = centerY - backgroundImageHeight * 0.15;
 let motherPosY = centerY - backgroundImageHeight * 0.06;
-
 
 let mazeStartX = (backgroundImageWidth * 0.20);
 let mazeStartY = centerY + screenHeight * 0.15;
@@ -157,3 +159,5 @@ const moveSound = new Audio('sound_mp3/move.wav');
 const eatSound = new Audio('sound_mp3/correct.wav');
 const drinkSound = new Audio('sound_mp3/correct.wav');
 const dieSound = new Audio('sound_mp3/die.wav');
+
+const fly_sprites = ['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'];

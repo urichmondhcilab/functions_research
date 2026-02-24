@@ -49,6 +49,13 @@ document.addEventListener('dragstart', (event) => {
 // Drop function handles creating a new block in the canvas after a block is dragged there
 function drop(event) {
     event.preventDefault();
+
+    if (running || isPaused) {
+        event.preventDefault();
+        draggedElementState = null;
+        return;
+    }
+
     if (draggedElementState) {
         const newBlock = createBlockClone(draggedElementState);        
         createNewBlock(newBlock);
@@ -77,6 +84,10 @@ function reorderItems(parent){
 }
 
 
+/**
+ * Changes the background color of the trash, when block is hovered over it.
+ * @param {*} e is the event object
+ */
 function dragOverTrash(e){
     e.preventDefault();
     trashObj.style.backgroundColor = "#FFC940";
@@ -87,17 +98,26 @@ function dragExitTrash(e){
      trashObj.style.backgroundColor = "white";   
 }
 
+/**
+ * gets the id of the object to be deleted (unique), then deletes the block from the id, and reoders remaining blocks of canvas
+ * @param {*} e is the event object
+ */
 function trashDrop(e){
     e.preventDefault();
-    //gets the id of the object to be deleted (unique)
     let data = e.dataTransfer.getData("text");
-    //gets the object to be deleted by unique ID
     deleteBlockbyId(data);
     trashObj.style.backgroundColor = "white";
     trashObj.style.borderColor = "white";
-    reorderItems(document.getElementById('block-drop'));    
+    reorderItems(document.getElementById('block-drop'));
+    const trashMP3 = new Audio("sound_mp3/trash2.mp3");
+    trashMP3.play();
 }
 
+/**
+ * removes block from the canvas.
+ * @param {*} id is the unique DOM id of the block to be deleted
+ * @returns 
+ */
 function deleteBlockbyId(id){
     const delObject = document.getElementById(id);
     if (!delObject){
@@ -113,6 +133,11 @@ function dragStartHandler(e){
 
 //Shared Functions
 
+/**
+ * 
+ * @param {*} state 
+ * @returns 
+ */
 function createBlockClone(state){
     const {element, move} = state;
     const newBlock = element.cloneNode(true);
@@ -133,14 +158,12 @@ function createBlockClone(state){
 
         }            
 
-        // console.log(newBlock.querySelector(".visible-move"));
         newBlock.querySelector(".visible-move").addEventListener('click', displayMoves)
         newBlock.querySelector(".move-list").addEventListener('click', resetMove);
         newBlock.querySelector(".move-right").addEventListener('click', resetMove);
         newBlock.querySelector(".move-left").addEventListener('click', resetMove);
         newBlock.querySelector(".move-up").addEventListener('click', resetMove);
         newBlock.querySelector(".move-down").addEventListener('click', resetMove);   
-
         newBlock.querySelector(".visible-move").addEventListener('touchend', displayMoves)        
         newBlock.querySelector(".move-list").addEventListener('touchend', resetMove);
         newBlock.querySelector(".move-right").addEventListener('touchend', resetMove);
@@ -314,6 +337,15 @@ function TouchEnd(e){
         return;
     }
 
+    if (running || isPaused){
+        if (curBlock){
+            curBlock.remove();
+            curBlock = null;
+        }
+        draggedElementState = null;
+        return;
+    }
+
     // if (!isDragging) return;
 
     //refers to current touches
@@ -395,23 +427,26 @@ function TouchEnd(e){
     }
 }
 
-//Only called when block is dropped in block-drop
-//DropTarget is the DOM Element of Block drop, where block will be placed
+/**
+ * Only called when block is dropped in block-drop.
+ * Gets the original element that was dragged, including its attributes
+ * clones dragged element, creates new element and adds it to the drop target
+ * allows new element to be in correct order and allows to be dragged
+ * @param {*} dropTarget, the DOM Element of Block drop, where block will be placed
+ * @returns if there is not a current dragged element registered (nothing to drop)
+ */
 function TouchDrop(dropTarget){
-    //Gets the original element that was dragged, including its attributes
-    //like selected values
     const state = draggedElementState;
+
     if (!state){
         return;
     }
+
     const newBlock = createBlockClone(state);
-    //Rename    
     createNewBlock(newBlock);
     dropTarget.appendChild(newBlock);
 
     reorderItems(dropTarget);
-
-    //resets dragged state data
     draggedElementState = null;
     addTouchDrag(newBlock);
 }

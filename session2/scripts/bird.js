@@ -146,8 +146,8 @@ class Bird{
   }
 
   /**
-   * Redcuce Lifespan by 1, sets life bar width to percent of current life / total
-   * sets color based on which 3rd of lifespan percent is
+   * Redcuce Lifespan by 1 each call, sets life bar width to percent of current life / total
+   * sets color based current life percent (green > 66%, yellow > 33%, red <= 33%)
    */
   pointDecrement(){
     if(!this.finished && !running){
@@ -168,7 +168,7 @@ class Bird{
   }
 
 /**
- * move the bird to the start of the maze
+ * move the bird to the start tile of the maze
  * @param {Maze} curMaze 
  */
 start(curMaze) {
@@ -181,12 +181,17 @@ start(curMaze) {
 
 /**
  * Moves the chick to the desired end tile, one step at a time
- * @param {string} direction is the direction to move in
+ * Ensure that the bird is currently on a valid tile.
+ * calculate the new tile coordinates based on the direction of movement, ensuring that they stay within the bounds of the maze.
+ * Checks if the new tile is a block, if so, does not move the bird, plays a sound and decreases points.
+ * Else, updates the birds current tile to the new tile, updates the birds screen position, and plays a move sound.
+ * Finally, if the new tile is the end tile, points are updated, and bird is flagged as finished.
+ * @param {string} direction is the direction to move in {"up", "down", "left", "right"}
  * @param {Array} curMaze, current array of the maze, houses tiles
  */
 move(direction, curMaze) {
 
-  //If this is the chicks first move, the bird dies
+  
   if (this.curTile === null || this.curTile.state.name === "BLOCK"){   
     this.die();
     return;
@@ -210,26 +215,21 @@ move(direction, curMaze) {
             break;
       }
 
-    //Gets the tile from updated indexes, check if it will be a block
-    //if so returns
     const newTile = curMaze[newY][newX];
+
     if (newTile.state.name === "BLOCK"){
       dieSound.play();
       this.updatePoints(-25);
       return;
     }
-    //Tile no longer occupied
+
     this.curTile.occupied = false;
-    //else sets this. variables
     this.xIndex = newX;
     this.yIndex = newY;
     this.curTile = newTile;
-    //new tile now occupied
     this.curTile.occupied = true;
-    //no can eat on new tile
     this.hasConsumed = false;
 
-    //Display in new position
     let top = parseInt(slicePX(this.curTile.y) /*- slicePX(this.curTile.height) / 8*/);
     let left = parseInt(slicePX(this.curTile.x) + slicePX(this.curTile.width) / 4);  
     this.birdie.style.left= `${left}px`;
@@ -245,17 +245,14 @@ move(direction, curMaze) {
     if (this.curTile.state.name == "END"){
       console.log("ended maze!");
       this.updatePoints(100);
-      //Get current count in int form
       this.finished = true;
       this.point_display.style.backgroundColor = "green";
-      //Disapear chick (animation/sound)
-      //update finished counter
     }
 }
 
 /**
- * changes the bird sprite to the drinking sprite
- * Only works for water tiles, points are updated
+ * Checks if on a drink tile that it has not already eated at.
+ * if so, plays sound, increases points, and changes sprite to drinking sprite
  */
 drink() {
   if(this.curTile.state.name == "WATER" && !this.hasConsumed){
@@ -268,8 +265,8 @@ drink() {
 
 
 /**
- * changes the bird sprite to the eating sprite
- * Only works for food tiles, points are updated
+ * Checks if on a food tile that it has not already eated at.
+ * if so, plays sound, increases points, and changes sprite to eating sprite
  */
   eat() {
   if(this.curTile.state.name == "FOOD" && !this.hasConsumed){
@@ -281,27 +278,23 @@ drink() {
   }
 
 /**
- * call to remove bird from list of birds
+ * Removes the bird from the game canvas and updates tile occupation.
  */
   die(){
     if(this.curTile){
       this.curTile.occupied = false;
     }
-    this.updatePoints(-50);
     this.hasConsumed = false;
-    game_canvas.removeChild(this.birdie);    
-    dieSound.play();
-    //lifespan resets
-    // this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
-    // this.curLife = this.lifeSpan;
-    //Places bird on new open spot in maze.
-    // this.placeBird(maze);
+    if (this.birdie && this.birdie.parentNode) {
+      this.birdie.parentNode.removeChild(this.birdie);
+    }    //dieSound.play();
   }
 
 
 /**
-* birds cannot be placed on a block, start or end
-* @param {Object} maze 
+ * places the bird on a random open tile in the maze, birds cannot be placed on an occupied tile, block, start or end.
+ * Adjusts the birds screen position and tile variables accordingly.
+* @param {Object} maze
 */
   placeBird(maze){
     let mazeArray = maze.maze;
@@ -330,13 +323,36 @@ drink() {
  */
   updatePoints(val){
     this.curLife += val;
-    // console.log(this.curLife);
   }
-
 
   gameCompletionAnimation(){
         let chick_color = chickEndAnimationPoses[this.selectedColorIndex][0];
         this.birdie.firstChild.src = chick_color;    
         this.animationCount -= 1;
+  }
+
+  /**
+   * Fly animation
+   */
+
+  fly(){
+    const img = this.birdie.firstChild;
+    this.birdie.classList.add("fly");
+
+    let frame = 0;
+    const sprite_int = setInterval(() => {
+      img.src = fly_sprites[frame];
+      if(frame == 0){
+        frame = 1
+      }
+      else{
+        frame = 0
+      }
+    }, 100);
+
+    setTimeout(() => {
+      clearInterval(sprite_int);
+      this.die();
+    }, 3000);
   }
 }
