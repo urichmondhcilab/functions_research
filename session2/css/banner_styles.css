@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-.points, .reset, .back, .finished
+.points, .reset, .back, .finished, .pause
 {
   padding: 0.2vw;
   border-radius: 0.2em;

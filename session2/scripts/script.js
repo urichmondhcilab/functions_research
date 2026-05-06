@@ -36,7 +36,12 @@ let mazeElements = 3;
 let startX, startY;
 let isDragging = false;
 const DRAGTRESHOLD = 5;
+let isPaused = false;
 
+/**
+ * Sets the speed variable to a new value, clears existing game interval.
+ * @param {*} newSpeed: Number - the new speed for the gane interval
+ */
 function resetInterval(newSpeed){
   speed = newSpeed;
   clearInterval(gameInterval);
@@ -113,12 +118,11 @@ function updateBirds(){
  * Each bird has a .deathImgFlag. If this flag is 1, it tells the UpdateBird() function to replace the img of the squarton with a death img,
  * instead of the normal animation. Here, we check to see if the life span is close to death. If we are, we set this flag to 1. To adjust the
  * length the death img shows up, we can increase the number on if(bird.lifeSpan == 2). The larger the number, the longer this image stays. 
+ * 
  * @param {Bird} bird 
  * @returns a boolean that indicates whether to keep or remove the bird
  */
 function respawnBirds(bird){
-  // // point_number.textContent = birdCounter;
-  // console.log("not bird: " + !bird)
   // if (!bird) return false;
   let keepBird = true;
   bird.pointDecrement();
@@ -128,17 +132,14 @@ function respawnBirds(bird){
   }
 
   if (bird.curLife <= 0 /*&& !running*/){
-    console.log("life span less than 0");
-    bird.die();
+    bird.fly()
     deadBirds++;
     birdCounter--;    
     return false;
-    // return keepBird;
   }
-  //Checks if bird is on end tile, if so removes bird from allbirds
   if(bird.curTile.state.name === "END"){
-    // animate the bird before remove
     bird.gameCompletionAnimation();
+
     if (bird.animationCount <= 0){
       game_canvas.removeChild(bird.birdie);
       birdCounter--;
@@ -149,6 +150,10 @@ function respawnBirds(bird){
 }
 
 
+/**
+ * if all birds have been removed (either completed maze or timed out), or nextGame flag is true
+ * reset nextGame flag to false, and begin new level
+ */
 function gameOverCheck(){
   if (birdCounter == 0 || nextGame == true){
     nextGame = false;
@@ -156,7 +161,9 @@ function gameOverCheck(){
   }
 }
 
-
+/**
+ * REVIEW FUNCTION
+ */
 function newLevel(){
   // console.log("moves for level " + curLevel + ":" + executedBlockCount)
   // increase level if all birds were saved
@@ -167,7 +174,6 @@ function newLevel(){
     transitionMessage = "Level " + (curLevel + 1);
   }
 
- 
   if (curLevel > MAX_LEVEL){
     // reset curLevel for reset
     GameEndElement = document.getElementById("game_end");
@@ -189,12 +195,17 @@ function transitionBeforeNewLevel(){
   isTransition = true;
 }
 
-
+/**
+ * gets the levels attributes from constant object, uses the attributes to:
+ * sets the number of birds to spawn, wether to include the mother, the background image, wether to display food and water
+ * resets the level to update and add the new elements to the screen
+ * 
+ * @param {*} level: Int - the level number to set up
+ * @returns 
+ */
 function newLevelConfig(level){
   const levelconfig = levelAttributes[level];
   if (!levelconfig) return;
-
-  // console.log(`Start Level: ${level}`);
 
   //Gets the level set number of birds (int), include mother (bool) and range of states (int)
   MAX_NUMBER_OF_BIRDS = levelconfig.max_Birds;
@@ -219,10 +230,10 @@ function newLevelConfig(level){
 
 
 /**
- * resets the current number of birds 
+ * resets the current number of birds, and mother
  * resets selected birds
  * removes the birds on the screen
- * clears the array of birds
+ * clears the array of birds, and the blocks to be executed
  */
 function reset(){
   birdCounter = 0;
@@ -234,16 +245,14 @@ function reset(){
   });
   resetInterval(CREATE_BIRD_SPEED);
   allBirds = [];
-  // if (maze) {
-  //   maze.mazeRevert();
-  // }
+
   if(motherHen){
     game_canvas.removeChild(motherHen.mother);
     motherHen = null;
   }
 
   executedBlockCount = 0;
-
+  resumeGame();
   GameEndElement = document.getElementById("game_end");
   GameEndElement.style.display = 'none';
   
@@ -256,8 +265,6 @@ function reset(){
 }
 
 
-//Probably only either for game over or explicit choice, triggered by reset button at top
-//for now to show functionality
 /**
  * calls reset() to reset birds and revert maze attributes (not needed)
  * iterates through current maze and removes the DOM elements from the screen
@@ -272,15 +279,16 @@ function nextLevel(){
   nextGame = true;
 }
 
+/**
+ * removes all tiles from DOM, and sets maze to null
+ */
 function removeMazeElements(){
-  // remove tiles
   let tiles = game_canvas.querySelectorAll(".tile");
   tiles.forEach(tile => {
     game_canvas.removeChild(tile);
   });
   maze = null;
 }
-
 
 /**
  * Remove blocks from canvas
@@ -291,7 +299,9 @@ function resetBlocks(e){
   blocks.forEach(block => block.remove());
 }
 
-
+/**
+ * resets attibutes, maze and blocks. If mother is included in the level, creates mother.
+ */
 function ResetLevel(){
   curLevel = curLevel > MAX_LEVEL ? MAX_LEVEL : curLevel;
   // recreates bird and mother
@@ -663,8 +673,40 @@ function chooseStartOrTransition(){
     newLevelConfig(curLevel);
     isTransition = false;
   }
+  if (isPaused){
+    resumeGame();
+  }
 }
 
+document.getElementById("pause").addEventListener('click', pauseGame);
+//document.getElementById("pause").addEventListener('click', resumeGame);
+
+function pauseGame(){
+  if(isPaused){
+    return
+  }
+  isPaused = true;
+  clearInterval(gameInterval);
+  transitionMessage = "Paused";
+  transitionImage.firstChild.nodeValue = transitionMessage;
+  transitionWidth = 0;
+  transitionHeight = 0;
+
+  transitionImageContainer.style.display = "flex";
+  //document.getElementById("pause").textContent = 'play'
+  gameInterval = setInterval(pulsatingStart, speed);
+}
+
+function resumeGame(){
+  if(!isPaused){
+    return
+  }
+  isPaused = false;
+  transitionImageContainer.style.display = "none";
+
+  clearInterval(gameInterval);
+  gameInterval = setInterval(birdAction, speed);
+}
 
 /**
  * increases/decreases the transition play button by 5%
@@ -680,10 +722,8 @@ function pulsatingStart(){
   }
 }
 
-
 // click the transition button to start the game
 transitionImageContainer.addEventListener('click', chooseStartOrTransition);
-
 
 // pulsating play button onload
 window.addEventListener('load', function (e){

@@ -30,6 +30,11 @@ class Mother{
       game_canvas.appendChild(this.mother);
     }
 
+    
+    /**
+     * Selects all birds in the game and sets their selected state to true.
+     * @param {Object} e is the event object
+     */
     selectAllBirds(e){
       console.log(selectedBirds);
       if (selectedBirds != null && selectedBirds !== undefined){
@@ -51,12 +56,14 @@ class Mother{
         selectedBird.selectionDiv.style.display = "block";
         selectedBird.selected = true;
         selectedBird.selectedColorIndex = Math.floor(Math.random() * SELECTED_BIRD_COLOR_PALETTE_COUNT) + 1;         
-        // console.log( selectedBird.selectionDiv.style.backgroundRepeat) ;
 
         this.selected = true;
       }
     }
 
+    /**
+     * to update the position of the mother, we set the left/top styles of the mother to the current x and y position of the mother.
+     */
     updateMomPosition(){
       this.mother.style.left= `${Math.floor(motherPosX)}px`;
       this.mother.style.top = `${Math.floor(motherPosY)}px`;      
@@ -78,9 +85,9 @@ class Mother{
       let n = chickSelectionStars.length;
       this.selectionCount++;
       this.selectionCount = (this.selectionCount) % n;
+
       if (this.selected){
         let currImage = `url('${chickSelectionStars[this.selectionCount]}')`;
-        // console.log(x);
         this.mother.style.backgroundImage = currImage;
       }
     }       
