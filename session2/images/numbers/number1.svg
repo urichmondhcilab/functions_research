@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
-     inkscape:zoom="0.64"
-     inkscape:cx="608.9499"
-     inkscape:cy="470.11698"
+     inkscape:zoom="0.36812285"
+     inkscape:cx="764.69038"
+     inkscape:cy="384.38256"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -386,7 +386,9 @@
          id="feGaussianBlur15" /></filter></defs><g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1"><g
+     id="layer1">
+     
+     <g
        inkscape:label="Layer 1"
        id="layer1-8"
        transform="translate(0.33359156,-4.4884185)"><g

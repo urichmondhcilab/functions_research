@@ -92,11 +92,11 @@ html, body {
     height: 56vw;
     position: fixed;
     right: 0px;
-    z-index: 2;
+    /* z-index: 2; */
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-transform: translateZ(0);    
+/* transform: translateZ(0);     */
 }
 
 .top-right {
@@ -123,10 +123,24 @@ transform: translateZ(0);
   margin-bottom: .5rem;
 }
 
-.draggable, .block {
+.drink {
+  background-image: url("../images/game_buttons/drink_button.svg");
+}
+
+.eat {
+  background-image: url("../images/game_buttons/eat_button.svg");
+}
+
+.hidden{
+  display: none;
+}
+
+.start{
+  background-image: url("../images/game_buttons/start_button.svg");  
+}
+
+.draggable, .block{
   color: white;
-  /* padding-top: 3%;
-  padding-bottom: 3%; */
   height: 18%;
   width: 100%;
   cursor: pointer;
@@ -144,21 +158,7 @@ transform: translateZ(0);
   background-color: salmon;
 } */
 
-.drink {
-  background-image: url("../images/game_buttons/drink_button.svg");
-}
 
-.eat {
-  background-image: url("../images/game_buttons/eat_button.svg");
-}
-
-.hidden{
-  display: none;
-}
-
-.start{
-  background-image: url("../images/game_buttons/start_button.svg");  
-}
 
 .run-reset-buttons {
   display: flex;
@@ -179,14 +179,14 @@ transform: translateZ(0);
   overflow-y: scroll;
 }
 
-#num-input{
+/* #num-input{
   box-sizing: border-box;
   width: 50%;
   border: none;
   border-radius: 0.2rem;
   padding: 0.2%;
   font-size: 1vw;  
-}
+} */
 
 .move-select{
   width: 25%;
@@ -194,10 +194,6 @@ transform: translateZ(0);
   border-radius: 0.2rem;  
   padding: 0.1%; 
   font-size: 1vw;   
-}
-
-#block-reset{
-  background-image: url("../images/game_buttons/refresh_key.svg");  
 }
 
 #run{
@@ -213,6 +209,10 @@ transform: translateZ(0);
   border-radius: 50%;
   background-color: white;
   padding: 1%;
+}
+
+#block-reset{
+  background-image: url("../images/game_buttons/refresh_key.svg");  
 }
 
 #trash{
@@ -282,27 +282,12 @@ transform: translateZ(0);
   display: flex;
   width: 100%;
   height: 100%;
-  /* z-index: 999; */
   /* background-color: red; */
   margin: 0px;
   padding: 0px;
   align-items: center;
-
-}
-
-.visible-number{
-  background-image: url("../images/numbers/number0.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;  
-  margin-top: 1.8%;
-  margin-right: 0px;
-  /* margin-bottom: -50%; */
-  margin-left: -4%; 
-  width: 50%;
-  height: 100%;  
-  padding-bottom: 0px;
-  /* position: relative; */
+  position: relative;
+  transform: translateZ(1px); /*fix stubborn positioning behind game-operation background*/
 }
 
 .visible-move{
@@ -314,8 +299,33 @@ transform: translateZ(0);
   width: 50%;
   height: 100%;
   padding-bottom: 0px;
-  /* background-color: blue; */
-  /* flex-shrink: 0; */
+
+}
+
+.visible-number{
+  background-image: url("../images/numbers/number0.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;  
+  margin-top: 1.8%;
+  margin-right: 0px;
+  margin-left: -4%; 
+  width: 50%;
+  height: 100%;  
+  padding-bottom: 0px;
+  position: relative;
+  /* transform: translateZ(1px) */
+}
+
+
+.move-up, .move-down, .move-right, .move-left {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 15%;
+  width: 100%;
+  border: 1px solid yellow;
+  /* z-index: 1000; */
 }
 
 .num0, .num1, .num2, .num3, .num4, .num5, .num6, .num7, .num8, .num9{
@@ -324,16 +334,7 @@ transform: translateZ(0);
   background-position: center;
   height: 15%;
   width: 100%;
-  z-index: 1000;
-}
-
-.move-up, .move-down, .move-right, .move-left {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 15%;
-  width: 100%;
-  z-index: 1000;
+  /* z-index: 1000; */
 }
 
 .num0{
@@ -382,7 +383,7 @@ transform: translateZ(0);
 }
 
 .number-list, .move-list{
-   background-color: purple; 
+  background-color: purple; 
   position: relative;
   top: 100%;
   list-style: none;
@@ -391,3 +392,24 @@ transform: translateZ(0);
   display: none;
   overflow-y: auto;  
 }
+
+
+.game-menu{
+  background-color: #FFC940;;
+  display: none;
+  position: absolute;
+  width: 200%;
+  height: 8%;
+  /* border: 1px solid red; */
+  border-radius: 5px;
+  margin: 0px;
+  padding: 1%;
+  gap: 1%;
+}
+
+  .game-menu .move-left, .game-menu .move-right, .game-menu .move-up, .game-menu .move-down{
+    height: 100%;
+    border-radius: 5px;
+    transform: translateZ(5px);  
+    border: 1px solid purple;   
+  }

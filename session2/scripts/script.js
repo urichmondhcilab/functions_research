@@ -132,7 +132,8 @@ function respawnBirds(bird){
   }
 
   if (bird.curLife <= 0 /*&& !running*/){
-    bird.fly()
+    // bird.fly() replace with die for now
+    bird.die();
     deadBirds++;
     birdCounter--;    
     return false;
@@ -443,15 +444,33 @@ function displayNumbers(e){
  * @param {Object} e is the object that is clicked toggle to list 
  */
 function displayMoves(e){
+  // check is tablet and has multitouch support
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1;
   const targetMoveList = e.target.querySelector('.move-list');
-  if (targetMoveList != null){
-    if (targetMoveList.style.display == "none"){
-      targetMoveList.style.display = "block";
-      clearExpandedLists(targetMoveList);
-    }else{     
-      targetMoveList.style.display = "none";    
+
+  console.log("clicked! displaymoves")
+
+  console.log(isMobile)  
+
+  if (isMobile) {
+      console.log("Mobile device detected");
+      mobileGameMoveMenu.style.display = mobileGameMoveMenu.style.display == "flex"? "none" : "flex";
+      mobileGameMoveMenu.getTriggeringBlock = function(){return e.target};
+      e.target.parentNode.parentNode.style.backgroundColor = "#FFC940";
+      // console.log("block id: " + mobileGameMoveMenu.dataset.triggeringBlockID);
+      // console.log(e.target);
+  }else 
+  {
+    if (targetMoveList != null){
+      if (targetMoveList.style.display == "none"){
+        targetMoveList.style.display = "block";
+        clearExpandedLists(targetMoveList);
+      }else{     
+        targetMoveList.style.display = "none";    
+      }
     }
   }
+
 }
 
 
@@ -508,14 +527,51 @@ function resetDisplayedNumber(e){
  * hides the list after selection
  * @param {Object} e the object that triggers selection
  */
-function resetMove(e){
-  const targetVisibleMove = e.target.parentNode.parentNode;
+async function resetMove(e){
 
-  let className = (e.target.className).slice(5,);
+  // if (e.target.classList.contains("mobile"))
+  //   return;
+  // const targetVisibleMove = e.target.parentNode.parentNode;
 
-  if (className.trim() != "list")
-    targetVisibleMove.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;  
-  e.target.parentNode.style.display = "none";
+  // let className = (e.target.className).slice(5,);
+
+  // if (className.trim() != "list")
+  //   targetVisibleMove.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;  
+  // e.target.parentNode.style.display = "none";
+
+let targetVisibleMove;
+let className;
+  
+if (e.target.classList.contains("mobile")){
+    targetVisibleMove = mobileGameMoveMenu.getTriggeringBlock();
+    className = e.target.className.slice(12,);
+
+    console.log("in reset move");
+    console.log(mobileGameMoveMenu.getTriggeringBlock());
+    console.log("className: " + className);
+  }
+  else{
+    targetVisibleMove = e.target.parentNode.parentNode;
+    className = e.target.className.slice(5,);
+    console.log(targetVisibleMove);
+  }
+
+      let test_element = document.getElementById("test-id");
+
+  console.log("initial background image: " +     test_element.style.backgroundImage);  
+  console.log("initial background image: " + window.getComputedStyle(e.target).getPropertyValue('background-image'));   
+
+  if (className.trim() != "list"){
+
+    test_element.style.backgroundImage = "none";
+    test_element.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;
+    test_element.style.backgroundSize = "cover";
+    test_element.style.backgroundPosition = "center";
+    targetVisibleMove.style.backgroundColor = "#FFC940";
+  }  
+
+  
+  // e.target.parentNode.style.display = "none";  
 }
 
 

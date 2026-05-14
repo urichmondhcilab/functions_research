@@ -73,7 +73,12 @@
 
       <!-- Right side, where block coding interface appears -->
       <div id="game_operations">
-
+        <div class="game-menu ipad mobile-move">
+          <span class="mobile move-up"></span>
+          <span class="mobile move-down"></span>
+          <span class="mobile move-left"></span>
+          <span class="mobile move-right"></span>
+        </div>
         <div class="top-right" id="canvas">
           <div id="block-drop"></div>
           <div class="run-reset-buttons">
@@ -107,8 +112,9 @@
                 <input type="number" id="num-input" value="1"/>
             </div> -->
             
-            <div class="draggable block new-move" data-move="up" draggable="true">
+            <div id="test-id" class="draggable block new-move" data-move="up" draggable="true">
                 <div class="visible-move-container">
+
                   <div class="visible-move">
                     <ul class="move-list">
                       <li class="move-left"></li>
@@ -117,6 +123,7 @@
                       <li class="move-down"></li>
                     </ul>
                   </div>
+
                   <div class="visible-number">
                     <ul class="number-list">
                       <li class="num0"></li>

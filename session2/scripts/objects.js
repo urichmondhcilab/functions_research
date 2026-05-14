@@ -35,6 +35,9 @@ const moveUp = document.querySelector(".move-up");
 const moveDown = document.querySelector(".move-down");
 
 
+const mobileGameMoveMenu = document.querySelector(".game-menu, .ipad, .mobile-move")
+
+
 const game_end_text = document.getElementById("game_end_text");
 
 
