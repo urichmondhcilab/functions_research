@@ -564,10 +564,12 @@ if (e.target.classList.contains("mobile")){
   if (className.trim() != "list"){
 
     test_element.style.backgroundImage = "none";
-    test_element.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;
-    test_element.style.backgroundSize = "cover";
-    test_element.style.backgroundPosition = "center";
+    // test_element.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;
+    // test_element.style.backgroundSize = "cover";
+    // test_element.style.backgroundPosition = "center";
     targetVisibleMove.style.backgroundColor = "#FFC940";
+    targetVisibleMove.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;
+
   }  
 
   
