@@ -314,6 +314,13 @@ function ResetLevel(){
   // clears blocks
   resetBlocks();
 
+  //clear mobile menu
+  clearMobileMoveMenu();
+  clearMobileNumberMenu();
+
+  //clear selected blocks in mobile device
+  clearSelectedBlocksMobile();
+
   // include mother
   if (levelAttributes[curLevel].mother_include){
     motherHen = null;
@@ -338,6 +345,14 @@ function removeCurrentGameElements(){
 
   // reset the time interval
   resetInterval(NORMAL_SPEED);  
+
+
+  // clear mobile menu
+  clearMobileMoveMenu();
+  clearMobileNumberMenu()
+
+  //clear selected blocks in mobile menu
+  clearSelectedBlocksMobile()  
 }
 
 
@@ -420,6 +435,20 @@ async function runCode(){
   };  
 }
 
+/**
+ * Compares two divs with ids
+ * @param {Object} obj1 
+ * @param {Object} obj2 
+ */
+function isSameBlock(obj1, obj2){
+  if (obj1 == undefined || obj2 == undefined)
+    return false;
+
+  console.log("object 1 id: " + obj1.id);
+  console.log("object 1 id: " + obj2.id);
+
+  return obj1.parentNode.parentNode.id == obj2.parentNode.parentNode.id;
+}
 
 /**
  * Expands/hides a list associated with a number puzzle
@@ -427,16 +456,39 @@ async function runCode(){
  * @param {Object} e is a clicked number puzzle
  */
 function displayNumbers(e){
+
+  console.log(numObjects.length);  
+  console.log(numObjects[0]);
   // console.log("displayNumber");
+  // check is tablet and has multitouch support
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1;  
   const targetNumberList = e.target.querySelector('.number-list');
-  if (targetNumberList != null){
-    if (targetNumberList.style.display == "none"){
-      targetNumberList.style.display = "block";
-      clearExpandedLists(targetNumberList);    
-    }else{
-      targetNumberList.style.display = "none";    
-    }
+  if (isMobile){
+      clearSelectedBlocksMobile();
+      clearMobileMoveMenu();
+      // console.log(mobileGameNumberMenu);
+      if (isSameBlock(e.target, blockNumberTriggerObj)){
+        mobileGameNumberMenu.style.display = mobileGameNumberMenu.style.display == "flex" ? "none" : "flex";        
+      }else{
+        // update the blockDirectionTriggerObj
+        blockNumberTriggerObj = e.target;
+        mobileGameNumberMenu.style.display = "flex";
+        console.log("in here too");
+      }
+      mobileGameNumberMenu.getTriggeringBlock = function(){return e.target};
+      e.target.parentNode.parentNode.style.backgroundColor = "green";      
+
+  }else{
+    if (targetNumberList != null){
+      if (targetNumberList.style.display == "none"){
+        targetNumberList.style.display = "block";
+        clearExpandedLists(targetNumberList);    
+      }else{
+        targetNumberList.style.display = "none";    
+      }
+    }    
   }
+
 }
 
 /**
@@ -453,12 +505,23 @@ function displayMoves(e){
   console.log(isMobile)  
 
   if (isMobile) {
+      clearSelectedBlocksMobile();
+      clearMobileNumberMenu();
       console.log("Mobile device detected");
-      mobileGameMoveMenu.style.display = mobileGameMoveMenu.style.display == "flex"? "none" : "flex";
+      if (isSameBlock(e.target, blockDirectionTriggerObj)){
+        mobileGameMoveMenu.style.display = mobileGameMoveMenu.style.display == "flex" ? "none" : "flex";        
+      }else{
+        // update the blockDirectionTriggerObj
+        blockDirectionTriggerObj = e.target;
+        mobileGameMoveMenu.style.display = "flex";
+        console.log("in here too");
+      }
       mobileGameMoveMenu.getTriggeringBlock = function(){return e.target};
       e.target.parentNode.parentNode.style.backgroundColor = "#FFC940";
+
       // console.log("block id: " + mobileGameMoveMenu.dataset.triggeringBlockID);
-      // console.log(e.target);
+      // console.log("parentNode.parentNode")
+      // console.log(e.target.parentNode.parentNode);
   }else 
   {
     if (targetMoveList != null){
@@ -513,12 +576,30 @@ function eventBasedDisplayNumbersOrMoves(e, displayOrResetAction){
  * @param {Object} e a number object from a list of numbers
  */
 function resetDisplayedNumber(e){
-  const targetVisibleNumber = e.target.parentNode.parentNode;
-  let id  = (e.target.className).slice(0,3) + "ber" + (e.target.className).slice(-1);
+
+  let targetVisibleNumber;
+  let id;
+
+  console.log("in resetDisplayedNumber");
+
+  if(e.target.classList.contains("mobile"))
+  {
+    console.log("in visible number");
+    targetVisibleNumber = mobileGameNumberMenu.getTriggeringBlock();
+    console.log(targetVisibleNumber);
+    id = e.target.className.slice(7,10) + "ber" + (e.target.className).slice(-1);
+  }
+  else{
+    targetVisibleNumber = e.target.parentNode.parentNode;
+    id  = (e.target.className).slice(0,3) + "ber" + (e.target.className).slice(-1);  
+    e.target.parentNode.style.display = "none";      
+  }
+
+
   console.log(id);
 
   targetVisibleNumber.style.backgroundImage = `url(${'images/numbers/' + id + '.svg'})`;
-  e.target.parentNode.style.display = "none";
+
 }
 
 
@@ -527,7 +608,7 @@ function resetDisplayedNumber(e){
  * hides the list after selection
  * @param {Object} e the object that triggers selection
  */
-async function resetMove(e){
+function resetMove(e){
 
   // if (e.target.classList.contains("mobile"))
   //   return;
@@ -541,7 +622,8 @@ async function resetMove(e){
 
 let targetVisibleMove;
 let className;
-  
+// clearMobileMenu();  
+
 if (e.target.classList.contains("mobile")){
     targetVisibleMove = mobileGameMoveMenu.getTriggeringBlock();
     className = e.target.className.slice(12,);
@@ -567,12 +649,10 @@ if (e.target.classList.contains("mobile")){
     // test_element.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;
     // test_element.style.backgroundSize = "cover";
     // test_element.style.backgroundPosition = "center";
-    targetVisibleMove.style.backgroundColor = "#FFC940";
+    // targetVisibleMove.style.backgroundColor = "#FFC940";
     targetVisibleMove.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;
 
   }  
-
-  
   // e.target.parentNode.style.display = "none";  
 }
 
@@ -598,6 +678,29 @@ function clearExpandedLists(currList){
     }    
   }
 }
+
+function clearSelectedBlocksMobile()
+{
+  // mobileGameMoveMenu.style.display = "none";
+
+  // clear selection block background color
+  let allBlocks = document.querySelectorAll(".new-move");
+  // console.log("number of visible moves: " + allBlocks.length);
+  allBlocks.forEach(block => {
+    block.style.backgroundColor = "";
+  });
+  
+}
+
+function clearMobileMoveMenu(){
+  mobileGameMoveMenu.style.display = "none";  
+}
+
+function clearMobileNumberMenu(){
+  mobileGameNumberMenu.style.display = "none";  
+}
+
+
 
 
 /**
@@ -633,11 +736,21 @@ function initSession2EventListeners(){
   numberList.addEventListener('touchend', resetDisplayedNumber);
 
   //eventlisteners for when a number image is clicked
-  for (numObject in numObjects){
+    // console.log(numObjects)  
+  numObjects.forEach(numObject => {
+    console.log("printing numObjects");    
     numObject.addEventListener('click', resetDisplayedNumber);
-    numObject.addEventListener('touchend', resetDisplayedNumber);
+    numObject.addEventListener('touchend', resetDisplayedNumber);    
+    
+  });
 
-  }
+  // for (numObject in numObjects){
+  //   console.log("printing numObjects");
+
+  //   numObject.addEventListener('click', resetDisplayedNumber);
+  //   numObject.addEventListener('touchend', resetDisplayedNumber);
+
+  // }
 
   // event listeners for move puzzles
   visibleMove.addEventListener('click', function(e){eventBasedDisplayNumbersOrMoves(e, displayMoves)});
@@ -655,7 +768,10 @@ function initSession2EventListeners(){
   moveDown.addEventListener('touchend', resetMove);
   moveLeft.addEventListener('touchend', resetMove);
   moveRight.addEventListener('touchend', resetMove);
+
 }
+
+
 
 /**
  * Every second a bird is created, 

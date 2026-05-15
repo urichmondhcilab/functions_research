@@ -24,9 +24,15 @@ const transitionImage = document.getElementById("transition_image");
 const visibleNumber = document.querySelector(".visible-number");
 const numberList = document.querySelector(".number-list");
 
-for (let i in 10){
-    numObjects.push(document.querySelector(".num" + i))
+for (let i = 0; i < 10; i++){
+    const nodeList = Array.from(document.querySelectorAll(".num" + i));
+    numObjects.push(...nodeList);
+    console.log("num" + i);
+    // console.log(numObjects[i]);
 }
+
+
+
 const visibleMove = document.querySelector(".visible-move");
 const moveList = document.querySelector(".move-list")
 const moveRight = document.querySelector(".move-right");
@@ -35,7 +41,11 @@ const moveUp = document.querySelector(".move-up");
 const moveDown = document.querySelector(".move-down");
 
 
-const mobileGameMoveMenu = document.querySelector(".game-menu, .ipad, .mobile-move")
+let mobileGameMoveMenu = document.getElementById("mobile-move");
+let mobileGameNumberMenu = document.getElementById("mobile-number");
+
+let blockDirectionTriggerObj = null;
+let blockNumberTriggerObj = null;
 
 
 const game_end_text = document.getElementById("game_end_text");
