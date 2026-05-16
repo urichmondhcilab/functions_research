@@ -128,7 +128,7 @@ html, body {
 }
 
 .eat {
-  background-image: url("../images/game_buttons/eat_button.svg");
+  background-image: url("../images/game_buttons/eat_button.png");
 }
 
 .hidden{
@@ -212,7 +212,7 @@ html, body {
 }
 
 #block-reset{
-  background-image: url("../images/game_buttons/refresh_key.svg");  
+  background-image: url("../images/game_buttons/refresh_key.png");  
 }
 
 #trash{
@@ -331,7 +331,7 @@ html, body {
 /**
   ipad properties 
 */
-.game-menu .move-left, .game-menu .move-right, .game-menu .move-up, .game-menu .move-down{
+.game-menu .move-left, .game-menu .move-right, .game-menu .move-up, .game-menu .move-down{  
   background-color: #FFC940;    
   height: 100%;
   border-radius: 5px;
@@ -339,10 +339,22 @@ html, body {
   border: 1px solid purple;   
 }
 
+/* game-number-menu .num0::before, .game-number-menu .num1, .game-number-menu .num2, .game-number-menu .num3, .game-number-menu .num4, .game-number-menu .num5, .game-number-menu .num6, .game-number-menu .num7, .game-number-menu .num8, .game-number-menu .num9{
+  background-color: purple;
+} */
+
+.game-number-menu .num0, .game-number-menu .num1, .game-number-menu .num2, .game-number-menu .num3, .game-number-menu .num4, .game-number-menu .num5, .game-number-menu .num6, .game-number-menu .num7, .game-number-menu .num8, .game-number-menu .num9{
+  /* background-color: #6C7C17;     */
+
+  height: 100%;
+  border-radius: 5px;
+  /* transform: translateZ(5px);   */
+  border: 1px solid purple; 
+  background-color: white;
+}
 
 
-
-.num0, .num1, .num2, .num3, .num4, .num5, .num6, .num7, .num8, .num9{
+ .num0, .num1, .num2, .num3, .num4, .num5, .num6, .num7, .num8, .num9{
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -351,51 +363,48 @@ html, body {
   /* z-index: 1000; */
 }
 
-
-
-
 .num0{
-  background-image: url("../images/numbers/number0.svg");
+  background-image: url("../images/numbers/number0.png");
 }
 .num1{
-  background-image: url("../images/numbers/number1.svg");
+  background-image: url("../images/numbers/number1.png");
 }
 .num2{
-  background-image: url("../images/numbers/number2.svg");
+  background-image: url("../images/numbers/number2.png");
 }
 .num3{
-  background-image: url("../images/numbers/number3.svg");
+  background-image: url("../images/numbers/number3.png");
 }
 .num4{
-  background-image: url("../images/numbers/number4.svg");
+  background-image: url("../images/numbers/number4.png");
 }
 .num5{
-  background-image: url("../images/numbers/number5.svg");
+  background-image: url("../images/numbers/number5.png");
 }
 .num6{
-  background-image: url("../images/numbers/number6.svg");
+  background-image: url("../images/numbers/number6.png");
 }
 .num7{
-  background-image: url("../images/numbers/number7.svg");
+  background-image: url("../images/numbers/number7.png");
 }
 .num8{
-  background-image: url("../images/numbers/number8.svg");
+  background-image: url("../images/numbers/number8.png");
 }
 .num9{
-  background-image: url("../images/numbers/number9.svg");
+  background-image: url("../images/numbers/number9.png");
 }
 
 .move-right{
-  background-image: url("../images/direction/right.svg");
+  background-image: url("../images/direction/right.png");
 }
 .move-up{
-  background-image: url("../images/direction/up.svg");
+  background-image: url("../images/direction/up.png");
 }
 .move-down{
-  background-image: url("../images/direction/down.svg");
+  background-image: url("../images/direction/down.png");
 }
 .move-left{
-  background-image: url("../images/direction/left.svg");
+  background-image: url("../images/direction/left.png");
 }
 
 .number-list, .move-list{
@@ -435,11 +444,5 @@ html, body {
   /* padding: 5%; */
 }
 
-.game-number-menu .num0, .game-number-menu .num1, .game-number-menu .num2, .game-number-menu .num3, .game-number-menu .num4, .game-number-menu .num5, .game-number-menu .num6, .game-number-menu .num7, .game-number-menu .num8, .game-number-menu .num9{
-  background-color: #6C7C17;    
-  height: 100%;
-  border-radius: 5px;
-  /* transform: translateZ(5px);   */
-  border: 1px solid purple; 
-}
+
 

@@ -444,9 +444,6 @@ function isSameBlock(obj1, obj2){
   if (obj1 == undefined || obj2 == undefined)
     return false;
 
-  console.log("object 1 id: " + obj1.id);
-  console.log("object 1 id: " + obj2.id);
-
   return obj1.parentNode.parentNode.id == obj2.parentNode.parentNode.id;
 }
 
@@ -456,27 +453,21 @@ function isSameBlock(obj1, obj2){
  * @param {Object} e is a clicked number puzzle
  */
 function displayNumbers(e){
-
-  console.log(numObjects.length);  
-  console.log(numObjects[0]);
-  // console.log("displayNumber");
   // check is tablet and has multitouch support
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1;  
   const targetNumberList = e.target.querySelector('.number-list');
   if (isMobile){
       clearSelectedBlocksMobile();
       clearMobileMoveMenu();
-      // console.log(mobileGameNumberMenu);
       if (isSameBlock(e.target, blockNumberTriggerObj)){
         mobileGameNumberMenu.style.display = mobileGameNumberMenu.style.display == "flex" ? "none" : "flex";        
       }else{
-        // update the blockDirectionTriggerObj
         blockNumberTriggerObj = e.target;
         mobileGameNumberMenu.style.display = "flex";
         console.log("in here too");
       }
       mobileGameNumberMenu.getTriggeringBlock = function(){return e.target};
-      e.target.parentNode.parentNode.style.backgroundColor = "green";      
+      e.target.parentNode.parentNode.style.backgroundColor = "white";      
 
   }else{
     if (targetNumberList != null){
@@ -500,28 +491,19 @@ function displayMoves(e){
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1;
   const targetMoveList = e.target.querySelector('.move-list');
 
-  console.log("clicked! displaymoves")
-
-  console.log(isMobile)  
-
   if (isMobile) {
       clearSelectedBlocksMobile();
       clearMobileNumberMenu();
-      console.log("Mobile device detected");
       if (isSameBlock(e.target, blockDirectionTriggerObj)){
         mobileGameMoveMenu.style.display = mobileGameMoveMenu.style.display == "flex" ? "none" : "flex";        
       }else{
         // update the blockDirectionTriggerObj
         blockDirectionTriggerObj = e.target;
         mobileGameMoveMenu.style.display = "flex";
-        console.log("in here too");
       }
       mobileGameMoveMenu.getTriggeringBlock = function(){return e.target};
       e.target.parentNode.parentNode.style.backgroundColor = "#FFC940";
 
-      // console.log("block id: " + mobileGameMoveMenu.dataset.triggeringBlockID);
-      // console.log("parentNode.parentNode")
-      // console.log(e.target.parentNode.parentNode);
   }else 
   {
     if (targetMoveList != null){
@@ -598,7 +580,7 @@ function resetDisplayedNumber(e){
 
   console.log(id);
 
-  targetVisibleNumber.style.backgroundImage = `url(${'images/numbers/' + id + '.svg'})`;
+  targetVisibleNumber.style.backgroundImage = `url(${'images/numbers/' + id + '.png'})`;
 
 }
 
@@ -610,47 +592,24 @@ function resetDisplayedNumber(e){
  */
 function resetMove(e){
 
-  // if (e.target.classList.contains("mobile"))
-  //   return;
-  // const targetVisibleMove = e.target.parentNode.parentNode;
-
-  // let className = (e.target.className).slice(5,);
-
-  // if (className.trim() != "list")
-  //   targetVisibleMove.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;  
-  // e.target.parentNode.style.display = "none";
-
 let targetVisibleMove;
-let className;
-// clearMobileMenu();  
+let className; 
 
 if (e.target.classList.contains("mobile")){
     targetVisibleMove = mobileGameMoveMenu.getTriggeringBlock();
     className = e.target.className.slice(12,);
-
-    console.log("in reset move");
-    console.log(mobileGameMoveMenu.getTriggeringBlock());
-    console.log("className: " + className);
   }
   else{
     targetVisibleMove = e.target.parentNode.parentNode;
     className = e.target.className.slice(5,);
-    console.log(targetVisibleMove);
   }
 
       let test_element = document.getElementById("test-id");
 
-  console.log("initial background image: " +     test_element.style.backgroundImage);  
-  console.log("initial background image: " + window.getComputedStyle(e.target).getPropertyValue('background-image'));   
-
   if (className.trim() != "list"){
 
     test_element.style.backgroundImage = "none";
-    // test_element.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;
-    // test_element.style.backgroundSize = "cover";
-    // test_element.style.backgroundPosition = "center";
-    // targetVisibleMove.style.backgroundColor = "#FFC940";
-    targetVisibleMove.style.backgroundImage = `url(${'images/direction/' + className + '.svg'})`;
+    targetVisibleMove.style.backgroundImage = `url(${'images/direction/' + className + '.png'})`;
 
   }  
   // e.target.parentNode.style.display = "none";  

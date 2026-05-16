@@ -27,8 +27,6 @@ const numberList = document.querySelector(".number-list");
 for (let i = 0; i < 10; i++){
     const nodeList = Array.from(document.querySelectorAll(".num" + i));
     numObjects.push(...nodeList);
-    console.log("num" + i);
-    // console.log(numObjects[i]);
 }
 
 
