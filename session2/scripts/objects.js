@@ -2,6 +2,7 @@
     The elements are retrieved by their ids.
     document is a global variable made available with JavaScript
  */
+let gameOperationsObj = document.getElementById("game_operations");
 let chick = document.getElementById('chick_png');
 let mother = document.getElementById('mother');
 let water = document.getElementById('water');
@@ -47,6 +48,8 @@ let blockNumberTriggerObj = null;
 
 
 const game_end_text = document.getElementById("game_end_text");
+
+const hintObj = document.getElementById("mobile-hint");
 
 
 

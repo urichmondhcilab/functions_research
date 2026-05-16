@@ -322,6 +322,9 @@ function ResetLevel(){
   //clear selected blocks in mobile device
   clearSelectedBlocksMobile();
 
+  //clear hint
+  clearHint();
+
   // include mother
   if (levelAttributes[curLevel].mother_include){
     motherHen = null;
@@ -351,6 +354,9 @@ function removeCurrentGameElements(){
   // clear mobile menu
   clearMobileMoveMenu();
   clearMobileNumberMenu()
+
+  // clear hints
+  clearHint();
 
   //clear selected blocks in mobile menu
   clearSelectedBlocksMobile()  
@@ -405,7 +411,10 @@ async function initializeBlockIdentifiers(){
   blockCount = 0;
   placedBlocks = document.querySelectorAll('#canvas .block');
 
+  // help debug program
+  checkHint();
   if (selectedBirds != null && selectedBirds.length > 0 && placedBlocks != null && placedBlocks.length > 0){
+    clearHint();
     running = true;    
     resetInterval(RUN_SPEED);
     let parser = new Parser(selectedBirds, placedBlocks, maze);    
@@ -421,6 +430,7 @@ async function initializeBlockIdentifiers(){
  */
 async function runCode(){
   if (!running) return;
+
   if (selectedBirds != null && selectedBirds.length > 0 && blockCount >= 0 && ast!= null && blockCount < ast.length){
     // disable run button
     // console.log("selected birds: " + selectedBirds.length);
@@ -505,8 +515,7 @@ function displayMoves(e){
       mobileGameMoveMenu.getTriggeringBlock = function(){return e.target};
       e.target.parentNode.parentNode.style.backgroundColor = "#FFC940";
 
-  }else 
-  {
+  }else{
     if (targetMoveList != null){
       if (targetMoveList.style.display == "none"){
         targetMoveList.style.display = "block";
@@ -661,8 +670,6 @@ function clearMobileNumberMenu(){
 }
 
 
-
-
 /**
  * An event listener runs in the background waiting for an event to occur on an element
  * In these two cases load and click
@@ -756,6 +763,8 @@ async function birdAction(){
 
     updateBirds();
     allBirds = allBirds.filter(respawnBirds);
+
+    pulsatingHint();
     //Checks if GameOver Conditions are met
     gameOverCheck(); 
     runCode() ;
@@ -864,3 +873,46 @@ window.addEventListener('load', function (e){
   speed = NORMAL_SPEED;
   gameInterval = this.setInterval(pulsatingStart, speed)
 });
+
+
+function checkHint(){
+  console.log("checking hint ...")
+    hintObj.style.display = "block";
+  if (selectedBirds == null || selectedBirds.length == 0){
+    hintObj.style.backgroundImage = `url('images/game_buttons/hint.webp')`;    
+    console.log("no selected birds");
+    let top = allBirds[0].birdie.style.top;
+    let height = window.getComputedStyle(allBirds[0].birdie).height;
+    console.log("height: " +height);
+    top = top.slice(0,-2);
+    height = top.slice(0,-2);
+    top = (top - 6 * height) + "px";
+    console.log
+    hintObj.style.top = top;
+    hintObj.style.left = allBirds[0].birdie.style.left;
+  }
+  else if(placedBlocks == null || placedBlocks.length == 0){
+    console.log("move block on to console");
+    console.log(window.getComputedStyle(gameOperationsObj).top);
+
+    let gameOperationsHeight = window.getComputedStyle(gameOperationsObj).top;
+    gameOperationsHeight = screenHeight * 0.35;  
+    console.log("gameOperationsHeight" + gameOperationsHeight) ;
+    hintObj.style.top = gameOperationsHeight + "px";
+
+    hintObj.style.left = window.getComputedStyle(gameOperationsObj).left;
+    hintObj.style.backgroundImage = `url('images/game_buttons/hint_right.png')`;
+  }
+}
+
+
+
+function clearHint(){
+  hintObj.style.display = "none";
+}
+
+function pulsatingHint(){
+  if (hintObj.style.display == "block")
+    hintObj.style.width = hintObj.style.width == "5%" ? "5.5%" : "5%";
+    hintObj.style.height = hintObj.style.height == "5%" ? "5.5%" : "5%";  
+}

@@ -420,7 +420,7 @@ html, body {
 
 
 .game-menu{
-  /* background-color: red; */
+  /* background-color: skyblue; */
   display: none;
   position: absolute;
   width: 200%;
@@ -428,12 +428,12 @@ html, body {
   margin: 0px;
   padding: 1%;
   gap: 1%;
-  /* padding: 5%; */
+  padding-top: 10%;
 }
 
 
 .game-number-menu{
-  /* background-color: red; */
+  /* background-color: skyblue; */
   display: none;
   position: absolute;
   width: 100vw;
@@ -441,7 +441,21 @@ html, body {
   margin: 0px;
   padding: 1%;
   gap: 1%;
-  /* padding: 5%; */
+  padding-top: 15%;
+}
+
+.hint{
+  display: none;
+  position: absolute;
+  width: 5%;
+  height: 5%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* background-color: yellow; */
+  background-image: url("../images/game_buttons/hint.webp");
+  transform: translateZ(10px);
+
 }
 
 
