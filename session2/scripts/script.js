@@ -302,6 +302,7 @@ function resetBlocks(e){
 
 /**
  * resets attibutes, maze and blocks. If mother is included in the level, creates mother.
+ * clears the mobile menu - removes it from the scene
  */
 function ResetLevel(){
   curLevel = curLevel > MAX_LEVEL ? MAX_LEVEL : curLevel;

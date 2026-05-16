@@ -146,6 +146,10 @@ function createBlockClone(state){
         // if it's a move block, make sure the dropdown contains the same value
     if(move){
 
+        // remove display properties that show the move block was selected 
+        // so that there is only one selected block at a time 
+        element.style.backgroundColor = "";
+
         newBlock.querySelector(".visible-number").addEventListener('click', displayNumbers);
         newBlock.querySelector(".visible-number").addEventListener('touchend', displayNumbers);
 
