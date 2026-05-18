@@ -855,13 +855,18 @@ function resumeGame(){
  * increases/decreases the transition play button by 5%
  */
 function pulsatingStart(){
+  console.log("transition width: " + transitionWidth);
   if (parseInt(transitionWidth) < 50){
     transitionWidth += 5;
     transitionHeight += 5;
     transitionImage.style.width = transitionWidth + "%";
     transitionImage.style.height = transitionHeight + "%";
   }else{
-    transitionImage.style.width = transitionImage.style.width == "50%" ? "49%" : "50%";
+    transitionWidth = transitionWidth == 50 ? 51 : 50;
+    transitionHeight = transitionHeight == 50 ? 51 : 50;
+
+    transitionImage.style.width = transitionWidth + "%";
+    transitionImage.style.height = transitionHeight + "%";    
   }
 }
 
