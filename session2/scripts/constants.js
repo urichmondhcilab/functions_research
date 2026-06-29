@@ -1,8 +1,11 @@
 // const MIN_LIFE_SPAN = 1000;
 // const MAX_LIFE_SPAN = 5000; // actually 100 + 500
 
-const MIN_LIFE_SPAN = 10;
-const MAX_LIFE_SPAN = 50; // actually 100 + 500
+const MIN_LIFE_SPAN = 1000;
+const MAX_LIFE_SPAN = 2000; // actually 100 + 500
+
+// const MIN_LIFE_SPAN = 100;
+// const MAX_LIFE_SPAN = 500; // actually 100 + 500
 let MAX_NUMBER_OF_BIRDS = 1;
 //Edit
 
@@ -88,8 +91,8 @@ const STARTSTATE = {
     image_path : "images/planks/start_plank.svg"
 }
 
-const NUMBER_OF_TILES_X = 10;
-const NUMBER_OF_TILES_Y = 2;
+let NUMBER_OF_TILES_X = 10;
+let NUMBER_OF_TILES_Y = 2;
 
 let selectedBirds = null;
 let placedBlocks = null;
@@ -149,10 +152,17 @@ const levelAttributes = {
         state_range: 6,
         mother_include: true,
         background_image_path: "url('images/game_environment/scene2.svg')"        
-    },
+    }, 
+    5:{
+        description: "Level 5, 12 Birds, full maze",
+        max_Birds: 12,
+        state_range: 6,
+        mother_include: false,
+        //background_image_path: "url('images/game_environment/scene.svg')"
+    }
 }
 
-let MAX_LEVEL = 4;
+let MAX_LEVEL = 5;
 
 // const moveSound = new Audio('sound_mp3/Movement.mp3');
 const moveSound = new Audio('sound_mp3/move.wav');
