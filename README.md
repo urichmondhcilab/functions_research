@@ -6,14 +6,14 @@ The game has two game characters, chicks and a mother hen.
 ## Chicks
 Chicks are the programmable. They have time assigned to them. In their default state, they are yellow, but when selected for programming, they change to another color.
 <figure>
-<img src="session2/images/chicks/squarton_resting_position_1.svg" width="45%" /> <img src="session2/images/poses/blue_bird_poses/rest1.svg" width="45%" />
+<img src="session2/images/chicks/squarton_resting_position_1.svg" width="25%" /> <img src="session2/images/poses/blue_bird_poses/rest1.svg" width="65%" />
 <figcaption>Figure 1. An unselected and selected chick</figcaption>
 </figure>
 
 ## Mother Hen
 When tapped or clicked, the mother hen selects all the chicks and programs apply to all the chicks.
 <figure>
-<img src="session2/images/mother_hen/Mother_Hen_1.svg" width="45%" />
+<img src="session2/images/mother_hen/Mother_Hen_1.svg" width="35%" />
 <figcaption>Figure 2. The Mother Hen</figcaption>
 </figure>
 
@@ -66,7 +66,7 @@ Game characters may be programmed to pass through this tile, however additional 
 # Game Levels
 The game has multiple levels.
 ### Level 1
-The goal is to program a single chick from its current location to the finish tile. Tiles in this level include, start, open and finish tiles.
+The goal in this level is to program a single chick to move from its current location to the finish tile. Tiles in this level include, start, open and finish tiles.
 ## Level 2
 In this level chicks are to be programmed to get to the end tile, however, there are eat and drink tiles to gain additional points.
 ## Level 3
