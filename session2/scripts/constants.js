@@ -1,8 +1,8 @@
 // const MIN_LIFE_SPAN = 1000;
 // const MAX_LIFE_SPAN = 5000; // actually 100 + 500
 
-const MIN_LIFE_SPAN = 1000;
-const MAX_LIFE_SPAN = 2000; // actually 100 + 500
+const MIN_LIFE_SPAN = 300;
+const MAX_LIFE_SPAN = 500; // actually 100 + 500
 
 // const MIN_LIFE_SPAN = 100;
 // const MAX_LIFE_SPAN = 500; // actually 100 + 500

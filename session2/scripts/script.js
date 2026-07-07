@@ -498,7 +498,7 @@ function displayNumbers(e){
  * @param {Object} e is the object that is clicked toggle to list 
  */
 function displayMoves(e){
-  // check is tablet and has multitouch support
+  // check if tablet and has multitouch support
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1;
   const targetMoveList = e.target.querySelector('.move-list');
 
@@ -506,7 +506,10 @@ function displayMoves(e){
       clearSelectedBlocksMobile();
       clearMobileNumberMenu();
       if (isSameBlock(e.target, blockDirectionTriggerObj)){
-        mobileGameMoveMenu.style.display = mobileGameMoveMenu.style.display == "flex" ? "none" : "flex";        
+
+        // mobileGameMoveMenu.style.top = e.target.parentNode.parentNode.style.top;       
+        mobileGameMoveMenu.style.display = mobileGameMoveMenu.style.display == "flex" ? "none" : "flex"; 
+        // blockDirectionTriggerObj = e.target;
       }else{
         // update the blockDirectionTriggerObj
         blockDirectionTriggerObj = e.target;
@@ -514,7 +517,6 @@ function displayMoves(e){
       }
       mobileGameMoveMenu.getTriggeringBlock = function(){return e.target};
       e.target.parentNode.parentNode.style.backgroundColor = "#FFC940";
-
   }else{
     if (targetMoveList != null){
       if (targetMoveList.style.display == "none"){
@@ -525,7 +527,6 @@ function displayMoves(e){
       }
     }
   }
-
 }
 
 
@@ -587,9 +588,7 @@ function resetDisplayedNumber(e){
     e.target.parentNode.style.display = "none";      
   }
 
-
   console.log(id);
-
   targetVisibleNumber.style.backgroundImage = `url(${'images/numbers/' + id + '.png'})`;
 
 }
@@ -711,14 +710,6 @@ function initSession2EventListeners(){
     
   });
 
-  // for (numObject in numObjects){
-  //   console.log("printing numObjects");
-
-  //   numObject.addEventListener('click', resetDisplayedNumber);
-  //   numObject.addEventListener('touchend', resetDisplayedNumber);
-
-  // }
-
   // event listeners for move puzzles
   visibleMove.addEventListener('click', function(e){eventBasedDisplayNumbersOrMoves(e, displayMoves)});
   visibleMove.addEventListener('touchend', function(e){eventBasedDisplayNumbersOrMoves(e, displayMoves)});
@@ -767,7 +758,7 @@ async function birdAction(){
     pulsatingHint();
     //Checks if GameOver Conditions are met
     gameOverCheck(); 
-    runCode() ;
+    runCode();
   }
 }
 
@@ -880,6 +871,9 @@ window.addEventListener('load', function (e){
 });
 
 
+/**
+ * adds a hint arrow if the user attempts to run code without selecting a bird or creating code
+ */
 function checkHint(){
   console.log("checking hint ...")
     hintObj.style.display = "block";
@@ -911,11 +905,16 @@ function checkHint(){
 }
 
 
-
+/**
+ * hides the hint div
+ */
 function clearHint(){
   hintObj.style.display = "none";
 }
 
+/**
+ * makes the hint div increadse and decrease as long as it is displayed.
+ */
 function pulsatingHint(){
   if (hintObj.style.display == "block")
     hintObj.style.width = hintObj.style.width == "5%" ? "5.5%" : "5%";
