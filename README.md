@@ -1,67 +1,102 @@
 # Cock-a-doodle Challenge
-Cock-a-doodle Challenge is a game designed to motivate children to reuse code through multiple time constrained programmable elements. The programmable elements are chicks which appear on random tiles on a maze. The chicks may be programmed individually or collectively to get to the end of the maze.  
+Cock-a-doodle Challenge is a game designed to motivate children to reuse code through multiple time constrained programmable game elements. The programmable elements are chicks which appear on random tiles on a maze. The chicks may be programmed individually or collectively to get to the end of the maze.  
 
 # Game Characters
 The game has two game characters, chicks and a mother hen.
 ## Chicks
 Chicks are the programmable. They have time assigned to them. In their default state, they are yellow, but when selected for programming, they change to another color.
-<figure>
-<img src="session2/images/chicks/squarton_resting_position_1.svg" width="25%" /> <img src="session2/images/poses/blue_bird_poses/rest1.svg" width="65%" />
-<figcaption>Figure 1. An unselected and selected chick</figcaption>
-</figure>
+<table>
+  <tr>
+    <td><img src="session2/images/chicks/squarton_resting_position_1.svg" width="40%"></td>
+    <td><img src="session2/images/poses/blue_bird_poses/rest1.svg" width="100%"></td>
+  </tr>
+  <tr>Figure 1. An unselected and selected chick </tr>
+</table>
+
 
 ## Mother Hen
 When tapped or clicked, the mother hen selects all the chicks and programs apply to all the chicks.
-<figure>
-<img src="session2/images/mother_hen/Mother_Hen_1.svg" width="35%" />
-<figcaption>Figure 2. The Mother Hen</figcaption>
-</figure>
+<table>
+  <tr>
+    <td><img src="session2/images/mother_hen/Mother_Hen_1.svg" width="25%"></td>
+  </tr>
+  <tr>Figure 2. The mother hen </tr>
+</table>
+
+
 
 # Game Tiles
 The game maze has different tile types described below:
 
 ## Food Tile
 Food tiles have crumbs on them. Chicks may be programmed to eat the crumbs with an eat block.
-<figure>
-<img src="session2/images/food/food.svg" width="45%" /> <img src="session2/images/game_buttons/eat_button.png" width="45%" />
-<figcaption>Figure 3. A food tile and block</figcaption>
-</figure>
+<table>
+  <tr>
+    <td><img src="session2/images/food/food.svg" width="100%" /></td>
+    <td><img src="session2/images/game_buttons/eat_button.png" width="70%" /></td>
+  </tr>
+  <tr>Figure 3. A food tile and block</tr>
+</table>
+
 
 ## Water Tile
 Chicks may be programmed to drink the water on this tile and gain more points.
-<figure><img src="session2/images/water/water.svg" width="45%" /> <img src="session2/images/game_buttons/drink_button.svg" width="45%" />
-<figcaption>Figure 4. A water tile and block</figcaption>
-</figure>
+<table>
+  <tr>
+    <td><img src="session2/images/water/water.svg" width="80%" /></td>
+    <td><img src="session2/images/game_buttons/drink_button.svg" width="80%" /></td>
+  </tr>
+  <tr>Figure 4. A water tile and block</figcaption>
+</figure></tr>
+</table>
 
 ## Walls
 Chicks cannot walk over these tiles. They may only be programmed to go around them.
-<figure>
-<img src="session2/images/boulder_and_interface/boulder.svg" width="45%" />
-<figcaption>Figure 5. A wall tile</figcaption>
-</figure>
+<table>
+  <tr>
+    <td><img src="session2/images/boulder_and_interface/boulder.svg" width="60%" /></td>
+  </tr>
+  <tr>Figure 5. A wall tile</figcaption>
+</figure></tr>
+</table>
+
+
 
 ## Start Tile
 This is the beginning of the maze. The mother hen appears next to this tile. Chicks may be programmed to go to this tile with the start block.
-<figure>
-<img src="session2/images/planks/start_plank.svg" width="45%" /><img src="session2/images/game_buttons/start_button_1.svg" width="45%" />
-<figcaption>Figure 6. A start tile and block</figcaption>
-</figure>
+
+<table>
+  <tr>
+    <td><img src="session2/images/planks/start_plank.svg" width="80%" /></td>
+    <td><img src="session2/images/game_buttons/start_button_1.svg" width="80%" /></td>
+  </tr>
+  <tr>Figure 6. A start tile and block</figcaption>
+</figure></tr>
+</table>
+
 
 ## Finish Tile
 This tile is the end of the maze. Programming a chick to get to this tile means the chick can leave the maze.
 
-<figure>
-<img src="session2/images/planks/end_plank.svg" width="45%" />
-<figcaption>Figure 7. The finish tile</figcaption>
-</figure>
+<table>
+  <tr>
+    <td><img src="session2/images/planks/end_plank.svg" width="30%" /></td>
+  </tr>
+  <tr>Figure 7. The finish tile</figcaption>
+</figure></tr>
+</table>
+
 
 ## Open Tiles
 Game characters may be programmed to pass through this tile, however additional points are not gained.
 
-<figure>
-<img src="session2/images/planks/plank.svg" width="45%" />
-<figcaption>Figure 8. The finish tile</figcaption>
-</figure>
+<table>
+  <tr>
+    <td><img src="session2/images/planks/plank.svg" width="30%" /></td>
+  </tr>
+  <tr>Figure 8. An open tile</figcaption>
+</figure></tr>
+</table>
 
 # Game Levels
 The game has multiple levels.
