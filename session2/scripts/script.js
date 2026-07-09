@@ -452,6 +452,7 @@ async function initializeBlockIdentifiers(){
     clearHint();
     running = true;    
     resetInterval(RUN_SPEED);
+    setUpChicks();
     let parser = new Parser(selectedBirds, placedBlocks, maze);    
     ast = parser.parse(); 
   }
@@ -974,6 +975,12 @@ function pulsatingHint(){
   if (hintObj.style.display == "block")
     hintObj.style.width = hintObj.style.width == "5%" ? "5.5%" : "5%";
     hintObj.style.height = hintObj.style.height == "5%" ? "5.5%" : "5%";  
+}
+
+function setUpChicks() {
+  for (let i = 0; i < allBirds.length; i++) {
+    allBirds[i].hasBounced = false;
+  }
 }
 
 

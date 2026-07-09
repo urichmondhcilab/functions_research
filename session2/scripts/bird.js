@@ -46,6 +46,7 @@ class Bird{
     this.finished = false;
     this.hasConsumed = false;
     this.isBouncing = false;
+    this.hasBounced = false;
     this.dizzyDiv = dizzyDiv;
 
     // animation variables
@@ -245,7 +246,11 @@ move(direction, curMaze) {
     // running into a wall
     //initiate a new animation seqence
     if (newTile.state.name === "BLOCK"){
+      if (this.hasBounced){
+        return;
+      }
       this.isBouncing = true;
+      this.hasBounced = false;
       this.bounceCount = 5;
 
       this.oldTile = oldTile;
@@ -403,6 +408,7 @@ drink() {
 
     if (this.bounceCount <= 0) {
       this.isBouncing = false;
+      this.hasBounced = true;
       this.dizzyDiv.style.backgroundImage = "none";
       this.dizzyDiv.style.display = "none";
 
@@ -436,5 +442,4 @@ drink() {
       this.birdie.style.top = `${oldTop}px`;
     }
   }
-
 }
