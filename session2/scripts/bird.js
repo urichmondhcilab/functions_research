@@ -136,7 +136,8 @@ class Bird{
 
   /**
    * update the bird sprite to a random sprite
-   * If selected, changes both chick sprite, and associated lifespan counter sprite to same color
+   * if selected, changes both chick sprite, and associated lifespan counter sprite to same color
+   * if the bird is bouncing, continue the bounceAnimation 
    */
   updateBird(){
       if (this.selected){
@@ -149,6 +150,11 @@ class Bird{
         let chick_color = chickImagePaths[0][Math.round (Math.random() * (chickImagePaths[0].length - 1))];
         this.birdie.firstChild.src = chick_color;
         this.chick_Icon.src = chick_color;   
+      }
+
+      // if the bird is bouncing, continue the bounceAnimation 
+      if (this.isBouncing){
+        this.bounceAnimation();
       }
 
   }
@@ -198,9 +204,10 @@ start(curMaze) {
  * @param {Array} curMaze, current array of the maze, houses tiles
  */
 move(direction, curMaze) {
+  // if already bouncing do not initiate new moves or bounce animation
   if (this.isBouncing){
-    //this.bounceCount--;
-    this.bounceAnimation();
+    console.log("is bouncing:" + this.isBouncing);
+    console.log("bounce count" + this.bounceCount);
     return;
   }
   
@@ -234,13 +241,12 @@ move(direction, curMaze) {
     const newTile = curMaze[newY][newX];
     const oldTile = curMaze[oldY][oldX];
 
-
+    
+    // running into a wall
+    //initiate a new animation seqence
     if (newTile.state.name === "BLOCK"){
       this.isBouncing = true;
       this.bounceCount = 5;
-      this.hitBlock = true;
-      console.log("bouncing");
-      this.bounceCount--;
 
       this.oldTile = oldTile;
       this.blockTile = newTile;
@@ -248,24 +254,6 @@ move(direction, curMaze) {
       dieSound.play();
       this.updatePoints(-25);
       this.bounceAnimation();
-
-      let blockTop = parseInt(slicePX(newTile.y));
-      let blockLeft = parseInt(slicePX(newTile.x) + slicePX(newTile.width) / 4);
-
-      this.birdie.style.left = `${blockLeft}px`;
-      this.birdie.style.top = `${blockTop}px`;
-
-      
-      setTimeout(() => {
-        let oldTop = parseInt(slicePX(oldTile.y));
-        let oldLeft = parseInt(slicePX(oldTile.x) + slicePX(oldTile.width) / 4);
-
-        this.birdie.style.left = `${oldLeft}px`;
-        this.birdie.style.top = `${oldTop}px`;
-
-        this.isBouncing = false;
-      }, 300);
-
       return;
     }
     
@@ -310,7 +298,6 @@ drink() {
     this.updatePoints(50);
   }
 }
-
 
 /**
  * Checks if on a food tile that it has not already eated at.
@@ -404,55 +391,13 @@ drink() {
     }, 3000);
   }
 
-  dizzy(){
-    this.dizzyDiv.style.display = "block";
-    let frame = 0;
-    // //this.dizzyDiv.style.backgroundImage = `url('${dizzy_sprites[frame]}')`;
-
-    // const dizzyInt = setInterval(() => {
-
-    //     if(frame == 0){
-    //         frame = 1;
-    //     }
-    //     else{
-    //         frame = 0;
-    //     }
-
-    //     //this.dizzyDiv.style.backgroundImage = `url('${dizzy_sprites[frame]}')`;
-
-    // }, 100);
-
-    // setTimeout(() => {
-    //     clearInterval(dizzyInt);
-    //     this.dizzyDiv.style.display = "none";
-    // }, 3000);
-
-    // this.dizzyDiv.style.display = this.dizzyDiv.style.display == "block" ? "none" : "block";
-
-    this.bounceCount = this.bounceCount - 1;
-    console.log("bounce count: " + this.bounceCount);
-    let count = this.bounceCount % 2;
-
-    let displayStyle = this.dizzyDiv.style.display;
-      console.log("displayStyle:" + displayStyle);   
-      
-    if (this.bounceCount < 0){
-      this.dizzyDiv.style.display = "none";      
-      return;
-    }
-
-    if (count == 0){
-      console.log("in dizzy function");
-      this.dizzyDiv.style.display = "none";
-    }
-    else{
-      console.log("in alternate dizzy function");      
-      this.dizzyDiv.style.display = "block";
-      this.dizzyDiv.style.backgroundImage = `url('${dizzy_sprites[0]}')`;      
-    }
-  }
-
-
+  /**
+   * Initiate or continue a bounce animation
+   * decrement counter
+   * if the bounce count is less than zero, reset the animation to initial tile and remove dizzy sprite
+   * else alternate bird between wall tile and initial tile. Alternate dizzy sprite
+   * @returns null
+   */
   bounceAnimation(){
     this.bounceCount--;
 
@@ -461,7 +406,6 @@ drink() {
       this.dizzyDiv.style.backgroundImage = "none";
       this.dizzyDiv.style.display = "none";
 
-      // always return to tile before the block
       let oldTop = parseInt(slicePX(this.oldTile.y));
       let oldLeft = parseInt(slicePX(this.oldTile.x) + slicePX(this.oldTile.width) / 4);
 
@@ -493,38 +437,4 @@ drink() {
     }
   }
 
-
-  // bounceAnimation(){
-  //   // countDown 
-  //   this.bounceCount--;
-  //   if (this.bounceCount <= 0){
-  //     this.isBouncing = false;
-  //     return;
-  //   }  
-
-  //   if(this.bounceCount % 2 == 0)
-  //   {
-  //     // change sprite
-   
-
-  //     // move bird forward 
-  //     let blockTop = parseInt(slicePX(newTile.y));
-  //     let blockLeft = parseInt(slicePX(newTile.x) + slicePX(newTile.width) / 4);
-
-  //     this.birdie.style.left = `${blockLeft}px`;
-  //     this.birdie.style.top = `${blockTop}px`;   
-
-  //   }else{
-  //     // change to another sprite
-
-  //     // move bird backward
-  //       let oldTop = parseInt(slicePX(oldTile.y));
-  //       let oldLeft = parseInt(slicePX(oldTile.x) + slicePX(oldTile.width) / 4);
-
-  //       this.birdie.style.left = `${oldLeft}px`;
-  //       this.birdie.style.top = `${oldTop}px`;      
-  //   }
-
-
-  // }
 }
