@@ -458,5 +458,15 @@ html, body {
 
 }
 
+.dizzy_effect {
+  position: absolute;
+  top: -30px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
 
 

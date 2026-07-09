@@ -32,6 +32,7 @@ let mazeStartY = centerY + screenHeight * 0.15;
 let mazeWidth = (backgroundImageWidth * 0.7);
 let mazeHeight = centerY + backgroundImageHeight * 0.4;
 
+
 const chickImagePaths = [['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'],
                             ['images/poses/green_bird_poses/rest1.svg', 'images/poses/green_bird_poses/rest2.svg'],
                             ['images/poses/orange_bird_poses/rest1.svg', 'images/poses/orange_bird_poses/rest2.svg'],
@@ -171,3 +172,5 @@ const drinkSound = new Audio('sound_mp3/correct.wav');
 const dieSound = new Audio('sound_mp3/die.wav');
 
 const fly_sprites = ['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'];
+
+const dizzy_sprites = ['images/dizzy/dizzy.svg', 'images/dizzy/dizzy_transparent.svg'];

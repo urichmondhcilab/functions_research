@@ -360,6 +360,7 @@ function ResetLevel(){
   if (levelAttributes[curLevel].mother_include){
     motherHen = null;
     createMother();
+    checkHint();
   }
 }
 
@@ -917,34 +918,53 @@ window.addEventListener('load', function (e){
 function checkHint(){
   console.log("checking hint ...")
     hintObj.style.display = "block";
-  if (selectedBirds == null || selectedBirds.length == 0){
-    hintObj.style.backgroundImage = `url('images/game_buttons/hint.webp')`;    
-    console.log("no selected birds");
-    let top = allBirds[0].birdie.style.top;
-    let height = window.getComputedStyle(allBirds[0].birdie).height;
-    console.log("height: " +height);
-    top = top.slice(0,-2);
-    height = top.slice(0,-2);
-    top = (top - 6 * height) + "px";
-    console.log
-    hintObj.style.top = top;
-    hintObj.style.left = allBirds[0].birdie.style.left;
+  if(showMotherHint()){
+    return;
   }
+  else{
+    if (selectedBirds == null || selectedBirds.length == 0){
+      hintObj.style.backgroundImage = `url('images/game_buttons/hint.webp')`;    
+      console.log("no selected birds");
+      let top = allBirds[0].birdie.style.top;
+      let height = window.getComputedStyle(allBirds[0].birdie).height;
+      console.log("height: " +height);
+      top = top.slice(0,-2);
+      height = top.slice(0,-2);
+      top = (top - 6 * height) + "px";
+      console.log
+      hintObj.style.top = top;
+      hintObj.style.left = allBirds[0].birdie.style.left;
+    }
   else if(placedBlocks == null || placedBlocks.length == 0){
-    console.log("move block on to console");
-    console.log(window.getComputedStyle(gameOperationsObj).top);
+      console.log("move block on to console");
+      console.log(window.getComputedStyle(gameOperationsObj).top);
 
-    let gameOperationsHeight = window.getComputedStyle(gameOperationsObj).top;
-    gameOperationsHeight = screenHeight * 0.35;  
-    console.log("gameOperationsHeight" + gameOperationsHeight) ;
-    hintObj.style.top = gameOperationsHeight + "px";
+      let gameOperationsHeight = window.getComputedStyle(gameOperationsObj).top;
+      gameOperationsHeight = screenHeight * 0.35;  
+      console.log("gameOperationsHeight" + gameOperationsHeight) ;
+      hintObj.style.top = gameOperationsHeight + "px";
 
-    hintObj.style.left = window.getComputedStyle(gameOperationsObj).left;
-    hintObj.style.backgroundImage = `url('images/game_buttons/hint_right.png')`;
+      hintObj.style.left = window.getComputedStyle(gameOperationsObj).left;
+      hintObj.style.backgroundImage = `url('images/game_buttons/hint_right.png')`;
+    }
   }
 }
 
+function showMotherHint(){
+if (levelAttributes[curLevel].mother_include && motherHen && !motherHen.selected){
+    hintObj.style.display = "block";
+    hintObj.style.backgroundImage = `url('images/game_buttons/hint.webp')`;
 
+    let top = parseInt(motherHen.mother.style.top);
+    let left = parseInt(motherHen.mother.style.left);
+
+    hintObj.style.top = (top - 50) + "px";
+    hintObj.style.left = (left + 60) + "px";
+
+    return true;
+  }
+  return false;
+}
 
 function clearHint(){
   hintObj.style.display = "none";
