@@ -17,17 +17,22 @@ class Bird{
   constructor(birdId, maze){
     // give the bird an id
     this.id = birdId;
-    this.maze = maze
+    this.maze = maze;
+    this.bounceCount = 0;
 
     this.lifeSpan = MIN_LIFE_SPAN + Math.floor(Math.random() * MAX_LIFE_SPAN);
     this.curLife = this.lifeSpan;
     let birdDiv = document.createElement('div');
     let birdImg = document.createElement('img');
     let selectionDiv = document.createElement('div');
+    let dizzyDiv = document.createElement("div");
     selectionDiv.className = "chick_selection";
     birdImg.className = "chick";
+    dizzyDiv.className = "dizzy_effect";
+    dizzyDiv.style.display = "none";
     birdDiv.appendChild(birdImg)
     birdDiv.appendChild(selectionDiv);
+    birdDiv.appendChild(dizzyDiv);
 
     this.birdie = birdDiv;
     this.selectionDiv = selectionDiv;
@@ -40,6 +45,9 @@ class Bird{
     this.selectionCount = 0;
     this.finished = false;
     this.hasConsumed = false;
+    this.isBouncing = false;
+    this.hasBounced = false;
+    this.dizzyDiv = dizzyDiv;
 
     // animation variables
     this.animationCount = 5;
@@ -129,7 +137,8 @@ class Bird{
 
   /**
    * update the bird sprite to a random sprite
-   * If selected, changes both chick sprite, and associated lifespan counter sprite to same color
+   * if selected, changes both chick sprite, and associated lifespan counter sprite to same color
+   * if the bird is bouncing, continue the bounceAnimation 
    */
   updateBird(){
       if (this.selected){
@@ -143,6 +152,12 @@ class Bird{
         this.birdie.firstChild.src = chick_color;
         this.chick_Icon.src = chick_color;   
       }
+
+      // if the bird is bouncing, continue the bounceAnimation 
+      if (this.isBouncing){
+        this.bounceAnimation();
+      }
+
   }
 
   /**
@@ -190,7 +205,12 @@ start(curMaze) {
  * @param {Array} curMaze, current array of the maze, houses tiles
  */
 move(direction, curMaze) {
-
+  // if already bouncing do not initiate new moves or bounce animation
+  if (this.isBouncing){
+    console.log("is bouncing:" + this.isBouncing);
+    console.log("bounce count" + this.bounceCount);
+    return;
+  }
   
   if (this.curTile === null || this.curTile.state.name === "BLOCK"){   
     this.die();
@@ -199,6 +219,10 @@ move(direction, curMaze) {
 
   let newX = this.xIndex;
   let newY = this.yIndex;
+
+  let oldX = newX;
+  let oldY = newY;
+
   //adjusts the index of the tile to move to +-1
       switch (direction) {
         case "up":
@@ -216,13 +240,29 @@ move(direction, curMaze) {
       }
 
     const newTile = curMaze[newY][newX];
+    const oldTile = curMaze[oldY][oldX];
 
+    
+    // running into a wall
+    //initiate a new animation seqence
     if (newTile.state.name === "BLOCK"){
+      if (this.hasBounced){
+        return;
+      }
+      this.isBouncing = true;
+      this.hasBounced = false;
+      this.bounceCount = 5;
+
+      this.oldTile = oldTile;
+      this.blockTile = newTile;
+
       dieSound.play();
       this.updatePoints(-25);
+      this.bounceAnimation();
       return;
     }
-
+    
+   
     this.curTile.occupied = false;
     this.xIndex = newX;
     this.yIndex = newY;
@@ -237,6 +277,7 @@ move(direction, curMaze) {
 
     moveSound.currentTime = 0;
     moveSound.play();
+    console.log("current tile:" + newX +"and"+newY);
 
     if (this.curTile.state.name === "BLOCK"){   
       return;
@@ -262,7 +303,6 @@ drink() {
     this.updatePoints(50);
   }
 }
-
 
 /**
  * Checks if on a food tile that it has not already eated at.
@@ -354,5 +394,52 @@ drink() {
       clearInterval(sprite_int);
       this.die();
     }, 3000);
+  }
+
+  /**
+   * Initiate or continue a bounce animation
+   * decrement counter
+   * if the bounce count is less than zero, reset the animation to initial tile and remove dizzy sprite
+   * else alternate bird between wall tile and initial tile. Alternate dizzy sprite
+   * @returns null
+   */
+  bounceAnimation(){
+    this.bounceCount--;
+
+    if (this.bounceCount <= 0) {
+      this.isBouncing = false;
+      this.hasBounced = true;
+      this.dizzyDiv.style.backgroundImage = "none";
+      this.dizzyDiv.style.display = "none";
+
+      let oldTop = parseInt(slicePX(this.oldTile.y));
+      let oldLeft = parseInt(slicePX(this.oldTile.x) + slicePX(this.oldTile.width) / 4);
+
+      this.birdie.style.left = `${oldLeft}px`;
+      this.birdie.style.top = `${oldTop}px`;
+
+      return;
+    } 
+
+    this.dizzyDiv.style.display = "block";
+
+    if (this.bounceCount % 2 == 0) {
+      this.dizzyDiv.style.backgroundImage = `url('${dizzy_sprites[0]}')`;
+
+      let blockTop = parseInt(slicePX(this.blockTile.y));
+      let blockLeft = parseInt(slicePX(this.blockTile.x) + slicePX(this.blockTile.width) / 4);
+
+      this.birdie.style.left = `${blockLeft}px`;
+      this.birdie.style.top = `${blockTop}px`;
+    }
+    else {
+      this.dizzyDiv.style.backgroundImage = `url('${dizzy_sprites[1]}')`;
+
+      let oldTop = parseInt(slicePX(this.oldTile.y));
+      let oldLeft = parseInt(slicePX(this.oldTile.x) + slicePX(this.oldTile.width) / 4);
+
+      this.birdie.style.left = `${oldLeft}px`;
+      this.birdie.style.top = `${oldTop}px`;
+    }
   }
 }

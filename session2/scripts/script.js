@@ -196,6 +196,29 @@ function transitionBeforeNewLevel(){
   isTransition = true;
 }
 
+
+function updateMazeDimensions(){
+  if (curLevel == 5){
+    NUMBER_OF_TILES_X = 12;
+    NUMBER_OF_TILES_Y = 5;
+
+    mazeStartX = backgroundImageWidth * 0.02;
+    mazeStartY = backgroundImageHeight * 0.1;
+    mazeWidth = backgroundImageWidth * 0.67;
+    mazeHeight = backgroundImageHeight * 0.82;
+
+  }
+  else{
+    NUMBER_OF_TILES_X = 10;
+    NUMBER_OF_TILES_Y = 2;
+
+    mazeStartX = backgroundImageWidth * 0.20;
+    mazeStartY = centerY + backgroundImageHeight * 0.15;
+    mazeWidth = backgroundImageWidth * 0.70;
+    mazeHeight = centerY + backgroundImageHeight * 0.40;
+  }
+}
+
 /**
  * gets the levels attributes from constant object, uses the attributes to:
  * sets the number of birds to spawn, wether to include the mother, the background image, wether to display food and water
@@ -212,7 +235,7 @@ function newLevelConfig(level){
   MAX_NUMBER_OF_BIRDS = levelconfig.max_Birds;
   createMom = levelconfig.mother_include;
   mazeElements = levelconfig.state_range;
-  game_canvas.style.backgroundImage = levelconfig.background_image_path;
+  //game_canvas.style.backgroundImage = levelconfig.background_image_path;
 
   const drinkBlock = document.getElementById("drink");
   const eatBlock = document.getElementById("eat");
@@ -224,7 +247,15 @@ function newLevelConfig(level){
       drinkBlock.classList.add('hidden');
       eatBlock.classList.add('hidden');
     }
-
+    
+  if (curLevel == 5) {
+      game_canvas.style.backgroundImage = "none";
+  }
+  else {
+      game_canvas.style.backgroundImage = levelconfig.background_image_path;
+  }
+  updateMazeDimensions();
+  
   //Resets birds, maze, blocks
   ResetLevel();
 }
@@ -329,6 +360,7 @@ function ResetLevel(){
   if (levelAttributes[curLevel].mother_include){
     motherHen = null;
     createMother();
+    checkHint();
   }
 }
 
@@ -379,10 +411,13 @@ function repositionGameObjects(){
   motherPosX = centerX - backgroundImageWidth * 0.35;
   motherPosY = centerY - backgroundImageHeight * 0.06;
 
-  mazeStartX = (backgroundImageWidth * 0.20);
+  /**mazeStartX = (backgroundImageWidth * 0.20);
   mazeStartY = centerY + backgroundImageHeight * 0.15 ;
   mazeWidth = (backgroundImageWidth * 0.7);
   mazeHeight = centerY + backgroundImageHeight * 0.4;
+  */
+
+  updateMazeDimensions();
   
   console.log("maze in reposition: " + maze);
   if (maze) maze.upadateMazePosition(mazeStartX, mazeStartY, mazeWidth, mazeHeight);
@@ -417,6 +452,7 @@ async function initializeBlockIdentifiers(){
     clearHint();
     running = true;    
     resetInterval(RUN_SPEED);
+    setUpChicks();
     let parser = new Parser(selectedBirds, placedBlocks, maze);    
     ast = parser.parse(); 
   }
@@ -877,37 +913,54 @@ window.addEventListener('load', function (e){
 function checkHint(){
   console.log("checking hint ...")
     hintObj.style.display = "block";
-  if (selectedBirds == null || selectedBirds.length == 0){
-    hintObj.style.backgroundImage = `url('images/game_buttons/hint.webp')`;    
-    console.log("no selected birds");
-    let top = allBirds[0].birdie.style.top;
-    let height = window.getComputedStyle(allBirds[0].birdie).height;
-    console.log("height: " +height);
-    top = top.slice(0,-2);
-    height = top.slice(0,-2);
-    top = (top - 6 * height) + "px";
-    console.log
-    hintObj.style.top = top;
-    hintObj.style.left = allBirds[0].birdie.style.left;
+  if(showMotherHint()){
+    return;
   }
+  else{
+    if (selectedBirds == null || selectedBirds.length == 0){
+      hintObj.style.backgroundImage = `url('images/game_buttons/hint.webp')`;    
+      console.log("no selected birds");
+      let top = allBirds[0].birdie.style.top;
+      let height = window.getComputedStyle(allBirds[0].birdie).height;
+      console.log("height: " +height);
+      top = top.slice(0,-2);
+      height = top.slice(0,-2);
+      top = (top - 6 * height) + "px";
+      console.log
+      hintObj.style.top = top;
+      hintObj.style.left = allBirds[0].birdie.style.left;
+    }
   else if(placedBlocks == null || placedBlocks.length == 0){
-    console.log("move block on to console");
-    console.log(window.getComputedStyle(gameOperationsObj).top);
+      console.log("move block on to console");
+      console.log(window.getComputedStyle(gameOperationsObj).top);
 
-    let gameOperationsHeight = window.getComputedStyle(gameOperationsObj).top;
-    gameOperationsHeight = screenHeight * 0.35;  
-    console.log("gameOperationsHeight" + gameOperationsHeight) ;
-    hintObj.style.top = gameOperationsHeight + "px";
+      let gameOperationsHeight = window.getComputedStyle(gameOperationsObj).top;
+      gameOperationsHeight = screenHeight * 0.35;  
+      console.log("gameOperationsHeight" + gameOperationsHeight) ;
+      hintObj.style.top = gameOperationsHeight + "px";
 
-    hintObj.style.left = window.getComputedStyle(gameOperationsObj).left;
-    hintObj.style.backgroundImage = `url('images/game_buttons/hint_right.png')`;
+      hintObj.style.left = window.getComputedStyle(gameOperationsObj).left;
+      hintObj.style.backgroundImage = `url('images/game_buttons/hint_right.png')`;
+    }
   }
 }
 
+function showMotherHint(){
+if (levelAttributes[curLevel].mother_include && motherHen && !motherHen.selected){
+    hintObj.style.display = "block";
+    hintObj.style.backgroundImage = `url('images/game_buttons/hint.webp')`;
 
-/**
- * hides the hint div
- */
+    let top = parseInt(motherHen.mother.style.top);
+    let left = parseInt(motherHen.mother.style.left);
+
+    hintObj.style.top = (top - 50) + "px";
+    hintObj.style.left = (left + 60) + "px";
+
+    return true;
+  }
+  return false;
+}
+
 function clearHint(){
   hintObj.style.display = "none";
 }
@@ -920,3 +973,11 @@ function pulsatingHint(){
     hintObj.style.width = hintObj.style.width == "5%" ? "5.5%" : "5%";
     hintObj.style.height = hintObj.style.height == "5%" ? "5.5%" : "5%";  
 }
+
+function setUpChicks() {
+  for (let i = 0; i < allBirds.length; i++) {
+    allBirds[i].hasBounced = false;
+  }
+}
+
+

@@ -32,6 +32,7 @@ let mazeStartY = centerY + screenHeight * 0.15;
 let mazeWidth = (backgroundImageWidth * 0.7);
 let mazeHeight = centerY + backgroundImageHeight * 0.4;
 
+
 const chickImagePaths = [['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'],
                             ['images/poses/green_bird_poses/rest1.svg', 'images/poses/green_bird_poses/rest2.svg'],
                             ['images/poses/orange_bird_poses/rest1.svg', 'images/poses/orange_bird_poses/rest2.svg'],
@@ -91,8 +92,8 @@ const STARTSTATE = {
     image_path : "images/planks/start_plank.svg"
 }
 
-const NUMBER_OF_TILES_X = 10;
-const NUMBER_OF_TILES_Y = 2;
+let NUMBER_OF_TILES_X = 10;
+let NUMBER_OF_TILES_Y = 2;
 
 let selectedBirds = null;
 let placedBlocks = null;
@@ -152,10 +153,17 @@ const levelAttributes = {
         state_range: 6,
         mother_include: true,
         background_image_path: "url('images/game_environment/scene2.svg')"        
-    },
+    }, 
+    5:{
+        description: "Level 5, 12 Birds, full maze",
+        max_Birds: 12,
+        state_range: 6,
+        mother_include: false,
+        //background_image_path: "url('images/game_environment/scene.svg')"
+    }
 }
 
-let MAX_LEVEL = 4;
+let MAX_LEVEL = 5;
 
 // const moveSound = new Audio('sound_mp3/Movement.mp3');
 const moveSound = new Audio('sound_mp3/move.wav');
@@ -164,3 +172,5 @@ const drinkSound = new Audio('sound_mp3/correct.wav');
 const dieSound = new Audio('sound_mp3/die.wav');
 
 const fly_sprites = ['images/chicks/squarton_resting_position_1.svg', 'images/chicks/squarton_resting_position_2.svg'];
+
+const dizzy_sprites = ['images/dizzy/dizzy.svg', 'images/dizzy/dizzy_transparent.svg'];
