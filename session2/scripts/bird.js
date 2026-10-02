@@ -242,10 +242,15 @@ move(direction, curMaze) {
     const newTile = curMaze[newY][newX];
     const oldTile = curMaze[oldY][oldX];
 
+    console.log("newTile: ");
+    console.log(newTile);
+
+    console.log("oldTile: ");
+    console.log(oldTile);
     
     // running into a wall
     //initiate a new animation seqence
-    if (newTile.state.name === "BLOCK"){
+    if (newTile.state.name === "BLOCK" || (newTile == oldTile)){
       if (this.hasBounced){
         return;
       }
