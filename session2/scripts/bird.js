@@ -305,7 +305,9 @@ drink() {
     this.birdie.firstChild.src = 'images/chicks/Squarton_splashing.svg';
     this.hasConsumed = true;
     drinkSound.play();
-    this.updatePoints(50);
+    //this.updatePoints(50);
+    this.updatePoints();
+
   }
 }
 
@@ -318,7 +320,8 @@ drink() {
       this.birdie.firstChild.src = 'images/chicks/Squarton_feeding.svg';
       this.hasConsumed = true;
       eatSound.play();
-      this.updatePoints(50);
+      //this.updatePoints(50);
+      this.updatePoints();      
     }
   }
 
@@ -367,7 +370,14 @@ drink() {
  * @param {int} val, value of points to be updated
  */
   updatePoints(val){
-    this.curLife += val;
+    if (val != null){
+      this.curLife += val;
+    }else{
+      // give the bird full life if no value is passed to updatePoints
+      // drink and eat will not pass values.
+      this.curLife = this.lifeSpan;
+    }
+
   }
 
   gameCompletionAnimation(){
