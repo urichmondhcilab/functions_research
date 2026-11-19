@@ -417,6 +417,7 @@ drink() {
       this.dizzyDiv.style.backgroundImage = "none";
       this.dizzyDiv.style.display = "none";
 
+      
       let oldTop = parseInt(slicePX(this.oldTile.y));
       let oldLeft = parseInt(slicePX(this.oldTile.x) + slicePX(this.oldTile.width) / 4);
 
